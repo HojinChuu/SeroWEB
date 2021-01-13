@@ -6,6 +6,12 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
+  USER_PHONE_MESSAGE_REQUEST,
+  USER_PHONE_MESSAGE_SUCCESS,
+  USER_PHONE_MESSAGE_FAIL,
+  USER_PHONE_MESSAGE_CHECK_REQUEST,
+  USER_PHONE_MESSAGE_CHECK_SUCCESS,
+  USER_PHONE_MESSAGE_CHECK_FAIL,
 } from "../constants/userConstants";
 
 export const userRegisterReducer = (state = {}, action) => {
@@ -49,6 +55,48 @@ export const userLoginReducer = (state = {}, action) => {
       };
     case USER_LOGOUT:
       return {};
+    default:
+      return state;
+  }
+};
+
+export const userMessageReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_PHONE_MESSAGE_REQUEST:
+      return {
+        loading: true,
+      };
+    case USER_PHONE_MESSAGE_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+      };
+    case USER_PHONE_MESSAGE_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export const userMessageCheckReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_PHONE_MESSAGE_CHECK_REQUEST:
+      return {
+        loading: true,
+      };
+    case USER_PHONE_MESSAGE_CHECK_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+      };
+    case USER_PHONE_MESSAGE_CHECK_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
     default:
       return state;
   }

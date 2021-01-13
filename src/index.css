@@ -1,3 +1,8 @@
+html {
+  overflow-x: hidden;
+  height: 100%;
+}
+
 main {
   min-height: 80vh;
 }
@@ -16,9 +21,18 @@ h2 {
   padding: 0.5rem 0;
 }
 
+body {
+  position: relative;
+  margin: 0;
+  padding-bottom: 5rem;
+  min-height: 100%;
+}
+
 footer {
   position: absolute;
-  left: 0;
-  bottom: 0;
   right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  border-top: 1px solid lightgrey;
 }

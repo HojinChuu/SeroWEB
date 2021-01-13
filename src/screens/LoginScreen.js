@@ -22,7 +22,7 @@ const LoginScreen = () => {
 
   return (
     <FormContainer>
-      <Card className="p-4 mt-5">
+      <Card className="p-4 mt-3">
         <h1 className="text-center">Sign In</h1>
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="phone">
