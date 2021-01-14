@@ -23,7 +23,8 @@ export const userRegisterReducer = (state = {}, action) => {
     case USER_REGISTER_SUCCESS:
       return {
         loading: false,
-        userInfo: action.payload,
+        success: true,
+        userInfo: action.payload.data,
       };
     case USER_REGISTER_FAIL:
       return {
@@ -46,7 +47,7 @@ export const userLoginReducer = (state = {}, action) => {
     case USER_LOGIN_SUCCESS:
       return {
         loading: false,
-        userInfo: action.payload,
+        userInfo: action.payload.data,
       };
     case USER_LOGIN_FAIL:
       return {
@@ -69,6 +70,7 @@ export const userMessageReducer = (state = {}, action) => {
     case USER_PHONE_MESSAGE_SUCCESS:
       return {
         loading: false,
+        code: action.payload.data,
         success: true,
       };
     case USER_PHONE_MESSAGE_FAIL:

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { DOMAIN } from "../config";
 import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
@@ -12,30 +13,20 @@ import {
   USER_PHONE_MESSAGE_CHECK_REQUEST,
   USER_PHONE_MESSAGE_CHECK_SUCCESS,
   USER_PHONE_MESSAGE_CHECK_FAIL,
+  USER_LOGOUT,
 } from "../constants/userConstants";
 
-export const register = (registerData) => async (dispatch) => {
+export const register = (formData) => async (dispatch) => {
   try {
-    dispatch({ type: USER_REGISTER_REQUEST });
+    dispatch({
+      type: USER_REGISTER_REQUEST,
+    });
 
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+    const config = { headers: { "Content-Type": "application/json" } };
 
     const { data } = await axios.post(
-      "http://dev.seropost.com/web_fuc_regist",
-      {
-        us_social_value: registerData.socialValue,
-        us_phone_number: registerData.phone,
-        us_name: registerData.name,
-        us_photo: registerData.profileImage,
-        us_address: registerData.address,
-        us_address_detail: registerData.addressDetail,
-        us_address_number: registerData.postCode,
-        us_password: registerData.password,
-      },
+      `${DOMAIN}/web_fuc_regist`,
+      formData,
       config
     );
 
@@ -53,18 +44,14 @@ export const login = (socialValue, phone, password) => async (dispatch) => {
   try {
     dispatch({ type: USER_LOGIN_REQUEST });
 
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+    const config = { headers: { "Content-Type": "application/json" } };
 
     const { data } = await axios.post(
-      "http://dev.seropost.com/web_fuc_login",
+      `${DOMAIN}/web_fuc_login`,
       {
-        us_social_value: socialValue,
-        us_phone_number: phone,
-        us_password: password,
+        usSocialValue: socialValue,
+        usPhoneNumber: phone,
+        usPassword: password,
       },
       config
     );
@@ -73,26 +60,30 @@ export const login = (socialValue, phone, password) => async (dispatch) => {
       type: USER_LOGIN_SUCCESS,
       payload: data,
     });
+
+    localStorage.setItem("userInfo", JSON.stringify(data.data));
   } catch (error) {
     dispatch({ type: USER_LOGIN_FAIL });
     console.log(error);
   }
 };
 
+export const logout = () => (dispatch) => {
+  localStorage.removeItem("userInfo");
+  dispatch({ type: USER_LOGOUT });
+};
+
 export const smsMessage = (phone) => async (dispatch) => {
   try {
-    dispatch({ type: USER_PHONE_MESSAGE_REQUEST });
+    dispatch({
+      type: USER_PHONE_MESSAGE_REQUEST,
+    });
 
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
+    const config = { headers: { "Content-Type": "application/json" } };
     const { data } = await axios.post(
-      "http://dev.seropost.com/auth/certification",
+      `${DOMAIN}/web_fuc_sms`,
       {
-        us_phone_number: phone,
+        cePhoneNumber: phone,
       },
       config
     );
@@ -109,19 +100,17 @@ export const smsMessage = (phone) => async (dispatch) => {
 
 export const smsMessageCheck = (phone, code) => async (dispatch) => {
   try {
-    dispatch({ type: USER_PHONE_MESSAGE_CHECK_REQUEST });
+    dispatch({
+      type: USER_PHONE_MESSAGE_CHECK_REQUEST,
+    });
 
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+    const config = { headers: { "Content-Type": "application/json" } };
 
     const { data } = await axios.post(
-      "http://dev.seropost.com/auth/number_certification",
+      `${DOMAIN}/web_chk_number`,
       {
-        us_phone_number: phone,
-        code,
+        cePhoneNumber: phone,
+        ceNumber: code,
       },
       config
     );

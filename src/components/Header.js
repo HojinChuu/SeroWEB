@@ -1,8 +1,15 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { LinkContainer } from "react-router-bootstrap";
-import { Navbar, Nav, Container } from "react-bootstrap";
+import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../actions/userActions";
 
 const Header = () => {
+  const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   return (
     <header>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
@@ -13,12 +20,30 @@ const Header = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
-              <LinkContainer to="/login">
-                <Nav.Link>LOGIN</Nav.Link>
-              </LinkContainer>
-              <LinkContainer to="/register">
-                <Nav.Link>SIGN UP</Nav.Link>
-              </LinkContainer>
+              {userInfo && userInfo.usGrant === 0 && (
+                <LinkContainer to="/register">
+                  <Nav.Link>Admin</Nav.Link>
+                </LinkContainer>
+              )}
+              {userInfo ? (
+                <NavDropdown title={userInfo.usName} id="username">
+                  <LinkContainer to="/profile">
+                    <NavDropdown.Item>MyPage</NavDropdown.Item>
+                  </LinkContainer>
+                  <NavDropdown.Item onClick={() => dispatch(logout())}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+              ) : (
+                <Fragment>
+                  <LinkContainer to="/login">
+                    <Nav.Link>LOGIN</Nav.Link>
+                  </LinkContainer>
+                  <LinkContainer to="/register">
+                    <Nav.Link>SIGN UP</Nav.Link>
+                  </LinkContainer>
+                </Fragment>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>

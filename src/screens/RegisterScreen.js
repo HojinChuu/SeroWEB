@@ -1,50 +1,74 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { Form, Button, Row, Col, Card, Image } from "react-bootstrap";
-import Message from "../components/Message";
-import Loader from "../components/Loader";
-import FormContainer from "../components/FormContainer";
-import PostCodeSearch from "../components/PostCodeSearch";
+import { useDispatch, useSelector } from "react-redux";
 import { register, smsMessage, smsMessageCheck } from "../actions/userActions";
 
-const RegisterScreen = () => {
-  const form = useRef(null);
+import FormContainer from "../components/FormContainer";
+import PostCodeSearch from "../components/PostCodeSearch";
+import Message from "../components/Message";
+import Loader from "../components/Loader";
+
+const RegisterScreen = ({ history }) => {
   const [socialValue, setSocialValue] = useState(0);
   const [phone, setPhone] = useState("");
   const [code, setCode] = useState("");
   const [name, setName] = useState("");
-  const [photo, setPhoto] = useState({ preview: "", raw: "" });
+  const [photo, setPhoto] = useState({ preview: "", file: "" });
   const [address, setAddress] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
   const [postCode, setPostCode] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState({ success: "", fail: "" });
   const [postSearch, setPostSearch] = useState(false);
+  const [smsVisible, setSmsVisible] = useState(false);
 
   const dispatch = useDispatch();
 
   const userRegister = useSelector((state) => state.userRegister);
-  const { loading, error, userInfo } = userRegister;
+  const { loading, error, success: registerSuccess } = userRegister;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   const userMessage = useSelector((state) => state.userMessage);
-  const {
-    loading: smsLoading,
-    error: smsError,
-    success: smsSuccess,
-  } = userMessage;
+  const { loading: smsLoading, error: smsError, code: smsCode } = userMessage;
 
-  const handleImageChange = (e) => {
+  const userMessageCheck = useSelector((state) => state.userMessageCheck);
+  const { success: smsCheckSuccess, error: smsCheckSError } = userMessageCheck;
+
+  useEffect(() => {
+    if (userInfo) {
+      history.push("/");
+    }
+  }, [history, userInfo]);
+
+  const messageSendHandler = () => {
+    dispatch(smsMessage(phone));
+    setSmsVisible(true);
+  };
+
+  const messageCheckHandler = () => {
+    if (code !== smsCode) {
+      setMessage({ fail: "SMS code do not match" });
+    } else {
+      dispatch(smsMessageCheck(phone, code));
+      setMessage({ success: "SMS success" });
+      setSmsVisible(false);
+    }
+  };
+
+  const imageChangeHandler = (e) => {
     if (e.target.files.length) {
       setPhoto({
         preview: URL.createObjectURL(e.target.files[0]),
-        raw: e.target.files[0],
+        file: e.target.files[0],
       });
     }
   };
 
-  const handleComplete = (data) => {
+  const addressCompleteHandler = (data) => {
     let fullAddress = data.address;
     let extraAddress = "";
     let zoneCodes = data.zonecode;
@@ -68,22 +92,21 @@ const RegisterScreen = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      setMessage("Passwords do not match");
+      setMessage({ fail: "Passwords do not match" });
     } else {
-      const profileImage = new FormData(form.current);
-      profileImage.append("myImage", photo.raw);
-      dispatch(
-        register({
-          socialValue,
-          phone,
-          name,
-          profileImage,
-          address,
-          addressDetail,
-          postCode,
-          password,
-        })
-      );
+      const formData = new FormData();
+      formData.append("usSocialValue", socialValue);
+      formData.append("usPhoneNumber", phone);
+      formData.append("usName", name);
+      formData.append("usAddress", address);
+      formData.append("usAddressDetail", addressDetail);
+      formData.append("usAddressNumber", postCode);
+      formData.append("usPassword", password);
+      formData.append("usPhoto", photo.file);
+      dispatch(register(formData));
+      if (registerSuccess) {
+        history.push("/");
+      }
     }
   };
 
@@ -94,12 +117,11 @@ const RegisterScreen = () => {
       ) : (
         <Card className="p-4 mt-3">
           <h1 className="text-center">Sign Up</h1>
-          {message && <Message variant="danger">{message}</Message>}
-          <Form
-            onSubmit={submitHandler}
-            ref={form}
-            encType="multipart/form-data"
-          >
+          {message.fail && <Message variant="danger">{message.fail}</Message>}
+          {message.success && (
+            <Message variant="success">{message.success}</Message>
+          )}
+          <Form onSubmit={submitHandler} encType="multipart/form-data">
             <Form.Group controlId="phone">
               <Form.Label>Phone Number</Form.Label>
               <Row className="mb-4">
@@ -109,6 +131,7 @@ const RegisterScreen = () => {
                     placeholder="Enter Phone Number"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
+                    readOnly={smsCheckSuccess}
                     required
                   ></Form.Control>
                 </Col>
@@ -116,7 +139,8 @@ const RegisterScreen = () => {
                   <Button
                     variant="primary"
                     className="btn btn-block"
-                    onClick={() => dispatch(smsMessage(phone))}
+                    disabled={smsCheckSuccess}
+                    onClick={messageSendHandler}
                   >
                     Ok
                   </Button>
@@ -124,7 +148,7 @@ const RegisterScreen = () => {
               </Row>
             </Form.Group>
 
-            {smsSuccess && (
+            {smsVisible && (
               <Row className="mb-4">
                 <Col>
                   <Form.Control
@@ -139,7 +163,7 @@ const RegisterScreen = () => {
                   <Button
                     variant="primary"
                     className="btn btn-block"
-                    onClick={() => dispatch(smsMessageCheck(phone, code))}
+                    onClick={messageCheckHandler}
                   >
                     Ok
                   </Button>
@@ -165,7 +189,7 @@ const RegisterScreen = () => {
                   id="upload-button"
                   type="file"
                   style={{ display: "none" }}
-                  onChange={handleImageChange}
+                  onChange={imageChangeHandler}
                 ></Form.Control>
                 <Col>
                   <Image
@@ -202,6 +226,7 @@ const RegisterScreen = () => {
                 placeholder="Enter Address"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
+                readOnly
                 required
               ></Form.Control>
             </Form.Group>
@@ -225,13 +250,20 @@ const RegisterScreen = () => {
                     placeholder="Enter Post Code"
                     value={postCode}
                     onChange={(e) => setPostCode(e.target.value)}
+                    readOnly
                     required
                   ></Form.Control>
                 </Col>
               </Row>
             </Form.Group>
 
-            <PostCodeSearch visible={postSearch} onComplete={handleComplete} />
+            {postSearch && (
+              <PostCodeSearch
+                visible={postSearch}
+                onComplete={addressCompleteHandler}
+                cancelBtn={() => setPostSearch(false)}
+              />
+            )}
 
             <Form.Group controlId="password">
               <Form.Label>Password</Form.Label>
