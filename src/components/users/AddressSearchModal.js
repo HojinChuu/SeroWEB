@@ -1,13 +1,12 @@
 import React from "react";
-import { Button } from "react-bootstrap";
 import DaumPostcode from "react-daum-postcode";
 
-const PostCodeSearch = ({ visible, onComplete, cancelBtn }) => {
+const AddressSearchModal = ({ visible, onComplete, cancelBtn }) => {
   return (
     <div style={{ ...postCodeStyle, display: visible ? "block" : "none" }}>
-      <Button variant="dark" style={btnStyle} onClick={cancelBtn}>
+      <button className="btn btn-dark" style={btnStyle} onClick={cancelBtn}>
         <i className="fas fa-window-close"></i>
-      </Button>
+      </button>
       <DaumPostcode
         onComplete={onComplete}
         animation
@@ -35,4 +34,4 @@ const btnStyle = {
   cursor: "pointer",
 };
 
-export default PostCodeSearch;
+export default AddressSearchModal;

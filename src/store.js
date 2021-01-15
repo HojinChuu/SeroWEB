@@ -15,12 +15,12 @@ const reducer = combineReducers({
   userMessageCheck: userMessageCheckReducer,
 });
 
-const userInfoFromStorage = localStorage.getItem("userInfo")
-  ? JSON.parse(localStorage.getItem("userInfo"))
+const userTokenFromStorage = localStorage.getItem("userToken")
+  ? JSON.parse(localStorage.getItem("userToken"))
   : false;
 
 const initailState = {
-  userLogin: { userInfo: userInfoFromStorage },
+  userLogin: { userToken: userTokenFromStorage },
 };
 
 const middleware = [thunk];

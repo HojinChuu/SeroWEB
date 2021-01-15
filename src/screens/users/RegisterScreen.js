@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Form, Button, Row, Col, Card, Image } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { register, smsMessage, smsMessageCheck } from "../actions/userActions";
+import {
+  register,
+  smsMessage,
+  smsMessageCheck,
+} from "../../actions/userActions";
 
-import FormContainer from "../components/FormContainer";
-import PostCodeSearch from "../components/PostCodeSearch";
-import Message from "../components/Message";
-import Loader from "../components/Loader";
+import FormContainer from "../../components/helpers/FormContainer";
+import AddressSearchModal from "../../components/users/AddressSearchModal";
+import Message from "../../components/helpers/Message";
+import Loader from "../../components/helpers/Loader";
 
 const RegisterScreen = ({ history }) => {
+  // Form
   const [socialValue, setSocialValue] = useState(0);
   const [phone, setPhone] = useState("");
   const [code, setCode] = useState("");
@@ -20,9 +25,17 @@ const RegisterScreen = ({ history }) => {
   const [postCode, setPostCode] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  // State
   const [message, setMessage] = useState({ success: "", fail: "" });
-  const [postSearch, setPostSearch] = useState(false);
   const [smsVisible, setSmsVisible] = useState(false);
+  const [postSearch, setPostSearch] = useState(false);
+  const [validation, setValidation] = useState({
+    nameErr: "",
+    passwordErr: "",
+    confirmPasswordErr: "",
+    addressDetailErr: "",
+  });
 
   const dispatch = useDispatch();
 
@@ -44,18 +57,24 @@ const RegisterScreen = ({ history }) => {
     }
   }, [history, userInfo]);
 
+  useEffect(() => {
+    if (registerSuccess) {
+      history.push("/login");
+    }
+  }, [history, registerSuccess]);
+
   const messageSendHandler = () => {
     dispatch(smsMessage(phone));
     setSmsVisible(true);
   };
 
   const messageCheckHandler = () => {
-    if (code !== smsCode) {
-      setMessage({ fail: "SMS code do not match" });
-    } else {
+    if (code == smsCode) {
       dispatch(smsMessageCheck(phone, code));
       setMessage({ success: "SMS success" });
       setSmsVisible(false);
+    } else {
+      setMessage({ fail: "SMS code do not match" });
     }
   };
 
@@ -91,7 +110,7 @@ const RegisterScreen = ({ history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
+    if (password !== confirmPassword && smsCheckSuccess) {
       setMessage({ fail: "Passwords do not match" });
     } else {
       const formData = new FormData();
@@ -104,9 +123,6 @@ const RegisterScreen = ({ history }) => {
       formData.append("usPassword", password);
       formData.append("usPhoto", photo.file);
       dispatch(register(formData));
-      if (registerSuccess) {
-        history.push("/");
-      }
     }
   };
 
@@ -115,193 +131,211 @@ const RegisterScreen = ({ history }) => {
       {loading ? (
         <Loader />
       ) : (
-        <Card className="p-4 mt-3">
+        <div className="card p-4 mt-3 rounded">
           <h1 className="text-center">Sign Up</h1>
           {message.fail && <Message variant="danger">{message.fail}</Message>}
           {message.success && (
             <Message variant="success">{message.success}</Message>
           )}
-          <Form onSubmit={submitHandler} encType="multipart/form-data">
-            <Form.Group controlId="phone">
-              <Form.Label>Phone Number</Form.Label>
-              <Row className="mb-4">
-                <Col>
-                  <Form.Control
+          <form onSubmit={submitHandler} encType="multipart/form-data">
+            <div className="form-group" id="phone">
+              <label>Phone Number</label>
+              <div className="row mb-4">
+                <div className="col">
+                  <input
                     type="text"
                     placeholder="Enter Phone Number"
+                    className="form-control"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     readOnly={smsCheckSuccess}
-                    required
-                  ></Form.Control>
-                </Col>
-                <Col>
-                  <Button
+                  />
+                </div>
+                <div className="col">
+                  <button
+                    type="button"
                     variant="primary"
-                    className="btn btn-block"
+                    className="btn btn-block btn-primary"
                     disabled={smsCheckSuccess}
                     onClick={messageSendHandler}
                   >
                     Ok
-                  </Button>
-                </Col>
-              </Row>
-            </Form.Group>
+                  </button>
+                </div>
+              </div>
+            </div>
 
             {smsVisible && (
-              <Row className="mb-4">
-                <Col>
-                  <Form.Control
+              <div className="row mb-4">
+                <div className="col">
+                  <input
                     type="text"
                     placeholder="Number"
+                    className="form-control"
                     value={code}
                     onChange={(e) => setCode(e.target.value)}
-                    required
-                  ></Form.Control>
-                </Col>
-                <Col>
-                  <Button
+                  />
+                </div>
+                <div className="col">
+                  <button
+                    type="button"
                     variant="primary"
-                    className="btn btn-block"
+                    className="btn btn-block btn-primary"
+                    disabled={code.length == 0}
                     onClick={messageCheckHandler}
                   >
                     Ok
-                  </Button>
-                </Col>
-              </Row>
+                  </button>
+                </div>
+              </div>
             )}
 
-            <Form.Group controlId="name">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
+            <div id="name" className="form-group">
+              <label>Name</label>
+              <input
                 type="text"
                 placeholder="Enter Name"
+                className="form-control"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                required
-              ></Form.Control>
-            </Form.Group>
+              />
+              {validation.nameErr && (
+                <small className="validation">{validation.nameErr}</small>
+              )}
+            </div>
 
-            <Form.Group>
-              <Form.Label htmlFor="upload-button" style={{ cursor: "pointer" }}>
+            <div className="form-group">
+              <label htmlFor="upload-button" style={{ cursor: "pointer" }}>
                 Photo
-                <Form.Control
+                <input
                   id="upload-button"
+                  className="form-control"
                   type="file"
                   style={{ display: "none" }}
                   onChange={imageChangeHandler}
-                ></Form.Control>
-                <Col>
+                ></input>
+                <div className="col">
                   <Image
                     rounded
                     id="upload"
                     className="mt-3"
-                    src={photo.preview ? photo.preview : "no-image.png"}
+                    src={photo.preview ? photo.preview : "image/no-image.png"}
                     style={{
                       width: "120px",
                       height: "100px",
                     }}
                   />
-                </Col>
-              </Form.Label>
-            </Form.Group>
-            <Form.Group controlId="address">
-              <Row className="justify-content-between">
-                <Col xs={10} md={10}>
-                  <Form.Label>Address</Form.Label>
-                </Col>
-                <Col xs={2} md={2}>
-                  <Button
-                    size="sm"
-                    variant="outline-light"
+                </div>
+              </label>
+            </div>
+            <div className="form-group" id="address">
+              <div className="row justify-content-between">
+                <div className="col-md-10 col-xs-10">
+                  <label>Address</label>
+                </div>
+                <div className="col-md-2 col-xs-2">
+                  <button
+                    type="button"
+                    className="btn btn-outline-light btn-sm"
                     style={{ color: "grey" }}
                     onClick={() => setPostSearch(true)}
                   >
                     Search
-                  </Button>
-                </Col>
-              </Row>
-              <Form.Control
+                  </button>
+                </div>
+              </div>
+              <input
                 type="text"
                 placeholder="Enter Address"
+                className="form-control"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 readOnly
                 required
-              ></Form.Control>
-            </Form.Group>
+              />
+            </div>
 
-            <Form.Group controlId="addressDetail">
-              <Row>
-                <Col xs={8} md={8}>
-                  <Form.Label>Address Detail</Form.Label>
-                  <Form.Control
+            <div className="form-group" id="addressDetail">
+              <div className="row">
+                <div className="col-md-8 col-xs-8">
+                  <label>Address Detail</label>
+                  <input
                     type="text"
                     placeholder="Enter Address Detail"
+                    className="form-control"
                     value={addressDetail}
                     onChange={(e) => setAddressDetail(e.target.value)}
-                    required
-                  ></Form.Control>
-                </Col>
-                <Col xs={4} md={4}>
-                  <Form.Label>Post Code</Form.Label>
-                  <Form.Control
+                  />
+                  {validation.addressDetailErr && (
+                    <small className="validation">
+                      {validation.addressDetailErr}
+                    </small>
+                  )}
+                </div>
+                <div className="col-md-4 col-xs-4">
+                  <label>Post Code</label>
+                  <input
                     type="text"
                     placeholder="Enter Post Code"
+                    className="form-control"
                     value={postCode}
                     onChange={(e) => setPostCode(e.target.value)}
                     readOnly
                     required
-                  ></Form.Control>
-                </Col>
-              </Row>
-            </Form.Group>
+                  />
+                </div>
+              </div>
+            </div>
 
             {postSearch && (
-              <PostCodeSearch
+              <AddressSearchModal
                 visible={postSearch}
                 onComplete={addressCompleteHandler}
                 cancelBtn={() => setPostSearch(false)}
               />
             )}
 
-            <Form.Group controlId="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
+            <div className="form-group" id="password">
+              <label>Password</label>
+              <input
                 type="password"
                 placeholder="Enter password"
+                className="form-control"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                required
-              ></Form.Control>
-            </Form.Group>
+              />
+              {validation.passwordErr && (
+                <small className="validation">{validation.passwordErr}</small>
+              )}
+            </div>
 
-            <Form.Group controlId="confirmPassword">
-              <Form.Label>Confirm Password</Form.Label>
-              <Form.Control
+            <div className="form-group" id="confirmPassword">
+              <label>Confirm Password</label>
+              <input
                 type="password"
                 placeholder="Enter Confirm Password"
+                className="form-control"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-              ></Form.Control>
-            </Form.Group>
+              />
+              {validation.confirmPasswordErr && (
+                <small className="validation">
+                  {validation.confirmPasswordErr}
+                </small>
+              )}
+            </div>
 
-            <Button
-              type="submit"
-              variant="primary"
-              className="btn btn-block mt-4"
-            >
+            <button type="submit" className="btn btn-block mt-4 btn-primary">
               Register
-            </Button>
-          </Form>
+            </button>
+          </form>
 
-          <Row className="py-3">
-            <Col>
+          <div className="row py-3">
+            <div className="col">
               Have an Account? <Link to="/login">Login</Link>
-            </Col>
-          </Row>
-        </Card>
+            </div>
+          </div>
+        </div>
       )}
     </FormContainer>
   );

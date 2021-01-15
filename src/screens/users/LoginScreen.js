@@ -1,11 +1,12 @@
 import React, { useState, Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Form, Button, Row, Col, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../actions/userActions";
+import { getUserInfo, login } from "../../actions/userActions";
 
-import FormContainer from "../components/FormContainer";
-import Loader from "../components/Loader";
+import FormContainer from "../../components/helpers/FormContainer";
+import Loader from "../../components/helpers/Loader";
+import GoogleAuth from "../../components/users/GoogleAuth";
+import KakaoAuth from "../../components/users/KakaoAuth";
 
 const LoginScreen = ({ history }) => {
   const [socialValue, setSocialValue] = useState(0);
@@ -15,17 +16,18 @@ const LoginScreen = ({ history }) => {
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { loading, error, userInfo } = userLogin;
+  const { loading, error, userToken } = userLogin;
 
   useEffect(() => {
-    if (userInfo) {
+    if (userToken) {
       history.push("/");
     }
-  }, [history, userInfo]);
+  }, [history, userToken]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(login(socialValue, phone, password));
+    dispatch(getUserInfo);
   };
 
   return (
@@ -34,44 +36,47 @@ const LoginScreen = ({ history }) => {
         <Loader />
       ) : (
         <FormContainer>
-          <Card className="p-4 mt-3">
+          <div className="card p-4 mt-3 rounded">
             <h1 className="text-center">Sign In</h1>
-            <Form onSubmit={submitHandler}>
-              <Form.Group controlId="phone">
-                <Form.Label>Phone Number</Form.Label>
-                <Form.Control
+            <form onSubmit={submitHandler}>
+              <div className="form-group" id="phone">
+                <label>Phone Number</label>
+                <input
                   type="phone"
                   placeholder="Enter Phone Number"
+                  className="form-control"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
+                />
+              </div>
 
-              <Form.Group controlId="password">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
+              <div className="form-group" id="password">
+                <label>Password</label>
+                <input
                   type="password"
+                  className="form-control"
                   placeholder="Enter password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                ></Form.Control>
-              </Form.Group>
+                />
+              </div>
 
-              <Button
+              <button
                 type="submit"
-                variant="primary"
-                className="btn btn-block mt-4"
+                className="btn btn-block btn-primary mt-4 btn-lg rounded"
               >
                 Sign In
-              </Button>
-            </Form>
+              </button>
+            </form>
 
-            <Row className="py-3">
-              <Col>
+            <div className="row py-3 mb-3">
+              <div className="col">
                 New Customer? <Link to="/register">Register</Link>
-              </Col>
-            </Row>
-          </Card>
+              </div>
+            </div>
+            <GoogleAuth />
+            <KakaoAuth />
+          </div>
         </FormContainer>
       )}
     </Fragment>
