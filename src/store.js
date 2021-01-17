@@ -4,15 +4,15 @@ import thunk from "redux-thunk";
 import {
   userRegisterReducer,
   userLoginReducer,
-  userMessageReducer,
-  userMessageCheckReducer,
+  userSmsReducer,
+  userSmsCheckReducer,
 } from "./reducers/userReducers";
 
 const reducer = combineReducers({
   userRegister: userRegisterReducer,
   userLogin: userLoginReducer,
-  userMessage: userMessageReducer,
-  userMessageCheck: userMessageCheckReducer,
+  userSms: userSmsReducer,
+  userSmsCheck: userSmsCheckReducer,
 });
 
 const userTokenFromStorage = localStorage.getItem("userToken")

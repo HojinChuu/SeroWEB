@@ -4,19 +4,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserInfo, login } from "../../actions/userActions";
 
 import FormContainer from "../../components/helpers/FormContainer";
-import Loader from "../../components/helpers/Loader";
+import Spinner from "../../components/helpers/Spinner";
 import GoogleAuth from "../../components/users/GoogleAuth";
 import KakaoAuth from "../../components/users/KakaoAuth";
 
 const LoginScreen = ({ history }) => {
-  const [socialValue, setSocialValue] = useState(0);
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { loading, error, userToken } = userLogin;
+  const { loading, userToken } = userLogin;
 
   useEffect(() => {
     if (userToken) {
@@ -26,14 +25,14 @@ const LoginScreen = ({ history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(login(socialValue, phone, password));
-    dispatch(getUserInfo);
+    dispatch(login(0, phone, password));
+    dispatch(getUserInfo());
   };
 
   return (
     <Fragment>
       {loading ? (
-        <Loader />
+        <Spinner />
       ) : (
         <FormContainer>
           <div className="card p-4 mt-3 rounded">
@@ -74,8 +73,8 @@ const LoginScreen = ({ history }) => {
                 New Customer? <Link to="/register">Register</Link>
               </div>
             </div>
-            <GoogleAuth />
-            <KakaoAuth />
+            <GoogleAuth history={history} />
+            <KakaoAuth history={history} />
           </div>
         </FormContainer>
       )}

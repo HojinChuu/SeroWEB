@@ -9,10 +9,12 @@ import Footer from "./components/defaults/Footer";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/users/LoginScreen";
 import RegisterScreen from "./screens/users/RegisterScreen";
+import AuthRedirect from "./screens/users/AuthRedirect";
+import AdminHomeScreen from "./screens/admin/AdminHomeScreen";
 
 const App = () => {
   const dispatch = useDispatch();
-  const { userToken, refreshLoading, userInfo } = useSelector(
+  const { userToken, loading, userInfo } = useSelector(
     (state) => state.userLogin
   );
 
@@ -20,14 +22,17 @@ const App = () => {
     if (userToken) {
       dispatch(getUserInfo());
     }
-  }, [dispatch, userToken, refreshLoading, userInfo]);
+  }, [dispatch, userToken, loading, userInfo]);
+
   return (
     <Router>
       <Header />
       <main className="py-3">
         <Container>
+          <Route path="/admin" component={AdminHomeScreen} />
           <Route path="/login" component={LoginScreen} />
           <Route path="/register" component={RegisterScreen} />
+          <Route path="/auth" component={AuthRedirect} exact />
           <Route path="/" component={HomeScreen} exact />
         </Container>
       </main>

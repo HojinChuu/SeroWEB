@@ -8,7 +8,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo, refreshLoading } = userLogin;
+  const { userInfo, loading } = userLogin;
 
   return (
     <header>
@@ -20,22 +20,22 @@ const Header = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
-              {refreshLoading ? (
-                <Spinner animation="border" variant="info" />
+              {loading ? (
+                <Spinner animation="border" variant="light" className="mr-5" />
               ) : (
                 <Fragment>
                   {userInfo && userInfo.usGrant === 0 && (
-                    <LinkContainer to="/register">
-                      <Nav.Link>Admin</Nav.Link>
+                    <LinkContainer to="/admin">
+                      <Nav.Link>ADMIN</Nav.Link>
                     </LinkContainer>
                   )}
                   {userInfo ? (
                     <NavDropdown title={userInfo.usName} id="username">
                       <LinkContainer to="/profile">
-                        <NavDropdown.Item>MyPage</NavDropdown.Item>
+                        <NavDropdown.Item>마이페이지</NavDropdown.Item>
                       </LinkContainer>
                       <NavDropdown.Item onClick={() => dispatch(logout())}>
-                        Logout
+                        로그아웃
                       </NavDropdown.Item>
                     </NavDropdown>
                   ) : (

@@ -36,3 +36,8 @@ footer {
   padding: 1rem;
   border-top: 1px solid lightgrey;
 }
+
+svg {
+  width: 200px;
+  height: auto;
+}

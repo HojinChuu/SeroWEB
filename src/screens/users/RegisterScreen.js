@@ -1,21 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  register,
-  smsMessage,
-  smsMessageCheck,
-} from "../../actions/userActions";
+import { register, sendSms, checkSms } from "../../actions/userActions";
+import { DEFAULT_PROFILE } from "../../config";
 
 import FormContainer from "../../components/helpers/FormContainer";
 import AddressSearchModal from "../../components/users/AddressSearchModal";
 import Message from "../../components/helpers/Message";
-import Loader from "../../components/helpers/Loader";
+import Spinner from "../../components/helpers/Spinner";
 
 const RegisterScreen = ({ history }) => {
-  // Form
-  const [socialValue, setSocialValue] = useState(0);
   const [phone, setPhone] = useState("");
   const [code, setCode] = useState("");
   const [name, setName] = useState("");
@@ -25,31 +20,26 @@ const RegisterScreen = ({ history }) => {
   const [postCode, setPostCode] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
-  // State
   const [message, setMessage] = useState({ success: "", fail: "" });
   const [smsVisible, setSmsVisible] = useState(false);
   const [postSearch, setPostSearch] = useState(false);
-  const [validation, setValidation] = useState({
-    nameErr: "",
-    passwordErr: "",
-    confirmPasswordErr: "",
-    addressDetailErr: "",
-  });
+  // const [validation, setValidation] = useState({
+  //   nameErr: "",
+  //   passwordErr: "",
+  //   confirmPasswordErr: "",
+  //   addressDetailErr: "",
+  // });
 
   const dispatch = useDispatch();
-
   const userRegister = useSelector((state) => state.userRegister);
-  const { loading, error, success: registerSuccess } = userRegister;
-
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  const userSms = useSelector((state) => state.userSms);
+  const userSmsCheck = useSelector((state) => state.userSmsCheck);
 
-  const userMessage = useSelector((state) => state.userMessage);
-  const { loading: smsLoading, error: smsError, code: smsCode } = userMessage;
-
-  const userMessageCheck = useSelector((state) => state.userMessageCheck);
-  const { success: smsCheckSuccess, error: smsCheckSError } = userMessageCheck;
+  const { loading, success: registerSuccess } = userRegister;
+  const { userInfo, authInfo } = userLogin;
+  const { code: smsCode } = userSms;
+  const { success: smsCheckSuccess } = userSmsCheck;
 
   useEffect(() => {
     if (userInfo) {
@@ -63,14 +53,43 @@ const RegisterScreen = ({ history }) => {
     }
   }, [history, registerSuccess]);
 
-  const messageSendHandler = () => {
-    dispatch(smsMessage(phone));
-    setSmsVisible(true);
+  useEffect(() => {
+    if (authInfo && authInfo.image) {
+      setName(authInfo.name);
+      fetch(authInfo.image).then(async (response) => {
+        const contentType = response.headers.get("content-type");
+        const blob = await response.blob();
+        const file = new File([blob], "image.png", { contentType });
+        setPhoto({
+          preview: URL.createObjectURL(file),
+          file: file,
+        });
+      });
+    } else {
+      fetch(DEFAULT_PROFILE).then(async (response) => {
+        const contentType = response.headers.get("content-type");
+        const blob = await response.blob();
+        const file = new File([blob], "image.png", { contentType });
+        setPhoto({
+          preview: URL.createObjectURL(file),
+          file: file,
+        });
+      });
+    }
+  }, [authInfo]);
+
+  const smsSendHandler = () => {
+    if (!phone) {
+      setMessage({ fail: "please enter the phone number" });
+    } else {
+      dispatch(sendSms(phone));
+      setSmsVisible(true);
+    }
   };
 
-  const messageCheckHandler = () => {
-    if (code == smsCode) {
-      dispatch(smsMessageCheck(phone, code));
+  const smsCheckHandler = () => {
+    if (parseInt(code) === smsCode) {
+      dispatch(checkSms(phone, code));
       setMessage({ success: "SMS success" });
       setSmsVisible(false);
     } else {
@@ -114,13 +133,18 @@ const RegisterScreen = ({ history }) => {
       setMessage({ fail: "Passwords do not match" });
     } else {
       const formData = new FormData();
-      formData.append("usSocialValue", socialValue);
+      if (!authInfo) {
+        formData.append("usSocialValue", 0);
+        formData.append("usPassword", password);
+      } else {
+        formData.append("usSocialValue", authInfo.usSocialValue);
+        formData.append("usSocialId", authInfo.id);
+      }
       formData.append("usPhoneNumber", phone);
       formData.append("usName", name);
       formData.append("usAddress", address);
       formData.append("usAddressDetail", addressDetail);
       formData.append("usAddressNumber", postCode);
-      formData.append("usPassword", password);
       formData.append("usPhoto", photo.file);
       dispatch(register(formData));
     }
@@ -129,7 +153,7 @@ const RegisterScreen = ({ history }) => {
   return (
     <FormContainer>
       {loading ? (
-        <Loader />
+        <Spinner />
       ) : (
         <div className="card p-4 mt-3 rounded">
           <h1 className="text-center">Sign Up</h1>
@@ -157,7 +181,7 @@ const RegisterScreen = ({ history }) => {
                     variant="primary"
                     className="btn btn-block btn-primary"
                     disabled={smsCheckSuccess}
-                    onClick={messageSendHandler}
+                    onClick={smsSendHandler}
                   >
                     Ok
                   </button>
@@ -181,8 +205,8 @@ const RegisterScreen = ({ history }) => {
                     type="button"
                     variant="primary"
                     className="btn btn-block btn-primary"
-                    disabled={code.length == 0}
-                    onClick={messageCheckHandler}
+                    disabled={code.length === 0}
+                    onClick={smsCheckHandler}
                   >
                     Ok
                   </button>
@@ -197,11 +221,12 @@ const RegisterScreen = ({ history }) => {
                 placeholder="Enter Name"
                 className="form-control"
                 value={name}
+                readOnly={authInfo}
                 onChange={(e) => setName(e.target.value)}
               />
-              {validation.nameErr && (
+              {/* {validation.nameErr && (
                 <small className="validation">{validation.nameErr}</small>
-              )}
+              )} */}
             </div>
 
             <div className="form-group">
@@ -211,6 +236,7 @@ const RegisterScreen = ({ history }) => {
                   id="upload-button"
                   className="form-control"
                   type="file"
+                  disabled={authInfo}
                   style={{ display: "none" }}
                   onChange={imageChangeHandler}
                 ></input>
@@ -266,11 +292,11 @@ const RegisterScreen = ({ history }) => {
                     value={addressDetail}
                     onChange={(e) => setAddressDetail(e.target.value)}
                   />
-                  {validation.addressDetailErr && (
+                  {/* {validation.addressDetailErr && (
                     <small className="validation">
                       {validation.addressDetailErr}
                     </small>
-                  )}
+                  )} */}
                 </div>
                 <div className="col-md-4 col-xs-4">
                   <label>Post Code</label>
@@ -294,36 +320,41 @@ const RegisterScreen = ({ history }) => {
                 cancelBtn={() => setPostSearch(false)}
               />
             )}
+            {!authInfo && (
+              <Fragment>
+                <div className="form-group" id="password">
+                  <label>Password</label>
+                  <input
+                    type="password"
+                    placeholder="Enter password"
+                    className="form-control"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  {/* {validation.passwordErr && (
+                    <small className="validation">
+                      {validation.passwordErr}
+                    </small>
+                  )} */}
+                </div>
 
-            <div className="form-group" id="password">
-              <label>Password</label>
-              <input
-                type="password"
-                placeholder="Enter password"
-                className="form-control"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              {validation.passwordErr && (
-                <small className="validation">{validation.passwordErr}</small>
-              )}
-            </div>
-
-            <div className="form-group" id="confirmPassword">
-              <label>Confirm Password</label>
-              <input
-                type="password"
-                placeholder="Enter Confirm Password"
-                className="form-control"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-              {validation.confirmPasswordErr && (
-                <small className="validation">
-                  {validation.confirmPasswordErr}
-                </small>
-              )}
-            </div>
+                <div className="form-group" id="confirmPassword">
+                  <label>Confirm Password</label>
+                  <input
+                    type="password"
+                    placeholder="Enter Confirm Password"
+                    className="form-control"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  />
+                  {/* {validation.confirmPasswordErr && (
+                    <small className="validation">
+                      {validation.confirmPasswordErr}
+                    </small>
+                  )} */}
+                </div>
+              </Fragment>
+            )}
 
             <button type="submit" className="btn btn-block mt-4 btn-primary">
               Register

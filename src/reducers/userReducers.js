@@ -5,15 +5,18 @@ import {
   USER_LOGIN_FAIL,
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
+  USER_AUTH_LOGIN_REQUEST,
+  USER_AUTH_LOGIN_SUCCESS,
+  USER_AUTH_LOGIN_FAIL,
   USER_LOGOUT,
   USER_TOKEN_CHECK_REQUEST,
   USER_TOKEN_CHECK_SUCCESS,
-  USER_PHONE_MESSAGE_REQUEST,
-  USER_PHONE_MESSAGE_SUCCESS,
-  USER_PHONE_MESSAGE_FAIL,
-  USER_PHONE_MESSAGE_CHECK_REQUEST,
-  USER_PHONE_MESSAGE_CHECK_SUCCESS,
-  USER_PHONE_MESSAGE_CHECK_FAIL,
+  USER_PHONE_SMS_REQUEST,
+  USER_PHONE_SMS_SUCCESS,
+  USER_PHONE_SMS_FAIL,
+  USER_PHONE_SMS_CHECK_REQUEST,
+  USER_PHONE_SMS_CHECK_SUCCESS,
+  USER_PHONE_SMS_CHECK_FAIL,
 } from "../constants/userConstants";
 
 export const userRegisterReducer = (state = {}, action) => {
@@ -26,7 +29,7 @@ export const userRegisterReducer = (state = {}, action) => {
       return {
         loading: false,
         success: true,
-        userInfo: action.payload.data,
+        userInfo: action.payload,
       };
     case USER_REGISTER_FAIL:
       return {
@@ -56,14 +59,28 @@ export const userLoginReducer = (state = {}, action) => {
         loading: false,
         error: action.payload,
       };
+    case USER_AUTH_LOGIN_REQUEST:
+      return {
+        loading: true,
+      };
+    case USER_AUTH_LOGIN_SUCCESS:
+      return {
+        loading: false,
+        userToken: action.payload,
+      };
+    case USER_AUTH_LOGIN_FAIL:
+      return {
+        loading: false,
+        authInfo: action.payload,
+      };
     case USER_TOKEN_CHECK_REQUEST:
       return {
-        refreshLoading: true,
+        loading: true,
       };
     case USER_TOKEN_CHECK_SUCCESS:
       return {
-        refreshLoading: false,
-        userInfo: action.payload.data,
+        loading: false,
+        userInfo: action.payload,
       };
     case USER_LOGOUT:
       return {};
@@ -72,19 +89,19 @@ export const userLoginReducer = (state = {}, action) => {
   }
 };
 
-export const userMessageReducer = (state = {}, action) => {
+export const userSmsReducer = (state = {}, action) => {
   switch (action.type) {
-    case USER_PHONE_MESSAGE_REQUEST:
+    case USER_PHONE_SMS_REQUEST:
       return {
         loading: true,
       };
-    case USER_PHONE_MESSAGE_SUCCESS:
+    case USER_PHONE_SMS_SUCCESS:
       return {
         loading: false,
-        code: action.payload.data,
+        code: action.payload,
         success: true,
       };
-    case USER_PHONE_MESSAGE_FAIL:
+    case USER_PHONE_SMS_FAIL:
       return {
         loading: false,
         error: action.payload,
@@ -94,18 +111,18 @@ export const userMessageReducer = (state = {}, action) => {
   }
 };
 
-export const userMessageCheckReducer = (state = {}, action) => {
+export const userSmsCheckReducer = (state = {}, action) => {
   switch (action.type) {
-    case USER_PHONE_MESSAGE_CHECK_REQUEST:
+    case USER_PHONE_SMS_CHECK_REQUEST:
       return {
         loading: true,
       };
-    case USER_PHONE_MESSAGE_CHECK_SUCCESS:
+    case USER_PHONE_SMS_CHECK_SUCCESS:
       return {
         loading: false,
         success: true,
       };
-    case USER_PHONE_MESSAGE_CHECK_FAIL:
+    case USER_PHONE_SMS_CHECK_FAIL:
       return {
         loading: false,
         error: action.payload,

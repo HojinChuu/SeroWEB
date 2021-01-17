@@ -1,14 +1,21 @@
 import React from "react";
 import { GoogleLogin } from "react-google-login";
-import { GOOGLE_CLIENT_ID } from "../../config";
-import { useDispatch, useSelector } from "react-redux";
+import { DEFAULT_PROFILE, GOOGLE_CLIENT_ID } from "../../config";
+import { useDispatch } from "react-redux";
 import { authRequest } from "../../actions/userActions";
 
-const GoogleAuth = () => {
+const GoogleAuth = ({ history }) => {
   const dispatch = useDispatch();
 
-  const onSuccess = (res) => {
-    dispatch(authRequest({ ...res.profileObj, usSocialValue: 1 }));
+  const onSuccess = ({ profileObj }) => {
+    const authInfo = {
+      id: profileObj.googleId,
+      name: profileObj.name,
+      image: profileObj.imageUrl ? profileObj.imageUrl : DEFAULT_PROFILE,
+      usSocialValue: 2,
+    };
+    dispatch(authRequest(authInfo));
+    history.push("/auth");
   };
 
   const onFailure = (res) => {
