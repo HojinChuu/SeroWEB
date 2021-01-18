@@ -1,45 +1,54 @@
-import React from "react";
-import KaKaoLogin from "react-kakao-login";
+import React, { useEffect } from "react";
 import { KAKAO_CLIENT_ID, DEFAULT_PROFILE } from "../../config";
 import { useDispatch } from "react-redux";
 import { authRequest } from "../../actions/userActions";
+const { Kakao } = window;
 
 const KakaoAuth = ({ history }) => {
   const dispatch = useDispatch();
 
-  const onSuccess = ({ profile }) => {
-    const authInfo = {
-      id: profile.id,
-      name: profile.kakao_account.profile.nickname,
-      image: profile.kakao_account.profile.profile_image_url
-        ? profile.kakao_account.profile.profile_image_url
-        : DEFAULT_PROFILE,
-      usSocialValue: 1,
-    };
-    dispatch(authRequest(authInfo));
-    history.push("/auth");
-  };
+  useEffect(() => {
+    if (!Kakao.isInitialized()) {
+      Kakao.init(KAKAO_CLIENT_ID);
+    }
+  });
 
-  const onFailure = (res) => {
-    console.log(res);
+  // profile_image_url
+  const onSuccess = () => {
+    Kakao.Auth.login({
+      throughTalk: false,
+      success: () => {
+        Kakao.API.request({
+          url: "/v2/user/me",
+          success: (profile) => {
+            const authInfo = {
+              id: profile.id,
+              name: profile.kakao_account.profile.nickname,
+              image: profile.kakao_account.profile.thumbnail_image_url
+                ? profile.kakao_account.profile.thumbnail_image_url
+                : DEFAULT_PROFILE,
+              usSocialValue: 1,
+            };
+            dispatch(authRequest(authInfo));
+            history.push("/auth");
+          },
+        });
+      },
+      fail: (error) => {
+        console.log(error);
+      },
+    });
   };
 
   return (
-    <KaKaoLogin
-      jsKey={KAKAO_CLIENT_ID}
-      onSuccess={onSuccess}
-      onFailure={onFailure}
-      getProfile={true}
-      render={(renderProps) => (
-        <button
-          className="mt-2 btn btn-lg rounded"
-          onClick={renderProps.onClick}
-          style={kakaoBtn}
-        >
-          Login With Kakao
-        </button>
-      )}
-    />
+    <button
+      id="kakao-login-btn"
+      onClick={onSuccess}
+      style={kakaoBtn}
+      className="mt-2 btn btn-lg rounded"
+    >
+      Login With Kakao
+    </button>
   );
 };
 
