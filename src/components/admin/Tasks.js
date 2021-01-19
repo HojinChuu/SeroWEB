@@ -1,33 +1,98 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { ToggleButton, ToggleButtonGroup } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { getTasks, removeTask } from "../../actions/adminAction";
+
+import TaskItem from "./TaskItem";
+import Loader from "../helpers/Loader";
 
 const Tasks = () => {
+  let taskArray = [];
+  const [taskState, setTaskState] = useState([]);
+  const [target, setTarget] = useState(0);
+  const [searchText, setSearchText] = useState("");
+  const dispatch = useDispatch();
+
+  const adminTasks = useSelector((state) => state.adminTasks);
+  const { loading, tasks } = adminTasks;
+
+  useEffect(() => {
+    dispatch(getTasks({}));
+  }, [dispatch]);
+
+  const getTaskValue = (taskValue) => {
+    taskArray.push(taskValue);
+    console.log(taskArray);
+  };
+
+  const removeTaskValue = (taskValue) => {
+    const index = taskArray.indexOf(taskValue);
+    if (index > -1) {
+      taskArray.splice(index, 1);
+    }
+  };
+
+  const removeTaskHandler = () => {
+    dispatch(removeTask(taskArray));
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(getTasks({ taskState, target, searchText }));
+  };
   return (
     <Fragment>
       <div className="row p-4">
-        <div className="row mr-auto toggle">
-          <ToggleButtonGroup type="checkbox">
-            <ToggleButton variant="light" value={1}>
+        <div className="row mr-auto">
+          <button
+            onClick={() => dispatch(getTasks({}))}
+            className="btn btn-outline-dark rounded"
+          >
+            <i className="fas fa-redo-alt"></i>
+          </button>
+          <button
+            className="btn btn-outline-primary rounded mr-2 ml-2"
+            disabled={taskArray.length === 0}
+          >
+            변경
+          </button>
+          <button
+            onClick={removeTaskHandler}
+            className="btn btn-outline-danger rounded"
+            disabled={taskArray.length === 0}
+          >
+            삭제
+          </button>
+        </div>
+        <form onSubmit={submitHandler} className="row ml-auto ml-3 toggle">
+          <ToggleButtonGroup type="checkbox" onChange={(e) => setTaskState(e)}>
+            <ToggleButton variant="light" value={0}>
               수신대기
             </ToggleButton>
-            <ToggleButton variant="light" value={2}>
+            <ToggleButton variant="light" value={1}>
               제작중
             </ToggleButton>
-            <ToggleButton variant="light" value={3}>
+            <ToggleButton variant="light" value={2}>
               배송중
             </ToggleButton>
-            <ToggleButton variant="light" value={4}>
+            <ToggleButton variant="light" value={3}>
               배송완료
             </ToggleButton>
           </ToggleButtonGroup>
-          <button className="btn btn-outline-primary rounded mr-2 ml-2">
-            변경
-          </button>
-          <button className="btn btn-outline-danger rounded mr-2">삭제</button>
-        </div>
-        <form className="row ml-auto ml-3">
+
+          <select
+            className="form-select ml-2"
+            onChange={(e) => setTarget(e.target.value)}
+          >
+            <option value={0}>전체</option>
+            <option value={1}>번호</option>
+            <option value={2}>주소</option>
+          </select>
           <div>
-            <input className="form-control" />
+            <input
+              className="form-control"
+              onChange={(e) => setSearchText(e.target.value)}
+            />
           </div>
           <button className="btn btn-sm btn-dark" type="submit">
             검색
@@ -37,8 +102,8 @@ const Tasks = () => {
       <div className="table-responsive">
         <table className="table table-striped table-lg">
           <thead>
-            <tr>
-              <th>#</th>
+            <tr className="text-center">
+              <th>선택</th>
               <th>번호</th>
               <th>유저</th>
               <th>주소</th>
@@ -48,132 +113,25 @@ const Tasks = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1,001</td>
-              <td>Lorem</td>
-              <td>ipsum</td>
-              <td>dolor</td>
-              <td>sit</td>
-              <td>sit</td>
-              <td>sit</td>
-            </tr>
-            <tr>
-              <td>1,002</td>
-              <td>amet</td>
-              <td>consectetur</td>
-              <td>adipiscing</td>
-              <td>sit</td>
-              <td>sit</td>
-              <td>elit</td>
-            </tr>
-            <tr>
-              <td>1,003</td>
-              <td>Integer</td>
-              <td>nec</td>
-              <td>odio</td>
-              <td>sit</td>
-              <td>sit</td>
-              <td>Praesent</td>
-            </tr>
-            <tr>
-              <td>1,003</td>
-              <td>libero</td>
-              <td>Sed</td>
-              <td>sit</td>
-              <td>sit</td>
-              <td>cursus</td>
-              <td>ante</td>
-            </tr>
-            <tr>
-              <td>1,004</td>
-              <td>dapibus</td>
-              <td>sit</td>
-              <td>sit</td>
-              <td>diam</td>
-              <td>Sed</td>
-              <td>nisi</td>
-            </tr>
-            <tr>
-              <td>1,005</td>
-              <td>Nulla</td>
-              <td>sit</td>
-              <td>sit</td>
-              <td>quis</td>
-              <td>sem</td>
-              <td>at</td>
-            </tr>
-            <tr>
-              <td>sit</td>
-              <td>sit</td>
-              <td>1,006</td>
-              <td>nibh</td>
-              <td>elementum</td>
-              <td>imperdiet</td>
-              <td>Duis</td>
-            </tr>
-            <tr>
-              <td>1,007</td>
-              <td>sagittis</td>
-              <td>sit</td>
-              <td>sit</td>
-              <td>ipsum</td>
-              <td>Praesent</td>
-              <td>mauris</td>
-            </tr>
-            <tr>
-              <td>1,008</td>
-              <td>Fusce</td>
-              <td>nec</td>
-              <td>tellus</td>
-              <td>sit</td>
-              <td>sit</td>
-              <td>sed</td>
-            </tr>
-            <tr>
-              <td>1,009</td>
-              <td>augue</td>
-              <td>sit</td>
-              <td>sit</td>
-              <td>semper</td>
-              <td>porta</td>
-              <td>Mauris</td>
-            </tr>
-            <tr>
-              <td>1,010</td>
-              <td>massa</td>
-              <td>Vestibulum</td>
-              <td>sit</td>
-              <td>sit</td>
-              <td>lacinia</td>
-              <td>arcu</td>
-            </tr>
-            <tr>
-              <td>1,011</td>
-              <td>eget</td>
-              <td>nulla</td>
-              <td>className</td>
-              <td>sit</td>
-              <td>sit</td>
-              <td>aptent</td>
-            </tr>
-            <tr>
-              <td>1,012</td>
-              <td>taciti</td>
-              <td>sit</td>
-              <td>sit</td>
-              <td>sit</td>
-              <td>ad</td>
-              <td>litora</td>
-            </tr>
-            <tr>
-              <td>1,013</td>
-              <td>torquent</td>
-              <td>sit</td>
-              <td>sit</td>
-              <td>per</td>
-              <td>conubia</td>
-              <td>nostra</td>
-            </tr>
+            {loading ? (
+              <tr style={{ backgroundColor: "transparent" }}>
+                <td colSpan="7">
+                  <Loader />
+                </td>
+              </tr>
+            ) : (
+              <>
+                {tasks &&
+                  tasks.map((task) => (
+                    <TaskItem
+                      task={task}
+                      key={task.seId}
+                      getTaskValue={getTaskValue}
+                      removeTaskValue={removeTaskValue}
+                    />
+                  ))}
+              </>
+            )}
           </tbody>
         </table>
       </div>

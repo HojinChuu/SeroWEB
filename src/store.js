@@ -7,12 +7,14 @@ import {
   userSmsReducer,
   userSmsCheckReducer,
 } from "./reducers/userReducers";
+import { adminTasksReducer } from "./reducers/adminReducers";
 
 const reducer = combineReducers({
   userRegister: userRegisterReducer,
   userLogin: userLoginReducer,
   userSms: userSmsReducer,
   userSmsCheck: userSmsCheckReducer,
+  adminTasks: adminTasksReducer,
 });
 
 const userTokenFromStorage = localStorage.getItem("userToken")

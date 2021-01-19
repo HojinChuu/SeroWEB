@@ -236,7 +236,6 @@ const RegisterScreen = ({ history }) => {
                   id="upload-button"
                   className="form-control"
                   type="file"
-                  disabled={authInfo}
                   style={{ display: "none" }}
                   onChange={imageChangeHandler}
                 ></input>
