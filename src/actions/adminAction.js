@@ -4,9 +4,15 @@ import {
   ADMIN_TASK_FETCH_REQUEST,
   ADMIN_TASK_FETCH_SUCCESS,
   ADMIN_TASK_FETCH_FAIL,
+  ADMIN_TASK_UPDATE_REQUEST,
+  ADMIN_TASK_UPDATE_SUCCESS,
+  ADMIN_TASK_UPDATE_FAIL,
   ADMIN_TASK_REMOVE_REQUEST,
   ADMIN_TASK_REMOVE_SUCCESS,
   ADMIN_TASK_REMOVE_FAIL,
+  ADMIN_QUESTION_FETCH_REQUEST,
+  ADMIN_QUESTION_FETCH_SUCCESS,
+  ADMIN_QUESTION_FETCH_FAIL,
 } from "../constants/adminConstants";
 
 export const getTasks = (condition) => async (dispatch) => {
@@ -37,6 +43,27 @@ export const getTasks = (condition) => async (dispatch) => {
   }
 };
 
+export const updateTask = (taskState, taskId) => async (dispatch) => {
+  try {
+    dispatch({
+      type: ADMIN_TASK_UPDATE_REQUEST,
+    });
+
+    await axios.post(
+      `${DOMAIN}/web_upt_task`,
+      { taskState, taskId },
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+    dispatch({
+      type: ADMIN_TASK_UPDATE_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({ type: ADMIN_TASK_UPDATE_FAIL });
+    console.log(error);
+  }
+};
+
 export const removeTask = (taskIdArray) => async (dispatch) => {
   try {
     dispatch({
@@ -55,6 +82,24 @@ export const removeTask = (taskIdArray) => async (dispatch) => {
     });
   } catch (error) {
     dispatch({ type: ADMIN_TASK_REMOVE_FAIL });
+    console.log(error);
+  }
+};
+
+export const getQuestions = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: ADMIN_QUESTION_FETCH_REQUEST,
+    });
+
+    const { data } = await axios.get(`${DOMAIN}/web_get_question`);
+
+    dispatch({
+      type: ADMIN_QUESTION_FETCH_SUCCESS,
+      payload: data.data,
+    });
+  } catch (error) {
+    dispatch({ type: ADMIN_QUESTION_FETCH_FAIL });
     console.log(error);
   }
 };

@@ -17,6 +17,11 @@ const SideBar = () => {
             </Link>
           </li>
           <li className="nav-item">
+            <Link className="nav-link" to="/admin/questions">
+              <span className="space">Questions</span>
+            </Link>
+          </li>
+          <li className="nav-item">
             <Link className="nav-link" to="/admin/analysis">
               <span className="space">Analysis</span>
             </Link>

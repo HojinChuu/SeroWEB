@@ -101,3 +101,9 @@ body {
   color: white !important;
   font-weight: bold;
 }
+
+.taskStateModal label.btn.active {
+  background-color: #888888 !important;
+  color: white !important;
+  font-weight: bold;
+}

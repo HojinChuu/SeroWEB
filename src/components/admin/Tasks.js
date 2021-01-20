@@ -5,14 +5,20 @@ import { getTasks, removeTask } from "../../actions/adminAction";
 
 import TaskItem from "./TaskItem";
 import Loader from "../helpers/Loader";
+import TaskStateModal from "../admin/TaskStateModal";
 
 const Tasks = () => {
   let taskArray = [];
   const [taskState, setTaskState] = useState([]);
   const [target, setTarget] = useState(0);
   const [searchText, setSearchText] = useState("");
-  const dispatch = useDispatch();
+  const [show, setShow] = useState(false);
+  const [disable, setDisable] = useState(true);
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const dispatch = useDispatch();
   const adminTasks = useSelector((state) => state.adminTasks);
   const { loading, tasks } = adminTasks;
 
@@ -20,9 +26,18 @@ const Tasks = () => {
     dispatch(getTasks({}));
   }, [dispatch]);
 
+  const btnStateHandler = () => {
+    taskArray.length !== 0 ? setDisable(false) : setDisable(true);
+  };
+
+  const refreshHandler = () => {
+    dispatch(getTasks({}));
+    setDisable(true);
+  };
+
   const getTaskValue = (taskValue) => {
     taskArray.push(taskValue);
-    console.log(taskArray);
+    btnStateHandler();
   };
 
   const removeTaskValue = (taskValue) => {
@@ -30,6 +45,8 @@ const Tasks = () => {
     if (index > -1) {
       taskArray.splice(index, 1);
     }
+    btnStateHandler();
+    taskArray.length !== 0 ? setDisable(false) : setDisable(true);
   };
 
   const removeTaskHandler = () => {
@@ -45,21 +62,22 @@ const Tasks = () => {
       <div className="row p-4">
         <div className="row mr-auto">
           <button
-            onClick={() => dispatch(getTasks({}))}
+            onClick={refreshHandler}
             className="btn btn-outline-dark rounded"
           >
             <i className="fas fa-redo-alt"></i>
           </button>
           <button
             className="btn btn-outline-primary rounded mr-2 ml-2"
-            disabled={taskArray.length === 0}
+            disabled={disable}
+            onClick={handleShow}
           >
             변경
           </button>
           <button
             onClick={removeTaskHandler}
             className="btn btn-outline-danger rounded"
-            disabled={taskArray.length === 0}
+            disabled={disable}
           >
             삭제
           </button>
@@ -135,6 +153,11 @@ const Tasks = () => {
           </tbody>
         </table>
       </div>
+      <TaskStateModal
+        show={show}
+        onHide={handleClose}
+        seletedTask={taskArray}
+      />
     </Fragment>
   );
 };

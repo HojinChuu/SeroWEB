@@ -1,20 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Route } from "react-router-dom";
 import SideBar from "../../components/admin/SideBar";
 import Tasks from "../../components/admin/Tasks";
 import Analysis from "../../components/admin/Analysis";
 import Notices from "../../components/admin/Notices";
+import Questions from "../../components/admin/Questions";
 
-const AdminHomeScreen = ({ match }) => {
+const AdminHomeScreen = ({ match, location }) => {
+  const [title, setTitle] = useState("");
+  useEffect(() => {
+    location.pathname.slice(7) === ""
+      ? setTitle("TASKS")
+      : setTitle(location.pathname.slice(7).toUpperCase());
+  }, [location.pathname]);
+
   return (
     <div className="row">
       <SideBar />
       <div className="col-md-10 m-auto col-lg-10">
         <div className="d-flex justify-content-center p-4 border-bottom">
-          <h1>Tasks</h1>
+          <h1>{title}</h1>
         </div>
-        <Route path={match.path + "/analysis"} component={Analysis} />
-        <Route path={match.path + "/notices"} component={Notices} />
+        <Route path={match.path + "/questions"} component={Questions} exact />
+        <Route path={match.path + "/analysis"} component={Analysis} exact />
+        <Route path={match.path + "/notices"} component={Notices} exact />
         <Route path={match.path} component={Tasks} exact />
       </div>
     </div>
