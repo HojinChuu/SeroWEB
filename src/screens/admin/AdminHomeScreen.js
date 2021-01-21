@@ -1,18 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { Route } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import SideBar from "../../components/admin/SideBar";
 import Tasks from "../../components/admin/Tasks";
 import Analysis from "../../components/admin/Analysis";
 import Notices from "../../components/admin/Notices";
 import Questions from "../../components/admin/Questions";
 
-const AdminHomeScreen = ({ match, location }) => {
+const AdminHomeScreen = ({ match, location, history }) => {
   const [title, setTitle] = useState("");
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   useEffect(() => {
     location.pathname.slice(7) === ""
       ? setTitle("TASKS")
       : setTitle(location.pathname.slice(7).toUpperCase());
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (userInfo && userInfo.usGrant === 0) {
+      history.push("/");
+    }
+  }, [history, userInfo]);
 
   return (
     <div className="row">

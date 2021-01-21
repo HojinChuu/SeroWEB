@@ -20,11 +20,17 @@ const Tasks = () => {
 
   const dispatch = useDispatch();
   const adminTasks = useSelector((state) => state.adminTasks);
-  const { loading, tasks } = adminTasks;
+  const { loading, tasks, success } = adminTasks;
 
   useEffect(() => {
     dispatch(getTasks({}));
   }, [dispatch]);
+
+  useEffect(() => {
+    if (success) {
+      dispatch(getTasks({}));
+    }
+  }, [dispatch, success]);
 
   const btnStateHandler = () => {
     taskArray.length !== 0 ? setDisable(false) : setDisable(true);
@@ -32,12 +38,14 @@ const Tasks = () => {
 
   const refreshHandler = () => {
     dispatch(getTasks({}));
+    setSearchText("");
     setDisable(true);
   };
 
   const getTaskValue = (taskValue) => {
     taskArray.push(taskValue);
     btnStateHandler();
+    console.log(taskArray);
   };
 
   const removeTaskValue = (taskValue) => {
@@ -47,6 +55,7 @@ const Tasks = () => {
     }
     btnStateHandler();
     taskArray.length !== 0 ? setDisable(false) : setDisable(true);
+    console.log(taskArray);
   };
 
   const removeTaskHandler = () => {
@@ -55,7 +64,8 @@ const Tasks = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(getTasks({ taskState, target, searchText }));
+    setSearchText("");
+    dispatch(getTasks({ taskState, target: parseInt(target), searchText }));
   };
   return (
     <Fragment>

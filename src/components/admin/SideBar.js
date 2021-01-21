@@ -8,7 +8,7 @@ const SideBar = () => {
         <ul className="nav flex-column">
           <li className="nav-item">
             <Link className="nav-link active" to="#">
-              <span className="space">Dashboard</span>
+              <span className="space">Management</span>
             </Link>
           </li>
           <li className="nav-item">
@@ -30,12 +30,6 @@ const SideBar = () => {
             <Link className="nav-link" to="/admin/notices">
               <span className="space"></span>
               Notices
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="#">
-              <span className="space"></span>
-              Reports
             </Link>
           </li>
         </ul>

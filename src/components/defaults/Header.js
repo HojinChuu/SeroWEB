@@ -24,7 +24,7 @@ const Header = () => {
                 <Spinner animation="border" variant="light" className="mr-5" />
               ) : (
                 <Fragment>
-                  {userInfo && userInfo.usGrant === 0 && (
+                  {userInfo && userInfo.usGrant === 1 && (
                     <LinkContainer to="/admin">
                       <Nav.Link>ADMIN</Nav.Link>
                     </LinkContainer>

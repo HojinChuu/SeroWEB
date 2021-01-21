@@ -14,11 +14,17 @@ const Questions = () => {
 
   const dispatch = useDispatch();
   const adminQuestions = useSelector((state) => state.adminQuestions);
-  const { loading, questions } = adminQuestions;
+  const { loading, success, questions } = adminQuestions;
 
   useEffect(() => {
     dispatch(getQuestions());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (success) {
+      dispatch(getQuestions());
+    }
+  }, [dispatch, success]);
 
   return (
     <Fragment>

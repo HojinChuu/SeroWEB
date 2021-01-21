@@ -16,6 +16,7 @@ const TaskStateModal = ({ show, onHide, seletedTask }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    console.log(seletedTask);
     const taskId = [9, 7, 5];
     dispatch(updateTask(parseInt(radioValue), taskId));
     onHide();

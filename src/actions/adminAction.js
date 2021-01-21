@@ -13,6 +13,10 @@ import {
   ADMIN_QUESTION_FETCH_REQUEST,
   ADMIN_QUESTION_FETCH_SUCCESS,
   ADMIN_QUESTION_FETCH_FAIL,
+  ADMIN_QUESTION_DATE_SAVE,
+  ADMIN_ANSWER_REQUEST,
+  ADMIN_ANSWER_SUCCESS,
+  ADMIN_ANSWER_FAIL,
 } from "../constants/adminConstants";
 
 export const getTasks = (condition) => async (dispatch) => {
@@ -21,11 +25,14 @@ export const getTasks = (condition) => async (dispatch) => {
       type: ADMIN_TASK_FETCH_REQUEST,
     });
 
-    if (Object.keys(condition).length === 0) {
+    if (
+      Object.keys(condition).length === 0 ||
+      condition.taskState.length === 0
+    ) {
       condition = {
         taskState: [0, 1, 2, 3],
-        target: 0,
-        searchText: "",
+        target: condition.target ? condition.target : 0,
+        searchText: condition.searchText ? condition.searchText : "",
       };
     }
 
@@ -100,6 +107,37 @@ export const getQuestions = () => async (dispatch) => {
     });
   } catch (error) {
     dispatch({ type: ADMIN_QUESTION_FETCH_FAIL });
+    console.log(error);
+  }
+};
+
+export const inputQuestionModalData = (questionId) => async (dispatch) => {
+  dispatch({
+    type: ADMIN_QUESTION_DATE_SAVE,
+    payload: parseInt(questionId),
+  });
+};
+
+export const answerToQuestion = (usId, quCaId, quContent, quParentId) => async (
+  dispatch
+) => {
+  try {
+    dispatch({
+      type: ADMIN_ANSWER_REQUEST,
+    });
+
+    const { data } = await axios.post(
+      `${DOMAIN}/web_set_question`,
+      { usId, quCaId, quContent, quParentId },
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+    dispatch({
+      type: ADMIN_ANSWER_SUCCESS,
+      payload: data.data,
+    });
+  } catch (error) {
+    dispatch({ type: ADMIN_ANSWER_FAIL });
     console.log(error);
   }
 };

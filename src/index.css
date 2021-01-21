@@ -90,6 +90,7 @@ body {
 
 .sidebar .nav-link.active {
   color: #007bff;
+  cursor: default;
 }
 
 .toggle label.btn {
@@ -106,4 +107,8 @@ body {
   background-color: #888888 !important;
   color: white !important;
   font-weight: bold;
+}
+
+.questionModal .modal-footer {
+  border-top: none !important;
 }
