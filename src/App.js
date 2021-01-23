@@ -9,8 +9,10 @@ import Footer from "./components/defaults/Footer";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
-import AuthRedirect from "./screens/AuthRedirect";
 import AdminHomeScreen from "./screens/AdminHomeScreen";
+import AuthRedirect from "./screens/redirect/AuthRedirectScreen";
+import InputAddress from "./screens/redirect/InputAddressScreen";
+import QrcodeLinkScreen from "./screens/redirect/QrcodeLinkScreen";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -32,6 +34,8 @@ const App = () => {
           <Route path="/admin" component={AdminHomeScreen} />
           <Route path="/login" component={LoginScreen} />
           <Route path="/register" component={RegisterScreen} />
+          <Route path="/qrcode" component={QrcodeLinkScreen} exact />
+          <Route path="/address" component={InputAddress} exact />
           <Route path="/auth" component={AuthRedirect} exact />
           <Route path="/" component={HomeScreen} exact />
         </Container>

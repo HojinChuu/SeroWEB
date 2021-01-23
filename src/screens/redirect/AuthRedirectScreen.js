@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import Spinner from "../components/helpers/Spinner";
+import Spinner from "../../components/helpers/Spinner";
 
-const AuthRedirect = ({ history }) => {
+const AuthRedirectScreen = ({ history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, userToken } = userLogin;
 
@@ -14,4 +14,4 @@ const AuthRedirect = ({ history }) => {
   return <Spinner />;
 };
 
-export default AuthRedirect;
+export default AuthRedirectScreen;

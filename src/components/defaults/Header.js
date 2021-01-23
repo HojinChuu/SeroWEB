@@ -12,7 +12,12 @@ const Header = () => {
 
   return (
     <header>
-      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
+      <Navbar
+        variant="dark"
+        expand="lg"
+        collapseOnSelect
+        style={{ backgroundColor: "#23394D" }}
+      >
         <Container>
           <LinkContainer to="/">
             <Navbar.Brand>SERO</Navbar.Brand>
