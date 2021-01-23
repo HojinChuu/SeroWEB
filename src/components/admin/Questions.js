@@ -1,10 +1,13 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getQuestions } from "../../actions/adminAction";
+import { paginate } from "../../utils/paginate";
+import { ADMIN_QUESTION_FETCH_SUCCESS } from "../../constants/adminConstants";
 
 import Loader from "../helpers/Loader";
 import QuestionItem from "./QuestionItem";
 import QuestionModal from "./QuestionModal";
+import Pagination from "../helpers/Pagination";
 
 const Questions = () => {
   const [show, setShow] = useState(false);
@@ -14,7 +17,14 @@ const Questions = () => {
 
   const dispatch = useDispatch();
   const adminQuestions = useSelector((state) => state.adminQuestions);
-  const { loading, success, questions } = adminQuestions;
+  const {
+    loading,
+    success,
+    questions,
+    questionsCount,
+    pageSize,
+    currentPage,
+  } = adminQuestions;
 
   useEffect(() => {
     dispatch(getQuestions());
@@ -25,6 +35,16 @@ const Questions = () => {
       dispatch(getQuestions());
     }
   }, [dispatch, success]);
+
+  const pageChangeHandler = (page) => {
+    dispatch({
+      type: ADMIN_QUESTION_FETCH_SUCCESS,
+      payload: questions,
+      currentPage: page,
+    });
+  };
+
+  const pagedQuestions = paginate(questions, currentPage, pageSize);
 
   return (
     <Fragment>
@@ -60,7 +80,7 @@ const Questions = () => {
             ) : (
               <>
                 {questions &&
-                  questions.map((question) => (
+                  pagedQuestions.map((question) => (
                     <QuestionItem
                       question={question}
                       key={question.quId}
@@ -72,6 +92,14 @@ const Questions = () => {
           </tbody>
         </table>
       </div>
+      {questions && (
+        <Pagination
+          itemsCount={questionsCount}
+          pageSize={pageSize}
+          currentPage={currentPage}
+          onPageChange={pageChangeHandler}
+        />
+      )}
       <QuestionModal show={show} onHide={handleClose} />
     </Fragment>
   );

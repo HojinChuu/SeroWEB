@@ -2,13 +2,17 @@ import React, { Fragment, useEffect, useState } from "react";
 import { ToggleButton, ToggleButtonGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getTasks, removeTask } from "../../actions/adminAction";
+import { ADMIN_TASK_FETCH_SUCCESS } from "../../constants/adminConstants";
+import { paginate } from "../../utils/paginate";
 
 import TaskItem from "./TaskItem";
 import Loader from "../helpers/Loader";
 import TaskStateModal from "../admin/TaskStateModal";
+import Pagination from "../helpers/Pagination";
 
 const Tasks = () => {
   let taskArray = [];
+  const [seletedTask, setSelectTask] = useState([]);
   const [taskState, setTaskState] = useState([]);
   const [target, setTarget] = useState(0);
   const [searchText, setSearchText] = useState("");
@@ -16,11 +20,20 @@ const Tasks = () => {
   const [disable, setDisable] = useState(true);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+  const handleShow = () => {
+    setSelectTask(taskArray);
+    setShow(true);
+  };
   const dispatch = useDispatch();
   const adminTasks = useSelector((state) => state.adminTasks);
-  const { loading, tasks, success } = adminTasks;
+  const {
+    loading,
+    tasks,
+    success,
+    tasksCount,
+    pageSize,
+    currentPage,
+  } = adminTasks;
 
   useEffect(() => {
     dispatch(getTasks({}));
@@ -43,9 +56,11 @@ const Tasks = () => {
   };
 
   const getTaskValue = (taskValue) => {
+    console.log(taskValue);
     taskArray.push(taskValue);
-    btnStateHandler();
     console.log(taskArray);
+
+    btnStateHandler();
   };
 
   const removeTaskValue = (taskValue) => {
@@ -61,6 +76,16 @@ const Tasks = () => {
   const removeTaskHandler = () => {
     dispatch(removeTask(taskArray));
   };
+
+  const pageChangeHandler = (page) => {
+    dispatch({
+      type: ADMIN_TASK_FETCH_SUCCESS,
+      payload: tasks,
+      currentPage: page,
+    });
+  };
+
+  const pagedTasks = paginate(tasks, currentPage, pageSize);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -119,6 +144,7 @@ const Tasks = () => {
           <div>
             <input
               className="form-control"
+              readOnly={target === 0}
               onChange={(e) => setSearchText(e.target.value)}
             />
           </div>
@@ -150,7 +176,7 @@ const Tasks = () => {
             ) : (
               <>
                 {tasks &&
-                  tasks.map((task) => (
+                  pagedTasks.map((task) => (
                     <TaskItem
                       task={task}
                       key={task.seId}
@@ -163,10 +189,18 @@ const Tasks = () => {
           </tbody>
         </table>
       </div>
+      {tasks && (
+        <Pagination
+          itemsCount={tasksCount}
+          pageSize={pageSize}
+          currentPage={currentPage}
+          onPageChange={pageChangeHandler}
+        />
+      )}
       <TaskStateModal
         show={show}
         onHide={handleClose}
-        seletedTask={taskArray}
+        seletedTask={seletedTask}
       />
     </Fragment>
   );

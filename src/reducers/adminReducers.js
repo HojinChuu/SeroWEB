@@ -27,6 +27,9 @@ export const adminTasksReducer = (state = {}, action) => {
       return {
         loading: false,
         tasks: action.payload,
+        tasksCount: action.payload.length,
+        pageSize: 10,
+        currentPage: action.currentPage ? action.currentPage : 1,
       };
     case ADMIN_TASK_FETCH_FAIL:
       return {
@@ -82,6 +85,9 @@ export const adminQuestionsReducer = (state = { question: {} }, action) => {
         ...state,
         loading: false,
         questions: action.payload,
+        questionsCount: action.payload.length,
+        pageSize: 10,
+        currentPage: action.currentPage ? action.currentPage : 1,
       };
     case ADMIN_QUESTION_DATE_SAVE:
       return {
