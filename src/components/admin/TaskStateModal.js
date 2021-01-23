@@ -16,7 +16,6 @@ const TaskStateModal = ({ show, onHide, seletedTask }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(seletedTask);
     dispatch(updateTask(parseInt(radioValue), seletedTask));
     onHide();
   };
@@ -54,12 +53,8 @@ const TaskStateModal = ({ show, onHide, seletedTask }) => {
         </ButtonGroup>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={onHide}>
-          취소
-        </Button>
-        <Button variant="primary" onClick={submitHandler}>
-          변경
-        </Button>
+        <Button variant="secondary" onClick={onHide}>취소</Button>
+        <Button variant="primary" onClick={submitHandler}>변경</Button>
       </Modal.Footer>
     </Modal>
   );

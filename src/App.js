@@ -7,10 +7,10 @@ import { getUserInfo } from "./actions/userActions";
 import Header from "./components/defaults/Header";
 import Footer from "./components/defaults/Footer";
 import HomeScreen from "./screens/HomeScreen";
-import LoginScreen from "./screens/users/LoginScreen";
-import RegisterScreen from "./screens/users/RegisterScreen";
-import AuthRedirect from "./screens/users/AuthRedirect";
-import AdminHomeScreen from "./screens/admin/AdminHomeScreen";
+import LoginScreen from "./screens/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen";
+import AuthRedirect from "./screens/AuthRedirect";
+import AdminHomeScreen from "./screens/AdminHomeScreen";
 
 const App = () => {
   const dispatch = useDispatch();

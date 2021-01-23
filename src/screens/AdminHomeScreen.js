@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import SideBar from "../../components/admin/SideBar";
-import Tasks from "../../components/admin/Tasks";
-import Analysis from "../../components/admin/Analysis";
-import Notices from "../../components/admin/Notices";
-import Questions from "../../components/admin/Questions";
+import SideBar from "../components/admin/SideBar";
+import Tasks from "../components/admin/Tasks";
+import Analysis from "../components/admin/Analysis";
+import Notices from "../components/admin/Notices";
+import Questions from "../components/admin/Questions";
 
 const AdminHomeScreen = ({ match, location, history }) => {
   const [title, setTitle] = useState("");
@@ -21,7 +21,7 @@ const AdminHomeScreen = ({ match, location, history }) => {
   }, [location.pathname]);
 
   useEffect(() => {
-    if (userInfo && userInfo.usGrant === 0) {
+    if (typeof userInfo == undefined || !userInfo || userInfo.usGrant !== 1) {
       history.push("/");
     }
   }, [history, userInfo]);

@@ -99,10 +99,7 @@ export const authRequest = (authInfo) => async (dispatch) => {
 
     localStorage.setItem("userToken", JSON.stringify(userToken));
   } catch (error) {
-    dispatch({
-      type: USER_AUTH_LOGIN_FAIL,
-      payload: authInfo,
-    });
+    dispatch({ type: USER_AUTH_LOGIN_FAIL, payload: authInfo });
     console.log(error);
   }
 };

@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { KAKAO_CLIENT_ID, DEFAULT_PROFILE } from "../../config";
 import { useDispatch } from "react-redux";
 import { authRequest } from "../../actions/userActions";
-const { Kakao } = window;
 
 const KakaoAuth = ({ history }) => {
+  const { Kakao } = window;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -13,7 +13,7 @@ const KakaoAuth = ({ history }) => {
     }
   });
 
-  // profile_image_url
+  // thumbnail_image_url
   const onSuccess = () => {
     Kakao.Auth.login({
       throughTalk: false,
@@ -24,8 +24,8 @@ const KakaoAuth = ({ history }) => {
             const authInfo = {
               id: profile.id,
               name: profile.kakao_account.profile.nickname,
-              image: profile.kakao_account.profile.thumbnail_image_url
-                ? profile.kakao_account.profile.thumbnail_image_url
+              image: profile.kakao_account.profile.profile_image_url
+                ? profile.kakao_account.profile.profile_image_url
                 : DEFAULT_PROFILE,
               usSocialValue: 1,
             };

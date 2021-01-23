@@ -1,12 +1,12 @@
 import React, { useState, Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserInfo, login } from "../../actions/userActions";
+import { getUserInfo, login } from "../actions/userActions";
 
-import FormContainer from "../../components/helpers/FormContainer";
-import Spinner from "../../components/helpers/Spinner";
-import GoogleAuth from "../../components/users/GoogleAuth";
-import KakaoAuth from "../../components/users/KakaoAuth";
+import FormContainer from "../components/helpers/FormContainer";
+import Spinner from "../components/helpers/Spinner";
+import GoogleAuth from "../components/users/GoogleAuth";
+import KakaoAuth from "../components/users/KakaoAuth";
 
 const LoginScreen = ({ history }) => {
   const [phone, setPhone] = useState("");

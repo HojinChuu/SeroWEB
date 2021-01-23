@@ -11,7 +11,7 @@ import TaskStateModal from "../admin/TaskStateModal";
 import Pagination from "../helpers/Pagination";
 
 const Tasks = () => {
-  let taskArray = [];
+  const [taskArray, setTaskArray] = useState([]);
   const [seletedTask, setSelectTask] = useState([]);
   const [taskState, setTaskState] = useState([]);
   const [target, setTarget] = useState(0);
@@ -26,14 +26,7 @@ const Tasks = () => {
   };
   const dispatch = useDispatch();
   const adminTasks = useSelector((state) => state.adminTasks);
-  const {
-    loading,
-    tasks,
-    success,
-    tasksCount,
-    pageSize,
-    currentPage,
-  } = adminTasks;
+  const { loading, tasks, success, tasksCount, pageSize, currentPage } = adminTasks;
 
   useEffect(() => {
     dispatch(getTasks({}));
@@ -56,21 +49,17 @@ const Tasks = () => {
   };
 
   const getTaskValue = (taskValue) => {
-    console.log(taskValue);
-    taskArray.push(taskValue);
-    console.log(taskArray);
-
+    setTaskArray(taskArray.concat(taskValue));
     btnStateHandler();
   };
 
-  const removeTaskValue = (taskValue) => {
-    const index = taskArray.indexOf(taskValue);
-    if (index > -1) {
-      taskArray.splice(index, 1);
-    }
+  const removeTaskValue = (index) => {
+    setTaskArray([
+      ...taskArray.slice(0, index),
+      ...taskArray.slice(index + 1, taskArray.length),
+    ]);
     btnStateHandler();
     taskArray.length !== 0 ? setDisable(false) : setDisable(true);
-    console.log(taskArray);
   };
 
   const removeTaskHandler = () => {
@@ -119,18 +108,10 @@ const Tasks = () => {
         </div>
         <form onSubmit={submitHandler} className="row ml-auto ml-3 toggle">
           <ToggleButtonGroup type="checkbox" onChange={(e) => setTaskState(e)}>
-            <ToggleButton variant="light" value={0}>
-              수신대기
-            </ToggleButton>
-            <ToggleButton variant="light" value={1}>
-              제작중
-            </ToggleButton>
-            <ToggleButton variant="light" value={2}>
-              배송중
-            </ToggleButton>
-            <ToggleButton variant="light" value={3}>
-              배송완료
-            </ToggleButton>
+            <ToggleButton variant="light" value={0}>수신대기</ToggleButton>
+            <ToggleButton variant="light" value={1}>제작중</ToggleButton>
+            <ToggleButton variant="light" value={2}>배송중</ToggleButton>
+            <ToggleButton variant="light" value={3}>배송완료</ToggleButton>
           </ToggleButtonGroup>
 
           <select
@@ -176,12 +157,13 @@ const Tasks = () => {
             ) : (
               <>
                 {tasks &&
-                  pagedTasks.map((task) => (
+                  pagedTasks.map((task, index) => (
                     <TaskItem
                       task={task}
                       key={task.seId}
                       getTaskValue={getTaskValue}
                       removeTaskValue={removeTaskValue}
+                      index={index}
                     />
                   ))}
               </>

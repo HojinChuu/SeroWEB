@@ -2,13 +2,13 @@ import React, { useState, useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { register, sendSms, checkSms } from "../../actions/userActions";
-import { DEFAULT_PROFILE } from "../../config";
+import { register, sendSms, checkSms } from "../actions/userActions";
+import { DEFAULT_PROFILE } from "../config";
 
-import FormContainer from "../../components/helpers/FormContainer";
-import AddressSearchModal from "../../components/users/AddressSearchModal";
-import Message from "../../components/helpers/Message";
-import Spinner from "../../components/helpers/Spinner";
+import FormContainer from "../components/helpers/FormContainer";
+import AddressSearchModal from "../components/users/AddressSearchModal";
+import Message from "../components/helpers/Message";
+import Spinner from "../components/helpers/Spinner";
 
 const RegisterScreen = ({ history }) => {
   const [phone, setPhone] = useState("");

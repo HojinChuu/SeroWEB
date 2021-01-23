@@ -1,17 +1,14 @@
 import React from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
-const TaskItem = ({ task, getTaskValue, removeTaskValue }) => {
+const TaskItem = ({ task, getTaskValue, removeTaskValue, index }) => {
   let shippingStatus = "";
 
-  if (task.seStatus === 0) {
-    shippingStatus = "수신대기";
-  } else if (task.seStatus === 1) {
-    shippingStatus = "제작중";
-  } else if (task.seStatus === 2) {
-    shippingStatus = "배송중";
-  } else if (task.seStatus === 3) {
-    shippingStatus = "배송완료";
+  switch (task.seStatus) {
+    case 1: shippingStatus = "제작중"; break;
+    case 2: shippingStatus = "배송중"; break;
+    case 3: shippingStatus = "배송완료"; break;
+    default: shippingStatus = "수신대기";
   }
 
   const renderTooltip = (
@@ -29,9 +26,7 @@ const TaskItem = ({ task, getTaskValue, removeTaskValue }) => {
           className="form-check-input"
           type="checkbox"
           onChange={(e) =>
-            e.target.checked
-              ? getTaskValue(task.seId)
-              : removeTaskValue(task.seId)
+            e.target.checked ? getTaskValue(task.seId) : removeTaskValue(index)
           }
         />
       </td>

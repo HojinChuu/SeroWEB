@@ -4,7 +4,6 @@ import { inputQuestionModalData } from "../../actions/adminAction";
 
 const QuestionItem = ({ question, handleShow }) => {
   const questionTarget = useRef(null);
-
   const dispatch = useDispatch();
 
   const buttonHandler = () => {

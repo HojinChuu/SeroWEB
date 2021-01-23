@@ -25,10 +25,7 @@ export const getTasks = (condition) => async (dispatch) => {
       type: ADMIN_TASK_FETCH_REQUEST,
     });
 
-    if (
-      Object.keys(condition).length === 0 ||
-      condition.taskState.length === 0
-    ) {
+    if (Object.keys(condition).length === 0 || condition.taskState.length === 0) {
       condition = {
         taskState: [0, 1, 2, 3],
         target: condition.target ? condition.target : 0,
