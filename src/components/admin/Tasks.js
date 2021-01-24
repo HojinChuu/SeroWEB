@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { ToggleButton, ToggleButtonGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getTasks, removeTask } from "../../actions/adminAction";
+import { getTasks, removeTask } from "../../actions/adminActions";
 import { ADMIN_TASK_FETCH_SUCCESS } from "../../constants/adminConstants";
 import { paginate } from "../../utils/paginate";
 

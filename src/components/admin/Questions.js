@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getQuestions } from "../../actions/adminAction";
+import { getQuestions } from "../../actions/adminActions";
 import { paginate } from "../../utils/paginate";
 import { ADMIN_QUESTION_FETCH_SUCCESS } from "../../constants/adminConstants";
 

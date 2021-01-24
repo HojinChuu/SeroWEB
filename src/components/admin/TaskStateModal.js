@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Button, ButtonGroup, ToggleButton } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { updateTask } from "../../actions/adminAction";
+import { updateTask } from "../../actions/adminActions";
 
 const TaskStateModal = ({ show, onHide, seletedTask }) => {
   const [radioValue, setRadioValue] = useState("0");

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal, Button, Image } from "react-bootstrap";
-import { answerToQuestion } from "../../actions/adminAction";
+import { answerToQuestion } from "../../actions/adminActions";
 import { IMAGE_URL } from "../../config";
 
 import AdminAnswer from "./AdminAnswer";

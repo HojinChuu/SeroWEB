@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
-import { inputQuestionModalData } from "../../actions/adminAction";
+import { inputQuestionModalData } from "../../actions/adminActions";
 
 const QuestionItem = ({ question, handleShow }) => {
   const questionTarget = useRef(null);

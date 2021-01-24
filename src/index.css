@@ -113,3 +113,32 @@ body {
   border-top: none !important;
 }
 
+.cardContainer {
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.front,
+.back {
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+@media (max-width: 991px) {
+  .front,
+  .back {
+    width: 100%;
+  }
+}
+
+@media (min-width: 991px) {
+  .front,
+  .back {
+    width: 40%;
+  }
+}

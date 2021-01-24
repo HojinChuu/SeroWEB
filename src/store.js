@@ -11,6 +11,10 @@ import {
   adminTasksReducer,
   adminQuestionsReducer,
 } from "./reducers/adminReducers";
+import {
+  qrcodePostDataReducer,
+  addressInputReducer,
+} from "./reducers/linkReducers";
 
 const reducer = combineReducers({
   userRegister: userRegisterReducer,
@@ -19,6 +23,8 @@ const reducer = combineReducers({
   userSmsCheck: userSmsCheckReducer,
   adminTasks: adminTasksReducer,
   adminQuestions: adminQuestionsReducer,
+  qrcodePostData: qrcodePostDataReducer,
+  addressInput: addressInputReducer,
 });
 
 const userTokenFromStorage = localStorage.getItem("userToken")
