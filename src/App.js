@@ -9,6 +9,7 @@ import Footer from "./components/defaults/Footer";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
+import MyPageScreen from "./screens/MyPageScreen";
 import AdminHomeScreen from "./screens/AdminHomeScreen";
 import AuthRedirect from "./screens/redirect/AuthRedirectScreen";
 import InputAddress from "./screens/redirect/InputAddressScreen";
@@ -32,6 +33,7 @@ const App = () => {
       <main className="py-3">
         <Container>
           <Route path="/admin" component={AdminHomeScreen} />
+          <Route path="/mypage" component={MyPageScreen} />
           <Route path="/login" component={LoginScreen} />
           <Route path="/register" component={RegisterScreen} />
           <Route path="/qrcode" component={QrcodeLinkScreen} exact />

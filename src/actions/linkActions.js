@@ -9,7 +9,6 @@ import {
   ADDRESS_INPUT_FAIL,
 } from "../constants/linkConstants";
 
-// qrcode
 export const getQrcodeData = (seId, usPhoneNumber) => async (dispatch) => {
   try {
     dispatch({
@@ -32,7 +31,6 @@ export const getQrcodeData = (seId, usPhoneNumber) => async (dispatch) => {
   }
 };
 
-// input address
 export const postAddress = (
   seId,
   phone,

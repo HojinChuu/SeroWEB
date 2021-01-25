@@ -7,9 +7,9 @@ import { IMAGE_URL } from "../../config";
 
 const QrcodeLinkScreen = ({ location, history }) => {
   const flipElement = useRef(null);
-  const [sound, setSound] = useState(true);
-  // eslint-disable-next-line
-  const [seId, setSeId] = useState(location.search.split("=")[1]);
+  const [audio, setAudio] = useState(null);
+  const [playing, setPlaying] = useState(true);
+  const [seId] = useState(location.search.split("=")[1]);
 
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
@@ -21,14 +21,25 @@ const QrcodeLinkScreen = ({ location, history }) => {
   useEffect(() => {
     if (userInfo && typeof userInfo != undefined) {
       error
-        ? history.push("/")
+        ? history.push("/login")
         : dispatch(getQrcodeData(seId, userInfo.usPhoneNumber));
     }
   }, [dispatch, userInfo, seId, history, error]);
 
+  useEffect(() => {
+    if (qrcode) {
+      setAudio(new Audio(IMAGE_URL + "/" + qrcode.Post.poRecord));
+    }
+  }, [qrcode]);
+
   const soundHandler = () => {
-    setSound(!sound);
-    console.log("sound");
+    setPlaying(!playing);
+    if (playing) {
+      audio.play();
+    } else {
+      audio.pause();
+      audio.currentTime = 0;
+    }
   };
 
   const flipHandler = () => {
@@ -37,7 +48,10 @@ const QrcodeLinkScreen = ({ location, history }) => {
       : (flipElement.current.style.transform = "rotateY(180deg)");
   };
 
-  const imageName = sound ? "fas fa-volume-up" : "fas fa-volume-mute";
+  const addPostHandler = () => {
+    console.log("add");
+  };
+
   return (
     <Container>
       {loading ? (
@@ -45,7 +59,7 @@ const QrcodeLinkScreen = ({ location, history }) => {
       ) : (
         qrcode && (
           <Fragment>
-            <Row className="align-items-center justify-content-center pt-4 pb-2">
+            <Row className="align-items-center justify-content-center pt-2 pb-2">
               <Card.Img
                 src={IMAGE_URL + "/resized/thumbnail/" + qrcode.User.usPhoto}
                 className="mr-1"
@@ -72,24 +86,27 @@ const QrcodeLinkScreen = ({ location, history }) => {
                 <Card.Img src={IMAGE_URL + "/" + qrcode.Post.poContentPhoto} />
               </Card>
             </Row>
-            <div style={{ position: "relative", marginTop: "48rem" }}>
-              <Row className="justify-content-center mt-4">
+            <div id="soundBtn">
+              <Row className="justify-content-center mt-3">
                 <div className="btn btn-circle btn-xl" onClick={soundHandler}>
-                  <i className={imageName + " fa-3x"}></i>
+                  <i
+                    className={
+                      playing
+                        ? "fas fa-volume-up fa-3x"
+                        : "fas fa-volume-mute fa-3x"
+                    }
+                  ></i>
                 </div>
               </Row>
-              <Row className="justify-content-center mt-4">
-                <button className="btn btn-dark btn-lg rounded btn-xl">
+              <Row className="justify-content-center mt-3 mb-3">
+                <button
+                  onClick={addPostHandler}
+                  className="btn btn-dark btn-lg rounded btn-xl"
+                >
                   <span style={{ fontSize: "14px" }}>내 엽서에 추가하기</span>
                 </button>
               </Row>
             </div>
-            {/* <audio id="audio" autoplay loop controls>
-              <source
-                src={IMAGE_URL + "/" + qrcode.Post.poRecord}
-                type="audio/wav"
-              />
-            </audio> */}
           </Fragment>
         )
       )}
