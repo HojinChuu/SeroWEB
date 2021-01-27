@@ -9,7 +9,7 @@ const QrcodeLinkScreen = ({ location, history }) => {
   const flipElement = useRef(null);
   const [audio, setAudio] = useState(null);
   const [playing, setPlaying] = useState(true);
-  const [seId] = useState(location.search.split("=")[1]);
+  const [qrData] = useState(location.search.split("=")[1]);
 
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
@@ -22,9 +22,9 @@ const QrcodeLinkScreen = ({ location, history }) => {
     if (userInfo && typeof userInfo != undefined) {
       error
         ? history.push("/login")
-        : dispatch(getQrcodeData(seId, userInfo.usPhoneNumber));
+        : dispatch(getQrcodeData(qrData, userInfo.usPhoneNumber));
     }
-  }, [dispatch, userInfo, seId, history, error]);
+  }, [dispatch, userInfo, qrData, history, error]);
 
   useEffect(() => {
     if (qrcode) {

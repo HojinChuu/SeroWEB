@@ -9,7 +9,7 @@ import {
   ADDRESS_INPUT_FAIL,
 } from "../constants/linkConstants";
 
-export const getQrcodeData = (seId, usPhoneNumber) => async (dispatch) => {
+export const getQrcodeData = (qrData, usPhoneNumber) => async (dispatch) => {
   try {
     dispatch({
       type: QRCODE_FETCH_REQUEST,
@@ -17,7 +17,7 @@ export const getQrcodeData = (seId, usPhoneNumber) => async (dispatch) => {
 
     const { data } = await axios.post(
       `${DOMAIN}/web_get_qrcode`,
-      { seId, usPhoneNumber },
+      { qrData, usPhoneNumber },
       { headers: { "Content-Type": "application/json" } }
     );
 
