@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Card, Container, Row } from "react-bootstrap";
-import { getQrcodeData } from "../../actions/linkActions";
+import { getQrcodeData, saveQrcodePost } from "../../actions/linkActions";
 import Spinner from "../../components/helpers/Spinner";
 import { IMAGE_URL } from "../../config";
 
@@ -14,17 +14,25 @@ const QrcodeLinkScreen = ({ location, history }) => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const qrcodePostData = useSelector((state) => state.qrcodePostData);
+  const qrcodeSavePost = useSelector((state) => state.qrcodeSavePost);
 
   const { userInfo } = userLogin;
   const { loading, qrcode, error } = qrcodePostData;
+  const { success: postSaveSuccess } = qrcodeSavePost;
 
   useEffect(() => {
     if (userInfo && typeof userInfo != undefined) {
-      error
-        ? history.push("/login")
-        : dispatch(getQrcodeData(qrData, userInfo.usPhoneNumber));
+      dispatch(getQrcodeData(qrData, userInfo.usPhoneNumber));
+    } else if (typeof userInfo == undefined) {
+      history.push("/login");
     }
-  }, [dispatch, userInfo, qrData, history, error]);
+  }, [userInfo, qrData, history, dispatch]);
+
+  useEffect(() => {
+    if (postSaveSuccess || error) {
+      history.push("/");
+    }
+  }, [history, postSaveSuccess, error]);
 
   useEffect(() => {
     if (qrcode) {
@@ -50,6 +58,7 @@ const QrcodeLinkScreen = ({ location, history }) => {
 
   const addPostHandler = () => {
     console.log("add");
+    dispatch(saveQrcodePost(userInfo.usId, qrcode.sePoId));
   };
 
   return (
@@ -61,13 +70,15 @@ const QrcodeLinkScreen = ({ location, history }) => {
           <Fragment>
             <Row className="align-items-center justify-content-center pt-2 pb-2">
               <Card.Img
-                src={IMAGE_URL + "/resized/thumbnail/" + qrcode.User.usPhoto}
+                src={
+                  IMAGE_URL + "/resized/thumbnail/" + qrcode.Post.User.usPhoto
+                }
                 className="mr-1"
                 style={{ width: "20px", borderRadius: "50%" }}
               />
-              <span className="mr-2">{qrcode.User.usName}</span>
+              <span className="mr-2">{qrcode.Post.User.usName}</span>
               <span className="mr-3 pr-5 mr-5">
-                ( {qrcode.User.usPhoneNumber} )
+                ( {qrcode.Post.User.usPhoneNumber} )
               </span>
               <span>{qrcode.createdAt.slice(0, 10)}</span>
             </Row>
@@ -87,17 +98,19 @@ const QrcodeLinkScreen = ({ location, history }) => {
               </Card>
             </Row>
             <div id="soundBtn">
-              <Row className="justify-content-center mt-3">
-                <div className="btn btn-circle btn-xl" onClick={soundHandler}>
-                  <i
-                    className={
-                      playing
-                        ? "fas fa-volume-up fa-3x"
-                        : "fas fa-volume-mute fa-3x"
-                    }
-                  ></i>
-                </div>
-              </Row>
+              {qrcode.Post.poRecord !== "null" && (
+                <Row className="justify-content-center mt-3">
+                  <div className="btn btn-circle btn-xl" onClick={soundHandler}>
+                    <i
+                      className={
+                        playing
+                          ? "fas fa-volume-up fa-3x"
+                          : "fas fa-volume-mute fa-3x"
+                      }
+                    ></i>
+                  </div>
+                </Row>
+              )}
               <Row className="justify-content-center mt-3 mb-3">
                 <button
                   onClick={addPostHandler}

@@ -23,6 +23,23 @@ h2 {
 
 nav.navbar {
   z-index: 100;
+  padding: 20px;
+  width: 90%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  position: fixed;
+}
+
+.navCustomRight .nav-link {
+  font-size: 20px;
+  margin-left: 25px;
+  color: #000000 !important;
+}
+
+.navCustomLeft .nav-link {
+  font-weight: 400;
+  color: #000000 !important;
 }
 
 body {
@@ -39,7 +56,10 @@ footer {
   left: 0;
   z-index: 100;
   padding: 1rem;
-  background-color: white;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  background-color: #23394d;
   border-top: 1px solid lightgrey;
 }
 

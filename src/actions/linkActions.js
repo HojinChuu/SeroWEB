@@ -7,6 +7,9 @@ import {
   ADDRESS_INPUT_REQUEST,
   ADDRESS_INPUT_SUCCESS,
   ADDRESS_INPUT_FAIL,
+  QRCODE_SAVE_POST_REQUEST,
+  QRCODE_SAVE_POST_SUCCESS,
+  QRCODE_SAVE_POST_FAIL,
 } from "../constants/linkConstants";
 
 export const getQrcodeData = (qrData, usPhoneNumber) => async (dispatch) => {
@@ -31,8 +34,29 @@ export const getQrcodeData = (qrData, usPhoneNumber) => async (dispatch) => {
   }
 };
 
+export const saveQrcodePost = (usId, poId) => async (dispatch) => {
+  try {
+    dispatch({
+      type: QRCODE_SAVE_POST_REQUEST,
+    });
+
+    await axios.post(
+      `${DOMAIN}/web_set_post`,
+      { usId, poId },
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+    dispatch({
+      type: QRCODE_SAVE_POST_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({ type: QRCODE_SAVE_POST_FAIL });
+    console.log(error);
+  }
+};
+
 export const postAddress = (
-  seId,
+  seCode,
   phone,
   name,
   address,
@@ -47,7 +71,7 @@ export const postAddress = (
     await axios.post(
       `${DOMAIN}/web_set_address`,
       {
-        seId,
+        seCode,
         usPhoneNumber: phone,
         usName: name,
         usAddress: address,

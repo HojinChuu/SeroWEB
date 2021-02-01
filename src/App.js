@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserInfo } from "./actions/userActions";
 
@@ -30,17 +29,15 @@ const App = () => {
   return (
     <Router>
       <Header />
-      <main className="py-3">
-        <Container>
-          <Route path="/admin" component={AdminHomeScreen} />
-          <Route path="/mypage" component={MyPageScreen} />
-          <Route path="/login" component={LoginScreen} />
-          <Route path="/register" component={RegisterScreen} />
-          <Route path="/qrcode" component={QrcodeLinkScreen} exact />
-          <Route path="/address" component={InputAddress} exact />
-          <Route path="/auth" component={AuthRedirect} exact />
-          <Route path="/" component={HomeScreen} exact />
-        </Container>
+      <main>
+        <Route path="/admin" component={AdminHomeScreen} />
+        <Route path="/mypage" component={MyPageScreen} />
+        <Route path="/login" component={LoginScreen} />
+        <Route path="/register" component={RegisterScreen} />
+        <Route path="/qrcode" component={QrcodeLinkScreen} exact />
+        <Route path="/address" component={InputAddress} exact />
+        <Route path="/auth" component={AuthRedirect} exact />
+        <Route path="/" component={HomeScreen} exact />
       </main>
       <Footer />
     </Router>

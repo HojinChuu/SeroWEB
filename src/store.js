@@ -13,6 +13,7 @@ import {
 } from "./reducers/adminReducers";
 import {
   qrcodePostDataReducer,
+  qrcodeSavePostReducer,
   addressInputReducer,
 } from "./reducers/linkReducers";
 
@@ -24,6 +25,7 @@ const reducer = combineReducers({
   adminTasks: adminTasksReducer,
   adminQuestions: adminQuestionsReducer,
   qrcodePostData: qrcodePostDataReducer,
+  qrcodeSavePost: qrcodeSavePostReducer,
   addressInput: addressInputReducer,
 });
 

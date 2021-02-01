@@ -6,7 +6,7 @@ const Footer = () => {
       {window.location.pathname !== "/qrcode" && (
         <footer>
           <div className="row">
-            <div className="col text-center py-3">Copyright &copy; SERO</div>
+            <div className="col text-right p-5">Copyright &copy; SERO</div>
           </div>
         </footer>
       )}

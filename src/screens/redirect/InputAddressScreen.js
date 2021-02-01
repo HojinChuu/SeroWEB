@@ -15,15 +15,14 @@ const InputAddressScreen = ({ location, history }) => {
   const [postCode, setPostCode] = useState("");
   const [postSearch, setPostSearch] = useState(false);
   const [message, setMessage] = useState("");
-  // eslint-disable-next-line
-  const [seId, setSeId] = useState(location.search.split("=")[1]);
+  const [seCode] = useState(location.search.split("=")[1]);
 
   const dispatch = useDispatch();
   const addressInput = useSelector((state) => state.addressInput);
   const { success, loading } = addressInput;
 
   useEffect(() => {
-    if (success || !location.search) {
+    if (success || location.search.split("=")[0] !== "?seid") {
       history.push("/");
     }
   }, [success, history, location]);
@@ -55,7 +54,7 @@ const InputAddressScreen = ({ location, history }) => {
       setMessage("전부 입력해 주세요");
     } else {
       dispatch(
-        postAddress(seId, phone, name, address, addressDetail, postCode)
+        postAddress(seCode, phone, name, address, addressDetail, postCode)
       );
     }
   };
