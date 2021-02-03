@@ -1,22 +1,49 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState, useRef } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Navbar, Nav, NavDropdown, Spinner, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/userActions";
-
 const Header = () => {
+  const prevScrollY = useRef(0);
   const dispatch = useDispatch();
-
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo, loading } = userLogin;
+  const [path, setPath] = useState(window.location.pathname);
+  const [goingUp, setGoingUp] = useState(false);
+
+  useEffect(() => {
+    console.log(path);
+    setPath(window.location.pathname);
+    // eslint-disable-next-line
+  }, [window.location.pathname, path]);
+
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+    if (prevScrollY.current < currentScrollY && goingUp) {
+      setGoingUp(false);
+    }
+    if (prevScrollY.current > currentScrollY && !goingUp) {
+      setGoingUp(true);
+    }
+    if (currentScrollY === 0) {
+      setGoingUp(false);
+    }
+    prevScrollY.current = currentScrollY;
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+    // eslint-disable-next-line
+  }, [goingUp]);
 
   return (
     <header>
-      {window.location.pathname !== "/qrcode" && (
-        <Navbar expand="lg" collapseOnSelect>
+      {path !== "/qrcode" && (
+        <Navbar collapseOnSelect expand="md" style={goingUp ? {} : scrollStyle}>
           <LinkContainer to="/">
             <Navbar.Brand>
-              <Image src="/favicon.ico" />
+              <Image src="/image/logo.png" width="70px" />
             </Navbar.Brand>
           </LinkContainer>
           <Navbar.Collapse id="basic-navbar-nav">
@@ -32,7 +59,7 @@ const Header = () => {
               </LinkContainer>
             </Nav>
           </Navbar.Collapse>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto navCustomLeft">
               {loading ? (
@@ -56,10 +83,10 @@ const Header = () => {
                   ) : (
                     <Fragment>
                       <LinkContainer to="/login">
-                        <Nav.Link>Login</Nav.Link>
+                        <Nav.Link>LOGIN</Nav.Link>
                       </LinkContainer>
                       <LinkContainer to="/register">
-                        <Nav.Link>Sign Up</Nav.Link>
+                        <Nav.Link>SIGN UP</Nav.Link>
                       </LinkContainer>
                     </Fragment>
                   )}
@@ -71,6 +98,11 @@ const Header = () => {
       )}
     </header>
   );
+};
+
+const scrollStyle = {
+  backgroundColor: "rgb(222, 219, 219, 0.5)",
+  backdropFilter: "blur(5px)",
 };
 
 export default Header;

@@ -23,7 +23,7 @@ const QrcodeLinkScreen = ({ location, history }) => {
   useEffect(() => {
     if (userInfo && typeof userInfo != undefined) {
       dispatch(getQrcodeData(qrData, userInfo.usPhoneNumber));
-    } else if (typeof userInfo == undefined) {
+    } else if (typeof userInfo == undefined || !userInfo) {
       history.push("/login");
     }
   }, [userInfo, qrData, history, dispatch]);

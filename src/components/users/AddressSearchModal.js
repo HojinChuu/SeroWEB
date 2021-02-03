@@ -26,6 +26,16 @@ const postCodeStyle = {
   overflow: "hidden",
 };
 
+// const postCodeSmStyle = {
+//   position: "absolute",
+//   width:"300px",
+//   top: 100,
+//   left: 50,
+//   zIndex: "100",
+//   border: "1px solid grey",
+//   overflow: "hidden",
+// };
+
 const btnStyle = {
   position: "absolute",
   zIndex: "200",
