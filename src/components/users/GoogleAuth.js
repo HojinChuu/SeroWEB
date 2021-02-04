@@ -35,7 +35,7 @@ const GoogleAuth = ({ history }) => {
           onClick={renderProps.onClick}
           style={googleBtn}
         >
-          Login With Google
+          Google
         </button>
       )}
     />

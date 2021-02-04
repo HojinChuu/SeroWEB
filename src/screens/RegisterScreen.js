@@ -155,8 +155,11 @@ const RegisterScreen = ({ history }) => {
       {loading ? (
         <Spinner />
       ) : (
-        <div className="card p-4 mt-3 rounded">
-          <h1 className="text-center">Sign Up</h1>
+        <div
+          className="card p-4 mt-3 rounded"
+          style={{ marginBottom: "100px" }}
+        >
+          <h1 className="text-center">SIGN UP</h1>
           {message.fail && <Message variant="danger">{message.fail}</Message>}
           {message.success && (
             <Message variant="success">{message.success}</Message>
@@ -183,7 +186,7 @@ const RegisterScreen = ({ history }) => {
                     disabled={smsCheckSuccess}
                     onClick={smsSendHandler}
                   >
-                    Ok
+                    Send SMS
                   </button>
                 </div>
               </div>

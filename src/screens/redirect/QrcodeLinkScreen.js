@@ -57,7 +57,6 @@ const QrcodeLinkScreen = ({ location, history }) => {
   };
 
   const addPostHandler = () => {
-    console.log("add");
     dispatch(saveQrcodePost(userInfo.usId, qrcode.sePoId));
   };
 

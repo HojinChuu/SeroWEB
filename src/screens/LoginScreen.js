@@ -36,7 +36,7 @@ const LoginScreen = ({ history }) => {
       ) : (
         <FormContainer>
           <div className="card p-4 mt-3 rounded">
-            <h1 className="text-center">Sign In</h1>
+            <h1 className="text-center">LOGIN</h1>
             <form onSubmit={submitHandler}>
               <div className="form-group" id="phone">
                 <label>Phone Number</label>
@@ -64,7 +64,7 @@ const LoginScreen = ({ history }) => {
                 type="submit"
                 className="btn btn-block btn-primary mt-4 btn-lg rounded"
               >
-                Sign In
+                OK
               </button>
             </form>
 

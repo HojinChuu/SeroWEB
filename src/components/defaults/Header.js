@@ -1,21 +1,19 @@
 import React, { Fragment, useEffect, useState, useRef } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Navbar, Nav, NavDropdown, Spinner, Image } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/userActions";
+
 const Header = () => {
   const prevScrollY = useRef(0);
-  const dispatch = useDispatch();
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo, loading } = userLogin;
-  const [path, setPath] = useState(window.location.pathname);
   const [goingUp, setGoingUp] = useState(false);
 
-  useEffect(() => {
-    console.log(path);
-    setPath(window.location.pathname);
-    // eslint-disable-next-line
-  }, [window.location.pathname, path]);
+  const location = useLocation();
+  const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo, loading } = userLogin;
 
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
@@ -39,8 +37,13 @@ const Header = () => {
 
   return (
     <header>
-      {path !== "/qrcode" && (
-        <Navbar collapseOnSelect expand="md" style={goingUp ? {} : scrollStyle}>
+      {location.pathname !== "/qrcode" && (
+        <Navbar
+          collapseOnSelect
+          expand="md"
+          fixed={location.pathname === "/" ? "top" : ""}
+          style={goingUp ? {} : scrollStyle}
+        >
           <LinkContainer to="/">
             <Navbar.Brand>
               <Image src="/image/logo.png" width="70px" />

@@ -1,5 +1,6 @@
 import React from "react";
 import { Image, Row, Col } from "react-bootstrap";
+
 const HomeScreen = () => {
   return (
     <div>
@@ -7,6 +8,7 @@ const HomeScreen = () => {
         src="/image/homeImage2.png"
         style={{ height: "100vh", width: "100%" }}
       />
+
       <Row style={rowStyle}>
         <Col md={4} style={colStyle} className="mt-5 pt-5">
           <div>세로엽서 기본 소개</div>
@@ -18,6 +20,7 @@ const HomeScreen = () => {
           />
         </Col>
       </Row>
+
       <Row style={rowStyle}>
         <Col md={8} style={colStyle}>
           <Image
@@ -29,6 +32,7 @@ const HomeScreen = () => {
           소셜임팩트 카드 소개
         </Col>
       </Row>
+
       <Row style={{ backgroundColor: "#dedbdb" }}>
         <Image
           src="/image/homeImage3.png"

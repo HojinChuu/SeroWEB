@@ -47,7 +47,7 @@ const KakaoAuth = ({ history }) => {
       style={kakaoBtn}
       className="mt-2 btn btn-lg rounded"
     >
-      Login With Kakao
+      kakao
     </button>
   );
 };

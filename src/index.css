@@ -24,7 +24,6 @@ nav.navbar {
   right: 0;
   padding-left: 100px;
   padding-right: 100px;
-  position: fixed;
   transition: ease-in-out 0.5s;
 }
 
