@@ -4,10 +4,11 @@ import { Image, Row, Col } from "react-bootstrap";
 const HomeScreen = () => {
   return (
     <div>
-      <Image
-        src="/image/homeImage2.png"
-        style={{ height: "100vh", width: "100%" }}
-      />
+      <Row>
+        <video style={{ height: "100%", width: "100%" }} autoPlay loop muted>
+          <source src="/image/homeVideo.mp4" type="video/mp4"></source>
+        </video>
+      </Row>
 
       <Row style={rowStyle}>
         <Col md={4} style={colStyle} className="mt-5 pt-5">

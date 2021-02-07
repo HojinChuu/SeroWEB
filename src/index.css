@@ -33,6 +33,7 @@ nav.navbar {
   color: #000000 !important;
 }
 .navCustomLeft .nav-link {
+  font-size: 20px;
   font-weight: 400;
   color: #000000 !important;
 }
@@ -44,9 +45,8 @@ body {
 }
 footer {
   position: absolute;
-  right: 0;
   bottom: 0;
-  left: 0;
+  width: 100%;
   z-index: 100;
   padding: 1rem;
   color: white;

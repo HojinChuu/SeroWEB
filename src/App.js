@@ -6,6 +6,8 @@ import { getUserInfo } from "./actions/userActions";
 import Header from "./components/defaults/Header";
 import Footer from "./components/defaults/Footer";
 import HomeScreen from "./screens/HomeScreen";
+import AboutScreen from "./screens/AboutScreen";
+import MailboxScreen from "./screens/MailboxScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import MyPageScreen from "./screens/MyPageScreen";
@@ -37,6 +39,8 @@ const App = () => {
         <Route path="/qrcode" component={QrcodeLinkScreen} exact />
         <Route path="/address" component={InputAddress} exact />
         <Route path="/auth" component={AuthRedirect} exact />
+        <Route path="/mailbox" component={MailboxScreen} exact />
+        <Route path="/about" component={AboutScreen} exact />
         <Route path="/" component={HomeScreen} exact />
       </main>
       <Footer />
