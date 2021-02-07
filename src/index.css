@@ -147,3 +147,13 @@ body {
     width: 40%;
   }
 }
+
+#flipCardTitle > button:hover {
+  cursor: initial;
+}
+
+#flipCardTitle > button:focus {
+  outline: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
