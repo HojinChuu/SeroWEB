@@ -15,13 +15,13 @@ const LoginScreen = ({ history }) => {
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { loading, userToken } = userLogin;
+  const { loading, userToken, userInfo } = userLogin;
 
   useEffect(() => {
     if (userToken) {
       history.push("/");
     }
-  }, [history, userToken]);
+  }, [history, userToken, userInfo]);
 
   const submitHandler = (e) => {
     e.preventDefault();

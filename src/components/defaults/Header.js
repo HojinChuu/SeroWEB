@@ -51,10 +51,10 @@ const Header = () => {
           </LinkContainer>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto navCustomRight">
-              <LinkContainer to="/admin">
+              <LinkContainer to="/about">
                 <Nav.Link>ABOUT</Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/admin">
+              <LinkContainer to="/mailbox">
                 <Nav.Link>MAILBOX</Nav.Link>
               </LinkContainer>
               <LinkContainer to="/admin">

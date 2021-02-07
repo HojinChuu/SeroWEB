@@ -16,17 +16,17 @@ const QrcodeLinkScreen = ({ location, history }) => {
   const qrcodePostData = useSelector((state) => state.qrcodePostData);
   const qrcodeSavePost = useSelector((state) => state.qrcodeSavePost);
 
-  const { userInfo } = userLogin;
+  const { userInfo, userToken } = userLogin;
   const { loading, qrcode, error } = qrcodePostData;
   const { success: postSaveSuccess } = qrcodeSavePost;
 
   useEffect(() => {
     if (userInfo && typeof userInfo != undefined) {
       dispatch(getQrcodeData(qrData, userInfo.usPhoneNumber));
-    } else if (typeof userInfo == undefined || !userInfo) {
+    } else if (!userToken) {
       history.push("/login");
     }
-  }, [userInfo, qrData, history, dispatch]);
+  }, [userInfo, qrData, history, dispatch, userToken]);
 
   useEffect(() => {
     if (postSaveSuccess || error) {
@@ -88,7 +88,8 @@ const QrcodeLinkScreen = ({ location, history }) => {
             >
               <Card className="shadow front" style={{ border: "none" }}>
                 <Card.Img
-                  src={IMAGE_URL + "/" + qrcode.Post.poPhoto}
+                  // src={IMAGE_URL + "/" + qrcode.Post.poPhoto}
+                  src="/image/homeImage1.png"
                   style={{ width: "100%" }}
                 />
               </Card>
