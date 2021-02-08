@@ -26,7 +26,14 @@ const Tasks = () => {
   };
   const dispatch = useDispatch();
   const adminTasks = useSelector((state) => state.adminTasks);
-  const { loading, tasks, success, tasksCount, pageSize, currentPage } = adminTasks;
+  const {
+    loading,
+    tasks,
+    success,
+    tasksCount,
+    pageSize,
+    currentPage,
+  } = adminTasks;
 
   useEffect(() => {
     dispatch(getTasks({}));
@@ -108,10 +115,18 @@ const Tasks = () => {
         </div>
         <form onSubmit={submitHandler} className="row ml-auto ml-3 toggle">
           <ToggleButtonGroup type="checkbox" onChange={(e) => setTaskState(e)}>
-            <ToggleButton variant="light" value={0}>수신대기</ToggleButton>
-            <ToggleButton variant="light" value={1}>제작중</ToggleButton>
-            <ToggleButton variant="light" value={2}>배송중</ToggleButton>
-            <ToggleButton variant="light" value={3}>배송완료</ToggleButton>
+            <ToggleButton variant="light" value={0}>
+              수신대기
+            </ToggleButton>
+            <ToggleButton variant="light" value={1}>
+              제작중
+            </ToggleButton>
+            <ToggleButton variant="light" value={2}>
+              배송중
+            </ToggleButton>
+            <ToggleButton variant="light" value={3}>
+              배송완료
+            </ToggleButton>
           </ToggleButtonGroup>
 
           <select

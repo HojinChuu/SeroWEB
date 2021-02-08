@@ -112,40 +112,15 @@ body {
 .questionModal .modal-footer {
   border-top: none !important;
 }
-.cardContainer {
-  transition: transform 1s;
-  transform-style: preserve-3d;
-  cursor: pointer;
-}
-.front,
-.back {
-  position: absolute;
-  backface-visibility: hidden;
-}
-.back {
-  transform: rotateY(180deg);
-}
-#soundBtn {
+
+#qrpostAddBtn {
   position: absolute;
   right: 0;
   bottom: 0;
   left: 0;
   z-index: 200;
-  padding-bottom: 0.5rem;
   background-color: white;
   border-top: 1px solid lightgrey;
-}
-@media (max-width: 991px) {
-  .front,
-  .back {
-    width: 100%;
-  }
-}
-@media (min-width: 991px) {
-  .front,
-  .back {
-    width: 40%;
-  }
 }
 
 #flipCardTitle > button:hover {

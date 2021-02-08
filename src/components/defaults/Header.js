@@ -3,6 +3,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Navbar, Nav, NavDropdown, Spinner, Image } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 import { logout } from "../../actions/userActions";
 
 const Header = () => {
@@ -27,6 +28,21 @@ const Header = () => {
       setGoingUp(false);
     }
     prevScrollY.current = currentScrollY;
+  };
+
+  const logoutHandler = () => {
+    Swal.fire({
+      // title: "",
+      text: "로그아웃 하시겠어요?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "YES",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("", "로그아웃 되었습니다", "success");
+        dispatch(logout());
+      }
+    });
   };
 
   useEffect(() => {
@@ -79,7 +95,7 @@ const Header = () => {
                       <LinkContainer to="/mypage">
                         <NavDropdown.Item>마이페이지</NavDropdown.Item>
                       </LinkContainer>
-                      <NavDropdown.Item onClick={() => dispatch(logout())}>
+                      <NavDropdown.Item onClick={logoutHandler}>
                         로그아웃
                       </NavDropdown.Item>
                     </NavDropdown>
