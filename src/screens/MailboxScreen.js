@@ -1,347 +1,62 @@
-import React, { useRef, useState } from "react";
-import { Row, Col, Image, Container } from "react-bootstrap";
-import Flippy, { FrontSide, BackSide } from "react-flippy";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Row, Container } from "react-bootstrap";
+import { getSendPosts, getReceivePosts } from "../actions/mailPostActions";
+import Spinner from "../components/helpers/Spinner";
+import ReceivedCardItem from "../components/mailbox/ReceivedCardItem";
+import SentCardItem from "../components/mailbox/SentCardItem";
 
 const MailboxScreen = () => {
-  const backButton = useRef(null);
-  const [playing, setPlaying] = useState(true);
+  const dispatch = useDispatch();
+  const [toggle, setToggle] = useState(false);
 
-  const soundHandler = (e) => {
-    console.log(e.target);
-    setPlaying(!playing);
+  const userLogin = useSelector((state) => state.userLogin);
+  const sendPosts = useSelector((state) => state.sendPosts);
+  const receivePosts = useSelector((state) => state.receivePosts);
+
+  const { userInfo } = userLogin;
+  const { loading: sentPostLoading, sentPosts } = sendPosts;
+  const { loading: receivedPostLoading, receivedPosts } = receivePosts;
+
+  useEffect(() => {
+    if (userInfo) {
+      if (toggle) {
+        dispatch(getSendPosts(userInfo.usId));
+      } else {
+        dispatch(getReceivePosts(userInfo.usId));
+      }
+    }
+  }, [dispatch, userInfo, toggle]);
+
+  const toogleHandler = () => {
+    setToggle(!toggle);
   };
 
   return (
     <Container>
-      <Row className="justify-content-center cardContainer mb-5">
-        <Col sm={10} md={6} lg={4} className="pb-5 pt-5">
-          <div id="flipCardTitle">
-            <button className="btn btn-block pr-4 pl-4">
-              <Row className="justify-content-between align-items-center">
-                <Row md={2} className="align-items-center">
-                  <Image src="/image/logo.png" width="30px" />
-                  <span>Chuhojin</span>
-                </Row>
-                <span>2020-10-20</span>
-              </Row>
-            </button>
-          </div>
-          <Flippy
-            flipOnHover={false}
-            flipOnClick={true}
-            flipDirection="horizontal"
-            ref={backButton}
-            style={{ width: "100%", height: "600px" }}
-          >
-            <FrontSide className="d-flex align-items-center">
-              <Image src="/image/homeImage3.png" width="100%" />
-            </FrontSide>
-            <BackSide className="d-flex align-items-center">
-              <Image src="/image/homeImage1.png" width="100%" />
-            </BackSide>
-          </Flippy>
-          <div>
-            <button
-              className="btn btn-block btn-light mt-3"
-              onClick={soundHandler}
-            >
-              <i
-                className={
-                  playing
-                    ? "fas fa-volume-up fa-2x"
-                    : "fas fa-volume-mute fa-2x"
-                }
-              ></i>
-            </button>
-          </div>
-        </Col>
-        <Col sm={10} md={6} lg={4} className="pb-5 pt-5">
-          <div id="flipCardTitle">
-            <button className="btn btn-block pr-4 pl-4">
-              <Row className="justify-content-between align-items-center">
-                <Row md={2} className="align-items-center">
-                  <Image src="/image/logo.png" width="30px" />
-                  <span>Chuhojin</span>
-                </Row>
-                <span>2020-10-20</span>
-              </Row>
-            </button>
-          </div>
-          <Flippy
-            flipOnHover={false}
-            flipOnClick={true}
-            flipDirection="horizontal"
-            ref={backButton}
-            style={{ width: "100%", height: "600px" }}
-          >
-            <FrontSide className="d-flex align-items-center">
-              <Image src="/image/homeImage3.png" width="100%" />
-            </FrontSide>
-            <BackSide className="d-flex align-items-center">
-              <Image src="/image/homeImage1.png" width="100%" />
-            </BackSide>
-          </Flippy>
-          <div>
-            <button
-              className="btn btn-block btn-light mt-3"
-              onClick={soundHandler}
-            >
-              <i
-                className={
-                  playing
-                    ? "fas fa-volume-up fa-2x"
-                    : "fas fa-volume-mute fa-2x"
-                }
-              ></i>
-            </button>
-          </div>
-        </Col>
-        <Col sm={10} md={6} lg={4} className="pb-5 pt-5">
-          <div id="flipCardTitle">
-            <button className="btn btn-block pr-4 pl-4">
-              <Row className="justify-content-between align-items-center">
-                <Row md={2} className="align-items-center">
-                  <Image src="/image/logo.png" width="30px" />
-                  <span>Chuhojin</span>
-                </Row>
-                <span>2020-10-20</span>
-              </Row>
-            </button>
-          </div>
-          <Flippy
-            flipOnHover={false}
-            flipOnClick={true}
-            flipDirection="horizontal"
-            ref={backButton}
-            style={{ width: "100%", height: "600px" }}
-          >
-            <FrontSide className="d-flex align-items-center">
-              <Image src="/image/homeImage3.png" width="100%" />
-            </FrontSide>
-            <BackSide className="d-flex align-items-center">
-              <Image src="/image/homeImage1.png" width="100%" />
-            </BackSide>
-          </Flippy>
-          <div>
-            <button
-              className="btn btn-block btn-light mt-3"
-              onClick={soundHandler}
-            >
-              <i
-                className={
-                  playing
-                    ? "fas fa-volume-up fa-2x"
-                    : "fas fa-volume-mute fa-2x"
-                }
-              ></i>
-            </button>
-          </div>
-        </Col>
-        <Col sm={10} md={6} lg={4} className="pb-5 pt-5">
-          <div id="flipCardTitle">
-            <button className="btn btn-block pr-4 pl-4">
-              <Row className="justify-content-between align-items-center">
-                <Row md={2} className="align-items-center">
-                  <Image src="/image/logo.png" width="30px" />
-                  <span>Chuhojin</span>
-                </Row>
-                <span>2020-10-20</span>
-              </Row>
-            </button>
-          </div>
-          <Flippy
-            flipOnHover={false}
-            flipOnClick={true}
-            flipDirection="horizontal"
-            ref={backButton}
-            style={{ width: "100%", height: "600px" }}
-          >
-            <FrontSide className="d-flex align-items-center">
-              <Image src="/image/homeImage3.png" width="100%" />
-            </FrontSide>
-            <BackSide className="d-flex align-items-center">
-              <Image src="/image/homeImage1.png" width="100%" />
-            </BackSide>
-          </Flippy>
-          <div>
-            <button
-              className="btn btn-block btn-light mt-3"
-              onClick={soundHandler}
-            >
-              <i
-                className={
-                  playing
-                    ? "fas fa-volume-up fa-2x"
-                    : "fas fa-volume-mute fa-2x"
-                }
-              ></i>
-            </button>
-          </div>
-        </Col>
-        <Col sm={10} md={6} lg={4} className="pb-5 pt-5">
-          <div id="flipCardTitle">
-            <button className="btn btn-block pr-4 pl-4">
-              <Row className="justify-content-between align-items-center">
-                <Row md={2} className="align-items-center">
-                  <Image src="/image/logo.png" width="30px" />
-                  <span>Chuhojin</span>
-                </Row>
-                <span>2020-10-20</span>
-              </Row>
-            </button>
-          </div>
-          <Flippy
-            flipOnHover={false}
-            flipOnClick={true}
-            flipDirection="horizontal"
-            ref={backButton}
-            style={{ width: "100%", height: "600px" }}
-          >
-            <FrontSide className="d-flex align-items-center">
-              <Image src="/image/homeImage3.png" width="100%" />
-            </FrontSide>
-            <BackSide className="d-flex align-items-center">
-              <Image src="/image/homeImage1.png" width="100%" />
-            </BackSide>
-          </Flippy>
-          <div>
-            <button
-              className="btn btn-block btn-light mt-3"
-              onClick={soundHandler}
-            >
-              <i
-                className={
-                  playing
-                    ? "fas fa-volume-up fa-2x"
-                    : "fas fa-volume-mute fa-2x"
-                }
-              ></i>
-            </button>
-          </div>
-        </Col>
-        <Col sm={10} md={6} lg={4} className="pb-5 pt-5">
-          <div id="flipCardTitle">
-            <button className="btn btn-block pr-4 pl-4">
-              <Row className="justify-content-between align-items-center">
-                <Row md={2} className="align-items-center">
-                  <Image src="/image/logo.png" width="30px" />
-                  <span>Chuhojin</span>
-                </Row>
-                <span>2020-10-20</span>
-              </Row>
-            </button>
-          </div>
-          <Flippy
-            flipOnHover={false}
-            flipOnClick={true}
-            flipDirection="horizontal"
-            ref={backButton}
-            style={{ width: "100%", height: "600px" }}
-          >
-            <FrontSide className="d-flex align-items-center">
-              <Image src="/image/homeImage3.png" width="100%" />
-            </FrontSide>
-            <BackSide className="d-flex align-items-center">
-              <Image src="/image/homeImage1.png" width="100%" />
-            </BackSide>
-          </Flippy>
-          <div>
-            <button
-              className="btn btn-block btn-light mt-3"
-              onClick={soundHandler}
-            >
-              <i
-                className={
-                  playing
-                    ? "fas fa-volume-up fa-2x"
-                    : "fas fa-volume-mute fa-2x"
-                }
-              ></i>
-            </button>
-          </div>
-        </Col>
-        <Col sm={10} md={6} lg={4} className="pb-5 pt-5">
-          <div id="flipCardTitle">
-            <button className="btn btn-block pr-4 pl-4">
-              <Row className="justify-content-between align-items-center">
-                <Row md={2} className="align-items-center">
-                  <Image src="/image/logo.png" width="30px" />
-                  <span>Chuhojin</span>
-                </Row>
-                <span>2020-10-20</span>
-              </Row>
-            </button>
-          </div>
-          <Flippy
-            flipOnHover={false}
-            flipOnClick={true}
-            flipDirection="horizontal"
-            ref={backButton}
-            style={{ width: "100%", height: "600px" }}
-          >
-            <FrontSide className="d-flex align-items-center">
-              <Image src="/image/homeImage3.png" width="100%" />
-            </FrontSide>
-            <BackSide className="d-flex align-items-center">
-              <Image src="/image/homeImage1.png" width="100%" />
-            </BackSide>
-          </Flippy>
-          <div>
-            <button
-              className="btn btn-block btn-light mt-3"
-              onClick={soundHandler}
-            >
-              <i
-                className={
-                  playing
-                    ? "fas fa-volume-up fa-2x"
-                    : "fas fa-volume-mute fa-2x"
-                }
-              ></i>
-            </button>
-          </div>
-        </Col>
-        <Col sm={10} md={6} lg={4} className="pb-5 pt-5">
-          <div id="flipCardTitle">
-            <button className="btn btn-block pr-4 pl-4">
-              <Row className="justify-content-between align-items-center">
-                <Row md={2} className="align-items-center">
-                  <Image src="/image/logo.png" width="30px" />
-                  <span>Chuhojin</span>
-                </Row>
-                <span>2020-10-20</span>
-              </Row>
-            </button>
-          </div>
-          <Flippy
-            flipOnHover={false}
-            flipOnClick={true}
-            flipDirection="horizontal"
-            ref={backButton}
-            style={{ width: "100%", height: "600px" }}
-          >
-            <FrontSide className="d-flex align-items-center">
-              <Image src="/image/homeImage3.png" width="100%" />
-            </FrontSide>
-            <BackSide className="d-flex align-items-center">
-              <Image src="/image/homeImage1.png" width="100%" />
-            </BackSide>
-          </Flippy>
-          <div>
-            <button
-              className="btn btn-block btn-light mt-3"
-              onClick={soundHandler}
-            >
-              <i
-                className={
-                  playing
-                    ? "fas fa-volume-up fa-2x"
-                    : "fas fa-volume-mute fa-2x"
-                }
-              ></i>
-            </button>
-          </div>
-        </Col>
+      <div className="mt-4 text-right">
+        <button className="btn btn-lg btn-light" onClick={toogleHandler}>
+          <span style={{ fontSize: "13px" }}>
+            {toggle ? "받은 엽서 보기" : "보낸 엽서 보기"}
+          </span>
+        </button>
+      </div>
+      <Row className="justify-content-center cardContainer mb-5 pb-5">
+        {!toggle ? (
+          receivedPostLoading || !receivedPosts ? (
+            <Spinner />
+          ) : (
+            receivedPosts.map((receivedPost, index) => (
+              <ReceivedCardItem receivedPost={receivedPost} key={index} />
+            ))
+          )
+        ) : sentPostLoading || !sentPosts || !userInfo ? (
+          <Spinner />
+        ) : (
+          sentPosts.map((sentPost, index) => (
+            <SentCardItem sentPost={sentPost} userInfo={userInfo} key={index} />
+          ))
+        )}
       </Row>
     </Container>
   );

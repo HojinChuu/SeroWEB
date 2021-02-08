@@ -16,6 +16,10 @@ import {
   qrcodeSavePostReducer,
   addressInputReducer,
 } from "./reducers/linkReducers";
+import {
+  sendPostsReducer,
+  receivePostsReducer,
+} from "./reducers/mailPostReducers";
 
 const reducer = combineReducers({
   userRegister: userRegisterReducer,
@@ -27,6 +31,8 @@ const reducer = combineReducers({
   qrcodePostData: qrcodePostDataReducer,
   qrcodeSavePost: qrcodeSavePostReducer,
   addressInput: addressInputReducer,
+  sendPosts: sendPostsReducer,
+  receivePosts: receivePostsReducer,
 });
 
 const userTokenFromStorage = localStorage.getItem("userToken")

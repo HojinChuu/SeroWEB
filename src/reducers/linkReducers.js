@@ -69,6 +69,7 @@ export const addressInputReducer = (state = {}, action) => {
     case ADDRESS_INPUT_FAIL:
       return {
         loading: false,
+        error: true,
       };
     default:
       return state;

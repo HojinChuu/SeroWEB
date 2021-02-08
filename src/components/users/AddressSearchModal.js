@@ -1,8 +1,10 @@
 import React from "react";
 import DaumPostcode from "react-daum-postcode";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
+import { useLocation } from "react-router-dom";
 
 const AddressSearchModal = ({ visible, onComplete, cancelBtn }) => {
+  const location = useLocation();
   const { width } = useWindowDimensions();
 
   return (
@@ -10,7 +12,11 @@ const AddressSearchModal = ({ visible, onComplete, cancelBtn }) => {
       style={
         width > 500
           ? { ...postCodeStyle, display: visible ? "block" : "none" }
-          : { ...postCodeSmStyle, display: visible ? "block" : "none" }
+          : {
+              left: location.pathname === "/register" ? 8 : 20,
+              ...postCodeSmStyle,
+              display: visible ? "block" : "none",
+            }
       }
     >
       <button className="btn btn-dark" style={btnStyle} onClick={cancelBtn}>
@@ -29,7 +35,7 @@ const AddressSearchModal = ({ visible, onComplete, cancelBtn }) => {
 const postCodeStyle = {
   position: "absolute",
   top: 100,
-  left: -50,
+  left: -20,
   zIndex: "100",
   border: "1px solid grey",
   overflow: "hidden",
@@ -37,9 +43,8 @@ const postCodeStyle = {
 
 const postCodeSmStyle = {
   position: "absolute",
-  width: "300px",
-  top: 100,
-  left: 20,
+  width: "330px",
+  top: 50,
   zIndex: "100",
   border: "1px solid grey",
   overflow: "hidden",

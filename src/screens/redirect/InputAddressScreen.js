@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postAddress } from "../../actions/linkActions";
+import Swal from "sweetalert2";
 
 import FormContainer from "../../components/helpers/FormContainer";
 import AddressSearchModal from "../../components/users/AddressSearchModal";
@@ -19,13 +20,33 @@ const InputAddressScreen = ({ location, history }) => {
 
   const dispatch = useDispatch();
   const addressInput = useSelector((state) => state.addressInput);
-  const { success, loading } = addressInput;
+  const { success, loading, error } = addressInput;
 
   useEffect(() => {
-    if (success || location.search.split("=")[0] !== "?seid") {
+    if (error) {
+      Swal.fire({
+        text: "이미 처리된 코드입니다",
+        icon: "warning",
+        confirmButtonText: "OK",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          history.push("/");
+        }
+      });
+    } else if (success) {
+      Swal.fire({
+        title: "Saved!",
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          history.push("/");
+        }
+      });
+    } else if (location.search.split("=")[0] !== "?seid") {
       history.push("/");
     }
-  }, [success, history, location]);
+  }, [success, history, location, error]);
 
   const addressCompleteHandler = (data) => {
     let fullAddress = data.address;
@@ -64,7 +85,7 @@ const InputAddressScreen = ({ location, history }) => {
       {loading ? (
         <Spinner />
       ) : (
-        <div className="card p-4 mt-3 rounded">
+        <div className="card p-4 mt-3 rounded mb-5">
           <h2 className="text-center">주소를 입력해주세요</h2>
           {message && <Message variant="danger">{message}</Message>}
           <form onSubmit={submitHandler}>
