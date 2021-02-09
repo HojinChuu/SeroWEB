@@ -45,9 +45,9 @@ const Tasks = () => {
     }
   }, [dispatch, success]);
 
-  const btnStateHandler = () => {
+  useEffect(() => {
     taskArray.length !== 0 ? setDisable(false) : setDisable(true);
-  };
+  }, [taskArray, disable]);
 
   const refreshHandler = () => {
     dispatch(getTasks({}));
@@ -57,16 +57,13 @@ const Tasks = () => {
 
   const getTaskValue = (taskValue) => {
     setTaskArray(taskArray.concat(taskValue));
-    btnStateHandler();
   };
 
-  const removeTaskValue = (index) => {
+  const removeTaskValue = (taskValue) => {
     setTaskArray([
-      ...taskArray.slice(0, index),
-      ...taskArray.slice(index + 1, taskArray.length),
+      ...taskArray.slice(0, taskArray.indexOf(taskValue)),
+      ...taskArray.slice(taskArray.indexOf(taskValue) + 1, taskArray.length),
     ]);
-    btnStateHandler();
-    taskArray.length !== 0 ? setDisable(false) : setDisable(true);
   };
 
   const removeTaskHandler = () => {

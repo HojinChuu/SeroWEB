@@ -11,7 +11,6 @@ const SentCardItem = ({ sentPost, userInfo }) => {
   useEffect(() => {
     if (sentPost.poRecord !== "null") {
       setAudio(new Audio(IMAGE_URL + "/" + sentPost.poRecord));
-      console.log(sentPost);
     }
   }, [sentPost]);
 

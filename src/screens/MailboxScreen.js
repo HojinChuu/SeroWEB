@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Container } from "react-bootstrap";
+import { Row, Container, Image } from "react-bootstrap";
 import { getSendPosts, getReceivePosts } from "../actions/mailPostActions";
 import Spinner from "../components/helpers/Spinner";
 import ReceivedCardItem from "../components/mailbox/ReceivedCardItem";
 import SentCardItem from "../components/mailbox/SentCardItem";
+import { paginate } from "../utils/paginate";
+import Pagination from "../components/helpers/Pagination";
+import {
+  RECEIVE_POST_FETCH_SUCCESS,
+  SEND_POST_FETCH_SUCCESS,
+} from "../constants/mailPostConstants";
 
-const MailboxScreen = () => {
+const MailboxScreen = ({ history }) => {
   const dispatch = useDispatch();
   const [toggle, setToggle] = useState(false);
 
@@ -15,8 +21,26 @@ const MailboxScreen = () => {
   const receivePosts = useSelector((state) => state.receivePosts);
 
   const { userInfo } = userLogin;
-  const { loading: sentPostLoading, sentPosts } = sendPosts;
-  const { loading: receivedPostLoading, receivedPosts } = receivePosts;
+  const {
+    loading: sentPostLoading,
+    sentPosts,
+    postCount: sentPostCount,
+    pageSize: sentPageSize,
+    currentPage: sentCurrentPage,
+  } = sendPosts;
+  const {
+    loading: receivedPostLoading,
+    receivedPosts,
+    postCount: receivedPostCount,
+    pageSize: receivedPageSize,
+    currentPage: receivedCurrentPage,
+  } = receivePosts;
+
+  useEffect(() => {
+    if (!userInfo && !localStorage.getItem("userToken")) {
+      history.push("/");
+    }
+  }, [history, userInfo]);
 
   useEffect(() => {
     if (userInfo) {
@@ -32,32 +56,87 @@ const MailboxScreen = () => {
     setToggle(!toggle);
   };
 
+  const sentPageChangeHandler = (page) => {
+    dispatch({
+      type: SEND_POST_FETCH_SUCCESS,
+      payload: sentPosts,
+      currentPage: page,
+    });
+  };
+
+  const receivedPageChangeHandler = (page) => {
+    dispatch({
+      type: RECEIVE_POST_FETCH_SUCCESS,
+      payload: receivedPosts,
+      currentPage: page,
+    });
+  };
+
+  const pagedSentPosts = paginate(sentPosts, sentCurrentPage, sentPageSize);
+  const pagedReceivedPosts = paginate(
+    receivedPosts,
+    receivedCurrentPage,
+    receivedPageSize
+  );
+
   return (
     <Container>
       <div className="mt-4 text-right">
-        <button className="btn btn-lg btn-light" onClick={toogleHandler}>
+        <button
+          className="btn btn-lg btn-light rounded"
+          onClick={toogleHandler}
+        >
           <span style={{ fontSize: "13px" }}>
             {toggle ? "받은 엽서 보기" : "보낸 엽서 보기"}
           </span>
         </button>
       </div>
-      <Row className="justify-content-center cardContainer mb-5 pb-5">
+      <Row className="justify-content-center cardContainer">
         {!toggle ? (
           receivedPostLoading || !receivedPosts ? (
             <Spinner />
+          ) : receivedPosts.length === 0 ? (
+            <Image
+              src="/image/empty_post.png"
+              width="50%"
+              style={{ margin: "200px" }}
+            />
           ) : (
-            receivedPosts.map((receivedPost, index) => (
+            pagedReceivedPosts.map((receivedPost, index) => (
               <ReceivedCardItem receivedPost={receivedPost} key={index} />
             ))
           )
         ) : sentPostLoading || !sentPosts || !userInfo ? (
           <Spinner />
+        ) : sentPosts.length === 0 ? (
+          <Image
+            src="/image/empty_post.png"
+            width="50%"
+            style={{ margin: "200px" }}
+          />
         ) : (
-          sentPosts.map((sentPost, index) => (
+          pagedSentPosts.map((sentPost, index) => (
             <SentCardItem sentPost={sentPost} userInfo={userInfo} key={index} />
           ))
         )}
       </Row>
+      <div className="mt-5 mb-5 pb-5">
+        {toggle ? (
+          <Pagination
+            itemsCount={sentPostCount}
+            pageSize={sentPageSize}
+            currentPage={sentCurrentPage}
+            onPageChange={sentPageChangeHandler}
+          />
+        ) : (
+          <Pagination
+            itemsCount={receivedPostCount}
+            pageSize={receivedPageSize}
+            currentPage={receivedCurrentPage}
+            onPageChange={receivedPageChangeHandler}
+          />
+        )}
+      </div>
     </Container>
   );
 };
