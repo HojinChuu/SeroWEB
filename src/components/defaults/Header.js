@@ -70,9 +70,11 @@ const Header = () => {
               <LinkContainer to="/about">
                 <Nav.Link>ABOUT</Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/mailbox">
-                <Nav.Link>MAILBOX</Nav.Link>
-              </LinkContainer>
+              {userInfo && (
+                <LinkContainer to="/mailbox">
+                  <Nav.Link>MAILBOX</Nav.Link>
+                </LinkContainer>
+              )}
               <LinkContainer to="/admin">
                 <Nav.Link>DESK</Nav.Link>
               </LinkContainer>
@@ -86,7 +88,7 @@ const Header = () => {
               ) : (
                 <Fragment>
                   {userInfo && userInfo.usGrant === 1 && (
-                    <LinkContainer to="/admin">
+                    <LinkContainer to="/admin" className="mr-4">
                       <Nav.Link>ADMIN</Nav.Link>
                     </LinkContainer>
                   )}

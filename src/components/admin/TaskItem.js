@@ -5,10 +5,17 @@ const TaskItem = ({ task, getTaskValue, removeTaskValue, index }) => {
   let shippingStatus = "";
 
   switch (task.seStatus) {
-    case 1: shippingStatus = "제작중"; break;
-    case 2: shippingStatus = "배송중"; break;
-    case 3: shippingStatus = "배송완료"; break;
-    default: shippingStatus = "수신대기";
+    case 1:
+      shippingStatus = "제작중";
+      break;
+    case 2:
+      shippingStatus = "배송중";
+      break;
+    case 3:
+      shippingStatus = "배송완료";
+      break;
+    default:
+      shippingStatus = "수신대기";
   }
 
   const renderTooltip = (
@@ -26,7 +33,9 @@ const TaskItem = ({ task, getTaskValue, removeTaskValue, index }) => {
           className="form-check-input"
           type="checkbox"
           onChange={(e) =>
-            e.target.checked ? getTaskValue(task.seId) : removeTaskValue(index)
+            e.target.checked
+              ? getTaskValue(task.seId)
+              : removeTaskValue(task.seId)
           }
         />
       </td>

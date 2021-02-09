@@ -30,7 +30,10 @@ const QrcodeLinkScreen = ({ location, history }) => {
   }, [userInfo, qrData, history, dispatch, userToken]);
 
   useEffect(() => {
-    if (postSaveSuccess || error) {
+    if (postSaveSuccess) {
+      history.push("/mailbox");
+    }
+    if (error) {
       history.push("/");
     }
   }, [history, postSaveSuccess, error]);

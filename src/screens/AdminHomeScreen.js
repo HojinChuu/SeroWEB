@@ -7,6 +7,7 @@ import Tasks from "../components/admin/Tasks";
 import Analysis from "../components/admin/Analysis";
 import Notices from "../components/admin/Notices";
 import Questions from "../components/admin/Questions";
+import { Container } from "react-bootstrap";
 
 const AdminHomeScreen = ({ match, location, history }) => {
   const [title, setTitle] = useState("");
@@ -21,24 +22,29 @@ const AdminHomeScreen = ({ match, location, history }) => {
   }, [location.pathname]);
 
   useEffect(() => {
-    if (typeof userInfo == undefined || !userInfo || userInfo.usGrant !== 1) {
+    if (
+      (!userInfo && !localStorage.getItem("userToken")) ||
+      (userInfo && userInfo.usGrant !== 1)
+    ) {
       history.push("/");
     }
   }, [history, userInfo]);
 
   return (
-    <div className="row">
-      <SideBar />
-      <div className="col-md-10 m-auto col-lg-10">
-        <div className="d-flex justify-content-center p-4 border-bottom">
-          <h1>{title}</h1>
+    <Container>
+      <div className="row" style={{ marginBottom: "150px" }}>
+        <SideBar />
+        <div className="col-md-10 m-auto col-lg-10">
+          <div className="d-flex justify-content-center p-4 border-bottom">
+            <h1>{title}</h1>
+          </div>
+          <Route path={match.path + "/questions"} component={Questions} exact />
+          <Route path={match.path + "/analysis"} component={Analysis} exact />
+          <Route path={match.path + "/notices"} component={Notices} exact />
+          <Route path={match.path} component={Tasks} exact />
         </div>
-        <Route path={match.path + "/questions"} component={Questions} exact />
-        <Route path={match.path + "/analysis"} component={Analysis} exact />
-        <Route path={match.path + "/notices"} component={Notices} exact />
-        <Route path={match.path} component={Tasks} exact />
       </div>
-    </div>
+    </Container>
   );
 };
 

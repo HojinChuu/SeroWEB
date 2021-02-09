@@ -258,17 +258,15 @@ const RegisterScreen = ({ history }) => {
             </div>
             <div className="form-group" id="address">
               <div className="row justify-content-between">
-                <div className="col-md-10 col-xs-10">
+                <div className="col">
                   <label>Address</label>
-                </div>
-                <div className="col-md-2 col-xs-2">
                   <button
                     type="button"
-                    className="btn btn-outline-light btn-sm"
+                    className="btn btn-sm"
                     style={{ color: "grey" }}
                     onClick={() => setPostSearch(true)}
                   >
-                    Search
+                    <i className="fas fa-search-location fa-lg"></i>
                   </button>
                 </div>
               </div>
