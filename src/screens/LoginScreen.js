@@ -7,21 +7,36 @@ import FormContainer from "../components/helpers/FormContainer";
 import Spinner from "../components/helpers/Spinner";
 import GoogleAuth from "../components/users/GoogleAuth";
 import KakaoAuth from "../components/users/KakaoAuth";
+import Message from "../components/helpers/Message";
 
 const LoginScreen = ({ history }) => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { loading, userToken, userInfo } = userLogin;
+  const { loading, userToken, userInfo, success } = userLogin;
 
   useEffect(() => {
     if (userToken) {
       history.push("/");
     }
   }, [history, userToken, userInfo]);
+
+  useEffect(() => {
+    if (success && localStorage.getItem("qrCode")) {
+      history.push(`/qrcode?code=${localStorage.getItem("qrCode")}`);
+      localStorage.removeItem("qrCode");
+    }
+  }, [history, success]);
+
+  useEffect(() => {
+    if (localStorage.getItem("qrCode")) {
+      setMessage("엽서를 확인하시려면 로그인이 필요합니다.");
+    }
+  }, [message]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -37,6 +52,7 @@ const LoginScreen = ({ history }) => {
         <FormContainer>
           <div className="card p-4 mt-3 rounded">
             <h1 className="text-center">LOGIN</h1>
+            {message && <Message variant="danger">{message}</Message>}
             <form onSubmit={submitHandler}>
               <div className="form-group" id="phone">
                 <label>Phone Number</label>
