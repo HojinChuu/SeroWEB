@@ -17,24 +17,35 @@ const QrcodeLinkScreen = ({ location, history }) => {
   const qrcodePostData = useSelector((state) => state.qrcodePostData);
   const qrcodeSavePost = useSelector((state) => state.qrcodeSavePost);
 
-  const { userInfo, userToken } = userLogin;
+  const { userInfo } = userLogin;
   const { loading, qrcode, error } = qrcodePostData;
   const { success: postSaveSuccess, error: postSaveError } = qrcodeSavePost;
 
   useEffect(() => {
-    if (userInfo && typeof userInfo != undefined) {
+    if (userInfo && localStorage.getItem("userToken")) {
       dispatch(getQrcodeData(qrData, userInfo.usPhoneNumber));
-    } else if (!userToken && typeof userInfo == undefined) {
+    } else if (!userInfo && !localStorage.getItem("userToken")) {
+      if (qrData) {
+        localStorage.setItem("qrCode", qrData);
+      }
       history.push("/login");
     }
-  }, [userInfo, qrData, history, dispatch, userToken]);
+  }, [userInfo, qrData, history, dispatch]);
 
   useEffect(() => {
     if (postSaveSuccess) {
       history.push("/mailbox");
     }
     if (error) {
-      history.push("/");
+      Swal.fire({
+        text: "잘못된 경로의 엽서입니다.",
+        icon: "warning",
+        confirmButtonText: "확인",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          history.push("/");
+        }
+      });
     }
   }, [history, postSaveSuccess, error]);
 
@@ -43,6 +54,21 @@ const QrcodeLinkScreen = ({ location, history }) => {
       setAudio(new Audio(IMAGE_URL + "/" + qrcode.Post.poRecord));
     }
   }, [qrcode]);
+
+  useEffect(() => {
+    if (postSaveError) {
+      Swal.fire({
+        text: "이미 추가된 엽서입니다.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "돌아가기",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          history.push("/");
+        }
+      });
+    }
+  }, [history, postSaveError]);
 
   const soundHandler = () => {
     setPlaying(!playing);
@@ -55,21 +81,7 @@ const QrcodeLinkScreen = ({ location, history }) => {
   };
 
   const addPostHandler = () => {
-    if (postSaveError) {
-      Swal.fire({
-        // title: "",
-        text: "이미 추가된 엽서입니다.",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "돌아가기",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          history.push("/");
-        }
-      });
-    } else {
-      dispatch(saveQrcodePost(userInfo.usId, qrcode.sePoId));
-    }
+    dispatch(saveQrcodePost(userInfo.usId, qrcode.sePoId));
   };
 
   return (
