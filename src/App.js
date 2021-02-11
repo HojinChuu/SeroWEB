@@ -18,15 +18,13 @@ import QrcodeLinkScreen from "./screens/redirect/QrcodeLinkScreen";
 
 const App = () => {
   const dispatch = useDispatch();
-  const { userToken, loading, userInfo } = useSelector(
-    (state) => state.userLogin
-  );
+  const { userToken } = useSelector((state) => state.userLogin);
 
   useEffect(() => {
     if (userToken) {
       dispatch(getUserInfo());
     }
-  }, [dispatch, userToken, loading, userInfo]);
+  }, [dispatch, userToken]);
 
   return (
     <Router>

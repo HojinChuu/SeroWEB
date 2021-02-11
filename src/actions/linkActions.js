@@ -30,7 +30,6 @@ export const getQrcodeData = (qrData, usPhoneNumber) => async (dispatch) => {
     });
   } catch (error) {
     dispatch({ type: QRCODE_FETCH_FAIL });
-    console.log(error);
   }
 };
 
@@ -51,7 +50,6 @@ export const saveQrcodePost = (usId, poId) => async (dispatch) => {
     });
   } catch (error) {
     dispatch({ type: QRCODE_SAVE_POST_FAIL });
-    console.log(error);
   }
 };
 
@@ -86,6 +84,5 @@ export const postAddress = (
     });
   } catch (error) {
     dispatch({ type: ADDRESS_INPUT_FAIL });
-    console.log(error);
   }
 };

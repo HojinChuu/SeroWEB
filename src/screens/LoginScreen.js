@@ -23,20 +23,14 @@ const LoginScreen = ({ history }) => {
     if (userToken) {
       history.push("/");
     }
-  }, [history, userToken, userInfo]);
-
-  useEffect(() => {
     if (success && localStorage.getItem("qrCode")) {
       history.push(`/qrcode?code=${localStorage.getItem("qrCode")}`);
       localStorage.removeItem("qrCode");
     }
-  }, [history, success]);
-
-  useEffect(() => {
     if (localStorage.getItem("qrCode")) {
       setMessage("엽서를 확인하시려면 로그인이 필요합니다.");
     }
-  }, [message]);
+  }, [history, userToken, userInfo, success, message]);
 
   const submitHandler = (e) => {
     e.preventDefault();

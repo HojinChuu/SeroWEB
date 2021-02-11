@@ -28,12 +28,6 @@ const Questions = () => {
 
   useEffect(() => {
     dispatch(getQuestions());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (success) {
-      dispatch(getQuestions());
-    }
   }, [dispatch, success]);
 
   const pageChangeHandler = (page) => {

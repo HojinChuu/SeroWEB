@@ -10,7 +10,6 @@ import {
   QRCODE_SAVE_POST_FAIL,
 } from "../constants/linkConstants";
 
-// qrcode
 export const qrcodePostDataReducer = (state = {}, action) => {
   switch (action.type) {
     case QRCODE_FETCH_REQUEST:
@@ -32,7 +31,6 @@ export const qrcodePostDataReducer = (state = {}, action) => {
   }
 };
 
-// qrcode
 export const qrcodeSavePostReducer = (state = {}, action) => {
   switch (action.type) {
     case QRCODE_SAVE_POST_REQUEST:
@@ -54,7 +52,6 @@ export const qrcodeSavePostReducer = (state = {}, action) => {
   }
 };
 
-// address input
 export const addressInputReducer = (state = {}, action) => {
   switch (action.type) {
     case ADDRESS_INPUT_REQUEST:

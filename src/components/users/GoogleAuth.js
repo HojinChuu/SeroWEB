@@ -1,8 +1,8 @@
 import React from "react";
-import { GoogleLogin } from "react-google-login";
-import { DEFAULT_PROFILE, GOOGLE_CLIENT_ID } from "../../config";
 import { useDispatch } from "react-redux";
+import { GoogleLogin } from "react-google-login";
 import { authRequest } from "../../actions/userActions";
+import { DEFAULT_PROFILE, GOOGLE_CLIENT_ID } from "../../config";
 
 const GoogleAuth = ({ history }) => {
   const dispatch = useDispatch();

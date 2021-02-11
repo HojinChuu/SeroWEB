@@ -3,8 +3,8 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Navbar, Nav, NavDropdown, Spinner, Image } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Swal from "sweetalert2";
 import { logout } from "../../actions/userActions";
+import showAlert from "../../utils/alert";
 
 const Header = () => {
   const prevScrollY = useRef(0);
@@ -31,18 +31,14 @@ const Header = () => {
   };
 
   const logoutHandler = () => {
-    Swal.fire({
-      // title: "",
-      text: "로그아웃 하시겠어요?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "YES",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire("", "로그아웃 되었습니다", "success");
-        dispatch(logout());
-      }
-    });
+    showAlert
+      .error("", "로그아웃 하시겠어요?", true, "YES")
+      .then(({ isConfirmed }) => {
+        if (isConfirmed) {
+          showAlert.success("", "로그아웃 되었습니다", false, "확인");
+          dispatch(logout());
+        }
+      });
   };
 
   useEffect(() => {

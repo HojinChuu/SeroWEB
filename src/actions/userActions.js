@@ -37,7 +37,6 @@ export const register = (formData) => async (dispatch) => {
     });
   } catch (error) {
     dispatch({ type: USER_REGISTER_FAIL });
-    console.log(error);
   }
 };
 
@@ -68,7 +67,6 @@ export const login = (socialValue, phone, password) => async (dispatch) => {
     localStorage.setItem("userToken", JSON.stringify(userToken));
   } catch (error) {
     dispatch({ type: USER_LOGIN_FAIL });
-    console.log(error);
   }
 };
 
@@ -100,7 +98,6 @@ export const authRequest = (authInfo) => async (dispatch) => {
     localStorage.setItem("userToken", JSON.stringify(userToken));
   } catch (error) {
     dispatch({ type: USER_AUTH_LOGIN_FAIL, payload: authInfo });
-    console.log(error);
   }
 };
 
@@ -127,7 +124,6 @@ export const sendSms = (phone) => async (dispatch) => {
     });
   } catch (error) {
     dispatch({ type: USER_PHONE_SMS_FAIL });
-    console.log(error);
   }
 };
 
@@ -149,7 +145,6 @@ export const checkSms = (phone, code) => async (dispatch) => {
     });
   } catch (error) {
     dispatch({ type: USER_PHONE_SMS_CHECK_FAIL });
-    console.log(error);
   }
 };
 
@@ -170,7 +165,5 @@ export const getUserInfo = () => async (dispatch) => {
       type: USER_TOKEN_CHECK_SUCCESS,
       payload: userInfo.data.data,
     });
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 };

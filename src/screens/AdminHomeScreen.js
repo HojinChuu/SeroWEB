@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Route } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Container } from "react-bootstrap";
 
 import SideBar from "../components/admin/SideBar";
 import Tasks from "../components/admin/Tasks";
 import Analysis from "../components/admin/Analysis";
 import Notices from "../components/admin/Notices";
 import Questions from "../components/admin/Questions";
-import { Container } from "react-bootstrap";
 
 const AdminHomeScreen = ({ match, location, history }) => {
   const [title, setTitle] = useState("");
@@ -19,7 +19,7 @@ const AdminHomeScreen = ({ match, location, history }) => {
     location.pathname.slice(7) === ""
       ? setTitle("TASKS")
       : setTitle(location.pathname.slice(7).toUpperCase());
-  }, [location.pathname]);
+  }, [location]);
 
   useEffect(() => {
     if (

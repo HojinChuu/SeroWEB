@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postAddress } from "../../actions/linkActions";
-import Swal from "sweetalert2";
+import { bindAddress } from "../../utils/bindAddress";
+import showAlert from "../../utils/alert";
 
 import FormContainer from "../../components/helpers/FormContainer";
 import AddressSearchModal from "../../components/users/AddressSearchModal";
 import Message from "../../components/helpers/Message";
-import { Spinner } from "react-bootstrap";
+import Spinner from "../../components/helpers/Spinner";
 
 const InputAddressScreen = ({ location, history }) => {
   const [phone, setPhone] = useState("");
@@ -24,24 +25,14 @@ const InputAddressScreen = ({ location, history }) => {
 
   useEffect(() => {
     if (error) {
-      Swal.fire({
-        text: "이미 처리된 코드입니다",
-        icon: "warning",
-        confirmButtonText: "OK",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          history.push("/");
-        }
-      });
+      showAlert
+        .error("", "이미 처리된 코드입니다", false, "OK")
+        .then(({ isConfirmed }) => {
+          if (isConfirmed) history.push("/");
+        });
     } else if (success) {
-      Swal.fire({
-        title: "Saved!",
-        icon: "success",
-        confirmButtonText: "OK",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          history.push("/");
-        }
+      showAlert.success("Saved!", "", false, "OK").then(({ isConfirmed }) => {
+        if (isConfirmed) history.push("/");
       });
     } else if (location.search.split("=")[0] !== "?seid") {
       history.push("/");
@@ -49,21 +40,7 @@ const InputAddressScreen = ({ location, history }) => {
   }, [success, history, location, error]);
 
   const addressCompleteHandler = (data) => {
-    let fullAddress = data.address;
-    let extraAddress = "";
-    let zoneCodes = data.zonecode;
-
-    if (data.addressType === "R") {
-      if (data.bname !== "") {
-        extraAddress += data.bname;
-      }
-      if (data.buildingName !== "") {
-        extraAddress +=
-          extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
-      }
-      fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
-    }
-
+    const { fullAddress, zoneCodes } = bindAddress(data);
     setAddress(fullAddress);
     setPostCode(zoneCodes);
     setPostSearch(false);
