@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Container, Image } from "react-bootstrap";
 import { getSendPosts, getReceivePosts } from "../actions/mailPostActions";
-import Spinner from "../components/helpers/Spinner";
-import ReceivedCardItem from "../components/mailbox/ReceivedCardItem";
-import SentCardItem from "../components/mailbox/SentCardItem";
 import { paginate } from "../utils/paginate";
-import Pagination from "../components/helpers/Pagination";
 import {
   RECEIVE_POST_FETCH_SUCCESS,
   SEND_POST_FETCH_SUCCESS,
 } from "../constants/mailPostConstants";
+
+import Spinner from "../components/helpers/Spinner";
+import ReceivedCardItem from "../components/mailbox/ReceivedCardItem";
+import SentCardItem from "../components/mailbox/SentCardItem";
+import Pagination from "../components/helpers/Pagination";
 
 const MailboxScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -44,17 +45,11 @@ const MailboxScreen = ({ history }) => {
 
   useEffect(() => {
     if (userInfo) {
-      if (toggle) {
-        dispatch(getSendPosts(userInfo.usId));
-      } else {
-        dispatch(getReceivePosts(userInfo.usId));
-      }
+      toggle
+        ? dispatch(getSendPosts(userInfo.usId))
+        : dispatch(getReceivePosts(userInfo.usId));
     }
   }, [dispatch, userInfo, toggle]);
-
-  const toogleHandler = () => {
-    setToggle(!toggle);
-  };
 
   const sentPageChangeHandler = (page) => {
     dispatch({
@@ -84,7 +79,7 @@ const MailboxScreen = ({ history }) => {
       <div className="mt-4 text-right">
         <button
           className="btn btn-lg btn-light rounded"
-          onClick={toogleHandler}
+          onClick={() => setToggle(!toggle)}
         >
           <span style={{ fontSize: "13px" }}>
             {toggle ? "받은 엽서 보기" : "보낸 엽서 보기"}

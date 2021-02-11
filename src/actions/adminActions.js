@@ -25,7 +25,10 @@ export const getTasks = (condition) => async (dispatch) => {
       type: ADMIN_TASK_FETCH_REQUEST,
     });
 
-    if (Object.keys(condition).length === 0 || condition.taskState.length === 0) {
+    if (
+      Object.keys(condition).length === 0 ||
+      condition.taskState.length === 0
+    ) {
       condition = {
         taskState: [0, 1, 2, 3],
         target: condition.target ? condition.target : 0,
@@ -43,7 +46,6 @@ export const getTasks = (condition) => async (dispatch) => {
     });
   } catch (error) {
     dispatch({ type: ADMIN_TASK_FETCH_FAIL });
-    console.log(error);
   }
 };
 
@@ -64,7 +66,6 @@ export const updateTask = (taskState, taskId) => async (dispatch) => {
     });
   } catch (error) {
     dispatch({ type: ADMIN_TASK_UPDATE_FAIL });
-    console.log(error);
   }
 };
 
@@ -86,7 +87,6 @@ export const removeTask = (taskIdArray) => async (dispatch) => {
     });
   } catch (error) {
     dispatch({ type: ADMIN_TASK_REMOVE_FAIL });
-    console.log(error);
   }
 };
 
@@ -104,7 +104,6 @@ export const getQuestions = () => async (dispatch) => {
     });
   } catch (error) {
     dispatch({ type: ADMIN_QUESTION_FETCH_FAIL });
-    console.log(error);
   }
 };
 
@@ -135,6 +134,5 @@ export const answerToQuestion = (usId, quCaId, quContent, quParentId) => async (
     });
   } catch (error) {
     dispatch({ type: ADMIN_ANSWER_FAIL });
-    console.log(error);
   }
 };

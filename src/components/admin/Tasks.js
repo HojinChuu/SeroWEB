@@ -24,6 +24,7 @@ const Tasks = () => {
     setSelectTask(taskArray);
     setShow(true);
   };
+
   const dispatch = useDispatch();
   const adminTasks = useSelector((state) => state.adminTasks);
   const {
@@ -37,12 +38,6 @@ const Tasks = () => {
 
   useEffect(() => {
     dispatch(getTasks({}));
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (success) {
-      dispatch(getTasks({}));
-    }
   }, [dispatch, success]);
 
   useEffect(() => {
@@ -66,8 +61,10 @@ const Tasks = () => {
     ]);
   };
 
-  const removeTaskHandler = () => {
-    dispatch(removeTask(taskArray));
+  const submitHandler = (e) => {
+    e.preventDefault();
+    setSearchText("");
+    dispatch(getTasks({ taskState, target: parseInt(target), searchText }));
   };
 
   const pageChangeHandler = (page) => {
@@ -80,11 +77,6 @@ const Tasks = () => {
 
   const pagedTasks = paginate(tasks, currentPage, pageSize);
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    setSearchText("");
-    dispatch(getTasks({ taskState, target: parseInt(target), searchText }));
-  };
   return (
     <Fragment>
       <div className="row p-4">
@@ -103,7 +95,7 @@ const Tasks = () => {
             변경
           </button>
           <button
-            onClick={removeTaskHandler}
+            onClick={() => dispatch(removeTask(taskArray))}
             className="btn btn-outline-danger rounded"
             disabled={disable}
           >
@@ -169,13 +161,12 @@ const Tasks = () => {
             ) : (
               <>
                 {tasks &&
-                  pagedTasks.map((task, index) => (
+                  pagedTasks.map((task) => (
                     <TaskItem
                       task={task}
                       key={task.seId}
                       getTaskValue={getTaskValue}
                       removeTaskValue={removeTaskValue}
-                      index={index}
                     />
                   ))}
               </>

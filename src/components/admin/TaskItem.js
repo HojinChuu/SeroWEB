@@ -1,7 +1,7 @@
 import React from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
-const TaskItem = ({ task, getTaskValue, removeTaskValue, index }) => {
+const TaskItem = ({ task, getTaskValue, removeTaskValue }) => {
   let shippingStatus = "";
 
   switch (task.seStatus) {
@@ -47,7 +47,9 @@ const TaskItem = ({ task, getTaskValue, removeTaskValue, index }) => {
           delay={{ show: 200, hide: 200 }}
           overlay={renderTooltip}
         >
-          <button className="btn btn-sm">{task.seAddress}</button>
+          <button className="btn btn-sm" id="adminAddressBtn">
+            {task.seAddress}
+          </button>
         </OverlayTrigger>
       </td>
       <td>{task.seAddressNumber}</td>

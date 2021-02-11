@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import { getQrcodeData, saveQrcodePost } from "../../actions/linkActions";
-import Spinner from "../../components/helpers/Spinner";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
-import Swal from "sweetalert2";
 import { IMAGE_URL } from "../../config";
+import showAlert from "../../utils/alert";
+
+import Spinner from "../../components/helpers/Spinner";
 
 const QrcodeLinkScreen = ({ location, history }) => {
   const [audio, setAudio] = useState(null);
@@ -37,15 +38,11 @@ const QrcodeLinkScreen = ({ location, history }) => {
       history.push("/mailbox");
     }
     if (error) {
-      Swal.fire({
-        text: "잘못된 경로의 엽서입니다.",
-        icon: "warning",
-        confirmButtonText: "확인",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          history.push("/");
-        }
-      });
+      showAlert
+        .error("", "잘못된 경로의 엽서입니다.", false, "확인")
+        .then(({ isConfirmed }) => {
+          if (isConfirmed) history.push("/");
+        });
     }
   }, [history, postSaveSuccess, error]);
 
@@ -57,16 +54,11 @@ const QrcodeLinkScreen = ({ location, history }) => {
 
   useEffect(() => {
     if (postSaveError) {
-      Swal.fire({
-        text: "이미 추가된 엽서입니다.",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "돌아가기",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          history.push("/");
-        }
-      });
+      showAlert
+        .error("", "이미 추가된 엽서입니다.", true, "돌아가기")
+        .then(({ isConfirmed }) => {
+          if (isConfirmed) history.push("/");
+        });
     }
   }, [history, postSaveError]);
 

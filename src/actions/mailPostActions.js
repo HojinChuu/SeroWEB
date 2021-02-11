@@ -27,7 +27,6 @@ export const getSendPosts = (usId) => async (dispatch) => {
     });
   } catch (error) {
     dispatch({ type: SEND_POST_FETCH_FAIL });
-    console.log(error);
   }
 };
 
@@ -49,6 +48,5 @@ export const getReceivePosts = (usId) => async (dispatch) => {
     });
   } catch (error) {
     dispatch({ type: RECEIVE_POST_FETCH_FAIL });
-    console.log(error);
   }
 };

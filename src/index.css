@@ -1,3 +1,4 @@
+/* default */
 html {
   overflow-x: hidden;
   height: 100%;
@@ -16,6 +17,8 @@ h2 {
   font-size: 1.4rem;
   padding: 0.5rem 0;
 }
+
+/* header */
 nav.navbar {
   z-index: 100;
   padding: 20px;
@@ -26,7 +29,6 @@ nav.navbar {
   padding-right: 100px;
   transition: ease-in-out 0.5s;
 }
-
 .navCustomRight .nav-link {
   font-size: 20px;
   margin-left: 50px;
@@ -37,12 +39,17 @@ nav.navbar {
   font-weight: 400;
   color: #000000 !important;
 }
+
+/* body */
 body {
   position: relative;
   margin: 0;
   padding-bottom: 5rem;
   min-height: 100%;
+  font-size: 0.875rem;
 }
+
+/* footer */
 footer {
   position: absolute;
   bottom: 0;
@@ -55,21 +62,14 @@ footer {
   background-color: #23394d;
   border-top: 1px solid lightgrey;
 }
+
+/* spinner */
 svg {
   width: 200px;
   height: auto;
 }
-body {
-  font-size: 0.875rem;
-}
-.feather {
-  width: 16px;
-  height: 16px;
-  vertical-align: text-bottom;
-}
-/*
- * Sidebar
- */
+
+/* admin side bar */
 .sidebar {
   position: fixed;
   top: 0;
@@ -97,6 +97,8 @@ body {
   color: #007bff;
   cursor: default;
 }
+
+/* admin */
 .toggle label.btn {
   border-radius: 5px;
 }
@@ -113,7 +115,16 @@ body {
 .questionModal .modal-footer {
   border-top: none !important;
 }
+#adminAddressBtn {
+  cursor: initial;
+}
+#adminAddressBtn:focus {
+  outline: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
 
+/* qrcode  */
 #qrpostAddBtn {
   position: absolute;
   right: 0;
@@ -124,6 +135,7 @@ body {
   border-top: 1px solid lightgrey;
 }
 
+/* mailbox  */
 #root
   > main
   > div
@@ -142,7 +154,6 @@ body {
   box-shadow: none;
   -webkit-box-shadow: none;
 }
-
 #root
   > main
   > div
@@ -155,7 +166,6 @@ body {
   border: 1px solid #242828;
   color: white;
 }
-
 #root > main > div > div.mt-5.mb-5.pb-5 > div > ul > li.page-item > button {
   color: #242828;
   outline: none;

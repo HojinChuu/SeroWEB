@@ -5,14 +5,14 @@ import { updateTask } from "../../actions/adminActions";
 
 const TaskStateModal = ({ show, onHide, seletedTask }) => {
   const [radioValue, setRadioValue] = useState("0");
-
-  const dispatch = useDispatch();
   const radios = [
     { name: "수신대기", value: "0", classValue: "fa-pause-circle" },
     { name: "제작중", value: "1", classValue: "fa-edit" },
     { name: "배송중", value: "2", classValue: "fa-shipping-fast" },
     { name: "배송완료", value: "3", classValue: "fa-check" },
   ];
+
+  const dispatch = useDispatch();
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -53,8 +53,12 @@ const TaskStateModal = ({ show, onHide, seletedTask }) => {
         </ButtonGroup>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={onHide}>취소</Button>
-        <Button variant="primary" onClick={submitHandler}>변경</Button>
+        <Button variant="secondary" onClick={onHide}>
+          취소
+        </Button>
+        <Button variant="primary" onClick={submitHandler}>
+          변경
+        </Button>
       </Modal.Footer>
     </Modal>
   );

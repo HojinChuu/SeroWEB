@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { KAKAO_CLIENT_ID, DEFAULT_PROFILE } from "../../config";
 import { useDispatch } from "react-redux";
 import { authRequest } from "../../actions/userActions";
+import { KAKAO_CLIENT_ID, DEFAULT_PROFILE } from "../../config";
 
 const KakaoAuth = ({ history }) => {
   const { Kakao } = window;
@@ -13,7 +13,6 @@ const KakaoAuth = ({ history }) => {
     }
   });
 
-  // thumbnail_image_url
   const onSuccess = () => {
     Kakao.Auth.login({
       throughTalk: false,

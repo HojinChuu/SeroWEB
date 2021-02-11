@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { register, sendSms, checkSms } from "../actions/userActions";
+import { bindAddress } from "../utils/bindAddress";
 import { DEFAULT_PROFILE } from "../config";
 
 import FormContainer from "../components/helpers/FormContainer";
@@ -45,13 +46,10 @@ const RegisterScreen = ({ history }) => {
     if (userInfo) {
       history.push("/");
     }
-  }, [history, userInfo]);
-
-  useEffect(() => {
     if (registerSuccess) {
       history.push("/login");
     }
-  }, [history, registerSuccess]);
+  }, [history, userInfo, registerSuccess]);
 
   useEffect(() => {
     if (authInfo && authInfo.image) {
@@ -107,21 +105,7 @@ const RegisterScreen = ({ history }) => {
   };
 
   const addressCompleteHandler = (data) => {
-    let fullAddress = data.address;
-    let extraAddress = "";
-    let zoneCodes = data.zonecode;
-
-    if (data.addressType === "R") {
-      if (data.bname !== "") {
-        extraAddress += data.bname;
-      }
-      if (data.buildingName !== "") {
-        extraAddress +=
-          extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
-      }
-      fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
-    }
-
+    const { fullAddress, zoneCodes } = bindAddress(data);
     setAddress(fullAddress);
     setPostCode(zoneCodes);
     setPostSearch(false);
