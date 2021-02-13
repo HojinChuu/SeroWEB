@@ -61,22 +61,24 @@ const Header = () => {
               <Image src="/image/logo.png" width="70px" />
             </Navbar.Brand>
           </LinkContainer>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto navCustomRight">
               <LinkContainer to="/about">
-                <Nav.Link>ABOUT</Nav.Link>
+                <Nav.Link>About</Nav.Link>
               </LinkContainer>
               {userInfo && (
                 <LinkContainer to="/mailbox">
-                  <Nav.Link>MAILBOX</Nav.Link>
+                  <Nav.Link>Mailbox</Nav.Link>
                 </LinkContainer>
               )}
               <LinkContainer to="/admin">
-                <Nav.Link>DESK</Nav.Link>
+                <Nav.Link>Desk</Nav.Link>
               </LinkContainer>
             </Nav>
           </Navbar.Collapse>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto navCustomLeft">
               {loading ? (
@@ -85,25 +87,25 @@ const Header = () => {
                 <Fragment>
                   {userInfo && userInfo.usGrant === 1 && (
                     <LinkContainer to="/admin" className="mr-4">
-                      <Nav.Link>ADMIN</Nav.Link>
+                      <Nav.Link>Admin</Nav.Link>
                     </LinkContainer>
                   )}
                   {userInfo ? (
                     <NavDropdown title={userInfo.usName} id="username">
                       <LinkContainer to="/mypage">
-                        <NavDropdown.Item>마이페이지</NavDropdown.Item>
+                        <NavDropdown.Item>Mypage</NavDropdown.Item>
                       </LinkContainer>
                       <NavDropdown.Item onClick={logoutHandler}>
-                        로그아웃
+                        Logout
                       </NavDropdown.Item>
                     </NavDropdown>
                   ) : (
                     <Fragment>
                       <LinkContainer to="/login">
-                        <Nav.Link>LOGIN</Nav.Link>
+                        <Nav.Link>Login</Nav.Link>
                       </LinkContainer>
                       <LinkContainer to="/register">
-                        <Nav.Link>SIGN UP</Nav.Link>
+                        <Nav.Link>Sign up</Nav.Link>
                       </LinkContainer>
                     </Fragment>
                   )}
