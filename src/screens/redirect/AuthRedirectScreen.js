@@ -5,13 +5,17 @@ import Spinner from "../../components/helpers/Spinner";
 
 const AuthRedirectScreen = ({ history }) => {
   const userLogin = useSelector((state) => state.userLogin);
-  const { loading, userToken } = userLogin;
+  const { userToken, success } = userLogin;
 
   useEffect(() => {
-    if (!loading) {
-      userToken ? history.push("/") : history.push("/register");
+    if (userToken) {
+      history.push("/");
     }
-  }, [history, loading, userToken]);
+    if (success && localStorage.getItem("qrCode")) {
+      history.push(`/qrcode?code=${localStorage.getItem("qrCode")}`);
+      localStorage.removeItem("qrCode");
+    }
+  }, [history, userToken, success]);
   return <Spinner />;
 };
 
