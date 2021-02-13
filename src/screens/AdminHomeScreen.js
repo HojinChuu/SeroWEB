@@ -32,7 +32,7 @@ const AdminHomeScreen = ({ match, location, history }) => {
 
   return (
     <Container>
-      <div className="row" style={{ marginBottom: "150px" }}>
+      <div className="row">
         <SideBar />
         <div className="col-md-10 m-auto col-lg-10">
           <div className="d-flex justify-content-center p-4 border-bottom">

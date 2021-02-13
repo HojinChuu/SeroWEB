@@ -137,10 +137,7 @@ const InputAddressScreen = ({ location, history }) => {
                 </div>
               </div>
             </div>
-            <button
-              type="submit"
-              className="btn btn-block mt-4 btn-primary mb-5"
-            >
+            <button type="submit" className="btn btn-block mt-4 btn-primary">
               확인
             </button>
           </form>

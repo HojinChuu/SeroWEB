@@ -93,7 +93,7 @@ const MailboxScreen = ({ history }) => {
           ) : receivedPosts.length === 0 ? (
             <Image
               src="/image/empty_post.png"
-              width="50%"
+              width="40%"
               style={{ margin: "200px" }}
             />
           ) : (
@@ -106,7 +106,7 @@ const MailboxScreen = ({ history }) => {
         ) : sentPosts.length === 0 ? (
           <Image
             src="/image/empty_post.png"
-            width="50%"
+            width="40%"
             style={{ margin: "200px" }}
           />
         ) : (
@@ -115,7 +115,7 @@ const MailboxScreen = ({ history }) => {
           ))
         )}
       </Row>
-      <div className="mt-5 mb-5 pb-5">
+      <div className="mt-5 mb-5">
         {toggle ? (
           <Pagination
             itemsCount={sentPostCount}

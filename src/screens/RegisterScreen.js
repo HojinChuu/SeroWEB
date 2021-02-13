@@ -139,10 +139,7 @@ const RegisterScreen = ({ history }) => {
       {loading ? (
         <Spinner />
       ) : (
-        <div
-          className="card p-4 mt-3 rounded"
-          style={{ marginBottom: "100px" }}
-        >
+        <div className="card p-4 mt-3 rounded mb-4">
           <h1 className="text-center">SIGN UP</h1>
           {message.fail && <Message variant="danger">{message.fail}</Message>}
           {message.success && (
