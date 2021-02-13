@@ -17,7 +17,7 @@ const LoginScreen = ({ history }) => {
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { loading, userToken, userInfo, success } = userLogin;
+  const { loading, userToken, success } = userLogin;
 
   useEffect(() => {
     if (userToken) {
@@ -30,7 +30,7 @@ const LoginScreen = ({ history }) => {
     if (localStorage.getItem("qrCode")) {
       setMessage("엽서를 확인하시려면 로그인이 필요합니다.");
     }
-  }, [history, userToken, userInfo, success, message]);
+  }, [history, userToken, success, message]);
 
   const submitHandler = (e) => {
     e.preventDefault();

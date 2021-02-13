@@ -68,6 +68,7 @@ export const userLoginReducer = (state = {}, action) => {
       return {
         loading: false,
         userToken: action.payload,
+        success: true,
       };
     case USER_AUTH_LOGIN_FAIL:
       return {
