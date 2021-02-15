@@ -62,7 +62,7 @@ const InputAddressScreen = ({ location, history }) => {
       {loading ? (
         <Spinner />
       ) : (
-        <div className="card p-4 mt-3 rounded mb-5">
+        <div className="card p-4 mt-3 rounded mb-3">
           <h2 className="text-center">주소를 입력해주세요</h2>
           {message && <Message variant="danger">{message}</Message>}
           <form onSubmit={submitHandler}>
