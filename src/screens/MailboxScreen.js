@@ -12,6 +12,7 @@ import Spinner from "../components/helpers/Spinner";
 import ReceivedCardItem from "../components/mailbox/ReceivedCardItem";
 import SentCardItem from "../components/mailbox/SentCardItem";
 import Pagination from "../components/helpers/Pagination";
+import SlideCard from "../components/mailbox/SlideCard";
 
 const MailboxScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -115,6 +116,9 @@ const MailboxScreen = ({ history }) => {
           ))
         )}
       </Row>
+      {receivedPosts && (
+        <SlideCard slideReceivedPosts={receivedPosts}></SlideCard>
+      )}
       <div className="mt-5 mb-5">
         {toggle ? (
           <Pagination
