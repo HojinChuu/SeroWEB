@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Container, Image } from "react-bootstrap";
 import { getSendPosts, getReceivePosts } from "../actions/mailPostActions";
@@ -12,11 +12,13 @@ import Spinner from "../components/helpers/Spinner";
 import ReceivedCardItem from "../components/mailbox/ReceivedCardItem";
 import SentCardItem from "../components/mailbox/SentCardItem";
 import Pagination from "../components/helpers/Pagination";
-import SlideCard from "../components/mailbox/SlideCard";
+import SentSlideCard from "../components/mailbox/SentSlideCard";
+import ReceivedSlideCard from "../components/mailbox/ReceivedSlideCard";
 
 const MailboxScreen = ({ history }) => {
   const dispatch = useDispatch();
   const [toggle, setToggle] = useState(false);
+  const [viewToggle, setViewToggle] = useState(false);
 
   const userLogin = useSelector((state) => state.userLogin);
   const sendPosts = useSelector((state) => state.sendPosts);
@@ -76,67 +78,90 @@ const MailboxScreen = ({ history }) => {
   );
 
   return (
-    <Container>
-      <div className="mt-4 text-right">
-        <button
-          className="btn btn-lg btn-light rounded"
-          onClick={() => setToggle(!toggle)}
-        >
-          <span style={{ fontSize: "13px" }}>
-            {toggle ? "받은 엽서 보기" : "보낸 엽서 보기"}
-          </span>
-        </button>
-      </div>
-      <Row className="justify-content-center cardContainer">
-        {!toggle ? (
-          receivedPostLoading || !receivedPosts ? (
+    <Fragment>
+      <Container>
+        <div className="mt-4 row justify-content-between">
+          <button
+            className="btn btn-lg btn-light rounded"
+            onClick={() => setViewToggle(!viewToggle)}
+          >
+            <span style={{ fontSize: "13px" }}>
+              {viewToggle ? "앨범으로 보기" : "슬라이드로 보기"}
+            </span>
+          </button>
+          <button
+            className="btn btn-lg btn-light rounded"
+            onClick={() => setToggle(!toggle)}
+          >
+            <span style={{ fontSize: "13px" }}>
+              {toggle ? "받은 엽서 보기" : "보낸 엽서 보기"}
+            </span>
+          </button>
+        </div>
+      </Container>
+      <div className={viewToggle ? "" : "container"}>
+        <Row className="justify-content-center cardContainer">
+          {!toggle ? (
+            receivedPostLoading || !receivedPosts ? (
+              <Spinner />
+            ) : receivedPosts.length === 0 ? (
+              <Image
+                src="/image/empty_post.png"
+                width="40%"
+                style={{ margin: "200px" }}
+              />
+            ) : viewToggle ? (
+              <ReceivedSlideCard
+                slideReceivedPosts={receivedPosts}
+              ></ReceivedSlideCard>
+            ) : (
+              pagedReceivedPosts.map((receivedPost, index) => (
+                <ReceivedCardItem receivedPost={receivedPost} key={index} />
+              ))
+            )
+          ) : sentPostLoading || !sentPosts || !userInfo ? (
             <Spinner />
-          ) : receivedPosts.length === 0 ? (
+          ) : sentPosts.length === 0 ? (
             <Image
               src="/image/empty_post.png"
               width="40%"
               style={{ margin: "200px" }}
             />
+          ) : viewToggle ? (
+            <SentSlideCard
+              slideSentPosts={sentPosts}
+              userInfo={userInfo}
+            ></SentSlideCard>
           ) : (
-            pagedReceivedPosts.map((receivedPost, index) => (
-              <ReceivedCardItem receivedPost={receivedPost} key={index} />
+            pagedSentPosts.map((sentPost, index) => (
+              <SentCardItem
+                sentPost={sentPost}
+                userInfo={userInfo}
+                key={index}
+              />
             ))
-          )
-        ) : sentPostLoading || !sentPosts || !userInfo ? (
-          <Spinner />
-        ) : sentPosts.length === 0 ? (
-          <Image
-            src="/image/empty_post.png"
-            width="40%"
-            style={{ margin: "200px" }}
-          />
-        ) : (
-          pagedSentPosts.map((sentPost, index) => (
-            <SentCardItem sentPost={sentPost} userInfo={userInfo} key={index} />
-          ))
-        )}
-      </Row>
-      {receivedPosts && (
-        <SlideCard slideReceivedPosts={receivedPosts}></SlideCard>
-      )}
-      <div className="mt-5 mb-5">
-        {toggle ? (
-          <Pagination
-            itemsCount={sentPostCount}
-            pageSize={sentPageSize}
-            currentPage={sentCurrentPage}
-            onPageChange={sentPageChangeHandler}
-          />
-        ) : (
-          <Pagination
-            itemsCount={receivedPostCount}
-            pageSize={receivedPageSize}
-            currentPage={receivedCurrentPage}
-            onPageChange={receivedPageChangeHandler}
-          />
-        )}
+          )}
+        </Row>
+
+        <div className="mt-5 mb-5">
+          {toggle && !viewToggle ? (
+            <Pagination
+              itemsCount={sentPostCount}
+              pageSize={sentPageSize}
+              currentPage={sentCurrentPage}
+              onPageChange={sentPageChangeHandler}
+            />
+          ) : (
+            <Pagination
+              itemsCount={receivedPostCount}
+              pageSize={receivedPageSize}
+              currentPage={receivedCurrentPage}
+              onPageChange={receivedPageChangeHandler}
+            />
+          )}
+        </div>
       </div>
-    </Container>
+    </Fragment>
   );
 };
 

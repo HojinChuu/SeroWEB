@@ -1,10 +1,9 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Image } from "react-bootstrap";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
 import { IMAGE_URL } from "../../config";
 
 const SentCardItem = ({ sentPost, userInfo }) => {
-  const sound = useRef(null);
   const [audio, setAudio] = useState(null);
   const [playing, setPlaying] = useState(true);
 
@@ -43,7 +42,6 @@ const SentCardItem = ({ sentPost, userInfo }) => {
         </button>
       </div>
       <Flippy
-        ref={sound}
         flipOnHover={false}
         flipOnClick={true}
         flipDirection="horizontal"
