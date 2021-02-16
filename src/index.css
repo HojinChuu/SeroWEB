@@ -33,16 +33,20 @@ nav.navbar {
 .navCustomRight .nav-link {
   font-size: 20px;
   margin-left: 50px;
+  font-weight: 400;
   color: #191919 !important;
 }
 .navCustomLeft .nav-link {
   font-size: 20px;
-  margin-left: 20px;
+  margin-left: 30px;
   font-weight: 400;
   color: #191919 !important;
 }
 #basic-navbar-nav.show .navbar-nav a {
   margin: 5px;
+}
+#basic-navbar-nav .navbar-nav a span:hover {
+  border-bottom: 3px solid #ffc165;
 }
 
 /* body */
