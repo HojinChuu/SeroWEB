@@ -177,6 +177,35 @@ svg {
   -webkit-box-shadow: none;
 }
 
+/* swiper */
+.swiper-container {
+  display: flex;
+}
+#root
+  > main
+  > div:nth-child(2)
+  > div.justify-content-center.cardContainer.row
+  > div
+  > div:nth-child(3) {
+  /* display: none; */
+  order: 2;
+}
+#root
+  > main
+  > div:nth-child(2)
+  > div.justify-content-center.cardContainer.row
+  > div
+  > div:nth-child(4) {
+  order: 1;
+}
+.swiper-button-prev,
+.swiper-button-next {
+  color: #191919;
+  opacity: 0.7;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
 /* font */
 @font-face {
   font-family: "Noto Serif KR";

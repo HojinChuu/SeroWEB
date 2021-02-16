@@ -12,8 +12,9 @@ import Spinner from "../components/helpers/Spinner";
 import ReceivedCardItem from "../components/mailbox/ReceivedCardItem";
 import SentCardItem from "../components/mailbox/SentCardItem";
 import Pagination from "../components/helpers/Pagination";
-import SentSlideCard from "../components/mailbox/SentSlideCard";
-import ReceivedSlideCard from "../components/mailbox/ReceivedSlideCard";
+import SlideCard from "../components/mailbox/SlideCard";
+import SlideReceivedCardItem from "../components/mailbox/SlideReceivedCardItem";
+import SlideSentCardItem from "../components/mailbox/SlideSentCardItem";
 
 const MailboxScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -111,9 +112,16 @@ const MailboxScreen = ({ history }) => {
                 style={{ margin: "200px" }}
               />
             ) : viewToggle ? (
-              <ReceivedSlideCard
-                slideReceivedPosts={receivedPosts}
-              ></ReceivedSlideCard>
+              <SlideCard>
+                <div className="swiper-wrapper">
+                  {receivedPosts.map((item, index) => (
+                    <SlideReceivedCardItem
+                      slideReceivedPost={item}
+                      key={index}
+                    />
+                  ))}
+                </div>
+              </SlideCard>
             ) : (
               pagedReceivedPosts.map((receivedPost, index) => (
                 <ReceivedCardItem receivedPost={receivedPost} key={index} />
@@ -128,10 +136,17 @@ const MailboxScreen = ({ history }) => {
               style={{ margin: "200px" }}
             />
           ) : viewToggle ? (
-            <SentSlideCard
-              slideSentPosts={sentPosts}
-              userInfo={userInfo}
-            ></SentSlideCard>
+            <SlideCard>
+              <div className="swiper-wrapper">
+                {sentPosts.map((item, index) => (
+                  <SlideSentCardItem
+                    slideSentPost={item}
+                    userInfo={userInfo}
+                    key={index}
+                  />
+                ))}
+              </div>
+            </SlideCard>
           ) : (
             pagedSentPosts.map((sentPost, index) => (
               <SentCardItem
