@@ -66,15 +66,21 @@ const Header = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto navCustomRight">
               <LinkContainer to="/about">
-                <Nav.Link>About</Nav.Link>
+                <Nav.Link>
+                  <span>About</span>
+                </Nav.Link>
               </LinkContainer>
               {userInfo && (
                 <LinkContainer to="/mailbox">
-                  <Nav.Link>Mailbox</Nav.Link>
+                  <Nav.Link>
+                    <span>Mailbox</span>
+                  </Nav.Link>
                 </LinkContainer>
               )}
               <LinkContainer to="/admin">
-                <Nav.Link>Desk</Nav.Link>
+                <Nav.Link>
+                  <span>Desk</span>
+                </Nav.Link>
               </LinkContainer>
             </Nav>
           </Navbar.Collapse>
@@ -87,7 +93,9 @@ const Header = () => {
                 <Fragment>
                   {userInfo && userInfo.usGrant === 1 && (
                     <LinkContainer to="/admin" className="mr-4">
-                      <Nav.Link>Admin</Nav.Link>
+                      <Nav.Link>
+                        <span>Admin</span>
+                      </Nav.Link>
                     </LinkContainer>
                   )}
                   {userInfo ? (
@@ -102,10 +110,14 @@ const Header = () => {
                   ) : (
                     <Fragment>
                       <LinkContainer to="/login">
-                        <Nav.Link>Login</Nav.Link>
+                        <Nav.Link>
+                          <span>Login</span>
+                        </Nav.Link>
                       </LinkContainer>
                       <LinkContainer to="/register">
-                        <Nav.Link>Sign up</Nav.Link>
+                        <Nav.Link>
+                          <span>Sign up</span>
+                        </Nav.Link>
                       </LinkContainer>
                     </Fragment>
                   )}
