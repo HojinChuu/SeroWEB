@@ -9,12 +9,15 @@ SwiperCore.use([Navigation]);
 const SlideCard = ({ children }) => {
   return (
     <Swiper
-      slidesPerView={4}
+      slidesPerView={5}
       spaceBetween={0}
       navigation
       centeredSlides
       grabCursor
       breakpoints={{
+        1450: {
+          slidesPerView: 4,
+        },
         1070: {
           slidesPerView: 3,
         },

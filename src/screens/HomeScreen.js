@@ -1,6 +1,10 @@
 import React from "react";
 import { Image, Col } from "react-bootstrap";
+import useWindowDimensions from "../hooks/useWindowDimensions";
+
 const HomeScreen = () => {
+  const { width } = useWindowDimensions();
+
   return (
     <div>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
@@ -9,25 +13,25 @@ const HomeScreen = () => {
         </video>
       </div>
       <div style={rowStyle}>
-        <Col md={4} style={colStyle} className="mt-5 pt-5">
-          <div>세로엽서 기본 소개</div>
-        </Col>
-        <Col md={8} style={colStyle}>
+        <Col style={colStyle}>
           <Image
-            src="/image/homeImage1.png"
-            style={{ height: "100%", width: "100%" }}
+            src={
+              width > 600 ? "/image/mainpage1.png" : "/image/mainpage_sm1.jpg"
+            }
+            height="100%"
+            width="100%"
           />
         </Col>
       </div>
       <div style={rowStyle}>
-        <Col md={8} style={colStyle}>
+        <Col style={colStyle}>
           <Image
-            src="/image/homeImage2.png"
-            style={{ height: "100%", width: "100%" }}
+            src={
+              width > 600 ? "/image/mainpage2.png" : "/image/mainpage_sm1.jpg"
+            }
+            height="100%"
+            width="100%"
           />
-        </Col>
-        <Col md={4} style={colStyle} className="mt-5 pt-5">
-          소셜임팩트 카드 소개
         </Col>
       </div>
       <div

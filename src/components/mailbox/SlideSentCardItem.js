@@ -26,7 +26,7 @@ const SlideSentCardItem = ({ slideSentPost, userInfo }) => {
 
   return (
     <SwiperSlide className="pl-1 pr-1">
-      <Col sm={10} md={10} lg={10} className="mt-3 mb-3">
+      <Col sm={11} md={12} lg={12} className="mt-3 mb-3">
         <div id="flipCardTitle">
           <button className="btn btn-block pr-4 pl-4 ml-2">
             <Row className="justify-content-between align-items-center">

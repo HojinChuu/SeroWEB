@@ -26,7 +26,7 @@ const SlideReceivedCardItem = ({ slideReceivedPost }) => {
 
   return (
     <SwiperSlide className="pl-1 pr-1">
-      <Col sm={10} md={10} lg={10} className="mt-3 mb-3">
+      <Col sm={12} md={12} lg={12} className="ml-1 mr-1 mb-4 mt-4">
         <div id="flipCardTitle">
           <button className="btn btn-block pr-4 pl-4 ml-2">
             <Row className="justify-content-between align-items-center">

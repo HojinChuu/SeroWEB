@@ -58,7 +58,7 @@ const Header = () => {
         >
           <LinkContainer to="/">
             <Navbar.Brand>
-              <Image src="/image/logo.png" width="70px" />
+              <Image src="/image/seroLogo.png" width="130px" />
             </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -68,6 +68,11 @@ const Header = () => {
               <LinkContainer to="/about">
                 <Nav.Link>
                   <span>About</span>
+                </Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/admin">
+                <Nav.Link>
+                  <span>Social</span>
                 </Nav.Link>
               </LinkContainer>
               {userInfo && (
