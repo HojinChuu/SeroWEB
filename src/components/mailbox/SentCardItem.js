@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Image } from "react-bootstrap";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
 import { IMAGE_URL } from "../../config";
+import showAlert from "../../utils/alert";
 
 const SentCardItem = ({ sentPost, userInfo }) => {
   const [audio, setAudio] = useState(null);
@@ -21,6 +22,11 @@ const SentCardItem = ({ sentPost, userInfo }) => {
       audio.pause();
       audio.currentTime = 0;
     }
+  };
+
+  const removeHandler = (e) => {
+    e.stopPropagation();
+    showAlert.error("", "삭제하시겠어요?", true, "Yes");
   };
 
   return (
@@ -48,10 +54,29 @@ const SentCardItem = ({ sentPost, userInfo }) => {
         style={{ width: "100%", height: "600px" }}
       >
         <FrontSide className="d-flex align-items-center">
-          <Image src={IMAGE_URL + "/" + sentPost.poPhoto} width="100%" />
+          <i
+            onClick={removeHandler}
+            className="fas fa-times"
+            style={{
+              position: "absolute",
+              top: 0,
+              right: 0,
+              padding: 10,
+              color: "grey",
+            }}
+          ></i>
+          <Image
+            src={IMAGE_URL + "/" + sentPost.poPhoto}
+            width="100%"
+            height="100%"
+          />
         </FrontSide>
         <BackSide className="d-flex align-items-center">
-          <Image src={IMAGE_URL + "/" + sentPost.poContentPhoto} width="100%" />
+          <Image
+            src={IMAGE_URL + "/" + sentPost.poContentPhoto}
+            width="100%"
+            height="100%"
+          />
         </BackSide>
       </Flippy>
       <div>
