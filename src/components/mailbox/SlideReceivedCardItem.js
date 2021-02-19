@@ -3,6 +3,7 @@ import { Row, Image, Col } from "react-bootstrap";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
 import { SwiperSlide } from "swiper/react";
 import { IMAGE_URL } from "../../config";
+import showAlert from "../../utils/alert";
 
 const SlideReceivedCardItem = ({ slideReceivedPost }) => {
   const [audio, setAudio] = useState(null);
@@ -22,6 +23,11 @@ const SlideReceivedCardItem = ({ slideReceivedPost }) => {
       audio.pause();
       audio.currentTime = 0;
     }
+  };
+
+  const removeHandler = (e) => {
+    e.stopPropagation();
+    showAlert.error("", "삭제하시겠어요?", true, "Yes");
   };
 
   return (
@@ -46,12 +52,23 @@ const SlideReceivedCardItem = ({ slideReceivedPost }) => {
           </button>
         </div>
         <Flippy
+          onClick={removeHandler}
           flipOnHover={false}
           flipOnClick={true}
           flipDirection="horizontal"
           style={{ width: "100%", height: "700px" }}
         >
           <FrontSide className="d-flex align-items-center">
+            <i
+              className="fas fa-times"
+              style={{
+                position: "absolute",
+                top: 0,
+                right: 0,
+                padding: 10,
+                color: "grey",
+              }}
+            ></i>
             <Image
               src={IMAGE_URL + "/" + slideReceivedPost.Post.poPhoto}
               width="100%"

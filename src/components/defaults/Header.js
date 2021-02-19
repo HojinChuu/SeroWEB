@@ -4,10 +4,12 @@ import { Navbar, Nav, NavDropdown, Spinner, Image } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../actions/userActions";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 import showAlert from "../../utils/alert";
 
 const Header = () => {
   const prevScrollY = useRef(0);
+  const { width } = useWindowDimensions();
   const [goingUp, setGoingUp] = useState(false);
 
   const location = useLocation();
@@ -58,7 +60,12 @@ const Header = () => {
         >
           <LinkContainer to="/">
             <Navbar.Brand>
-              <Image src="/image/seroLogo.png" width="130px" />
+              <Image
+                src={
+                  width > 767 ? "/image/seroLogo.png" : "/image/seroLogo_sm.png"
+                }
+                width="130px"
+              />
             </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -70,7 +77,7 @@ const Header = () => {
                   <span>About</span>
                 </Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/admin">
+              <LinkContainer to="/social">
                 <Nav.Link>
                   <span>Social</span>
                 </Nav.Link>
@@ -82,7 +89,7 @@ const Header = () => {
                   </Nav.Link>
                 </LinkContainer>
               )}
-              <LinkContainer to="/admin">
+              <LinkContainer to="/desk">
                 <Nav.Link>
                   <span>Desk</span>
                 </Nav.Link>

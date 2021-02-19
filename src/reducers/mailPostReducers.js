@@ -18,7 +18,7 @@ export const sendPostsReducer = (state = {}, action) => {
         loading: false,
         sentPosts: action.payload,
         postCount: action.payload.length,
-        pageSize: 6,
+        pageSize: 9,
         currentPage: action.currentPage ? action.currentPage : 1,
       };
     case SEND_POST_FETCH_FAIL:
@@ -42,7 +42,7 @@ export const receivePostsReducer = (state = {}, action) => {
         loading: false,
         receivedPosts: action.payload,
         postCount: action.payload.length,
-        pageSize: 6,
+        pageSize: 9,
         currentPage: action.currentPage ? action.currentPage : 1,
       };
     case RECEIVE_POST_FETCH_FAIL:

@@ -7,6 +7,14 @@ const HomeScreen = () => {
 
   return (
     <div>
+      <div>
+        <button
+          className="btn rounded"
+          style={{ ...buttonStyle, display: width > 414 ? "none" : "" }}
+        >
+          <small>앱 다운로드</small>
+        </button>
+      </div>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         <video style={{ height: "100%", width: "100%" }} autoPlay loop muted>
           <source src="/image/homeVideo.mp4" type="video/mp4"></source>
@@ -16,7 +24,7 @@ const HomeScreen = () => {
         <Col style={colStyle}>
           <Image
             src={
-              width > 600 ? "/image/mainpage1.png" : "/image/mainpage_sm1.jpg"
+              width > 600 ? "/image/mainpage1.png" : "/image/mainpage1_sm.jpg"
             }
             height="100%"
             width="100%"
@@ -27,7 +35,7 @@ const HomeScreen = () => {
         <Col style={colStyle}>
           <Image
             src={
-              width > 600 ? "/image/mainpage2.png" : "/image/mainpage_sm1.jpg"
+              width > 600 ? "/image/mainpage2.png" : "/image/mainpage1_sm.jpg"
             }
             height="100%"
             width="100%"
@@ -61,6 +69,16 @@ const colStyle = {
   paddingRight: 0,
   textAlign: "center",
   fontSize: "30px",
+};
+
+const buttonStyle = {
+  position: "fixed",
+  bottom: 20,
+  right: 20,
+  padding: 10,
+  backgroundColor: "white",
+  border: "1px solid gray",
+  zIndex: 1000,
 };
 
 export default HomeScreen;

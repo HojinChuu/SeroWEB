@@ -1,7 +1,7 @@
 import React from "react";
 
 const AboutScreen = () => {
-  return <div>about</div>;
+  return <h1 className="text-center">About Screen</h1>;
 };
 
 export default AboutScreen;
