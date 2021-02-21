@@ -13,7 +13,9 @@ const Footer = () => {
           <div className="row">
             <div
               className={
-                width > 414 ? "col text-right p-5" : "col text-right p-5 mb-4"
+                location.pathname === "/" && width <= 414
+                  ? "col text-right p-5 mb-4"
+                  : "col text-right p-5"
               }
             >
               Copyright &copy; SERO

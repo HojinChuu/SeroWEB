@@ -4,15 +4,18 @@ import useWindowDimensions from "../hooks/useWindowDimensions";
 
 const HomeScreen = () => {
   const { width } = useWindowDimensions();
-
   return (
     <div>
       <div>
         <button
+          onClick={() =>
+            (window.location =
+              "https://apps.apple.com/kr/app/trello/id1278508951?mt=12")
+          }
           className="btn rounded"
           style={{ ...buttonStyle, display: width > 414 ? "none" : "" }}
         >
-          <small>앱 다운로드</small>
+          <Image src="/image/downloadBtn.png" width="100" />
         </button>
       </div>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
@@ -35,7 +38,7 @@ const HomeScreen = () => {
         <Col style={colStyle}>
           <Image
             src={
-              width > 600 ? "/image/mainpage2.png" : "/image/mainpage1_sm.jpg"
+              width > 600 ? "/image/mainpage2.png" : "/image/mainpage2_sm.png"
             }
             height="100%"
             width="100%"
@@ -50,8 +53,14 @@ const HomeScreen = () => {
         }}
       >
         <Image
-          src="/image/homeImage3.png"
-          style={{ height: "100%", width: "50%", margin: "0 auto" }}
+          src={
+            width > 600 ? "/image/homeImage3.png" : "/image/mainpage3_sm.png"
+          }
+          style={
+            width > 600
+              ? { height: "100%", width: "50%", margin: "0 auto" }
+              : { height: "100%", width: "100%" }
+          }
         />
       </div>
     </div>
@@ -74,10 +83,10 @@ const colStyle = {
 const buttonStyle = {
   position: "fixed",
   bottom: 20,
-  right: 20,
-  padding: 10,
-  backgroundColor: "white",
-  border: "1px solid gray",
+  right: 0,
+  border: "none",
+  outline: "none",
+  boxShadow: "none",
   zIndex: 1000,
 };
 
