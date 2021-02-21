@@ -5,6 +5,7 @@ import { getUserInfo, login } from "../actions/userActions";
 
 import FormContainer from "../components/helpers/FormContainer";
 import Spinner from "../components/helpers/Spinner";
+import AppleAuth from "../components/users/AppleAuth";
 import GoogleAuth from "../components/users/GoogleAuth";
 import KakaoAuth from "../components/users/KakaoAuth";
 import Message from "../components/helpers/Message";
@@ -83,6 +84,7 @@ const LoginScreen = ({ history }) => {
                 New Customer? <Link to="/register">Register</Link>
               </div>
             </div>
+            <AppleAuth />
             <GoogleAuth history={history} />
             <KakaoAuth history={history} />
           </div>

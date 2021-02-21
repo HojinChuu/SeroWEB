@@ -144,7 +144,7 @@ const Header = () => {
 };
 
 const scrollStyle = {
-  backgroundColor: "rgb(222, 219, 219, 0.5)",
+  backgroundColor: "rgb(222, 219, 219, 0.8)",
   backdropFilter: "blur(5px)",
 };
 

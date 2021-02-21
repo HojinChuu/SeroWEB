@@ -48,6 +48,13 @@ nav.navbar {
 #basic-navbar-nav .navbar-nav a span:hover {
   border-bottom: 3px solid #ffc165;
 }
+.navbar-light .navbar-toggler {
+  border: none;
+  outline: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  padding: 0;
+}
 
 /* body */
 body {
@@ -179,6 +186,9 @@ svg {
   outline: none;
   box-shadow: none;
   -webkit-box-shadow: none;
+}
+.flippy-card {
+  padding: 0;
 }
 
 /* swiper */
