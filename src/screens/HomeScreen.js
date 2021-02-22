@@ -81,8 +81,8 @@ const colStyle = {
 };
 
 const buttonStyle = {
-  position: "fixed",
-  bottom: 20,
+  position: "absolute",
+  bottom: -80,
   right: 0,
   border: "none",
   outline: "none",

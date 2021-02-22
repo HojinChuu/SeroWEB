@@ -14,7 +14,8 @@ const SlideReceivedCardItem = ({ slideReceivedPost }) => {
     }
   }, [slideReceivedPost]);
 
-  const soundHandler = () => {
+  const soundHandler = (e) => {
+    e.stopPropagation();
     setPlaying(!playing);
     if (playing) {
       audio.play();
@@ -27,24 +28,6 @@ const SlideReceivedCardItem = ({ slideReceivedPost }) => {
   return (
     <SwiperSlide className="pl-1 pr-1">
       <Col sm={12} md={12} lg={12} className="ml-1 mr-1 mb-4 mt-4">
-        <div id="flipCardTitle">
-          <button className="btn btn-block pr-4 pl-4 ml-2">
-            <Row className="justify-content-between align-items-center">
-              <Row className="align-items-center">
-                <Image
-                  src={IMAGE_URL + "/" + slideReceivedPost.Post.User.usPhoto}
-                  width="25px"
-                  height="25px"
-                  roundedCircle
-                />
-                <span className="ml-2">
-                  {slideReceivedPost.Post.User.usName}
-                </span>
-              </Row>
-              <span>{slideReceivedPost.createdAt.slice(0, 10)}</span>
-            </Row>
-          </button>
-        </div>
         <Flippy
           flipOnHover={false}
           flipOnClick={true}
@@ -59,6 +42,26 @@ const SlideReceivedCardItem = ({ slideReceivedPost }) => {
             />
           </FrontSide>
           <BackSide className="d-flex align-items-center">
+            <button
+              id="soundBtn"
+              onClick={soundHandler}
+              className="btn"
+              style={{ position: "absolute", bottom: 10, right: 15 }}
+              disabled={slideReceivedPost.Post.poRecord === "null"}
+            >
+              <Image
+                src={
+                  slideReceivedPost.Post.poRecord === "null"
+                    ? "/image/sound_none.png"
+                    : playing
+                    ? "/image/sound_on.png"
+                    : "/image/sound_off.png"
+                }
+                width={
+                  slideReceivedPost.Post.poRecord === "null" ? "20px" : "30px"
+                }
+              />
+            </button>
             <Image
               src={IMAGE_URL + "/" + slideReceivedPost.Post.poContentPhoto}
               width="100%"
@@ -66,21 +69,17 @@ const SlideReceivedCardItem = ({ slideReceivedPost }) => {
             />
           </BackSide>
         </Flippy>
-        <div>
-          <button
-            className="btn btn-block btn-light mt-3"
-            onClick={soundHandler}
-            disabled={slideReceivedPost.Post.poRecord === "null"}
-          >
-            <i
-              className={
-                slideReceivedPost.Post.poRecord === "null"
-                  ? "fas fa-volume-off fa-2x"
-                  : playing
-                  ? "fas fa-volume-up fa-2x"
-                  : "fas fa-volume-mute fa-2x"
-              }
-            ></i>
+        <div id="flipCardTitle">
+          <button className="btn btn-block pr-4 pl-4 ml-2 mt-2">
+            <Row className="justify-content-between align-items-center">
+              <Row className="align-items-center">
+                <span>보낸이:</span>
+                <span className="ml-1">
+                  {slideReceivedPost.Post.User.usName}
+                </span>
+              </Row>
+              <span>{slideReceivedPost.createdAt.slice(0, 10)}</span>
+            </Row>
           </button>
         </div>
       </Col>

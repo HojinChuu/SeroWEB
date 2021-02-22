@@ -31,22 +31,18 @@ nav.navbar {
   transition: ease-in-out 0.5s;
 }
 .navCustomRight .nav-link {
+  position: relative;
   font-size: 20px;
   margin-left: 50px;
   font-weight: 400;
   color: #191919 !important;
 }
 .navCustomLeft .nav-link {
+  position: relative;
   font-size: 20px;
-  margin-left: 30px;
+  margin-left: 10px;
   font-weight: 400;
   color: #191919 !important;
-}
-#basic-navbar-nav.show .navbar-nav a {
-  margin: 5px;
-}
-#basic-navbar-nav .navbar-nav a span:hover {
-  border-bottom: 3px solid #ffc165;
 }
 .navbar-light .navbar-toggler {
   border: none;
@@ -54,6 +50,22 @@ nav.navbar {
   box-shadow: none;
   -webkit-box-shadow: none;
   padding: 0;
+}
+#basic-navbar-nav .navCustomRight a:after {
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 4px;
+  left: 50%;
+  position: absolute;
+  background: #ffc165;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0;
+}
+#basic-navbar-nav .navCustomRight a:hover:after {
+  width: 100%;
+  left: 0;
 }
 
 /* body */
@@ -189,6 +201,14 @@ svg {
 }
 .flippy-card {
   padding: 0;
+}
+#soundBtn:focus {
+  outline: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+#soundBtn:hover {
+  cursor: pointer;
 }
 
 /* swiper */

@@ -81,7 +81,7 @@ const MailboxScreen = ({ history }) => {
   return (
     <Fragment>
       <Container>
-        <div className="mt-4 row justify-content-between">
+        <div className="row justify-content-between pl-3 pr-3 mb-2 mt-5">
           <button
             className="btn btn-lg btn-light rounded"
             onClick={() => setViewToggle(!viewToggle)}
@@ -90,14 +90,24 @@ const MailboxScreen = ({ history }) => {
               {viewToggle ? "앨범으로 보기" : "슬라이드로 보기"}
             </span>
           </button>
-          <button
-            className="btn btn-lg btn-light rounded"
-            onClick={() => setToggle(!toggle)}
-          >
-            <span style={{ fontSize: "13px" }}>
-              {toggle ? "받은 엽서 보기" : "보낸 엽서 보기"}
-            </span>
-          </button>
+          <div>
+            <button
+              className="btn btn-light rounded p-2 pl-4 pr-4 mr-3"
+              onClick={() => setToggle(!toggle)}
+              disabled={toggle}
+              style={toggle ? postBtn : {}}
+            >
+              <span style={{ fontSize: "13px" }}>보낸 엽서</span>
+            </button>
+            <button
+              className="btn btn-light rounded p-2 pl-4 pr-4"
+              onClick={() => setToggle(!toggle)}
+              disabled={!toggle}
+              style={!toggle ? postBtn : {}}
+            >
+              <span style={{ fontSize: "13px" }}>받은 엽서</span>
+            </button>
+          </div>
         </div>
       </Container>
       <div className={viewToggle ? "" : "container"}>
@@ -178,6 +188,12 @@ const MailboxScreen = ({ history }) => {
       </div>
     </Fragment>
   );
+};
+
+const postBtn = {
+  backgroundColor: "green",
+  color: "white",
+  opacity: 1,
 };
 
 export default MailboxScreen;
