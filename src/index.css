@@ -232,7 +232,36 @@ svg {
   border: 1px solid gray;
   background-color: transparent;
 }
-
+#root
+  > main
+  > div:nth-child(2)
+  > div.mt-5.mb-5
+  > div
+  > ul
+  > li.page-item
+  > .page-link {
+  background-color: transparent;
+  border: 1px solid #191919;
+  color: #191919;
+  margin-right: 3px;
+  margin-left: 3px;
+  height: 32px;
+  width: 30px;
+}
+#root
+  > main
+  > div:nth-child(2)
+  > div.mt-5.mb-5
+  > div
+  > ul
+  > li.page-item.active
+  > button {
+  background-color: #d8d8d8;
+  color: #a5a5a5;
+  margin-right: 3px;
+  margin-left: 3px;
+  border: none;
+}
 /* swiper */
 .swiper-container {
   display: flex;
@@ -260,6 +289,50 @@ svg {
   opacity: 0.7;
   margin-left: 10px;
   margin-right: 10px;
+}
+
+/* desk */
+.deskBtn {
+  background-color: transparent;
+  margin-right: 5px;
+}
+.deskBtn button {
+  font-size: 17px;
+}
+.deskBtn button:focus {
+  outline: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+.deskBtn button a {
+  text-decoration: none;
+  color: black;
+}
+.deskTable {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #373a3c;
+  border-top: 2px solid grey;
+  font-size: 14px;
+  overflow: hidden;
+}
+.deskTable thead tr {
+  border-bottom: 2px solid lightgray;
+}
+.deskTable tbody tr {
+  border-bottom: 2px solid lightgray;
+}
+.deskTable thead tr th {
+  font-weight: 500;
+  padding: 16px 10px 16px 10px;
+}
+.deskTable tbody tr td {
+  padding: 16px 10px 16px 10px;
+}
+#deskEmpty {
+  padding: 80px;
+  border-right: 4px solid lightgray;
+  border-left: 4px solid lightgray;
 }
 
 /* login & register */

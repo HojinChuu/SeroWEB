@@ -46,7 +46,7 @@ const LoginScreen = ({ history }) => {
       ) : (
         <FormContainer>
           <div
-            className="card p-4 mt-3 rounded mb-3 loginForm"
+            className="card p-4 mt-3 rounded mb-4 loginForm"
             style={{ backgroundColor: "transparent" }}
           >
             <h1 className="text-center">LOGIN</h1>

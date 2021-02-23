@@ -1,7 +1,7 @@
 import React from "react";
 
 const Notices = () => {
-  return <div>Notices</div>;
+  return <h1 className="text-center">Notices</h1>;
 };
 
 export default Notices;

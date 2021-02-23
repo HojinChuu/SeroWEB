@@ -140,7 +140,7 @@ const RegisterScreen = ({ history }) => {
         <Spinner />
       ) : (
         <div
-          className="card p-4 mt-3 rounded mb-4 registerForm"
+          className="card p-4 mt-4 rounded mb-5 registerForm"
           style={{ backgroundColor: "transparent" }}
         >
           <h1 className="text-center">SIGN UP</h1>
