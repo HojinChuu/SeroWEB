@@ -4,13 +4,27 @@ import useWindowDimensions from "../hooks/useWindowDimensions";
 
 const HomeScreen = () => {
   const { width } = useWindowDimensions();
+
+  let type = navigator.userAgent.toLowerCase();
+  if (type.indexOf("android") > -1) {
+    type = "adroid";
+  } else if (
+    type.indexOf("iphone") > -1 ||
+    type.indexOf("ipad") > -1 ||
+    type.indexOf("ipod") > -1
+  ) {
+    type = "ios";
+  }
+
   return (
     <div>
       <div>
         <button
           onClick={() =>
-            (window.location =
-              "https://apps.apple.com/kr/app/trello/id1278508951?mt=12")
+            type === "ios"
+              ? (window.location =
+                  "https://apps.apple.com/kr/app/trello/id1278508951?mt=12")
+              : "http://play.google.com/store/apps/details?id=com.google.android.apps.maps"
           }
           className="btn rounded"
           style={{ ...buttonStyle, display: width > 414 ? "none" : "" }}
@@ -19,15 +33,22 @@ const HomeScreen = () => {
         </button>
       </div>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
-        <video style={{ height: "100%", width: "100%" }} autoPlay loop muted>
-          <source src="/image/homeVideo.mp4" type="video/mp4"></source>
-        </video>
+        {width > 600 ? (
+          <video style={{ height: "100%", width: "100%" }} autoPlay loop muted>
+            <source src="/image/homeVideo.mp4" type="video/mp4"></source>
+          </video>
+        ) : (
+          <Image
+            src="/image/homeVIdeo_sm.png"
+            style={{ height: "100vh", width: "100%" }}
+          />
+        )}
       </div>
       <div style={rowStyle}>
         <Col style={colStyle}>
           <Image
             src={
-              width > 600 ? "/image/mainpage1.png" : "/image/mainpage1_sm.jpg"
+              width > 600 ? "/image/mainpage1.png" : "/image/mainpage1_sm.png"
             }
             height="100%"
             width="100%"
@@ -52,16 +73,12 @@ const HomeScreen = () => {
           flexWrap: "wrap",
         }}
       >
-        <Image
-          src={
-            width > 600 ? "/image/homeImage3.png" : "/image/mainpage3_sm.png"
-          }
-          style={
-            width > 600
-              ? { height: "100%", width: "50%", margin: "0 auto" }
-              : { height: "100%", width: "100%" }
-          }
-        />
+        {width > 600 && (
+          <Image
+            src="/image/homeImage3.png"
+            style={{ height: "100%", width: "50%", margin: "0 auto" }}
+          />
+        )}
       </div>
     </div>
   );

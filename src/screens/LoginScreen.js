@@ -45,7 +45,10 @@ const LoginScreen = ({ history }) => {
         <Spinner />
       ) : (
         <FormContainer>
-          <div className="card p-4 mt-3 rounded mb-3">
+          <div
+            className="card p-4 mt-3 rounded mb-3 loginForm"
+            style={{ backgroundColor: "transparent" }}
+          >
             <h1 className="text-center">LOGIN</h1>
             {message && <Message variant="danger">{message}</Message>}
             <form onSubmit={submitHandler}>
