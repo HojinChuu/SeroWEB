@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 
 const SideBar = () => {
   return (
-    <nav className="col-md-2 d-none d-md-block bg-light sidebar">
+    <nav className="col-md-2 d-none d-md-block sidebar">
       <div className="sidebar-sticky">
         <ul className="nav flex-column">
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <Link className="nav-link active" to="#">
               <span className="space">Management</span>
             </Link>
-          </li>
+          </li> */}
           <li className="nav-item">
             <Link className="nav-link" to="/admin">
               <span className="space">Tasks</span>

@@ -56,7 +56,7 @@ const Header = () => {
           collapseOnSelect
           expand="md"
           fixed={location.pathname === "/" ? "top" : ""}
-          style={goingUp ? {} : scrollStyle}
+          style={!goingUp && location.pathname === "/" ? scrollStyle : {}}
         >
           <LinkContainer to="/">
             <Navbar.Brand>
@@ -138,6 +138,16 @@ const Header = () => {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
+      )}
+      {location.pathname !== "/" && (
+        <div
+          style={{
+            borderTop: "solid 1px #707070",
+            width: "90%",
+            margin: "auto",
+          }}
+          className="mb-3"
+        ></div>
       )}
     </header>
   );

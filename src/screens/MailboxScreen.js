@@ -83,11 +83,12 @@ const MailboxScreen = ({ history }) => {
       <Container>
         <div className="row justify-content-between pl-3 pr-3 mb-2 mt-5">
           <button
-            className="btn btn-lg btn-light rounded"
+            id="slideBtn"
+            className="btn btn-light rounded"
             onClick={() => setViewToggle(!viewToggle)}
           >
-            <span style={{ fontSize: "13px" }}>
-              {viewToggle ? "앨범으로 보기" : "슬라이드로 보기"}
+            <span style={{ fontSize: "15px" }}>
+              {viewToggle ? "Slide view" : "Gallery view"}
             </span>
           </button>
           <div>
@@ -95,7 +96,7 @@ const MailboxScreen = ({ history }) => {
               className="btn btn-light rounded p-2 pl-4 pr-4 mr-3"
               onClick={() => setToggle(!toggle)}
               disabled={toggle}
-              style={toggle ? postBtn : {}}
+              style={toggle ? postBtnActive : postBtn}
             >
               <span style={{ fontSize: "13px" }}>보낸 엽서</span>
             </button>
@@ -103,7 +104,7 @@ const MailboxScreen = ({ history }) => {
               className="btn btn-light rounded p-2 pl-4 pr-4"
               onClick={() => setToggle(!toggle)}
               disabled={!toggle}
-              style={!toggle ? postBtn : {}}
+              style={!toggle ? postBtnActive : postBtn}
             >
               <span style={{ fontSize: "13px" }}>받은 엽서</span>
             </button>
@@ -191,7 +192,12 @@ const MailboxScreen = ({ history }) => {
 };
 
 const postBtn = {
-  backgroundColor: "green",
+  backgroundColor: "#e0dfde",
+  border: "none",
+};
+
+const postBtnActive = {
+  backgroundColor: "#4e6f64",
   color: "white",
   opacity: 1,
 };

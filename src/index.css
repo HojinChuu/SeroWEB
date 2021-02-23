@@ -3,6 +3,9 @@ html {
   overflow-x: hidden;
   height: 100%;
 }
+body {
+  background-image: url("bg_web.jpg");
+}
 main {
   min-height: 80vh;
 }
@@ -30,6 +33,9 @@ nav.navbar {
   font-family: "Noto Serif KR";
   transition: ease-in-out 0.5s;
 }
+.dropdown #username {
+  margin-left: 0;
+}
 .navCustomRight .nav-link {
   position: relative;
   font-size: 20px;
@@ -40,7 +46,7 @@ nav.navbar {
 .navCustomLeft .nav-link {
   position: relative;
   font-size: 20px;
-  margin-left: 10px;
+  margin-left: 30px;
   font-weight: 400;
   color: #191919 !important;
 }
@@ -50,6 +56,9 @@ nav.navbar {
   box-shadow: none;
   -webkit-box-shadow: none;
   padding: 0;
+}
+#basic-navbar-nav.show .navbar-nav a {
+  margin: 5px;
 }
 #basic-navbar-nav .navCustomRight a:after {
   background: none repeat scroll 0 0 transparent;
@@ -103,9 +112,8 @@ svg {
   bottom: 0;
   left: 0;
   width: 250px;
-  padding: 120px 0;
+  padding: 370px 0;
   font-size: 18px;
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
   z-index: 50;
 }
 .sidebar .nav-link {
@@ -202,6 +210,16 @@ svg {
 .flippy-card {
   padding: 0;
 }
+#flipCardTitle > button {
+  font-family: "Noto Serif KR";
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #404040;
+}
 #soundBtn:focus {
   outline: none;
   box-shadow: none;
@@ -209,6 +227,10 @@ svg {
 }
 #soundBtn:hover {
   cursor: pointer;
+}
+#slideBtn {
+  border: 1px solid gray;
+  background-color: transparent;
 }
 
 /* swiper */
@@ -238,6 +260,18 @@ svg {
   opacity: 0.7;
   margin-left: 10px;
   margin-right: 10px;
+}
+
+/* login & register */
+.registerForm .form-control {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+.loginForm .form-control {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 /* font */
