@@ -158,6 +158,14 @@ svg {
   box-shadow: none;
   -webkit-box-shadow: none;
 }
+#adminNotice input {
+  background-color: transparent;
+  border: 2px solid lightgray;
+}
+#adminNotice textarea {
+  border: 2px solid lightgray;
+  background-color: transparent;
+}
 
 /* qrcode  */
 #qrpostAddBtn {
@@ -262,6 +270,12 @@ svg {
   margin-left: 3px;
   border: none;
 }
+#slideBtn {
+  font-family: "Noto Serif KR";
+}
+#root > main > div:nth-child(2) > div > div > button {
+  font-family: "Noto Serif KR";
+}
 /* swiper */
 .swiper-container {
   display: flex;
@@ -297,7 +311,13 @@ svg {
   margin-right: 5px;
 }
 .deskBtn button {
-  font-size: 17px;
+  font-size: 18px;
+  font-family: "Noto Serif KR";
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.44;
+  letter-spacing: normal;
 }
 .deskBtn button:focus {
   outline: none;
@@ -315,6 +335,7 @@ svg {
   border-top: 2px solid grey;
   font-size: 14px;
   overflow: hidden;
+  font-family: "Noto Serif KR";
 }
 .deskTable thead tr {
   border-bottom: 2px solid lightgray;
@@ -333,6 +354,42 @@ svg {
   padding: 80px;
   border-right: 4px solid lightgray;
   border-left: 4px solid lightgray;
+}
+#deskTitle {
+  margin: 0;
+  padding-top: 0;
+  margin-bottom: 10px;
+  font-family: "Noto Serif KR";
+  object-fit: contain;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #404040;
+}
+
+/* FAQ */
+.accordion {
+  width: 100%;
+  color: #373a3c;
+  border-top: 2px solid grey;
+  font-size: 14px;
+  overflow: hidden;
+  font-family: "Noto Serif KR";
+}
+.accordion .card {
+  background-color: transparent;
+  border: none;
+  border-top: solid 1px #b1b1b1;
+  border-bottom: solid 1px #b1b1b1;
+  padding: 7px 20px 7px 20px;
+  cursor: pointer;
+}
+.accordion .card .card-header {
+  border: none;
+  background-color: transparent;
+  padding: 10px;
 }
 
 /* login & register */

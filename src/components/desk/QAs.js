@@ -5,7 +5,7 @@ import QAitem from "./QAitem";
 const QAs = () => {
   return (
     <Fragment>
-      <h1 style={{ margin: 0, paddingTop: 0, marginBottom: "5px" }}>Q&A.</h1>
+      <h1 id="deskTitle">Q&A.</h1>
       <div className="table-responsive">
         <table className="deskTable">
           <thead>

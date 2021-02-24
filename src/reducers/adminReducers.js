@@ -15,6 +15,9 @@ import {
   ADMIN_ANSWER_REQUEST,
   ADMIN_ANSWER_SUCCESS,
   ADMIN_ANSWER_FAIL,
+  ADMIN_NOTICE_CREATE_REQUEST,
+  ADMIN_NOTICE_CREATE_SUCCESS,
+  ADMIN_NOTICE_CREATE_FAIL,
 } from "../constants/adminConstants";
 
 export const adminTasksReducer = (state = {}, action) => {
@@ -114,6 +117,27 @@ export const adminQuestionsReducer = (state = { question: {} }, action) => {
     case ADMIN_QUESTION_FETCH_FAIL:
       return {
         ...state,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export const adminNoticesReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ADMIN_NOTICE_CREATE_REQUEST:
+      return {
+        loading: true,
+      };
+    case ADMIN_NOTICE_CREATE_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+      };
+    case ADMIN_NOTICE_CREATE_FAIL:
+      return {
+        loading: false,
         error: action.payload,
       };
     default:
