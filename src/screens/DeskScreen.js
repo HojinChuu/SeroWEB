@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
+import { Route, Link, useLocation } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import useWindowDimensions from "../hooks/useWindowDimensions";
 
@@ -8,6 +8,7 @@ import FAQs from "../components/desk/FAQs";
 import QAs from "../components/desk/QAs";
 
 const DeskScreen = ({ match }) => {
+  const location = useLocation();
   const { width } = useWindowDimensions();
 
   return (
@@ -16,13 +17,38 @@ const DeskScreen = ({ match }) => {
     >
       <div className="row justify-content-end deskBtn">
         <Link to="/desk">
-          <button className="btn">NOTICE</button>
+          <button
+            className="btn"
+            style={location.pathname === "/desk" ? activeColor : inActiveColor}
+          >
+            <span style={location.pathname === "/desk" ? spanStyle : {}}>
+              NOTICE
+            </span>
+          </button>
         </Link>
         <Link to="/desk/faq">
-          <button className="btn">FAQ</button>
+          <button
+            className="btn"
+            style={
+              location.pathname === "/desk/faq" ? activeColor : inActiveColor
+            }
+          >
+            <span style={location.pathname === "/desk/faq" ? spanStyle : {}}>
+              FAQ
+            </span>
+          </button>
         </Link>
         <Link to="/desk/qa">
-          <button className="btn">Q&A</button>
+          <button
+            className="btn"
+            style={
+              location.pathname === "/desk/qa" ? activeColor : inActiveColor
+            }
+          >
+            <span style={location.pathname === "/desk/qa" ? spanStyle : {}}>
+              Q&A
+            </span>
+          </button>
         </Link>
       </div>
       <Route path={match.path + "/faq"} component={FAQs} exact />
@@ -31,5 +57,13 @@ const DeskScreen = ({ match }) => {
     </Container>
   );
 };
+
+const spanStyle = {
+  borderBottom: "3px solid #ffc165",
+  paddingBottom: "3px",
+};
+
+const activeColor = { color: "#404040" };
+const inActiveColor = { color: "#a2a2a2" };
 
 export default DeskScreen;

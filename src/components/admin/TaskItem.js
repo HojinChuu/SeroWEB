@@ -30,7 +30,7 @@ const TaskItem = ({ task, getTaskValue, removeTaskValue }) => {
     <tr className="text-center">
       <td>
         <input
-          className="form-check-input"
+          className="mt-1"
           type="checkbox"
           onChange={(e) =>
             e.target.checked

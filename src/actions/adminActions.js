@@ -17,6 +17,9 @@ import {
   ADMIN_ANSWER_REQUEST,
   ADMIN_ANSWER_SUCCESS,
   ADMIN_ANSWER_FAIL,
+  ADMIN_NOTICE_CREATE_REQUEST,
+  ADMIN_NOTICE_CREATE_SUCCESS,
+  ADMIN_NOTICE_CREATE_FAIL,
 } from "../constants/adminConstants";
 
 export const getTasks = (condition) => async (dispatch) => {
@@ -134,5 +137,25 @@ export const answerToQuestion = (usId, quCaId, quContent, quParentId) => async (
     });
   } catch (error) {
     dispatch({ type: ADMIN_ANSWER_FAIL });
+  }
+};
+
+export const createNotice = (noTitle, noContent) => async (dispatch) => {
+  try {
+    dispatch({
+      type: ADMIN_NOTICE_CREATE_REQUEST,
+    });
+
+    await axios.post(
+      `${DOMAIN}/web_set_notice`,
+      { noTitle, noContent },
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+    dispatch({
+      type: ADMIN_NOTICE_CREATE_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({ type: ADMIN_NOTICE_CREATE_FAIL });
   }
 };

@@ -79,8 +79,8 @@ const Tasks = () => {
 
   return (
     <Fragment>
-      <div className="row p-4">
-        <div className="row mr-auto">
+      <div className="row justify-content-between p-4">
+        <div className="row">
           <button
             onClick={refreshHandler}
             className="btn btn-outline-dark rounded"
@@ -102,7 +102,7 @@ const Tasks = () => {
             삭제
           </button>
         </div>
-        <form onSubmit={submitHandler} className="row ml-auto ml-3 toggle">
+        <form onSubmit={submitHandler} className="row ml-3 toggle">
           <ToggleButtonGroup type="checkbox" onChange={(e) => setTaskState(e)}>
             <ToggleButton variant="light" value={0}>
               수신대기

@@ -93,7 +93,7 @@ const MailboxScreen = ({ history }) => {
           </button>
           <div>
             <button
-              className="btn btn-light rounded p-2 pl-4 pr-4 mr-3"
+              className="btn btn-light p-2 pl-4 pr-4 mr-2"
               onClick={() => setToggle(!toggle)}
               disabled={toggle}
               style={toggle ? postBtnActive : postBtn}
@@ -101,7 +101,7 @@ const MailboxScreen = ({ history }) => {
               <span style={{ fontSize: "13px" }}>보낸 엽서</span>
             </button>
             <button
-              className="btn btn-light rounded p-2 pl-4 pr-4"
+              className="btn btn-light p-2 pl-4 pr-4"
               onClick={() => setToggle(!toggle)}
               disabled={!toggle}
               style={!toggle ? postBtnActive : postBtn}
@@ -194,11 +194,13 @@ const MailboxScreen = ({ history }) => {
 const postBtn = {
   backgroundColor: "#e0dfde",
   border: "none",
+  borderRadius: "10px",
 };
 
 const postBtnActive = {
   backgroundColor: "#4e6f64",
   color: "white",
+  borderRadius: "10px",
   opacity: 1,
 };
 
