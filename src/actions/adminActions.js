@@ -20,6 +20,12 @@ import {
   ADMIN_NOTICE_CREATE_REQUEST,
   ADMIN_NOTICE_CREATE_SUCCESS,
   ADMIN_NOTICE_CREATE_FAIL,
+  ADMIN_NOTICE_FETCH_REQUEST,
+  ADMIN_NOTICE_FETCH_SUCCESS,
+  ADMIN_NOTICE_FETCH_FAIL,
+  ADMIN_NOTICE_REMOVE_REQUEST,
+  ADMIN_NOTICE_REMOVE_SUCCESS,
+  ADMIN_NOTICE_REMOVE_FAIL,
 } from "../constants/adminConstants";
 
 export const getTasks = (condition) => async (dispatch) => {
@@ -157,5 +163,42 @@ export const createNotice = (noTitle, noContent) => async (dispatch) => {
     });
   } catch (error) {
     dispatch({ type: ADMIN_NOTICE_CREATE_FAIL });
+  }
+};
+
+export const getNotices = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: ADMIN_NOTICE_FETCH_REQUEST,
+    });
+
+    const { data } = await axios.get(`${DOMAIN}/web_get_notice`);
+
+    dispatch({
+      type: ADMIN_NOTICE_FETCH_SUCCESS,
+      payload: data.data,
+    });
+  } catch (error) {
+    dispatch({ type: ADMIN_NOTICE_FETCH_FAIL });
+  }
+};
+
+export const removeNotice = (noId) => async (dispatch) => {
+  try {
+    dispatch({
+      type: ADMIN_NOTICE_REMOVE_REQUEST,
+    });
+
+    await axios.post(
+      `${DOMAIN}/web_del_notice`,
+      { noId },
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+    dispatch({
+      type: ADMIN_NOTICE_REMOVE_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({ type: ADMIN_NOTICE_REMOVE_FAIL });
   }
 };

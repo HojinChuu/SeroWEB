@@ -18,6 +18,12 @@ import {
   ADMIN_NOTICE_CREATE_REQUEST,
   ADMIN_NOTICE_CREATE_SUCCESS,
   ADMIN_NOTICE_CREATE_FAIL,
+  ADMIN_NOTICE_FETCH_FAIL,
+  ADMIN_NOTICE_FETCH_SUCCESS,
+  ADMIN_NOTICE_FETCH_REQUEST,
+  ADMIN_NOTICE_REMOVE_REQUEST,
+  ADMIN_NOTICE_REMOVE_SUCCESS,
+  ADMIN_NOTICE_REMOVE_FAIL,
 } from "../constants/adminConstants";
 
 export const adminTasksReducer = (state = {}, action) => {
@@ -139,6 +145,35 @@ export const adminNoticesReducer = (state = {}, action) => {
       return {
         loading: false,
         error: action.payload,
+      };
+    case ADMIN_NOTICE_FETCH_REQUEST:
+      return {
+        loading: true,
+      };
+    case ADMIN_NOTICE_FETCH_SUCCESS:
+      return {
+        loading: false,
+        notices: action.payload,
+      };
+    case ADMIN_NOTICE_FETCH_FAIL:
+      return {
+        loading: false,
+        error: true,
+      };
+    case ADMIN_NOTICE_REMOVE_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case ADMIN_NOTICE_REMOVE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+      };
+    case ADMIN_NOTICE_REMOVE_FAIL:
+      return {
+        loading: false,
       };
     default:
       return state;

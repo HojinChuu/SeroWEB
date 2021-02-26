@@ -36,10 +36,13 @@ const QuestionAnswer = ({ show, onHide }) => {
       backdrop="static"
       keyboard={false}
     >
-      <Modal.Header className="m-auto">
+      <Modal.Header
+        className="m-auto"
+        style={{ padding: "1rem 1rem 0.4rem 1rem" }}
+      >
         <Modal.Title>
-          <h5 className="text-center ml-2 pb-2">문의</h5>
-          <div className="row justify-content-center ml-auto ">
+          <h5 className="text-center pb-2 pt-2">문의</h5>
+          <div className="row justify-content-center">
             <div className="col" xs={6} md={6}>
               <Image
                 src={
@@ -48,18 +51,17 @@ const QuestionAnswer = ({ show, onHide }) => {
                     : "/image/no-image.png"
                 }
                 roundedCircle
-                fluid
                 width="100"
               />
             </div>
           </div>
-          <h5 className="text-center mt-3 ml-3">
+          <h5 className="text-center mt-3">
             {Object.keys(question).length !== 0 && question.User.usName} 고객님
           </h5>
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body className="pl-5 pr-5">
-        <div className="row">
+      <Modal.Body className="pl-5 pr-5 mt-4">
+        <div className="row" style={{ alignItems: "center" }}>
           <small className="mr-auto ml-2 mb-1" style={{ color: "red" }}>
             문의사항
           </small>
@@ -80,16 +82,18 @@ const QuestionAnswer = ({ show, onHide }) => {
           <textarea
             className="form-control m-auto"
             onChange={(e) => setAnswerText(e.target.value)}
+            rows="5"
             placeholder="답글하기"
           ></textarea>
         </div>
         <Modal.Footer>
-          <Button variant="secondary" onClick={onHide}>
+          <Button variant="secondary" className="rounded" onClick={onHide}>
             취소
           </Button>
           <Button
             type="submit"
             variant="primary"
+            className="rounded"
             onClick={onHide}
             disabled={answerText.length === 0}
           >

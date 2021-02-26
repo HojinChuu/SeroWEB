@@ -24,12 +24,6 @@ const RegisterScreen = ({ history }) => {
   const [message, setMessage] = useState({ success: "", fail: "" });
   const [smsVisible, setSmsVisible] = useState(false);
   const [postSearch, setPostSearch] = useState(false);
-  // const [validation, setValidation] = useState({
-  //   nameErr: "",
-  //   passwordErr: "",
-  //   confirmPasswordErr: "",
-  //   addressDetailErr: "",
-  // });
 
   const dispatch = useDispatch();
   const userRegister = useSelector((state) => state.userRegister);
@@ -37,9 +31,9 @@ const RegisterScreen = ({ history }) => {
   const userSms = useSelector((state) => state.userSms);
   const userSmsCheck = useSelector((state) => state.userSmsCheck);
 
-  const { loading, success: registerSuccess } = userRegister;
+  const { loading, success: registerSuccess, error: validation } = userRegister;
   const { userInfo, authInfo } = userLogin;
-  const { code: smsCode } = userSms;
+  const { code: smsCode, error: smsSameErr } = userSms;
   const { success: smsCheckSuccess } = userSmsCheck;
 
   useEffect(() => {
@@ -78,12 +72,20 @@ const RegisterScreen = ({ history }) => {
 
   const smsSendHandler = () => {
     if (!phone) {
-      setMessage({ fail: "please enter the phone number" });
+      setMessage({ fail: "휴대폰번호를 입력해주세요." });
     } else {
       dispatch(sendSms(phone));
-      setSmsVisible(true);
     }
   };
+
+  useEffect(() => {
+    if (smsSameErr) {
+      setMessage({ fail: "휴대폰번호가 이미 존재합니다." });
+    }
+    if (smsCode) {
+      setSmsVisible(true);
+    }
+  }, [smsCode, smsSameErr]);
 
   const smsCheckHandler = () => {
     if (parseInt(code) === smsCode) {
@@ -144,7 +146,18 @@ const RegisterScreen = ({ history }) => {
           style={{ backgroundColor: "transparent" }}
         >
           <h1 className="text-center">SIGN UP</h1>
-          {message.fail && <Message variant="danger">{message.fail}</Message>}
+          {validation && (
+            <Message variant="danger">
+              {validation.map((validate, index) => (
+                <div key={index} style={{ fontSize: "12px" }}>
+                  {index + 1}. {validate.message}
+                </div>
+              ))}
+            </Message>
+          )}
+          {message.fail && !smsCode && (
+            <Message variant="danger">{message.fail}</Message>
+          )}
           {message.success && (
             <Message variant="success">{message.success}</Message>
           )}
@@ -154,7 +167,7 @@ const RegisterScreen = ({ history }) => {
               <div className="row mb-4">
                 <div className="col">
                   <input
-                    type="text"
+                    type="number"
                     placeholder="Enter Phone Number"
                     className="form-control"
                     value={phone}

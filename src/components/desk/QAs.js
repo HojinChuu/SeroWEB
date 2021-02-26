@@ -1,10 +1,14 @@
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 
 import QAitem from "./QAitem";
 
 const QAs = () => {
   return (
     <Fragment>
+      <Link to="/desk/qa/create" className="btn">
+        문의작성
+      </Link>
       <h1 id="deskTitle">Q&A.</h1>
       <div className="table-responsive">
         <table className="deskTable">

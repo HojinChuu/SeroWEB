@@ -35,8 +35,12 @@ const LoginScreen = ({ history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(login(0, phone, password));
-    dispatch(getUserInfo());
+    if (!phone || !password) {
+      setMessage("아이디 또는 비밀번호 오류입니다.");
+    } else {
+      dispatch(login(0, phone, password));
+      dispatch(getUserInfo());
+    }
   };
 
   return (
