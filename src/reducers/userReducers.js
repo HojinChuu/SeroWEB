@@ -58,7 +58,7 @@ export const userLoginReducer = (state = {}, action) => {
     case USER_LOGIN_FAIL:
       return {
         loading: false,
-        error: action.payload,
+        error: true,
       };
     case USER_AUTH_LOGIN_REQUEST:
       return {
@@ -106,7 +106,7 @@ export const userSmsReducer = (state = {}, action) => {
     case USER_PHONE_SMS_FAIL:
       return {
         loading: false,
-        error: action.payload,
+        error: true,
       };
     default:
       return state;

@@ -59,7 +59,7 @@ const Questions = () => {
               <th>문의번호</th>
               <th>회원번호</th>
               <th>카테고리</th>
-              <th>문의내용</th>
+              <th>제목</th>
               <th>문의날짜</th>
               <th>보기</th>
             </tr>

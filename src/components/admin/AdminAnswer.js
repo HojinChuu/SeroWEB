@@ -4,7 +4,7 @@ const AdminAnswer = ({ answerItem }) => {
   return (
     <Fragment>
       <hr />
-      <div className="row">
+      <div className="row" style={{ alignItems: "center" }}>
         {answerItem.User.usGrant === 1 ? (
           <small className="mr-auto ml-2 mb-1" style={{ color: "purple" }}>
             세로포스트

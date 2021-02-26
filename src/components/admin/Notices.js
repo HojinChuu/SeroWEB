@@ -1,67 +1,63 @@
-import React, { useEffect, useState } from "react";
-import { Fragment } from "react";
+import React, { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createNotice } from "../../actions/adminActions";
+import { Link } from "react-router-dom";
+import { getNotices } from "../../actions/adminActions";
 
-import Spinner from "../helpers/Spinner";
+import NoticeItem from "../admin/NoticeItem";
+import Loader from "../helpers/Loader";
 
 const Notices = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-
   const dispatch = useDispatch();
   const adminNotices = useSelector((state) => state.adminNotices);
-  const { loading, success, error } = adminNotices;
+  const { loading, notices, success } = adminNotices;
 
   useEffect(() => {
-    if (success || error) {
-      setTitle("");
-      setContent("");
-    }
-  }, [success, error]);
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    dispatch(createNotice(title, content));
-  };
+    dispatch(getNotices());
+  }, [dispatch, success]);
 
   return (
     <Fragment>
-      {loading ? (
-        <Spinner />
-      ) : (
-        <form onSubmit={submitHandler} className="mt-4" id="adminNotice">
-          <div className="form-group" id="phone">
-            <label>TITLE</label>
-            <input
-              type="phone"
-              placeholder="Enter the Title"
-              className="form-control"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </div>
-
-          <div className="form-group" id="password">
-            <label>CONTENT</label>
-            <textarea
-              className="form-control"
-              placeholder="Enter the Content"
-              rows="15"
-              style={{ resize: "none" }}
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-            ></textarea>
-          </div>
-
+      <div className="row p-4">
+        <div className="row mr-auto">
           <button
-            type="submit"
-            className="btn btn-block btn-dark mt-4 btn-lg rounded"
+            onClick={() => dispatch(getNotices())}
+            className="btn btn-outline-dark rounded"
           >
-            OK
+            <i className="fas fa-redo-alt"></i>
           </button>
-        </form>
-      )}
+        </div>
+        <div className="row ml-auto">
+          <Link to="/admin/notices/create">
+            <button className="btn btn-outline-dark rounded">CREATE</button>
+          </Link>
+        </div>
+      </div>
+      <div className="table-responsive">
+        <table className="table table-striped table-lg">
+          <thead>
+            <tr className="text-center">
+              <th>NO.</th>
+              <th>제목</th>
+              <th>작성일</th>
+              <th>삭제</th>
+            </tr>
+          </thead>
+          <tbody>
+            {loading ? (
+              <tr style={{ backgroundColor: "transparent" }}>
+                <td colSpan="4">
+                  <Loader />
+                </td>
+              </tr>
+            ) : (
+              notices &&
+              notices.map((notice, index) => (
+                <NoticeItem notice={notice} key={notice.noId} index={index} />
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
     </Fragment>
   );
 };

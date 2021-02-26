@@ -54,7 +54,7 @@ const Header = () => {
       {location.pathname !== "/qrcode" && (
         <Navbar
           collapseOnSelect
-          expand="md"
+          expand="lg"
           fixed={location.pathname === "/" ? "top" : ""}
           style={!goingUp && location.pathname === "/" ? scrollStyle : {}}
         >
@@ -157,5 +157,10 @@ const scrollStyle = {
   backgroundColor: "rgb(222, 219, 219, 0.8)",
   backdropFilter: "blur(5px)",
 };
+
+// const activeStyle = {
+//   paddingBottom: "1px",
+//   borderBottom: "4px solid #ffc165",
+// };
 
 export default Header;
