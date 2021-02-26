@@ -243,9 +243,23 @@ body > div.fade.modal.show > div > div {
   cursor: pointer;
 }
 #slideBtn {
+  font-family: "Noto Serif KR";
   border: 1px solid gray;
+  border-radius: 5px;
+  padding-bottom: 8px;
+  padding-top: 8px;
+  color: #404040;
+  font-size: 14px;
   background-color: transparent;
 }
+#root > main > div:nth-child(2) > div > div.dropdown > div {
+  font-family: "Noto Serif KR";
+  min-width: 120px;
+}
+#root > main > div.container > div > div.show.dropdown > div > a {
+  padding-left: 12px;
+}
+
 #root
   > main
   > div:nth-child(2)
@@ -275,9 +289,6 @@ body > div.fade.modal.show > div > div {
   margin-right: 3px;
   margin-left: 3px;
   border: none;
-}
-#slideBtn {
-  font-family: "Noto Serif KR";
 }
 #root > main > div:nth-child(2) > div > div > button {
   font-family: "Noto Serif KR";
