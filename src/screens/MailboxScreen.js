@@ -1,6 +1,12 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Container, Image } from "react-bootstrap";
+import {
+  Row,
+  Container,
+  Image,
+  Dropdown,
+  DropdownButton,
+} from "react-bootstrap";
 import { getSendPosts, getReceivePosts } from "../actions/mailPostActions";
 import { paginate } from "../utils/paginate";
 import {
@@ -82,15 +88,17 @@ const MailboxScreen = ({ history }) => {
     <Fragment>
       <Container>
         <div className="row justify-content-between pl-3 pr-3 mb-2 mt-5">
-          <button
+          <DropdownButton
             id="slideBtn"
-            className="btn btn-light rounded"
-            onClick={() => setViewToggle(!viewToggle)}
+            title={viewToggle ? "Slide view" : "Gallery view"}
           >
-            <span style={{ fontSize: "15px" }}>
-              {viewToggle ? "Slide view" : "Gallery view"}
-            </span>
-          </button>
+            <Dropdown.Item onClick={() => setViewToggle(false)}>
+              Gallery view
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => setViewToggle(true)}>
+              Slide view
+            </Dropdown.Item>
+          </DropdownButton>
           <div>
             <button
               className="btn btn-light p-2 pl-4 pr-4 mr-2"
