@@ -35,7 +35,12 @@ const Notices = ({ history }) => {
               </tr>
             ) : notices && notices.length !== 0 ? (
               notices.map((notice, index) => (
-                <NoticeItem notice={notice} key={notice.noId} index={index} />
+                <NoticeItem
+                  notice={notice}
+                  key={notice.noId}
+                  index={index}
+                  history={history}
+                />
               ))
             ) : (
               <tr className="text-center">

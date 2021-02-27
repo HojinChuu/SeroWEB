@@ -224,9 +224,6 @@ const RegisterScreen = ({ history }) => {
                 readOnly={authInfo}
                 onChange={(e) => setName(e.target.value)}
               />
-              {/* {validation.nameErr && (
-                <small className="validation">{validation.nameErr}</small>
-              )} */}
             </div>
 
             <div className="form-group">
@@ -289,11 +286,6 @@ const RegisterScreen = ({ history }) => {
                     value={addressDetail}
                     onChange={(e) => setAddressDetail(e.target.value)}
                   />
-                  {/* {validation.addressDetailErr && (
-                    <small className="validation">
-                      {validation.addressDetailErr}
-                    </small>
-                  )} */}
                 </div>
                 <div className="col-md-4 col-xs-4">
                   <label>Post Code</label>
@@ -328,11 +320,6 @@ const RegisterScreen = ({ history }) => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                  {/* {validation.passwordErr && (
-                    <small className="validation">
-                      {validation.passwordErr}
-                    </small>
-                  )} */}
                 </div>
 
                 <div className="form-group" id="confirmPassword">
@@ -344,11 +331,6 @@ const RegisterScreen = ({ history }) => {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                   />
-                  {/* {validation.confirmPasswordErr && (
-                    <small className="validation">
-                      {validation.confirmPasswordErr}
-                    </small>
-                  )} */}
                 </div>
               </Fragment>
             )}

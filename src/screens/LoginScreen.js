@@ -20,7 +20,7 @@ const LoginScreen = ({ history }) => {
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
-  const { loading, userToken, success } = userLogin;
+  const { loading, userToken, success, error } = userLogin;
 
   useEffect(() => {
     if (userToken) {
@@ -38,6 +38,8 @@ const LoginScreen = ({ history }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     if (!phone || !password) {
+      setMessage("빈칸을 모두 입력해 주세요.");
+    } else if (error) {
       setMessage("아이디 또는 비밀번호 오류입니다.");
     } else {
       dispatch(login(0, phone, password));
