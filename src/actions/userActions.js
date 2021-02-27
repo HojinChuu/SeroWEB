@@ -19,6 +19,12 @@ import {
   USER_PHONE_SMS_CHECK_REQUEST,
   USER_PHONE_SMS_CHECK_SUCCESS,
   USER_PHONE_SMS_CHECK_FAIL,
+  USER_FIND_PASS_SMS_REQUEST,
+  USER_FIND_PASS_SMS_SUCCESS,
+  USER_FIND_PASS_SMS_FAIL,
+  USER_UPDATE_PASS_REQUEST,
+  USER_UPDATE_PASS_SUCCESS,
+  USER_UPDATE_PASS_FAIL,
 } from "../constants/userConstants";
 
 export const register = (formData) => async (dispatch) => {
@@ -130,6 +136,27 @@ export const sendSms = (phone) => async (dispatch) => {
   }
 };
 
+export const findPassSendSms = (phone) => async (dispatch) => {
+  try {
+    dispatch({
+      type: USER_FIND_PASS_SMS_REQUEST,
+    });
+
+    const { data } = await axios.post(
+      `${DOMAIN}/web_upt_sms`,
+      { cePhoneNumber: phone },
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+    dispatch({
+      type: USER_FIND_PASS_SMS_SUCCESS,
+      payload: data.data,
+    });
+  } catch (error) {
+    dispatch({ type: USER_FIND_PASS_SMS_FAIL });
+  }
+};
+
 export const checkSms = (phone, code) => async (dispatch) => {
   try {
     dispatch({
@@ -148,6 +175,26 @@ export const checkSms = (phone, code) => async (dispatch) => {
     });
   } catch (error) {
     dispatch({ type: USER_PHONE_SMS_CHECK_FAIL });
+  }
+};
+
+export const updatePassword = (phone, password) => async (dispatch) => {
+  try {
+    dispatch({
+      type: USER_UPDATE_PASS_REQUEST,
+    });
+
+    await axios.post(
+      `${DOMAIN}/web_upt_password`,
+      { usPhoneNumber: phone, usPassword: password },
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+    dispatch({
+      type: USER_UPDATE_PASS_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({ type: USER_UPDATE_PASS_FAIL });
   }
 };
 

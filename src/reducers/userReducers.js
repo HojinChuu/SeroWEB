@@ -17,6 +17,12 @@ import {
   USER_PHONE_SMS_CHECK_REQUEST,
   USER_PHONE_SMS_CHECK_SUCCESS,
   USER_PHONE_SMS_CHECK_FAIL,
+  USER_FIND_PASS_SMS_REQUEST,
+  USER_FIND_PASS_SMS_SUCCESS,
+  USER_FIND_PASS_SMS_FAIL,
+  USER_UPDATE_PASS_REQUEST,
+  USER_UPDATE_PASS_SUCCESS,
+  USER_UPDATE_PASS_FAIL,
 } from "../constants/userConstants";
 
 export const userRegisterReducer = (state = {}, action) => {
@@ -108,6 +114,21 @@ export const userSmsReducer = (state = {}, action) => {
         loading: false,
         error: true,
       };
+    case USER_FIND_PASS_SMS_REQUEST:
+      return {
+        loading: true,
+      };
+    case USER_FIND_PASS_SMS_SUCCESS:
+      return {
+        loading: false,
+        code: action.payload,
+        success: true,
+      };
+    case USER_FIND_PASS_SMS_FAIL:
+      return {
+        loading: false,
+        error: true,
+      };
     default:
       return state;
   }
@@ -128,6 +149,27 @@ export const userSmsCheckReducer = (state = {}, action) => {
       return {
         loading: false,
         error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export const userUpdatePasswordReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_UPDATE_PASS_REQUEST:
+      return {
+        loading: true,
+      };
+    case USER_UPDATE_PASS_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+      };
+    case USER_UPDATE_PASS_FAIL:
+      return {
+        loading: false,
+        error: true,
       };
     default:
       return state;

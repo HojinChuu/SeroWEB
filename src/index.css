@@ -360,6 +360,10 @@ body > div.fade.modal.show > div > div {
 .deskTable tbody tr {
   border-bottom: 2px solid lightgray;
 }
+.deskTable tbody tr:hover {
+  background-color: rgba(216, 216, 216, 0.5);
+  cursor: pointer;
+}
 .deskTable thead tr th {
   font-weight: 500;
   padding: 16px 10px 16px 10px;
@@ -415,6 +419,40 @@ body > div.fade.modal.show > div > div {
 #root > main > div > div > div.accordion > div > div > div {
   border-top: 2px solid #b1b1b1;
   background-color: rgb(227, 227, 227, 0.5);
+}
+
+/* QA */
+#QAdropBtn {
+  border: 1px solid gray;
+  padding-bottom: 8px;
+  padding-top: 8px;
+  color: #404040;
+  width: 120px;
+  font-size: 14px;
+  background-color: white;
+}
+#root
+  > main
+  > div
+  > div
+  > form
+  > div:nth-child(1)
+  > div:nth-child(2)
+  > div
+  > div {
+  min-width: 120px;
+}
+#root
+  > main
+  > div
+  > div
+  > form
+  > div:nth-child(1)
+  > div:nth-child(2)
+  > div
+  > div
+  > a {
+  padding-left: 12px;
 }
 
 /* login & register */

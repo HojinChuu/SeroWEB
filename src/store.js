@@ -6,6 +6,7 @@ import {
   userLoginReducer,
   userSmsReducer,
   userSmsCheckReducer,
+  userUpdatePasswordReducer,
 } from "./reducers/userReducers";
 import {
   adminTasksReducer,
@@ -28,6 +29,7 @@ const reducer = combineReducers({
   userLogin: userLoginReducer,
   userSms: userSmsReducer,
   userSmsCheck: userSmsCheckReducer,
+  userUpdatePassword: userUpdatePasswordReducer,
   adminTasks: adminTasksReducer,
   adminQuestions: adminQuestionsReducer,
   adminNotices: adminNoticesReducer,

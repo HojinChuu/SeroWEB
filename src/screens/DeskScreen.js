@@ -7,6 +7,8 @@ import Notices from "../components/desk/Notices";
 import FAQs from "../components/desk/FAQs";
 import QAs from "../components/desk/QAs";
 import QACreateForm from "../components/desk/QACreateForm";
+import NoticeDetails from "../components/desk/NoticeDetails";
+
 import { Fragment } from "react";
 
 const DeskScreen = ({ match }) => {
@@ -15,67 +17,61 @@ const DeskScreen = ({ match }) => {
 
   return (
     <Fragment>
-      {location.pathname === match.path + "/qa/create" ? (
+      <Container
+        style={width > 600 ? { marginTop: "140px" } : { marginTop: "20px" }}
+      >
+        <div
+          className="row justify-content-end deskBtn"
+          style={width > 600 ? {} : { marginBottom: "20px" }}
+        >
+          <Link to="/desk">
+            <button
+              className="btn"
+              style={
+                location.pathname === "/desk" ? activeColor : inActiveColor
+              }
+            >
+              <span style={location.pathname === "/desk" ? spanStyle : {}}>
+                NOTICE
+              </span>
+            </button>
+          </Link>
+          <Link to="/desk/faq">
+            <button
+              className="btn"
+              style={
+                location.pathname === "/desk/faq" ? activeColor : inActiveColor
+              }
+            >
+              <span style={location.pathname === "/desk/faq" ? spanStyle : {}}>
+                FAQ
+              </span>
+            </button>
+          </Link>
+          <Link to="/desk/qa">
+            <button
+              className="btn"
+              style={
+                location.pathname === "/desk/qa" ? activeColor : inActiveColor
+              }
+            >
+              <span style={location.pathname === "/desk/qa" ? spanStyle : {}}>
+                Q&A
+              </span>
+            </button>
+          </Link>
+        </div>
+
         <Route
           path={match.path + "/qa/create"}
           component={QACreateForm}
           exact
         />
-      ) : (
-        <Container
-          style={width > 600 ? { marginTop: "140px" } : { marginTop: "20px" }}
-        >
-          <div
-            className="row justify-content-end deskBtn"
-            style={width > 600 ? {} : { marginBottom: "20px" }}
-          >
-            <Link to="/desk">
-              <button
-                className="btn"
-                style={
-                  location.pathname === "/desk" ? activeColor : inActiveColor
-                }
-              >
-                <span style={location.pathname === "/desk" ? spanStyle : {}}>
-                  NOTICE
-                </span>
-              </button>
-            </Link>
-            <Link to="/desk/faq">
-              <button
-                className="btn"
-                style={
-                  location.pathname === "/desk/faq"
-                    ? activeColor
-                    : inActiveColor
-                }
-              >
-                <span
-                  style={location.pathname === "/desk/faq" ? spanStyle : {}}
-                >
-                  FAQ
-                </span>
-              </button>
-            </Link>
-            <Link to="/desk/qa">
-              <button
-                className="btn"
-                style={
-                  location.pathname === "/desk/qa" ? activeColor : inActiveColor
-                }
-              >
-                <span style={location.pathname === "/desk/qa" ? spanStyle : {}}>
-                  Q&A
-                </span>
-              </button>
-            </Link>
-          </div>
-
-          <Route path={match.path + "/faq"} component={FAQs} exact />
-          <Route path={match.path + "/qa"} component={QAs} exact />
-          <Route path={match.path} component={Notices} exact />
-        </Container>
-      )}
+        <Route path="/desk/notice/:id" component={NoticeDetails} exact />
+        <Route path={match.path + "/faq"} component={FAQs} exact />
+        <Route path={match.path + "/qa"} component={QAs} exact />
+        <Route path={match.path} component={Notices} exact />
+      </Container>
     </Fragment>
   );
 };
