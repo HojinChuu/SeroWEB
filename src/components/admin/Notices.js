@@ -2,18 +2,38 @@ import React, { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getNotices } from "../../actions/adminActions";
+import { ADMIN_NOTICE_FETCH_SUCCESS } from "../../constants/adminConstants";
+import { paginate } from "../../utils/paginate";
 
 import NoticeItem from "../admin/NoticeItem";
 import Loader from "../helpers/Loader";
+import Pagination from "../helpers/Pagination";
 
 const Notices = () => {
   const dispatch = useDispatch();
   const adminNotices = useSelector((state) => state.adminNotices);
-  const { loading, notices, success } = adminNotices;
+  const {
+    loading,
+    notices,
+    success,
+    noticesCount,
+    pageSize,
+    currentPage,
+  } = adminNotices;
 
   useEffect(() => {
     dispatch(getNotices());
   }, [dispatch, success]);
+
+  const pageChangeHandler = (page) => {
+    dispatch({
+      type: ADMIN_NOTICE_FETCH_SUCCESS,
+      payload: notices,
+      currentPage: page,
+    });
+  };
+
+  const pagedNotices = paginate(notices, currentPage, pageSize);
 
   return (
     <Fragment>
@@ -32,7 +52,7 @@ const Notices = () => {
           </Link>
         </div>
       </div>
-      <div className="table-responsive">
+      <div className="table-responsive adminTable">
         <table className="table table-striped table-lg">
           <thead>
             <tr className="text-center">
@@ -51,12 +71,22 @@ const Notices = () => {
               </tr>
             ) : (
               notices &&
-              notices.map((notice, index) => (
+              pagedNotices.map((notice, index) => (
                 <NoticeItem notice={notice} key={notice.noId} index={index} />
               ))
             )}
           </tbody>
         </table>
+      </div>
+      <div className="mt-5 mb-5">
+        {notices && (
+          <Pagination
+            itemsCount={noticesCount}
+            pageSize={pageSize}
+            currentPage={currentPage}
+            onPageChange={pageChangeHandler}
+          />
+        )}
       </div>
     </Fragment>
   );

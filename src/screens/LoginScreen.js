@@ -80,6 +80,7 @@ const LoginScreen = ({ history }) => {
                     placeholder="Enter password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    autoComplete="on"
                   />
                 </div>
 
@@ -93,10 +94,20 @@ const LoginScreen = ({ history }) => {
 
               <div className="row py-3">
                 <div className="col">
-                  <Link to="/login/password" style={{ textDecoration: "none" }}>
-                    비밀번호 찾기
+                  <Link
+                    to="/register"
+                    style={{ textDecoration: "none", fontSize: "13px" }}
+                  >
+                    회원가입 하기
                   </Link>
                 </div>
+                <Link
+                  to="/login/password"
+                  style={{ textDecoration: "none", fontSize: "13px" }}
+                  className="mr-3"
+                >
+                  비밀번호 찾기
+                </Link>
               </div>
               <AppleAuth />
               <GoogleAuth history={history} />

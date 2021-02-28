@@ -319,6 +319,7 @@ const RegisterScreen = ({ history }) => {
                     className="form-control"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    autoComplete="on"
                   />
                 </div>
 
@@ -330,6 +331,7 @@ const RegisterScreen = ({ history }) => {
                     className="form-control"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
+                    autoComplete="on"
                   />
                 </div>
               </Fragment>

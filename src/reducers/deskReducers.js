@@ -5,6 +5,9 @@ import {
   DESK_FAQ_FETCH_REQUEST,
   DESK_FAQ_FETCH_SUCCESS,
   DESK_FAQ_FETCH_FAIL,
+  DESK_QA_FETCH_REQUEST,
+  DESK_QA_FETCH_SUCCESS,
+  DESK_QA_FETCH_FAIL,
 } from "../constants/deskConstants";
 
 export const fetchNoticesReducer = (state = {}, action) => {
@@ -17,6 +20,9 @@ export const fetchNoticesReducer = (state = {}, action) => {
       return {
         loading: false,
         notices: action.payload,
+        noticesCount: action.payload.length,
+        pageSize: 6,
+        currentPage: action.currentPage ? action.currentPage : 1,
       };
     case DESK_NOTICE_FETCH_FAIL:
       return {
@@ -38,8 +44,35 @@ export const fetchFaqsReducer = (state = {}, action) => {
       return {
         loading: false,
         faqs: action.payload,
+        faqsCount: action.payload.length,
+        pageSize: 6,
+        currentPage: action.currentPage ? action.currentPage : 1,
       };
     case DESK_FAQ_FETCH_FAIL:
+      return {
+        loading: false,
+        error: true,
+      };
+    default:
+      return state;
+  }
+};
+
+export const fetchQasReducer = (state = {}, action) => {
+  switch (action.type) {
+    case DESK_QA_FETCH_REQUEST:
+      return {
+        loading: true,
+      };
+    case DESK_QA_FETCH_SUCCESS:
+      return {
+        loading: false,
+        qas: action.payload,
+        qasCount: action.payload.length,
+        pageSize: 6,
+        currentPage: action.currentPage ? action.currentPage : 1,
+      };
+    case DESK_QA_FETCH_FAIL:
       return {
         loading: false,
         error: true,

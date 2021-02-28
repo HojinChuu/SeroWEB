@@ -154,6 +154,9 @@ export const adminNoticesReducer = (state = {}, action) => {
       return {
         loading: false,
         notices: action.payload,
+        noticesCount: action.payload.length,
+        pageSize: 6,
+        currentPage: action.currentPage ? action.currentPage : 1,
       };
     case ADMIN_NOTICE_FETCH_FAIL:
       return {

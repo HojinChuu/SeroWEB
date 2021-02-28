@@ -1,8 +1,7 @@
 import React from "react";
 import AppleLogin from "react-apple-signin-auth";
-import { APPLE_CLIENT_ID } from "../../config";
 
-const AppleAuth = ({ history }) => {
+const AppleAuth = () => {
   const onSuccess = () => {
     console.log("success");
   };
@@ -14,7 +13,12 @@ const AppleAuth = ({ history }) => {
   return (
     <AppleLogin
       authOptions={{
-        clientId: { APPLE_CLIENT_ID },
+        clientId: "seropost.com",
+        scope: "email name",
+        redirectURI: "https://seropost.com",
+        state: "",
+        nonce: "nonce",
+        usePopup: true,
       }}
       onSuccess={onSuccess}
       onError={onFailure}
