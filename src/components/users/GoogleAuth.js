@@ -19,7 +19,7 @@ const GoogleAuth = ({ history }) => {
   };
 
   const onFailure = (res) => {
-    console.log(res);
+    // console.log(res);
   };
 
   return (

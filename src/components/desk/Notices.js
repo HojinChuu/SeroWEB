@@ -1,18 +1,37 @@
 import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getNotices } from "../../actions/deskActions";
+import { DESK_NOTICE_FETCH_SUCCESS } from "../../constants/deskConstants";
+import { paginate } from "../../utils/paginate";
 
 import NoticeItem from "./NoticeItem";
 import Loader from "../helpers/Loader";
+import Pagination from "../helpers/Pagination";
 
 const Notices = ({ history }) => {
   const dispatch = useDispatch();
   const fetchNotices = useSelector((state) => state.fetchNotices);
-  const { loading, notices } = fetchNotices;
+  const {
+    loading,
+    notices,
+    noticesCount,
+    pageSize,
+    currentPage,
+  } = fetchNotices;
 
   useEffect(() => {
     dispatch(getNotices());
   }, [history, dispatch]);
+
+  const pageChangeHandler = (page) => {
+    dispatch({
+      type: DESK_NOTICE_FETCH_SUCCESS,
+      payload: notices,
+      currentPage: page,
+    });
+  };
+
+  const pagedNotices = paginate(notices, currentPage, pageSize);
 
   return (
     <Fragment>
@@ -34,7 +53,7 @@ const Notices = ({ history }) => {
                 </td>
               </tr>
             ) : notices && notices.length !== 0 ? (
-              notices.map((notice, index) => (
+              pagedNotices.map((notice, index) => (
                 <NoticeItem
                   notice={notice}
                   key={notice.noId}
@@ -51,6 +70,16 @@ const Notices = ({ history }) => {
             )}
           </tbody>
         </table>
+      </div>
+      <div className="mt-5 mb-5">
+        {notices && (
+          <Pagination
+            itemsCount={noticesCount}
+            pageSize={pageSize}
+            currentPage={currentPage}
+            onPageChange={pageChangeHandler}
+          />
+        )}
       </div>
     </Fragment>
   );

@@ -158,9 +158,4 @@ const scrollStyle = {
   backdropFilter: "blur(5px)",
 };
 
-// const activeStyle = {
-//   paddingBottom: "1px",
-//   borderBottom: "4px solid #ffc165",
-// };
-
 export default Header;

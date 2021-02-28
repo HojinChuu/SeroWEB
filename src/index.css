@@ -173,6 +173,46 @@ body > div.fade.modal.show > div > div {
   border-radius: 5px;
 }
 
+/* admin notice */
+.adminTable thead tr th {
+  width: 20%;
+}
+#root
+  > main
+  > div.container
+  > div
+  > div
+  > div.mt-5.mb-5
+  > div
+  > ul
+  > li.page-item.active
+  > button {
+  background-color: #d8d8d8;
+  color: #a5a5a5;
+  margin-right: 3px;
+  margin-left: 3px;
+  border: none;
+}
+#root
+  > main
+  > div.container
+  > div
+  > div
+  > div.mt-5.mb-5
+  > div
+  > ul
+  > li
+  > button {
+  background-color: transparent;
+  border: 1px solid #191919;
+  color: #191919;
+  margin-right: 3px;
+  margin-left: 3px;
+  line-height: 1px;
+  height: 32px;
+  width: 30px;
+}
+
 /* qrcode  */
 #qrpostAddBtn {
   position: absolute;
@@ -273,6 +313,7 @@ body > div.fade.modal.show > div > div {
   color: #191919;
   margin-right: 3px;
   margin-left: 3px;
+  line-height: 1px;
   height: 32px;
   width: 30px;
 }
@@ -367,6 +408,7 @@ body > div.fade.modal.show > div > div {
 .deskTable thead tr th {
   font-weight: 500;
   padding: 16px 10px 16px 10px;
+  width: 20%;
 }
 .deskTable tbody tr td {
   padding: 16px 10px 16px 10px;
@@ -389,6 +431,32 @@ body > div.fade.modal.show > div > div {
   font-size: 23px;
   text-align: left;
   color: #404040;
+}
+/* notice page button */
+#root
+  > main
+  > div
+  > div
+  > div.mt-5.mb-5
+  > div
+  > ul
+  > li.page-item.active
+  > button {
+  background-color: #d8d8d8;
+  color: #a5a5a5;
+  margin-right: 3px;
+  margin-left: 3px;
+  border: none;
+}
+#root > main > div > div > div.mt-5.mb-5 > div > ul > li > button {
+  background-color: transparent;
+  border: 1px solid #191919;
+  color: #191919;
+  margin-right: 3px;
+  margin-left: 3px;
+  line-height: 1px;
+  height: 32px;
+  width: 30px;
 }
 
 /* FAQ */
@@ -453,6 +521,23 @@ body > div.fade.modal.show > div > div {
   > div
   > a {
   padding-left: 12px;
+}
+/* focus remove */
+#root
+  > main
+  > div
+  > div
+  > form
+  > div:nth-child(3)
+  > div:nth-child(2)
+  > textarea:focus {
+  outline: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+#modalPostCard div:hover {
+  cursor: pointer;
+  background-color: rgba(180, 180, 180, 0.5) !important;
 }
 
 /* login & register */
