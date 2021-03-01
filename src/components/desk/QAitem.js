@@ -1,13 +1,19 @@
 import React from "react";
 
-const QAitem = () => {
+const QAitem = ({ qaItem, index, history }) => {
+  const handleClick = () => {
+    history.push({
+      pathname: `/desk/qa/detail/${qaItem.quId}`,
+      state: { qaItem },
+    });
+  };
   return (
-    <tr className="text-center">
-      <td>1</td>
-      <td>[배송문의]</td>
-      <td>세로엽서가 안와요.</td>
-      <td>추호진</td>
-      <td>2021.03.01</td>
+    <tr className="text-center" onClick={handleClick}>
+      <td>{index + 1}</td>
+      <td>{qaItem.Category.caContent}</td>
+      <td>{qaItem.quContent}</td>
+      <td>{qaItem.User.usName}</td>
+      <td>{qaItem.createdAt.slice(0, 10).replaceAll("-", ".")}</td>
     </tr>
   );
 };

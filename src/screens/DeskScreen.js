@@ -8,6 +8,7 @@ import FAQs from "../components/desk/FAQs";
 import QAs from "../components/desk/QAs";
 import QACreateForm from "../components/desk/QACreateForm";
 import NoticeDetails from "../components/desk/NoticeDetails";
+import QADetails from "../components/desk/QADetails";
 
 import { Fragment } from "react";
 
@@ -62,11 +63,8 @@ const DeskScreen = ({ match }) => {
           </Link>
         </div>
 
-        <Route
-          path={match.path + "/qa/create"}
-          component={QACreateForm}
-          exact
-        />
+        <Route path="/desk/qa/create" component={QACreateForm} exact />
+        <Route path="/desk/qa/detail/:id" component={QADetails} exact />
         <Route path="/desk/notice/:id" component={NoticeDetails} exact />
         <Route path={match.path + "/faq"} component={FAQs} exact />
         <Route path={match.path + "/qa"} component={QAs} exact />

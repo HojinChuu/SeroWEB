@@ -535,9 +535,58 @@ body > div.fade.modal.show > div > div {
   box-shadow: none;
   -webkit-box-shadow: none;
 }
-#modalPostCard div:hover {
+#modalPostCard .card-img-top {
+  box-shadow: 1px 2px 10px rgba(78, 78, 78, 0.5);
+  transform: scale(1);
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+#modalPostCard:hover img {
   cursor: pointer;
-  background-color: rgba(180, 180, 180, 0.5) !important;
+
+  -webkit-transform: scale(1.02);
+  transform: scale(1.02);
+}
+body
+  > div.fade.modal.show
+  > div
+  > div
+  > div
+  > div:nth-child(3)
+  > div
+  > ul
+  > li.page-item.active
+  > button {
+  background-color: #d8d8d8;
+  color: #a5a5a5;
+  margin-right: 3px;
+  margin-left: 3px;
+  border: none;
+}
+body
+  > div.fade.modal.show
+  > div
+  > div
+  > div
+  > div:nth-child(3)
+  > div
+  > ul
+  > li
+  > button {
+  background-color: transparent;
+  border: 1px solid #191919;
+  color: #191919;
+  margin-right: 3px;
+  margin-left: 3px;
+  line-height: 1px;
+  height: 32px;
+  width: 30px;
+}
+/* qa create form comment textarea */
+#root > main > div > div > form > div > div > textarea:focus {
+  outline: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
 }
 
 /* login & register */

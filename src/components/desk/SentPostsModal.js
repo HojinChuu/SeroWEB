@@ -1,16 +1,16 @@
 import React, { useEffect, Fragment } from "react";
 import { Modal, Button, CardGroup, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getSendPosts } from "../../actions/mailPostActions";
+import { getQASendPosts } from "../../actions/mailPostActions";
 import { paginate } from "../../utils/paginate";
-import { SEND_POST_FETCH_SUCCESS } from "../../constants/mailPostConstants";
+import { SEND_QA_POST_FETCH_SUCCESS } from "../../constants/mailPostConstants";
 
 import NoPostItem from "./NoPostItem";
 import SentPostItem from "./SentPostItem";
 import Loader from "../../components/helpers/Loader";
 import Pagination from "../../components/helpers/Pagination";
 
-const SentPostsModal = ({ show, onHide }) => {
+const SentPostsModal = ({ show, onHide, postRefHandler }) => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
 
@@ -27,13 +27,13 @@ const SentPostsModal = ({ show, onHide }) => {
 
   useEffect(() => {
     if (userInfo) {
-      dispatch(getSendPosts(userInfo.usId));
+      dispatch(getQASendPosts(userInfo.usId));
     }
   }, [dispatch, userInfo]);
 
   const sentPageChangeHandler = (page) => {
     dispatch({
-      type: SEND_POST_FETCH_SUCCESS,
+      type: SEND_QA_POST_FETCH_SUCCESS,
       payload: sentPosts,
       currentPage: page,
     });
@@ -83,21 +83,39 @@ const SentPostsModal = ({ show, onHide }) => {
           <CardGroup className="mt-5 row justify-content-center">
             {sentPosts && sentPosts.length > 2 ? (
               pagedSentPosts.map((post, index) => (
-                <SentPostItem key={index} post={post} />
+                <SentPostItem
+                  key={index}
+                  post={post}
+                  postRefHandler={postRefHandler}
+                  onHide={onHide}
+                  userInfo={userInfo}
+                />
               ))
             ) : sentPosts && sentPosts.length === 1 ? (
               <Fragment>
                 <NoPostItem />
                 <NoPostItem />
                 {sentPosts.map((post, index) => (
-                  <SentPostItem key={index} post={post} />
+                  <SentPostItem
+                    key={index}
+                    post={post}
+                    postRefHandler={postRefHandler}
+                    onHide={onHide}
+                    userInfo={userInfo}
+                  />
                 ))}
               </Fragment>
             ) : sentPosts && sentPosts.length === 2 ? (
               <Fragment>
                 <NoPostItem />
                 {sentPosts.map((post, index) => (
-                  <SentPostItem key={index} post={post} />
+                  <SentPostItem
+                    key={index}
+                    post={post}
+                    postRefHandler={postRefHandler}
+                    onHide={onHide}
+                    userInfo={userInfo}
+                  />
                 ))}
               </Fragment>
             ) : (
@@ -109,12 +127,14 @@ const SentPostsModal = ({ show, onHide }) => {
             )}
           </CardGroup>
           <div className="mt-5">
-            <Pagination
-              itemsCount={sentPostCount}
-              pageSize={sentPageSize}
-              currentPage={sentCurrentPage}
-              onPageChange={sentPageChangeHandler}
-            />
+            {sentPosts && (
+              <Pagination
+                itemsCount={sentPostCount}
+                pageSize={sentPageSize}
+                currentPage={sentCurrentPage}
+                onPageChange={sentPageChangeHandler}
+              />
+            )}
           </div>
           <div className="row pr-3 mb-3 justify-content-end">
             <Button
@@ -122,7 +142,7 @@ const SentPostsModal = ({ show, onHide }) => {
               className="pl-4 pr-4 rounded"
               style={{ backgroundColor: "#515151", border: "none" }}
             >
-              확인
+              취소
             </Button>
           </div>
         </Modal.Body>

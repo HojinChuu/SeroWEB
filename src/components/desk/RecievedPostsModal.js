@@ -1,9 +1,9 @@
 import React, { Fragment, useEffect } from "react";
 import { Modal, Button, CardGroup, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getReceivePosts } from "../../actions/mailPostActions";
+import { getQAReceivePosts } from "../../actions/mailPostActions";
 import { paginate } from "../../utils/paginate";
-import { RECEIVE_POST_FETCH_SUCCESS } from "../../constants/mailPostConstants";
+import { RECEIVE_QA_POST_FETCH_SUCCESS } from "../../constants/mailPostConstants";
 
 import NoPostItem from "./NoPostItem";
 import Loader from "../../components/helpers/Loader";
@@ -27,13 +27,13 @@ const RecievedPostsModal = ({ show, onHide, postRefHandler }) => {
 
   useEffect(() => {
     if (userInfo) {
-      dispatch(getReceivePosts(userInfo.usId));
+      dispatch(getQAReceivePosts(userInfo.usId));
     }
   }, [dispatch, userInfo]);
 
   const receivedPageChangeHandler = (page) => {
     dispatch({
-      type: RECEIVE_POST_FETCH_SUCCESS,
+      type: RECEIVE_QA_POST_FETCH_SUCCESS,
       payload: receivedPosts,
       currentPage: page,
     });
@@ -87,40 +87,55 @@ const RecievedPostsModal = ({ show, onHide, postRefHandler }) => {
           <CardGroup className="mt-5 row justify-content-center">
             {receivedPosts && receivedPosts.length > 2 ? (
               pagedReceivedPosts.map((post, index) => (
-                <RecievedPostItem key={index} post={post} />
+                <RecievedPostItem
+                  key={index}
+                  post={post}
+                  postRefHandler={postRefHandler}
+                  onHide={onHide}
+                />
               ))
             ) : receivedPosts && receivedPosts.length === 1 ? (
               <Fragment>
                 <NoPostItem />
                 <NoPostItem />
                 {receivedPosts.map((post, index) => (
-                  <RecievedPostItem key={index} post={post} />
+                  <RecievedPostItem
+                    key={index}
+                    post={post}
+                    postRefHandler={postRefHandler}
+                    onHide={onHide}
+                  />
                 ))}
               </Fragment>
             ) : receivedPosts && receivedPosts.length === 2 ? (
               <Fragment>
                 <NoPostItem />
                 {receivedPosts.map((post, index) => (
-                  <RecievedPostItem key={index} post={post} />
+                  <RecievedPostItem
+                    key={index}
+                    post={post}
+                    postRefHandler={postRefHandler}
+                    onHide={onHide}
+                  />
                 ))}
               </Fragment>
             ) : (
               <Fragment>
-                {/* test */}
-                <NoPostItem postRefHandler={postRefHandler} onHide={onHide} />
-                <NoPostItem postRefHandler={postRefHandler} onHide={onHide} />
-                <NoPostItem postRefHandler={postRefHandler} onHide={onHide} />
-                {/* test */}
+                <NoPostItem />
+                <NoPostItem />
+                <NoPostItem />
               </Fragment>
             )}
           </CardGroup>
           <div className="mt-5">
-            <Pagination
-              itemsCount={receivedPostCount}
-              pageSize={receivedPageSize}
-              currentPage={receivedCurrentPage}
-              onPageChange={receivedPageChangeHandler}
-            />
+            {receivedPosts && (
+              <Pagination
+                itemsCount={receivedPostCount}
+                pageSize={receivedPageSize}
+                currentPage={receivedCurrentPage}
+                onPageChange={receivedPageChangeHandler}
+              />
+            )}
           </div>
           <div className="row pr-3 mb-3 justify-content-end">
             <Button

@@ -10,6 +10,9 @@ import {
   DESK_QA_FETCH_REQUEST,
   DESK_QA_FETCH_SUCCESS,
   DESK_QA_FETCH_FAIL,
+  DESK_QA_CREATE_REQUEST,
+  DESK_QA_CREATE_SUCCESS,
+  DESK_QA_CREATE_FAIL,
 } from "../constants/deskConstants";
 
 export const getNotices = () => async (dispatch) => {
@@ -60,5 +63,32 @@ export const getQas = () => async (dispatch) => {
     });
   } catch (error) {
     dispatch({ type: DESK_QA_FETCH_FAIL });
+  }
+};
+
+export const createQa = (
+  usId,
+  quCaId,
+  quSeId,
+  quTitle,
+  quContent,
+  quShow
+) => async (dispatch) => {
+  try {
+    dispatch({
+      type: DESK_QA_CREATE_REQUEST,
+    });
+
+    await axios.post(
+      `${DOMAIN}/web_set_question`,
+      { usId, quCaId, quSeId, quTitle, quContent, quShow },
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+    dispatch({
+      type: DESK_QA_CREATE_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({ type: DESK_QA_CREATE_FAIL });
   }
 };
