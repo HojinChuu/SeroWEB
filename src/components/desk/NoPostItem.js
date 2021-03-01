@@ -1,22 +1,11 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 
-const NoPostItem = ({ postRefHandler, onHide }) => {
-  // test
-  const onClickHandler = () => {
-    postRefHandler(1);
-    onHide();
-  };
-  // test
-
+const NoPostItem = () => {
   return (
     <Card
       className="col col-4"
       style={{ border: "none", backgroundColor: "transparent" }}
-      // test
-      onClick={onClickHandler}
-      id="modalPostCard"
-      // test
     >
       <div
         className="d-flex align-items-center justify-content-center"

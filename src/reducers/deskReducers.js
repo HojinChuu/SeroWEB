@@ -8,6 +8,9 @@ import {
   DESK_QA_FETCH_REQUEST,
   DESK_QA_FETCH_SUCCESS,
   DESK_QA_FETCH_FAIL,
+  DESK_QA_CREATE_REQUEST,
+  DESK_QA_CREATE_SUCCESS,
+  DESK_QA_CREATE_FAIL,
 } from "../constants/deskConstants";
 
 export const fetchNoticesReducer = (state = {}, action) => {
@@ -76,6 +79,20 @@ export const fetchQasReducer = (state = {}, action) => {
       return {
         loading: false,
         error: true,
+      };
+    case DESK_QA_CREATE_REQUEST:
+      return {
+        loading: true,
+      };
+    case DESK_QA_CREATE_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+      };
+    case DESK_QA_CREATE_FAIL:
+      return {
+        loading: false,
+        error: false,
       };
     default:
       return state;

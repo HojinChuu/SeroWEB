@@ -5,6 +5,8 @@ import {
   RECEIVE_POST_FETCH_REQUEST,
   RECEIVE_POST_FETCH_SUCCESS,
   RECEIVE_POST_FETCH_FAIL,
+  SEND_QA_POST_FETCH_SUCCESS,
+  RECEIVE_QA_POST_FETCH_SUCCESS,
 } from "../constants/mailPostConstants";
 
 export const sendPostsReducer = (state = {}, action) => {
@@ -19,6 +21,14 @@ export const sendPostsReducer = (state = {}, action) => {
         sentPosts: action.payload,
         postCount: action.payload.length,
         pageSize: 9,
+        currentPage: action.currentPage ? action.currentPage : 1,
+      };
+    case SEND_QA_POST_FETCH_SUCCESS:
+      return {
+        loading: false,
+        sentPosts: action.payload,
+        postCount: action.payload.length,
+        pageSize: 3,
         currentPage: action.currentPage ? action.currentPage : 1,
       };
     case SEND_POST_FETCH_FAIL:
@@ -43,6 +53,14 @@ export const receivePostsReducer = (state = {}, action) => {
         receivedPosts: action.payload,
         postCount: action.payload.length,
         pageSize: 9,
+        currentPage: action.currentPage ? action.currentPage : 1,
+      };
+    case RECEIVE_QA_POST_FETCH_SUCCESS:
+      return {
+        loading: false,
+        receivedPosts: action.payload,
+        postCount: action.payload.length,
+        pageSize: 3,
         currentPage: action.currentPage ? action.currentPage : 1,
       };
     case RECEIVE_POST_FETCH_FAIL:
