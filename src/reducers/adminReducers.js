@@ -12,6 +12,9 @@ import {
   ADMIN_QUESTION_FETCH_SUCCESS,
   ADMIN_QUESTION_FETCH_FAIL,
   ADMIN_QUESTION_DATE_SAVE,
+  ADMIN_ANSWER_FETCH_REQUEST,
+  ADMIN_ANSWER_FETCH_SUCCESS,
+  ADMIN_ANSWER_FETCH_FAIL,
   ADMIN_ANSWER_REQUEST,
   ADMIN_ANSWER_SUCCESS,
   ADMIN_ANSWER_FAIL,
@@ -36,7 +39,7 @@ export const adminTasksReducer = (state = {}, action) => {
       return {
         loading: false,
         tasks: action.payload,
-        tasksCount: action.payload.length,
+        tasksCount: action.payload ? action.payload.length : 0,
         pageSize: 10,
         currentPage: action.currentPage ? action.currentPage : 1,
       };
@@ -94,7 +97,7 @@ export const adminQuestionsReducer = (state = { question: {} }, action) => {
         ...state,
         loading: false,
         questions: action.payload,
-        questionsCount: action.payload.length,
+        questionsCount: action.payload ? action.payload.length : 0,
         pageSize: 10,
         currentPage: action.currentPage ? action.currentPage : 1,
       };
@@ -104,6 +107,22 @@ export const adminQuestionsReducer = (state = { question: {} }, action) => {
         question: state.questions.filter(
           (item) => item.quId === action.payload
         )[0],
+      };
+    case ADMIN_ANSWER_FETCH_REQUEST:
+      return {
+        ...state,
+        success: false,
+      };
+    case ADMIN_ANSWER_FETCH_SUCCESS:
+      return {
+        ...state,
+        success: true,
+        answers: action.payload,
+      };
+    case ADMIN_ANSWER_FETCH_FAIL:
+      return {
+        ...state,
+        error: true,
       };
     case ADMIN_ANSWER_REQUEST:
       return {
@@ -154,7 +173,7 @@ export const adminNoticesReducer = (state = {}, action) => {
       return {
         loading: false,
         notices: action.payload,
-        noticesCount: action.payload.length,
+        noticesCount: action.payload ? action.payload.length : 0,
         pageSize: 6,
         currentPage: action.currentPage ? action.currentPage : 1,
       };

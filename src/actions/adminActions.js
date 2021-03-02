@@ -14,6 +14,9 @@ import {
   ADMIN_QUESTION_FETCH_SUCCESS,
   ADMIN_QUESTION_FETCH_FAIL,
   ADMIN_QUESTION_DATE_SAVE,
+  ADMIN_ANSWER_FETCH_REQUEST,
+  ADMIN_ANSWER_FETCH_SUCCESS,
+  ADMIN_ANSWER_FETCH_FAIL,
   ADMIN_ANSWER_REQUEST,
   ADMIN_ANSWER_SUCCESS,
   ADMIN_ANSWER_FAIL,
@@ -123,17 +126,36 @@ export const inputQuestionModalData = (questionId) => async (dispatch) => {
   });
 };
 
-export const answerToQuestion = (usId, quCaId, quContent, quParentId) => async (
-  dispatch
-) => {
+export const getQAComment = (usId, quId) => async (dispatch) => {
+  try {
+    dispatch({
+      type: ADMIN_ANSWER_FETCH_REQUEST,
+    });
+
+    const { data } = await axios.post(
+      `${DOMAIN}/web_get_answer`,
+      { usId, quId },
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+    dispatch({
+      type: ADMIN_ANSWER_FETCH_SUCCESS,
+      payload: data.data,
+    });
+  } catch (error) {
+    dispatch({ type: ADMIN_ANSWER_FETCH_FAIL });
+  }
+};
+
+export const answerToQuestion = (usId, quId, anContent) => async (dispatch) => {
   try {
     dispatch({
       type: ADMIN_ANSWER_REQUEST,
     });
 
     const { data } = await axios.post(
-      `${DOMAIN}/web_set_question`,
-      { usId, quCaId, quContent, quParentId },
+      `${DOMAIN}/web_set_answer`,
+      { usId, quId, anContent },
       { headers: { "Content-Type": "application/json" } }
     );
 
