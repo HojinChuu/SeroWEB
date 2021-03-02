@@ -19,7 +19,7 @@ export const sendPostsReducer = (state = {}, action) => {
       return {
         loading: false,
         sentPosts: action.payload,
-        postCount: action.payload.length,
+        postCount: action.payload ? action.payload.length : 0,
         pageSize: 9,
         currentPage: action.currentPage ? action.currentPage : 1,
       };
@@ -27,7 +27,7 @@ export const sendPostsReducer = (state = {}, action) => {
       return {
         loading: false,
         sentPosts: action.payload,
-        postCount: action.payload.length,
+        postCount: action.payload ? action.payload.length : 0,
         pageSize: 3,
         currentPage: action.currentPage ? action.currentPage : 1,
       };
@@ -51,7 +51,7 @@ export const receivePostsReducer = (state = {}, action) => {
       return {
         loading: false,
         receivedPosts: action.payload,
-        postCount: action.payload.length,
+        postCount: action.payload ? action.payload.length : 0,
         pageSize: 9,
         currentPage: action.currentPage ? action.currentPage : 1,
       };
@@ -59,7 +59,7 @@ export const receivePostsReducer = (state = {}, action) => {
       return {
         loading: false,
         receivedPosts: action.payload,
-        postCount: action.payload.length,
+        postCount: action.payload ? action.payload.length : 0,
         pageSize: 3,
         currentPage: action.currentPage ? action.currentPage : 1,
       };

@@ -1,9 +1,63 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { createQAComment, getQAComment } from "../../actions/deskActions";
+import { DESK_QA_FETCH_COMMENT_SUCCESS } from "../../constants/deskConstants";
+import { paginate } from "../../utils/paginate";
 
-const QADetails = ({ history }) => {
+import Loader from "../helpers/Loader";
+import QAComment from "./QAComment";
+import Pagination from "../helpers/Pagination";
+import RefImageModal from "./RefImageModal";
+
+const QADetails = ({ history, match }) => {
   const location = useLocation();
   const qaItem = location.state.qaItem;
+  const userInfo = location.state.userInfo;
+  const [show, setShow] = useState(false);
+  const [comment, setComment] = useState("");
+
+  const handleClose = () => setShow(false);
+
+  const dispatch = useDispatch();
+  const fetchQas = useSelector((state) => state.fetchQas);
+  const {
+    loading,
+    comments,
+    commentsCount,
+    pageSize,
+    currentPage,
+    success,
+  } = fetchQas;
+
+  useEffect(() => {
+    if (userInfo.usId && match.params.id) {
+      dispatch(getQAComment(userInfo.usId, parseInt(match.params.id)));
+    }
+    // eslint-disable-next-line
+  }, [history, dispatch, success]);
+
+  useEffect(() => {
+    if (success) {
+      dispatch({ type: DESK_QA_FETCH_COMMENT_SUCCESS });
+    }
+  }, [dispatch, success]);
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    dispatch(createQAComment(userInfo.usId, match.params.id, comment));
+    setComment("");
+  };
+
+  const pageChangeHandler = (page) => {
+    dispatch({
+      type: DESK_QA_FETCH_COMMENT_SUCCESS,
+      payload: comments,
+      currentPage: page,
+    });
+  };
+
+  const pagedComments = paginate(comments, currentPage, pageSize);
 
   return (
     <Fragment>
@@ -14,6 +68,15 @@ const QADetails = ({ history }) => {
             <span>제목</span>
             <span style={{ marginLeft: "40px" }}>{qaItem.quTitle}</span>
           </div>
+          <span>
+            <button
+              className="btn btn-sm btn-outline-dark mr-2"
+              style={{ lineHeight: "11px" }}
+              onClick={() => setShow(true)}
+            >
+              <span style={{ fontSize: "12px" }}>첨부엽서</span>
+            </button>
+          </span>
         </div>
         <div className="row justify-content-between">
           <div className="col">
@@ -47,15 +110,17 @@ const QADetails = ({ history }) => {
           marginLeft: "10px",
         }}
       >
-        댓글 4
+        댓글 {comments && comments.length}
       </h5>
-      <form className="pr-4 pl-4">
+      <form className="pr-4 pl-4" onSubmit={onSubmitHandler}>
         <div className="row">
           <div className="col" style={{ margin: 0, padding: 0 }}>
             <textarea
               type="text"
-              className="form-control"
+              className="form-control pr-4 pt-2"
               rows="4"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
               style={{ resize: "none" }}
             />
           </div>
@@ -72,58 +137,33 @@ const QADetails = ({ history }) => {
           style={{ border: "solid 1px #bab9b9" }}
           className="ml-2 mr-2 mt-4 mb-5"
         />
-        {/* comment */}
-        <div
-          style={{ background: "#f9f8f7", border: "1px solid #b1b1b1" }}
-          className="pl-3 pr-3 pt-4 rounded"
-        >
-          <div className="row ml-2 mr-2 p-2  rounded justify-content-between ">
-            <div>추호진</div>
-            <div>2021-03-02</div>
-          </div>
-          <div className="p-3 pb-4">
-            세로엽서 시켰는데 아직도 안와요... 해외배송인가요? 두달전에 시켰는데
-            제발좀 온나
-          </div>
-          <hr className="ml-3 mr-3" />
-          <div className="row ml-2 mr-2 p-2  rounded justify-content-between ">
-            <div>추호진</div>
-            <div>2021-03-02</div>
-          </div>
-          <div className="p-3 pb-4">
-            세로엽서 시켰는데 아직도 안와요... 해외배송인가요? 두달전에 시켰는데
-            제발좀 온나
-          </div>
-          <hr className="ml-3 mr-3" />
-          <div className="row ml-2 mr-2 p-2  rounded justify-content-between ">
-            <div>추호진</div>
-            <div>2021-03-02</div>
-          </div>
-          <div className="p-3 pb-4">
-            세로엽서 시켰는데 아직도 안와요... 해외배송인가요? 두달전에 시켰는데
-            제발좀 온나
-          </div>
-          <hr className="ml-3 mr-3" />
-          <div className="row ml-2 mr-2 p-2  rounded justify-content-between ">
-            <div>추호진</div>
-            <div>2021-03-02</div>
-          </div>
-          <div className="p-3 pb-4">
-            세로엽서 시켰는데 아직도 안와요... 해외배송인가요? 두달전에 시켰는데
-            제발좀 온나
-          </div>
-          <hr className="ml-3 mr-3" />
-          <div className="row ml-2 mr-2 p-2  rounded justify-content-between ">
-            <div>추호진</div>
-            <div>2021-03-02</div>
-          </div>
-          <div className="p-3 pb-4">
-            세로엽서 시켰는데 아직도 안와요... 해외배송인가요? 두달전에 시켰는데
-            제발좀 온나
-          </div>
-          <hr className="ml-3 mr-3" />
+        {loading ? (
+          <Loader />
+        ) : (
+          comments &&
+          comments.length !== 0 && (
+            <div
+              style={{ background: "#f9f8f7", border: "1px solid #b1b1b1" }}
+              className="pl-3 pr-3 pt-4 rounded"
+            >
+              {pagedComments.map((item, index) => (
+                <QAComment item={item} key={index} />
+              ))}
+            </div>
+          )
+        )}
+        <div className="mt-5 mb-5">
+          {comments && (
+            <Pagination
+              itemsCount={commentsCount}
+              pageSize={pageSize}
+              currentPage={currentPage}
+              onPageChange={pageChangeHandler}
+            />
+          )}
         </div>
       </div>
+      <RefImageModal show={show} onHide={handleClose} />
     </Fragment>
   );
 };

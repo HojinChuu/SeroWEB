@@ -72,6 +72,7 @@ const QAs = ({ history }) => {
                   key={index}
                   index={index}
                   history={history}
+                  userInfo={userInfo}
                 />
               ))
             ) : (

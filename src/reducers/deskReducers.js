@@ -11,6 +11,12 @@ import {
   DESK_QA_CREATE_REQUEST,
   DESK_QA_CREATE_SUCCESS,
   DESK_QA_CREATE_FAIL,
+  DESK_QA_CREATE_COMMENT_REQUEST,
+  DESK_QA_CREATE_COMMENT_SUCCESS,
+  DESK_QA_CREATE_COMMENT_FAIL,
+  DESK_QA_FETCH_COMMENT_REQUEST,
+  DESK_QA_FETCH_COMMENT_SUCCESS,
+  DESK_QA_FETCH_COMMENT_FAIL,
 } from "../constants/deskConstants";
 
 export const fetchNoticesReducer = (state = {}, action) => {
@@ -23,7 +29,7 @@ export const fetchNoticesReducer = (state = {}, action) => {
       return {
         loading: false,
         notices: action.payload,
-        noticesCount: action.payload.length,
+        noticesCount: action.payload ? action.payload.length : 0,
         pageSize: 6,
         currentPage: action.currentPage ? action.currentPage : 1,
       };
@@ -47,7 +53,7 @@ export const fetchFaqsReducer = (state = {}, action) => {
       return {
         loading: false,
         faqs: action.payload,
-        faqsCount: action.payload.length,
+        faqsCount: action.payload ? action.payload.length : 0,
         pageSize: 6,
         currentPage: action.currentPage ? action.currentPage : 1,
       };
@@ -71,7 +77,7 @@ export const fetchQasReducer = (state = {}, action) => {
       return {
         loading: false,
         qas: action.payload,
-        qasCount: action.payload.length,
+        qasCount: action.payload ? action.payload.length : 0,
         pageSize: 6,
         currentPage: action.currentPage ? action.currentPage : 1,
       };
@@ -93,6 +99,37 @@ export const fetchQasReducer = (state = {}, action) => {
       return {
         loading: false,
         error: false,
+      };
+    case DESK_QA_CREATE_COMMENT_REQUEST:
+      return {
+        loading: true,
+      };
+    case DESK_QA_CREATE_COMMENT_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+      };
+    case DESK_QA_CREATE_COMMENT_FAIL:
+      return {
+        loading: false,
+        error: true,
+      };
+    case DESK_QA_FETCH_COMMENT_REQUEST:
+      return {
+        loading: true,
+      };
+    case DESK_QA_FETCH_COMMENT_SUCCESS:
+      return {
+        loading: false,
+        comments: action.payload,
+        commentsCount: action.payload ? action.payload.length : 0,
+        pageSize: 5,
+        currentPage: action.currentPage ? action.currentPage : 1,
+      };
+    case DESK_QA_FETCH_COMMENT_FAIL:
+      return {
+        loading: false,
+        error: true,
       };
     default:
       return state;

@@ -588,6 +588,43 @@ body
   box-shadow: none;
   -webkit-box-shadow: none;
 }
+/* qa comments pagination */
+#root
+  > main
+  > div
+  > div
+  > div.mb-3.pb-5
+  > div.mt-5.mb-5
+  > div
+  > ul
+  > li.page-item.active
+  > button {
+  background-color: #d8d8d8;
+  color: #a5a5a5;
+  margin-right: 3px;
+  margin-left: 3px;
+  border: none;
+}
+
+#root
+  > main
+  > div
+  > div
+  > div.mb-3.pb-5
+  > div.mt-5.mb-5
+  > div
+  > ul
+  > li
+  > button {
+  background-color: transparent;
+  border: 1px solid #191919;
+  color: #191919;
+  margin-right: 3px;
+  margin-left: 3px;
+  line-height: 1px;
+  height: 32px;
+  width: 30px;
+}
 
 /* login & register */
 .registerForm .form-control {

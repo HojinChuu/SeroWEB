@@ -14,7 +14,7 @@ const AdminAnswer = ({ answerItem }) => {
             {answerItem.User.usName}
           </small>
         )}
-        <span className="p-2">{answerItem.quContent}</span>
+        <span className="p-2">{answerItem.anContent}</span>
         <small className="ml-auto mr-2">
           {answerItem.createdAt.slice(0, 10)}
         </small>

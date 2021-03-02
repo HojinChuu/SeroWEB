@@ -19,7 +19,11 @@ const QuestionItem = ({ question, handleShow }) => {
       </td>
       <td>{question.quUsId}</td>
       <td>{question.Category.caContent}</td>
-      <td>{question.quContent.slice(0, 10) + "..."}</td>
+      <td>
+        {question.quContent.slice(0, 10).length > 10
+          ? question.quContent.slice(0, 10) + "..."
+          : question.quContent.slice(0, 10)}
+      </td>
       <td>{question.createdAt.slice(0, 10)}</td>
       <td>
         <button

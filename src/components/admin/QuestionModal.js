@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal, Button, Image } from "react-bootstrap";
-import { answerToQuestion } from "../../actions/adminActions";
+import { answerToQuestion, getQAComment } from "../../actions/adminActions";
+// import { ADMIN_ANSWER_FETCH_SUCCESS } from "../../constants/adminConstants";
 import { IMAGE_URL } from "../../config";
 
 import AdminAnswer from "./AdminAnswer";
+// import Loader from "../helpers/Loader";
 
 const QuestionAnswer = ({ show, onHide }) => {
   const [answerText, setAnswerText] = useState("");
@@ -14,18 +16,17 @@ const QuestionAnswer = ({ show, onHide }) => {
   const userLogin = useSelector((state) => state.userLogin);
 
   const { userInfo } = userLogin;
-  const { question } = adminQuestions;
+  const { question, answers } = adminQuestions;
+
+  useEffect(() => {
+    if (userInfo && Object.keys(question).length !== 0) {
+      dispatch(getQAComment(userInfo.usId, question.quId));
+    }
+  }, [dispatch, userInfo, question]);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    dispatch(
-      answerToQuestion(
-        userInfo.usId,
-        question.quCaId,
-        answerText,
-        question.quId
-      )
-    );
+    dispatch(answerToQuestion(userInfo.usId, question.quId, answerText));
   };
   return (
     <Modal
@@ -43,7 +44,7 @@ const QuestionAnswer = ({ show, onHide }) => {
         <Modal.Title>
           <h5 className="text-center pb-2 pt-2">문의</h5>
           <div className="row justify-content-center">
-            <div className="col" xs={6} md={6}>
+            <div className="col text-center" xs={6} md={6}>
               <Image
                 src={
                   Object.keys(question).length !== 0 && question.User.usPhoto
@@ -72,9 +73,10 @@ const QuestionAnswer = ({ show, onHide }) => {
           </small>
         </div>
 
-        {Object.keys(question).length !== 0 &&
-          question.answer.map((answerItem) => (
-            <AdminAnswer answerItem={answerItem} key={answerItem.quId} />
+        {answers &&
+          answers.length !== 0 &&
+          answers.map((answerItem, index) => (
+            <AdminAnswer answerItem={answerItem} key={index} />
           ))}
       </Modal.Body>
       <form onSubmit={onSubmitHandler} className="questionModal">
