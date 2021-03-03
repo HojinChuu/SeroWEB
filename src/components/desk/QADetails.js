@@ -102,7 +102,12 @@ const QADetails = ({ history, match }) => {
         <div className="row justify-content-between">
           <div className="col">
             <span>작성자</span>
-            <span style={{ marginLeft: "28px" }}>{qaItem.User.usName}</span>
+            <span style={{ marginLeft: "28px" }}>
+              {(userInfo && qaItem.quUsId === userInfo.usId) ||
+              (userInfo && userInfo.usGrant === 1)
+                ? qaItem.User.usName
+                : qaItem.User.usName.slice(0, -2) + "***"}
+            </span>
           </div>
           <span>
             작성일{" "}
