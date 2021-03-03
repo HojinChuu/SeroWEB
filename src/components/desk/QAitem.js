@@ -34,7 +34,11 @@ const QAitem = ({ qaItem, index, history, userInfo }) => {
         )}
         {qaItem.quContent}
       </td>
-      <td>{qaItem.User.usName}</td>
+      <td>
+        {qaItem.quUsId === usId || (userInfo && userInfo.usGrant === 1)
+          ? qaItem.User.usName
+          : qaItem.User.usName.slice(0, -2) + "***"}
+      </td>
       <td>{qaItem.createdAt.slice(0, 10).replaceAll("-", ".")}</td>
     </tr>
   );
