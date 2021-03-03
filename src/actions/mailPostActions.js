@@ -13,9 +13,7 @@ import {
 
 export const getSendPosts = (usId) => async (dispatch) => {
   try {
-    dispatch({
-      type: SEND_POST_FETCH_REQUEST,
-    });
+    dispatch({ type: SEND_POST_FETCH_REQUEST });
 
     const { data } = await axios.post(
       `${DOMAIN}/web_get_post`,
@@ -34,9 +32,7 @@ export const getSendPosts = (usId) => async (dispatch) => {
 
 export const getReceivePosts = (usId) => async (dispatch) => {
   try {
-    dispatch({
-      type: RECEIVE_POST_FETCH_REQUEST,
-    });
+    dispatch({ type: RECEIVE_POST_FETCH_REQUEST });
 
     const { data } = await axios.post(
       `${DOMAIN}/web_get_received`,
@@ -55,9 +51,7 @@ export const getReceivePosts = (usId) => async (dispatch) => {
 
 export const getQASendPosts = (usId) => async (dispatch) => {
   try {
-    dispatch({
-      type: SEND_POST_FETCH_REQUEST,
-    });
+    dispatch({ type: SEND_POST_FETCH_REQUEST });
 
     const { data } = await axios.post(
       `${DOMAIN}/web_get_post`,
@@ -76,9 +70,7 @@ export const getQASendPosts = (usId) => async (dispatch) => {
 
 export const getQAReceivePosts = (usId) => async (dispatch) => {
   try {
-    dispatch({
-      type: RECEIVE_POST_FETCH_REQUEST,
-    });
+    dispatch({ type: RECEIVE_POST_FETCH_REQUEST });
 
     const { data } = await axios.post(
       `${DOMAIN}/web_get_received`,

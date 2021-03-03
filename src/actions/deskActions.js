@@ -19,13 +19,13 @@ import {
   DESK_QA_FETCH_COMMENT_REQUEST,
   DESK_QA_FETCH_COMMENT_SUCCESS,
   DESK_QA_FETCH_COMMENT_FAIL,
+  DESK_QA_FETCH_POST_REQUEST,
+  DESK_QA_FETCH_POST_SUCCESS,
 } from "../constants/deskConstants";
 
 export const getNotices = () => async (dispatch) => {
   try {
-    dispatch({
-      type: DESK_NOTICE_FETCH_REQUEST,
-    });
+    dispatch({ type: DESK_NOTICE_FETCH_REQUEST });
 
     const { data } = await axios.get(`${DOMAIN}/web_get_notice`);
 
@@ -40,9 +40,7 @@ export const getNotices = () => async (dispatch) => {
 
 export const getFaqs = () => async (dispatch) => {
   try {
-    dispatch({
-      type: DESK_FAQ_FETCH_REQUEST,
-    });
+    dispatch({ type: DESK_FAQ_FETCH_REQUEST });
 
     const { data } = await axios.get(`${DOMAIN}/web_get_faq`);
 
@@ -57,9 +55,7 @@ export const getFaqs = () => async (dispatch) => {
 
 export const getQas = () => async (dispatch) => {
   try {
-    dispatch({
-      type: DESK_QA_FETCH_REQUEST,
-    });
+    dispatch({ type: DESK_QA_FETCH_REQUEST });
 
     const { data } = await axios.get(`${DOMAIN}/web_get_question`);
 
@@ -81,9 +77,7 @@ export const createQa = (
   quShow
 ) => async (dispatch) => {
   try {
-    dispatch({
-      type: DESK_QA_CREATE_REQUEST,
-    });
+    dispatch({ type: DESK_QA_CREATE_REQUEST });
 
     await axios.post(
       `${DOMAIN}/web_set_question`,
@@ -101,9 +95,7 @@ export const createQa = (
 
 export const createQAComment = (usId, quId, anContent) => async (dispatch) => {
   try {
-    dispatch({
-      type: DESK_QA_CREATE_COMMENT_REQUEST,
-    });
+    dispatch({ type: DESK_QA_CREATE_COMMENT_REQUEST });
 
     await axios.post(
       `${DOMAIN}/web_set_answer`,
@@ -119,15 +111,13 @@ export const createQAComment = (usId, quId, anContent) => async (dispatch) => {
   }
 };
 
-export const getQAComment = (usId, quId) => async (dispatch) => {
+export const getQAComments = (quId) => async (dispatch) => {
   try {
-    dispatch({
-      type: DESK_QA_FETCH_COMMENT_REQUEST,
-    });
+    dispatch({ type: DESK_QA_FETCH_COMMENT_REQUEST });
 
     const { data } = await axios.post(
       `${DOMAIN}/web_get_answer`,
-      { usId, quId },
+      { quId },
       { headers: { "Content-Type": "application/json" } }
     );
 
@@ -138,4 +128,21 @@ export const getQAComment = (usId, quId) => async (dispatch) => {
   } catch (error) {
     dispatch({ type: DESK_QA_FETCH_COMMENT_FAIL });
   }
+};
+
+export const getQAPost = (poId) => async (dispatch) => {
+  try {
+    dispatch({ type: DESK_QA_FETCH_POST_REQUEST });
+
+    const { data } = await axios.post(
+      `${DOMAIN}/web_get_detail`,
+      { poId },
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+    dispatch({
+      type: DESK_QA_FETCH_POST_SUCCESS,
+      payload: data.data,
+    });
+  } catch (error) {}
 };

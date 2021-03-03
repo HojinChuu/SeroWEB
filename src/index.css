@@ -4,7 +4,7 @@ html {
   height: 100%;
 }
 body {
-  background-image: url("bg_web.jpg");
+  background-image: url("background.jpg");
 }
 main {
   min-height: 82vh;
@@ -605,7 +605,6 @@ body
   margin-left: 3px;
   border: none;
 }
-
 #root
   > main
   > div
@@ -624,6 +623,18 @@ body
   line-height: 1px;
   height: 32px;
   width: 30px;
+}
+
+/* qa ref post */
+body
+  > div.fade.modal.show
+  > div
+  > div
+  > div.pl-5.pr-5.modal-body
+  > div
+  > div
+  > div.flippy-container:hover {
+  cursor: pointer;
 }
 
 /* login & register */

@@ -21,6 +21,7 @@ const InputAddressScreen = ({ location, history }) => {
 
   const dispatch = useDispatch();
   const addressInput = useSelector((state) => state.addressInput);
+
   const { success, loading, error } = addressInput;
 
   useEffect(() => {
@@ -137,7 +138,11 @@ const InputAddressScreen = ({ location, history }) => {
                 </div>
               </div>
             </div>
-            <button type="submit" className="btn btn-block mt-4 btn-primary">
+            <button
+              type="submit"
+              className="btn btn-block mt-4 btn-dark"
+              style={{ backgroundColor: "#515151" }}
+            >
               확인
             </button>
           </form>

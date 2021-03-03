@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { Fragment } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   findPassSendSms,
@@ -70,7 +69,9 @@ const FindPasswordForm = ({ history }) => {
           className="card p-4 mt-3 rounded mb-4 loginForm"
           style={{ backgroundColor: "transparent" }}
         >
-          <h1 className="text-center">비밀번호 찾기</h1>
+          <h1 className="text-center mb-4" style={{ fontSize: "25px" }}>
+            비밀번호 찾기
+          </h1>
           {message.fail && <Message variant="danger">{message.fail}</Message>}
           {message.success && (
             <Message variant="success">{message.success}</Message>
@@ -93,9 +94,10 @@ const FindPasswordForm = ({ history }) => {
                   <button
                     type="button"
                     variant="primary"
-                    className="btn btn-block btn-primary"
+                    className="btn btn-block btn-dark"
                     disabled={smsCheckSuccess}
                     onClick={smsSendHandler}
+                    style={{ backgroundColor: "#515151" }}
                   >
                     Send SMS
                   </button>
@@ -118,9 +120,10 @@ const FindPasswordForm = ({ history }) => {
                   <button
                     type="button"
                     variant="primary"
-                    className="btn btn-block btn-primary"
+                    className="btn btn-block btn-dark"
                     disabled={code.length === 0}
                     onClick={smsCheckHandler}
+                    style={{ backgroundColor: "#515151" }}
                   >
                     Ok
                   </button>
@@ -153,7 +156,8 @@ const FindPasswordForm = ({ history }) => {
 
                 <button
                   type="submit"
-                  className="btn btn-block btn-primary mt-4 btn-lg rounded"
+                  className="btn btn-block btn-dark mt-4 btn-lg rounded"
+                  style={{ backgroundColor: "#515151" }}
                 >
                   OK
                 </button>

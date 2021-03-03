@@ -1,20 +1,20 @@
 import React, { Fragment, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getQas } from "../../actions/deskActions";
+import { Link } from "react-router-dom";
 import { DESK_QA_FETCH_SUCCESS } from "../../constants/deskConstants";
+import { getQas } from "../../actions/deskActions";
 import { paginate } from "../../utils/paginate";
 
-import QAitem from "./QAitem";
-import Loader from "../helpers/Loader";
 import Pagination from "../helpers/Pagination";
+import Loader from "../helpers/Loader";
+import QAitem from "./QAitem";
 
 const QAs = ({ history }) => {
   const dispatch = useDispatch();
-
   const userLogin = useSelector((state) => state.userLogin);
-  const fetchQas = useSelector((state) => state.fetchQas);
-  const { loading, qas, qasCount, pageSize, currentPage } = fetchQas;
+  const deskQas = useSelector((state) => state.deskQas);
+
+  const { loading, qas, qasCount, pageSize, currentPage } = deskQas;
   const { userInfo } = userLogin;
 
   useEffect(() => {

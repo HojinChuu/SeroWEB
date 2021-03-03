@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { ADMIN_QUESTION_FETCH_SUCCESS } from "../../constants/adminConstants";
 import { getQuestions } from "../../actions/adminActions";
 import { paginate } from "../../utils/paginate";
-import { ADMIN_QUESTION_FETCH_SUCCESS } from "../../constants/adminConstants";
 
 import Loader from "../helpers/Loader";
 import QuestionItem from "./QuestionItem";
@@ -19,16 +19,22 @@ const Questions = () => {
   const adminQuestions = useSelector((state) => state.adminQuestions);
   const {
     loading,
-    success,
     questions,
     questionsCount,
     pageSize,
     currentPage,
+    createSuccess,
   } = adminQuestions;
 
   useEffect(() => {
     dispatch(getQuestions());
-  }, [dispatch, success]);
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (createSuccess) {
+      dispatch(getQuestions());
+    }
+  }, [dispatch, createSuccess]);
 
   const pageChangeHandler = (page) => {
     dispatch({

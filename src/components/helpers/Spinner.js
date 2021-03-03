@@ -1,8 +1,8 @@
 import React from "react";
 
-const Spinner = () => {
+const Spinner = ({ spinnerHeight }) => {
   return (
-    <div style={spinnerContainer}>
+    <div style={{ ...spinnerContainer, ...spinnerHeight }}>
       <svg
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"

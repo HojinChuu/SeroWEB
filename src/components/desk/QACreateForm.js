@@ -3,10 +3,10 @@ import { DropdownButton, Dropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { createQa } from "../../actions/deskActions";
 
+import Message from "../../components/helpers/Message";
+import Loader from "../helpers/Loader";
 import RecievedPostsModal from "./RecievedPostsModal";
 import SentPostsModal from "./SentPostsModal";
-import Loader from "../helpers/Loader";
-import Message from "../../components/helpers/Message";
 
 const QACreateForm = ({ history }) => {
   const [sentBtnShow, setSentBtnShow] = useState(false);
@@ -22,10 +22,10 @@ const QACreateForm = ({ history }) => {
 
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  const deskQas = useSelector((state) => state.deskQas);
 
-  const fetchQas = useSelector((state) => state.fetchQas);
-  const { success, loading } = fetchQas; // reducer error 삭제
+  const { userInfo } = userLogin;
+  const { success, loading } = deskQas;
 
   useEffect(() => {
     if (!userInfo && !localStorage.getItem("userToken")) {
@@ -98,13 +98,7 @@ const QACreateForm = ({ history }) => {
       ) : (
         <Fragment>
           {message && <Message variant="danger">{message}</Message>}
-          <form
-            onSubmit={onSubmitHandler}
-            style={{
-              borderTop: "1px solid black",
-              padding: "40px 50px 50px 0px",
-            }}
-          >
+          <form onSubmit={onSubmitHandler} style={formStyle}>
             <div className="row mb-2">
               <div
                 className="col col-lg-1 col-md-2 col-sm-3 col-3"
@@ -154,12 +148,8 @@ const QACreateForm = ({ history }) => {
               {sentBtnShow && (
                 <button
                   type="button"
-                  className="btn btn-sm btn-primary rounded ml-auto mr-3 pl-3 pr-3"
-                  style={{
-                    backgroundColor: "#4e6f64",
-                    border: "none",
-                    fontWeight: 500,
-                  }}
+                  className="btn btn-sm btn-dark rounded ml-auto mr-3 pl-3 pr-3"
+                  style={sentBtnStyle}
                   onClick={() => setSentShow(true)}
                 >
                   보낸 엽서함
@@ -170,11 +160,7 @@ const QACreateForm = ({ history }) => {
                 <button
                   type="button"
                   className="btn btn-sm rounded ml-auto mr-3 pl-3 pr-3"
-                  style={{
-                    backgroundColor: "#ffc165",
-                    border: "none",
-                    fontWeight: 500,
-                  }}
+                  style={receivedBtnStyle}
                   onClick={() => setReceivedShow(true)}
                 >
                   받은 엽서함
@@ -301,6 +287,23 @@ const QACreateForm = ({ history }) => {
       )}
     </Fragment>
   );
+};
+
+const formStyle = {
+  borderTop: "1px solid black",
+  padding: "40px 50px 50px 0px",
+};
+
+const sentBtnStyle = {
+  backgroundColor: "#4e6f64",
+  border: "none",
+  fontWeight: 500,
+};
+
+const receivedBtnStyle = {
+  backgroundColor: "#ffc165",
+  border: "none",
+  fontWeight: 500,
 };
 
 const buttonStyle = {

@@ -29,7 +29,7 @@ const HomeScreen = () => {
           className="btn rounded"
           style={{ ...buttonStyle, display: width > 414 ? "none" : "" }}
         >
-          <Image src="/image/downloadBtn.png" width="100" />
+          <Image src="/image/app_download.png" width="100" />
         </button>
       </div>
       <div style={{ display: "flex", flexWrap: "wrap" }}>

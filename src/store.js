@@ -23,9 +23,9 @@ import {
   receivePostsReducer,
 } from "./reducers/mailPostReducers";
 import {
-  fetchNoticesReducer,
-  fetchFaqsReducer,
-  fetchQasReducer,
+  deskNoticesReducer,
+  deskFaqsReducer,
+  deskQasReducer,
 } from "./reducers/deskReducers";
 
 const reducer = combineReducers({
@@ -42,9 +42,9 @@ const reducer = combineReducers({
   addressInput: addressInputReducer,
   sendPosts: sendPostsReducer,
   receivePosts: receivePostsReducer,
-  fetchNotices: fetchNoticesReducer,
-  fetchFaqs: fetchFaqsReducer,
-  fetchQas: fetchQasReducer,
+  deskNotices: deskNoticesReducer,
+  deskFaqs: deskFaqsReducer,
+  deskQas: deskQasReducer,
 });
 
 const userTokenFromStorage = localStorage.getItem("userToken")

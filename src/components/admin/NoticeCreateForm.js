@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createNotice } from "../../actions/adminActions";
 

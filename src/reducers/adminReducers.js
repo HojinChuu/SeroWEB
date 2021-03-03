@@ -15,9 +15,9 @@ import {
   ADMIN_ANSWER_FETCH_REQUEST,
   ADMIN_ANSWER_FETCH_SUCCESS,
   ADMIN_ANSWER_FETCH_FAIL,
-  ADMIN_ANSWER_REQUEST,
-  ADMIN_ANSWER_SUCCESS,
-  ADMIN_ANSWER_FAIL,
+  ADMIN_ANSWER_CREATE_REQUEST,
+  ADMIN_ANSWER_CREATE_SUCCESS,
+  ADMIN_ANSWER_CREATE_FAIL,
   ADMIN_NOTICE_CREATE_REQUEST,
   ADMIN_NOTICE_CREATE_SUCCESS,
   ADMIN_NOTICE_CREATE_FAIL,
@@ -111,12 +111,12 @@ export const adminQuestionsReducer = (state = { question: {} }, action) => {
     case ADMIN_ANSWER_FETCH_REQUEST:
       return {
         ...state,
-        success: false,
+        answerLoading: true,
       };
     case ADMIN_ANSWER_FETCH_SUCCESS:
       return {
         ...state,
-        success: true,
+        answerLoading: false,
         answers: action.payload,
       };
     case ADMIN_ANSWER_FETCH_FAIL:
@@ -124,17 +124,16 @@ export const adminQuestionsReducer = (state = { question: {} }, action) => {
         ...state,
         error: true,
       };
-    case ADMIN_ANSWER_REQUEST:
+    case ADMIN_ANSWER_CREATE_REQUEST:
       return {
         ...state,
-        success: false,
       };
-    case ADMIN_ANSWER_SUCCESS:
+    case ADMIN_ANSWER_CREATE_SUCCESS:
       return {
         ...state,
-        success: true,
+        createSuccess: true,
       };
-    case ADMIN_ANSWER_FAIL:
+    case ADMIN_ANSWER_CREATE_FAIL:
       return {
         ...state,
         error: action.payload,

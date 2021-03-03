@@ -16,6 +16,7 @@ const AuthRedirectScreen = ({ history }) => {
       localStorage.removeItem("qrCode");
     }
   }, [history, userToken, success]);
+
   return <Spinner />;
 };
 

@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getNotices } from "../../actions/deskActions";
 import { DESK_NOTICE_FETCH_SUCCESS } from "../../constants/deskConstants";
+import { getNotices } from "../../actions/deskActions";
 import { paginate } from "../../utils/paginate";
 
 import NoticeItem from "./NoticeItem";
@@ -10,14 +10,8 @@ import Pagination from "../helpers/Pagination";
 
 const Notices = ({ history }) => {
   const dispatch = useDispatch();
-  const fetchNotices = useSelector((state) => state.fetchNotices);
-  const {
-    loading,
-    notices,
-    noticesCount,
-    pageSize,
-    currentPage,
-  } = fetchNotices;
+  const deskNotices = useSelector((state) => state.deskNotices);
+  const { loading, notices, noticesCount, pageSize, currentPage } = deskNotices;
 
   useEffect(() => {
     dispatch(getNotices());

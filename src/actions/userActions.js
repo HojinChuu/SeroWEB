@@ -29,9 +29,7 @@ import {
 
 export const register = (formData) => async (dispatch) => {
   try {
-    dispatch({
-      type: USER_REGISTER_REQUEST,
-    });
+    dispatch({ type: USER_REGISTER_REQUEST });
 
     const { data } = await axios.post(`${DOMAIN}/web_fuc_regist`, formData, {
       headers: { "Content-Type": "application/json" },
@@ -81,9 +79,7 @@ export const login = (socialValue, phone, password) => async (dispatch) => {
 
 export const authRequest = (authInfo) => async (dispatch) => {
   try {
-    dispatch({
-      type: USER_AUTH_LOGIN_REQUEST,
-    });
+    dispatch({ type: USER_AUTH_LOGIN_REQUEST });
 
     const { data } = await axios.post(
       `${DOMAIN}/web_fuc_login`,
@@ -117,9 +113,7 @@ export const logout = () => (dispatch) => {
 
 export const sendSms = (phone) => async (dispatch) => {
   try {
-    dispatch({
-      type: USER_PHONE_SMS_REQUEST,
-    });
+    dispatch({ type: USER_PHONE_SMS_REQUEST });
 
     const { data } = await axios.post(
       `${DOMAIN}/web_fuc_sms`,
@@ -138,9 +132,7 @@ export const sendSms = (phone) => async (dispatch) => {
 
 export const findPassSendSms = (phone) => async (dispatch) => {
   try {
-    dispatch({
-      type: USER_FIND_PASS_SMS_REQUEST,
-    });
+    dispatch({ type: USER_FIND_PASS_SMS_REQUEST });
 
     const { data } = await axios.post(
       `${DOMAIN}/web_upt_sms`,
@@ -159,9 +151,7 @@ export const findPassSendSms = (phone) => async (dispatch) => {
 
 export const checkSms = (phone, code) => async (dispatch) => {
   try {
-    dispatch({
-      type: USER_PHONE_SMS_CHECK_REQUEST,
-    });
+    dispatch({ type: USER_PHONE_SMS_CHECK_REQUEST });
 
     const { data } = await axios.post(
       `${DOMAIN}/web_chk_number`,
@@ -180,9 +170,7 @@ export const checkSms = (phone, code) => async (dispatch) => {
 
 export const updatePassword = (phone, password) => async (dispatch) => {
   try {
-    dispatch({
-      type: USER_UPDATE_PASS_REQUEST,
-    });
+    dispatch({ type: USER_UPDATE_PASS_REQUEST });
 
     await axios.post(
       `${DOMAIN}/web_upt_password`,
@@ -200,9 +188,7 @@ export const updatePassword = (phone, password) => async (dispatch) => {
 
 export const getUserInfo = () => async (dispatch) => {
   try {
-    dispatch({
-      type: USER_TOKEN_CHECK_REQUEST,
-    });
+    dispatch({ type: USER_TOKEN_CHECK_REQUEST });
     const storageToken = JSON.parse(localStorage.getItem("userToken"));
 
     const userInfo = await axios.post(
