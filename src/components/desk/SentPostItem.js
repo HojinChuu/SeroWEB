@@ -11,7 +11,7 @@ const SentPostItem = ({ post, postRefHandler, onHide, userInfo }) => {
   return (
     <Card
       className="col col-4"
-      style={{ border: "none", backgroundColor: "transparent" }}
+      style={cardStyle}
       id="modalPostCard"
       onClick={onClickHandler}
     >
@@ -34,6 +34,11 @@ const SentPostItem = ({ post, postRefHandler, onHide, userInfo }) => {
       </div>
     </Card>
   );
+};
+
+const cardStyle = {
+  border: "none",
+  backgroundColor: "transparent",
 };
 
 export default SentPostItem;

@@ -14,9 +14,7 @@ import {
 
 export const getQrcodeData = (qrData, usPhoneNumber) => async (dispatch) => {
   try {
-    dispatch({
-      type: QRCODE_FETCH_REQUEST,
-    });
+    dispatch({ type: QRCODE_FETCH_REQUEST });
 
     const { data } = await axios.post(
       `${DOMAIN}/web_get_qrcode`,
@@ -35,9 +33,7 @@ export const getQrcodeData = (qrData, usPhoneNumber) => async (dispatch) => {
 
 export const saveQrcodePost = (usId, poId) => async (dispatch) => {
   try {
-    dispatch({
-      type: QRCODE_SAVE_POST_REQUEST,
-    });
+    dispatch({ type: QRCODE_SAVE_POST_REQUEST });
 
     await axios.post(
       `${DOMAIN}/web_set_post`,
@@ -62,9 +58,7 @@ export const postAddress = (
   postCode
 ) => async (dispatch) => {
   try {
-    dispatch({
-      type: ADDRESS_INPUT_REQUEST,
-    });
+    dispatch({ type: ADDRESS_INPUT_REQUEST });
 
     await axios.post(
       `${DOMAIN}/web_set_address`,

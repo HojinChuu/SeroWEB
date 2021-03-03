@@ -17,9 +17,9 @@ import {
   ADMIN_ANSWER_FETCH_REQUEST,
   ADMIN_ANSWER_FETCH_SUCCESS,
   ADMIN_ANSWER_FETCH_FAIL,
-  ADMIN_ANSWER_REQUEST,
-  ADMIN_ANSWER_SUCCESS,
-  ADMIN_ANSWER_FAIL,
+  ADMIN_ANSWER_CREATE_REQUEST,
+  ADMIN_ANSWER_CREATE_SUCCESS,
+  ADMIN_ANSWER_CREATE_FAIL,
   ADMIN_NOTICE_CREATE_REQUEST,
   ADMIN_NOTICE_CREATE_SUCCESS,
   ADMIN_NOTICE_CREATE_FAIL,
@@ -33,9 +33,7 @@ import {
 
 export const getTasks = (condition) => async (dispatch) => {
   try {
-    dispatch({
-      type: ADMIN_TASK_FETCH_REQUEST,
-    });
+    dispatch({ type: ADMIN_TASK_FETCH_REQUEST });
 
     if (
       Object.keys(condition).length === 0 ||
@@ -63,9 +61,7 @@ export const getTasks = (condition) => async (dispatch) => {
 
 export const updateTask = (taskState, taskId) => async (dispatch) => {
   try {
-    dispatch({
-      type: ADMIN_TASK_UPDATE_REQUEST,
-    });
+    dispatch({ type: ADMIN_TASK_UPDATE_REQUEST });
 
     await axios.post(
       `${DOMAIN}/web_upt_task`,
@@ -83,9 +79,7 @@ export const updateTask = (taskState, taskId) => async (dispatch) => {
 
 export const removeTask = (taskIdArray) => async (dispatch) => {
   try {
-    dispatch({
-      type: ADMIN_TASK_REMOVE_REQUEST,
-    });
+    dispatch({ type: ADMIN_TASK_REMOVE_REQUEST });
 
     await axios.post(
       `${DOMAIN}/web_del_task`,
@@ -104,9 +98,7 @@ export const removeTask = (taskIdArray) => async (dispatch) => {
 
 export const getQuestions = () => async (dispatch) => {
   try {
-    dispatch({
-      type: ADMIN_QUESTION_FETCH_REQUEST,
-    });
+    dispatch({ type: ADMIN_QUESTION_FETCH_REQUEST });
 
     const { data } = await axios.get(`${DOMAIN}/web_get_question`);
 
@@ -126,11 +118,9 @@ export const inputQuestionModalData = (questionId) => async (dispatch) => {
   });
 };
 
-export const getQAComment = (usId, quId) => async (dispatch) => {
+export const getQAComments = (usId, quId) => async (dispatch) => {
   try {
-    dispatch({
-      type: ADMIN_ANSWER_FETCH_REQUEST,
-    });
+    dispatch({ type: ADMIN_ANSWER_FETCH_REQUEST });
 
     const { data } = await axios.post(
       `${DOMAIN}/web_get_answer`,
@@ -149,9 +139,7 @@ export const getQAComment = (usId, quId) => async (dispatch) => {
 
 export const answerToQuestion = (usId, quId, anContent) => async (dispatch) => {
   try {
-    dispatch({
-      type: ADMIN_ANSWER_REQUEST,
-    });
+    dispatch({ type: ADMIN_ANSWER_CREATE_REQUEST });
 
     const { data } = await axios.post(
       `${DOMAIN}/web_set_answer`,
@@ -160,19 +148,17 @@ export const answerToQuestion = (usId, quId, anContent) => async (dispatch) => {
     );
 
     dispatch({
-      type: ADMIN_ANSWER_SUCCESS,
+      type: ADMIN_ANSWER_CREATE_SUCCESS,
       payload: data.data,
     });
   } catch (error) {
-    dispatch({ type: ADMIN_ANSWER_FAIL });
+    dispatch({ type: ADMIN_ANSWER_CREATE_FAIL });
   }
 };
 
 export const createNotice = (noTitle, noContent) => async (dispatch) => {
   try {
-    dispatch({
-      type: ADMIN_NOTICE_CREATE_REQUEST,
-    });
+    dispatch({ type: ADMIN_NOTICE_CREATE_REQUEST });
 
     await axios.post(
       `${DOMAIN}/web_set_notice`,
@@ -190,9 +176,7 @@ export const createNotice = (noTitle, noContent) => async (dispatch) => {
 
 export const getNotices = () => async (dispatch) => {
   try {
-    dispatch({
-      type: ADMIN_NOTICE_FETCH_REQUEST,
-    });
+    dispatch({ type: ADMIN_NOTICE_FETCH_REQUEST });
 
     const { data } = await axios.get(`${DOMAIN}/web_get_notice`);
 
@@ -207,9 +191,7 @@ export const getNotices = () => async (dispatch) => {
 
 export const removeNotice = (noId) => async (dispatch) => {
   try {
-    dispatch({
-      type: ADMIN_NOTICE_REMOVE_REQUEST,
-    });
+    dispatch({ type: ADMIN_NOTICE_REMOVE_REQUEST });
 
     await axios.post(
       `${DOMAIN}/web_del_notice`,

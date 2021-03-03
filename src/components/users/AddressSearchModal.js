@@ -1,7 +1,7 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import DaumPostcode from "react-daum-postcode";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
-import { useLocation } from "react-router-dom";
 
 const AddressSearchModal = ({ visible, onComplete, cancelBtn }) => {
   const location = useLocation();

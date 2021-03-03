@@ -7,12 +7,12 @@ import {
   Dropdown,
   DropdownButton,
 } from "react-bootstrap";
-import { getSendPosts, getReceivePosts } from "../actions/mailPostActions";
-import { paginate } from "../utils/paginate";
 import {
   RECEIVE_POST_FETCH_SUCCESS,
   SEND_POST_FETCH_SUCCESS,
 } from "../constants/mailPostConstants";
+import { getSendPosts, getReceivePosts } from "../actions/mailPostActions";
+import { paginate } from "../utils/paginate";
 
 import Spinner from "../components/helpers/Spinner";
 import ReceivedCardItem from "../components/mailbox/ReceivedCardItem";
@@ -23,10 +23,10 @@ import SlideReceivedCardItem from "../components/mailbox/SlideReceivedCardItem";
 import SlideSentCardItem from "../components/mailbox/SlideSentCardItem";
 
 const MailboxScreen = ({ history }) => {
-  const dispatch = useDispatch();
   const [toggle, setToggle] = useState(false);
   const [viewToggle, setViewToggle] = useState(false);
 
+  const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const sendPosts = useSelector((state) => state.sendPosts);
   const receivePosts = useSelector((state) => state.receivePosts);

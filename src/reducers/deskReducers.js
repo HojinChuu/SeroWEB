@@ -17,9 +17,11 @@ import {
   DESK_QA_FETCH_COMMENT_REQUEST,
   DESK_QA_FETCH_COMMENT_SUCCESS,
   DESK_QA_FETCH_COMMENT_FAIL,
+  DESK_QA_FETCH_POST_REQUEST,
+  DESK_QA_FETCH_POST_SUCCESS,
 } from "../constants/deskConstants";
 
-export const fetchNoticesReducer = (state = {}, action) => {
+export const deskNoticesReducer = (state = {}, action) => {
   switch (action.type) {
     case DESK_NOTICE_FETCH_REQUEST:
       return {
@@ -43,7 +45,7 @@ export const fetchNoticesReducer = (state = {}, action) => {
   }
 };
 
-export const fetchFaqsReducer = (state = {}, action) => {
+export const deskFaqsReducer = (state = {}, action) => {
   switch (action.type) {
     case DESK_FAQ_FETCH_REQUEST:
       return {
@@ -67,7 +69,7 @@ export const fetchFaqsReducer = (state = {}, action) => {
   }
 };
 
-export const fetchQasReducer = (state = {}, action) => {
+export const deskQasReducer = (state = {}, action) => {
   switch (action.type) {
     case DESK_QA_FETCH_REQUEST:
       return {
@@ -130,6 +132,17 @@ export const fetchQasReducer = (state = {}, action) => {
       return {
         loading: false,
         error: true,
+      };
+    case DESK_QA_FETCH_POST_REQUEST:
+      return {
+        ...state,
+        postLoading: true,
+      };
+    case DESK_QA_FETCH_POST_SUCCESS:
+      return {
+        ...state,
+        postLoading: false,
+        refPost: action.payload,
       };
     default:
       return state;

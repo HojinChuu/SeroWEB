@@ -1,8 +1,8 @@
 import React, { useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getNotices } from "../../actions/adminActions";
 import { ADMIN_NOTICE_FETCH_SUCCESS } from "../../constants/adminConstants";
+import { getNotices } from "../../actions/adminActions";
 import { paginate } from "../../utils/paginate";
 
 import NoticeItem from "../admin/NoticeItem";

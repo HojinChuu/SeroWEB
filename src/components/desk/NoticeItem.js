@@ -7,6 +7,7 @@ const NoticeItem = ({ notice, index, history }) => {
       state: { notice },
     });
   };
+
   return (
     <tr className="text-center" onClick={handleClick}>
       <td>{index + 1}</td>

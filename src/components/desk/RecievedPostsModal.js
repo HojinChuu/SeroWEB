@@ -1,22 +1,21 @@
 import React, { Fragment, useEffect } from "react";
-import { Modal, Button, CardGroup, Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { Modal, Button, CardGroup, Image } from "react-bootstrap";
+import { RECEIVE_QA_POST_FETCH_SUCCESS } from "../../constants/mailPostConstants";
 import { getQAReceivePosts } from "../../actions/mailPostActions";
 import { paginate } from "../../utils/paginate";
-import { RECEIVE_QA_POST_FETCH_SUCCESS } from "../../constants/mailPostConstants";
 
-import NoPostItem from "./NoPostItem";
-import Loader from "../../components/helpers/Loader";
 import Pagination from "../../components/helpers/Pagination";
 import RecievedPostItem from "./RecievedPostItem";
+import Loader from "../../components/helpers/Loader";
+import NoPostItem from "./NoPostItem";
 
 const RecievedPostsModal = ({ show, onHide, postRefHandler }) => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
-
   const receivePosts = useSelector((state) => state.receivePosts);
-  const { userInfo } = userLogin;
 
+  const { userInfo } = userLogin;
   const {
     loading,
     receivedPosts,
@@ -58,12 +57,7 @@ const RecievedPostsModal = ({ show, onHide, postRefHandler }) => {
       {loading ? (
         <Loader />
       ) : (
-        <Modal.Body
-          className="pl-5 pr-5 pt-5"
-          style={{
-            background: "linear-gradient(to bottom, #ffc165 50%, #ffffff 50%)",
-          }}
-        >
+        <Modal.Body className="pl-5 pr-5 pt-5" style={modalStyle}>
           <div className="row justify-content-between pl-3 pr-3">
             <div className="row pl-3">
               <Image
@@ -72,15 +66,7 @@ const RecievedPostsModal = ({ show, onHide, postRefHandler }) => {
                 height="22px"
                 className="mr-2"
               />
-              <h5
-                style={{
-                  color: "black",
-                  fontWeight: "400",
-                  lineHeight: "23px",
-                }}
-              >
-                받은 엽서함
-              </h5>
+              <h5 style={textStyle}>받은 엽서함</h5>
             </div>
             <Image src="/image/seroLogo_sm.png" width="90px" height="22px" />
           </div>
@@ -141,7 +127,7 @@ const RecievedPostsModal = ({ show, onHide, postRefHandler }) => {
             <Button
               onClick={onHide}
               className="pl-4 pr-4 rounded"
-              style={{ backgroundColor: "#515151", border: "none" }}
+              style={cancleBtn}
             >
               취소
             </Button>
@@ -150,6 +136,21 @@ const RecievedPostsModal = ({ show, onHide, postRefHandler }) => {
       )}
     </Modal>
   );
+};
+
+const modalStyle = {
+  background: "linear-gradient(to bottom, #ffc165 50%, #ffffff 50%)",
+};
+
+const textStyle = {
+  color: "black",
+  fontWeight: "400",
+  lineHeight: "23px",
+};
+
+const cancleBtn = {
+  backgroundColor: "#515151",
+  border: "none",
 };
 
 export default RecievedPostsModal;

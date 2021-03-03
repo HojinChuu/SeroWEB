@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect } from "react";
-import { Accordion } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getFaqs } from "../../actions/deskActions";
+import { Accordion } from "react-bootstrap";
 import { DESK_FAQ_FETCH_SUCCESS } from "../../constants/deskConstants";
+import { getFaqs } from "../../actions/deskActions";
 import { paginate } from "../../utils/paginate";
 
 import FAQItem from "./FAQItem";
@@ -11,8 +11,8 @@ import Pagination from "../helpers/Pagination";
 
 const FAQs = ({ history }) => {
   const dispatch = useDispatch();
-  const fetchFaqs = useSelector((state) => state.fetchFaqs);
-  const { loading, faqs, faqsCount, pageSize, currentPage } = fetchFaqs;
+  const deskFaqs = useSelector((state) => state.deskFaqs);
+  const { loading, faqs, faqsCount, pageSize, currentPage } = deskFaqs;
 
   useEffect(() => {
     dispatch(getFaqs());

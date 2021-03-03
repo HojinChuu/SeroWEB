@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Image } from "react-bootstrap";
 
 const QAitem = ({ qaItem, index, history, userInfo }) => {
-  const [usId, setUsId] = useState();
+  const [usId, setUsId] = useState(0);
 
   useEffect(() => {
     if (userInfo) {
@@ -11,9 +11,7 @@ const QAitem = ({ qaItem, index, history, userInfo }) => {
   }, [history, userInfo]);
 
   const handleClick = () => {
-    if (qaItem.quShow === 1 && qaItem.quUsId !== usId) {
-      console.log("못들어감");
-    } else {
+    if (qaItem.quShow === 0 || qaItem.quUsId === usId) {
       history.push({
         pathname: `/desk/qa/detail/${qaItem.quId}`,
         state: { qaItem, userInfo },

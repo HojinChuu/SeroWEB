@@ -18,8 +18,8 @@ const LoginScreen = ({ history }) => {
   const [message, setMessage] = useState("");
 
   const dispatch = useDispatch();
-
   const userLogin = useSelector((state) => state.userLogin);
+
   const { loading, userToken, success, error } = userLogin;
 
   useEffect(() => {

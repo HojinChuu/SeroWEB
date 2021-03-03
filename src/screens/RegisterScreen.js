@@ -179,9 +179,10 @@ const RegisterScreen = ({ history }) => {
                   <button
                     type="button"
                     variant="primary"
-                    className="btn btn-block btn-primary"
+                    className="btn btn-block btn-dark"
                     disabled={smsCheckSuccess}
                     onClick={smsSendHandler}
+                    style={{ backgroundColor: "#515151" }}
                   >
                     Send SMS
                   </button>
@@ -204,9 +205,10 @@ const RegisterScreen = ({ history }) => {
                   <button
                     type="button"
                     variant="primary"
-                    className="btn btn-block btn-primary"
+                    className="btn btn-block btn-dark"
                     disabled={code.length === 0}
                     onClick={smsCheckHandler}
+                    style={{ backgroundColor: "#515151" }}
                   >
                     Ok
                   </button>
@@ -337,7 +339,11 @@ const RegisterScreen = ({ history }) => {
               </Fragment>
             )}
 
-            <button type="submit" className="btn btn-block mt-4 btn-primary">
+            <button
+              type="submit"
+              className="btn btn-block mt-4 btn-dark"
+              style={{ backgroundColor: "#515151" }}
+            >
               Register
             </button>
           </form>

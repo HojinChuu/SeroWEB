@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Route, Link, useLocation } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import useWindowDimensions from "../hooks/useWindowDimensions";
@@ -9,8 +9,6 @@ import QAs from "../components/desk/QAs";
 import QACreateForm from "../components/desk/QACreateForm";
 import NoticeDetails from "../components/desk/NoticeDetails";
 import QADetails from "../components/desk/QADetails";
-
-import { Fragment } from "react";
 
 const DeskScreen = ({ match }) => {
   const location = useLocation();
