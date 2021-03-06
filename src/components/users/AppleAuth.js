@@ -2,8 +2,8 @@ import React from "react";
 import AppleLogin from "react-apple-signin-auth";
 
 const AppleAuth = () => {
-  const onSuccess = () => {
-    console.log("success");
+  const onSuccess = (response) => {
+    console.log(response);
   };
 
   const onFailure = () => {

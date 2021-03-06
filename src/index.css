@@ -212,6 +212,39 @@ body > div.fade.modal.show > div > div {
   height: 32px;
   width: 30px;
 }
+#root
+  > main
+  > div.container
+  > div
+  > div
+  > div.row.justify-content-center
+  > ul
+  > li.page-item.active
+  > button {
+  background-color: #d8d8d8;
+  color: #a5a5a5;
+  margin-right: 3px;
+  margin-left: 3px;
+  border: none;
+}
+#root
+  > main
+  > div.container
+  > div
+  > div
+  > div.row.justify-content-center
+  > ul
+  > li
+  > button {
+  background-color: transparent;
+  border: 1px solid #191919;
+  color: #191919;
+  margin-right: 3px;
+  margin-left: 3px;
+  line-height: 1px;
+  height: 32px;
+  width: 30px;
+}
 
 /* qrcode  */
 #qrpostAddBtn {
