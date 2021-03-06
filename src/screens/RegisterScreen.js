@@ -223,7 +223,7 @@ const RegisterScreen = ({ history }) => {
                 placeholder="Enter Name"
                 className="form-control"
                 value={name}
-                readOnly={authInfo}
+                // readOnly={authInfo}
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
