@@ -98,7 +98,7 @@ export const adminQuestionsReducer = (state = { question: {} }, action) => {
         loading: false,
         questions: action.payload,
         questionsCount: action.payload ? action.payload.length : 0,
-        pageSize: 10,
+        pageSize: 6,
         currentPage: action.currentPage ? action.currentPage : 1,
       };
     case ADMIN_QUESTION_DATE_SAVE:
