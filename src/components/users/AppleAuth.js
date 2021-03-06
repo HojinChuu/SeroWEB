@@ -1,13 +1,26 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import AppleLogin from "react-apple-signin-auth";
+import { authRequest } from "../../actions/userActions";
+import { DEFAULT_PROFILE } from "../../config";
 
-const AppleAuth = () => {
-  const onSuccess = (response) => {
-    console.log(response);
+const AppleAuth = ({ history }) => {
+  const dispatch = useDispatch();
+
+  const onSuccess = ({ authorization }) => {
+    const response = JSON.parse(atob(authorization.id_token.split(".")[1]));
+    const authInfo = {
+      id: response.sub,
+      name: "이름을 정해주세요",
+      image: DEFAULT_PROFILE,
+      usSocialValue: 3,
+    };
+    dispatch(authRequest(authInfo));
+    history.push("/auth");
   };
 
   const onFailure = () => {
-    console.log("error");
+    // console.log("error");
   };
 
   return (

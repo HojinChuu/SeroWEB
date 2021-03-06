@@ -109,7 +109,7 @@ const LoginScreen = ({ history }) => {
                   비밀번호 찾기
                 </Link>
               </div>
-              <AppleAuth />
+              <AppleAuth history={history} />
               <GoogleAuth history={history} />
               <KakaoAuth history={history} />
             </div>
