@@ -66,7 +66,7 @@ const SentPostsModal = ({ show, onHide, postRefHandler }) => {
             </div>
             <Image src="/image/seroLogo_sm.png" width="90px" height="22px" />
           </div>
-          <CardGroup className="mt-5 row justify-content-center">
+          <CardGroup className="mt-5 pt-5 row justify-content-center">
             {sentPosts && sentPosts.length > 2 ? (
               pagedSentPosts.map((post, index) => (
                 <SentPostItem
@@ -138,7 +138,7 @@ const SentPostsModal = ({ show, onHide, postRefHandler }) => {
 };
 
 const modalStyle = {
-  background: "linear-gradient(to bottom, #4e6f64 50%, #ffffff 50%)",
+  background: "linear-gradient(to bottom, #4e6f64 17%, #ffffff 0%)",
 };
 
 const textStyle = {

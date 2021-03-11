@@ -95,8 +95,29 @@ footer {
   color: white;
   font-size: 17px;
   font-weight: bold;
-  background-color: #23394d;
+  background-color: #8e8e8e;
   border-top: 1px solid lightgrey;
+}
+
+footer .title {
+  color: #cecece;
+}
+
+footer .title span {
+  margin-left: 20px;
+}
+
+footer .subTitle {
+  color: #cecece;
+}
+
+footer .subTitle span:not(:nth-child(4)) {
+  border-right: 1px solid #cecece;
+  padding-right: 20px;
+}
+
+footer .subTitle span {
+  margin-left: 15px;
 }
 
 /* spinner */

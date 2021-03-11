@@ -32,7 +32,7 @@ const QAitem = ({ qaItem, index, history, userInfo }) => {
             className="mr-2 mb-1"
           />
         )}
-        {qaItem.quContent}
+        {qaItem.quTitle}
       </td>
       <td>
         {qaItem.quUsId === usId || (userInfo && userInfo.usGrant === 1)

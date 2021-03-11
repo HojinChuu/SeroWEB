@@ -180,7 +180,7 @@ const QADetails = ({ history, match }) => {
               className="pl-3 pr-3 pt-4 rounded"
             >
               {pagedComments.map((item, index) => (
-                <QAComment item={item} key={index} />
+                <QAComment item={item} key={index} userInfo={userInfo} />
               ))}
             </div>
           )
