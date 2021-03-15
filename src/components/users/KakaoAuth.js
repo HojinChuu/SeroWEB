@@ -1,53 +1,47 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
+import KakaoLogin from "react-kakao-login";
 import { authRequest } from "../../actions/userActions";
 import { KAKAO_CLIENT_ID, DEFAULT_PROFILE } from "../../config";
 
 const KakaoAuth = ({ history }) => {
-  const { Kakao } = window;
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (!Kakao.isInitialized()) {
-      Kakao.init(KAKAO_CLIENT_ID);
-    }
-  });
+  const onSuccess = ({ profile }) => {
+    const authInfo = {
+      id: profile.googleId,
+      name: profile.properties.nickname,
+      image: profile.kakao_account.profile.profile_image_url
+        ? DEFAULT_PROFILE
+        : DEFAULT_PROFILE,
+      usSocialValue: 1,
+    };
+    dispatch(authRequest(authInfo));
+    history.push("/auth");
+  };
 
-  const onSuccess = () => {
-    Kakao.Auth.login({
-      throughTalk: false,
-      success: () => {
-        Kakao.API.request({
-          url: "/v2/user/me",
-          success: (profile) => {
-            const authInfo = {
-              id: profile.id,
-              name: profile.kakao_account.profile.nickname,
-              image: profile.kakao_account.profile.profile_image_url
-                ? profile.kakao_account.profile.profile_image_url
-                : DEFAULT_PROFILE,
-              usSocialValue: 1,
-            };
-            dispatch(authRequest(authInfo));
-            history.push("/auth");
-          },
-        });
-      },
-      fail: (error) => {
-        console.log(error);
-      },
-    });
+  const onFailure = (res) => {
+    // console.log(res);
   };
 
   return (
-    <button
-      id="kakao-login-btn"
-      onClick={onSuccess}
-      style={kakaoBtn}
-      className="mt-2 btn btn-lg rounded"
-    >
-      kakao
-    </button>
+    <KakaoLogin
+      token={KAKAO_CLIENT_ID}
+      onSuccess={onSuccess}
+      onFail={onFailure}
+      onLogout={console.info}
+      render={(renderProps) => {
+        return (
+          <button
+            className="mt-2 btn btn-lg rounded"
+            onClick={renderProps.onClick}
+            style={kakaoBtn}
+          >
+            kakao
+          </button>
+        );
+      }}
+    />
   );
 };
 

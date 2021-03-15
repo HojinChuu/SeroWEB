@@ -1,6 +1,6 @@
 import React from "react";
 
-const NoticeItem = ({ notice, index, history }) => {
+const NoticeItem = ({ notice, history }) => {
   const handleClick = () => {
     history.push({
       pathname: `/desk/notice/${notice.noId}`,
@@ -10,7 +10,7 @@ const NoticeItem = ({ notice, index, history }) => {
 
   return (
     <tr className="text-center" onClick={handleClick}>
-      <td>{index + 1}</td>
+      <td>{notice.noId}</td>
       <td>
         {notice.noTitle.length > 4
           ? notice.noTitle.slice(0, 30) + "..."

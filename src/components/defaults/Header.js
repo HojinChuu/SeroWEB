@@ -74,24 +74,24 @@ const Header = () => {
             <Nav className="mr-auto navCustomRight">
               <LinkContainer to="/about">
                 <Nav.Link>
-                  <span>About</span>
+                  <span>소개</span>
                 </Nav.Link>
               </LinkContainer>
               <LinkContainer to="/social">
                 <Nav.Link>
-                  <span>Social</span>
+                  <span>이웃이야기</span>
                 </Nav.Link>
               </LinkContainer>
               {userInfo && (
                 <LinkContainer to="/mailbox">
                   <Nav.Link>
-                    <span>Mailbox</span>
+                    <span>메일함</span>
                   </Nav.Link>
                 </LinkContainer>
               )}
               <LinkContainer to="/desk">
                 <Nav.Link>
-                  <span>Desk</span>
+                  <span>더보기</span>
                 </Nav.Link>
               </LinkContainer>
             </Nav>
@@ -106,29 +106,29 @@ const Header = () => {
                   {userInfo && userInfo.usGrant === 1 && (
                     <LinkContainer to="/admin" className="mr-4">
                       <Nav.Link>
-                        <span>Admin</span>
+                        <span>관리자</span>
                       </Nav.Link>
                     </LinkContainer>
                   )}
                   {userInfo ? (
                     <NavDropdown title={userInfo.usName} id="username">
                       <LinkContainer to="/mypage">
-                        <NavDropdown.Item>Mypage</NavDropdown.Item>
+                        <NavDropdown.Item>마이페이지</NavDropdown.Item>
                       </LinkContainer>
                       <NavDropdown.Item onClick={logoutHandler}>
-                        Logout
+                        로그아웃
                       </NavDropdown.Item>
                     </NavDropdown>
                   ) : (
                     <Fragment>
                       <LinkContainer to="/login">
                         <Nav.Link>
-                          <span>Login</span>
+                          <span>로그인</span>
                         </Nav.Link>
                       </LinkContainer>
                       <LinkContainer to="/register">
                         <Nav.Link>
-                          <span>Sign up</span>
+                          <span>회원가입</span>
                         </Nav.Link>
                       </LinkContainer>
                     </Fragment>

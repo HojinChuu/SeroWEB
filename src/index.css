@@ -101,19 +101,24 @@ footer {
 
 footer .title {
   color: #cecece;
+  font-size: 15px;
+  margin-left: 0px;
+  font-size: 15px;
 }
 
 footer .title span {
+  margin-right: 14px;
   margin-left: 20px;
 }
 
 footer .subTitle {
   color: #cecece;
+  font-size: 15px;
 }
 
 footer .subTitle span:not(:nth-child(4)) {
   border-right: 1px solid #cecece;
-  padding-right: 20px;
+  padding-right: 40px;
 }
 
 footer .subTitle span {
@@ -708,6 +713,22 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+/* register check */
+#root
+  > main
+  > div.container
+  > div
+  > div
+  > div
+  > form
+  > div.row.py-3
+  > div.col.col-1
+  > input:focus {
+  outline: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
 }
 
 /* font */

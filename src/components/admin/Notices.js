@@ -71,8 +71,8 @@ const Notices = () => {
               </tr>
             ) : (
               notices &&
-              pagedNotices.map((notice, index) => (
-                <NoticeItem notice={notice} key={notice.noId} index={index} />
+              pagedNotices.map((notice) => (
+                <NoticeItem notice={notice} key={notice.noId} />
               ))
             )}
           </tbody>

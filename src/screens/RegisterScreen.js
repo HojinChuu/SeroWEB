@@ -8,6 +8,7 @@ import { DEFAULT_PROFILE } from "../config";
 
 import FormContainer from "../components/helpers/FormContainer";
 import AddressSearchModal from "../components/users/AddressSearchModal";
+import RegisterAgreeModal from "../components/users/RegisterAgreeModal";
 import Message from "../components/helpers/Message";
 import Spinner from "../components/helpers/Spinner";
 
@@ -24,6 +25,7 @@ const RegisterScreen = ({ history }) => {
   const [message, setMessage] = useState({ success: "", fail: "" });
   const [smsVisible, setSmsVisible] = useState(false);
   const [postSearch, setPostSearch] = useState(false);
+  const [show, setShow] = useState(false);
 
   const dispatch = useDispatch();
   const userRegister = useSelector((state) => state.userRegister);
@@ -69,6 +71,8 @@ const RegisterScreen = ({ history }) => {
       });
     }
   }, [authInfo]);
+
+  const handleClose = () => setShow(false);
 
   const smsSendHandler = () => {
     if (!phone) {
@@ -338,7 +342,21 @@ const RegisterScreen = ({ history }) => {
                 </div>
               </Fragment>
             )}
-
+            <div className="row pb-1 pt-1">
+              <div className="col col-1 mt-1">
+                <input type="checkbox" style={{ width: "20px" }} required />
+              </div>
+              <div style={{ lineHeight: "23px" }}>
+                <button
+                  type="button"
+                  className="btn"
+                  style={{ fontSize: "13px", padding: "0", margin: "0" }}
+                  onClick={() => setShow(true)}
+                >
+                  개인정보 처리방침
+                </button>
+              </div>
+            </div>
             <button
               type="submit"
               className="btn btn-block mt-4 btn-dark"
@@ -355,6 +373,7 @@ const RegisterScreen = ({ history }) => {
           </div>
         </div>
       )}
+      <RegisterAgreeModal show={show} onHide={handleClose} />
     </FormContainer>
   );
 };
