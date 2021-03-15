@@ -349,7 +349,7 @@ const RegisterScreen = ({ history }) => {
               <div style={{ lineHeight: "23px" }}>
                 <button
                   type="button"
-                  className="btn"
+                  className="btn ml-2"
                   style={{ fontSize: "13px", padding: "0", margin: "0" }}
                   onClick={() => setShow(true)}
                 >
