@@ -42,21 +42,27 @@ const Footer = () => {
                 className={
                   location.pathname === "/" && width <= 414
                     ? // ? "col p-3 mb-4"
-                      "col p-3 "
-                    : "col p-3"
+                      "col pt-2 pr-2 pl-2 "
+                    : "col pt-2 pr-2 pl-2"
                 }
               >
-                <div className="title">
+                <div className="title" style={{ fontSize: "14px" }}>
                   <div className="ml-3">
                     Copyright &copy; 2021 Seropost.All right reserved
                   </div>
                   <div>
-                    <span>개인정보 처리방침</span>
-                    <span>이용약관</span>
-                    <span>고객센터</span>
+                    <span style={{ fontSize: "14px", marginLeft: "17px" }}>
+                      개인정보 처리방침
+                    </span>
+                    <span style={{ fontSize: "14px", marginLeft: "0" }}>
+                      이용약관
+                    </span>
+                    <span style={{ fontSize: "14px", marginLeft: "0" }}>
+                      고객센터
+                    </span>
                   </div>
                 </div>
-                <div className="p-3 subTitle">
+                <div className="p-3 subTitle" style={{ fontSize: "14px" }}>
                   <div>개인정보책임관리자: 안준용</div>
                   <div>사업자등록번호: 123-45-678910</div>
                   <div>통신판매업신고번호: 제2021-대구북구-0443호</div>
