@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { removeNotice } from "../../actions/adminActions";
 import showAlert from "../../utils/alert";
 
-const NoticeItem = ({ notice, index }) => {
+const NoticeItem = ({ notice }) => {
   const dispatch = useDispatch();
 
   const removeHandler = (id) => {
@@ -18,7 +18,7 @@ const NoticeItem = ({ notice, index }) => {
 
   return (
     <tr className="text-center">
-      <td style={{ lineHeight: "25px" }}>{index + 1}</td>
+      <td style={{ lineHeight: "25px" }}>{notice.noId}</td>
       <td style={{ lineHeight: "25px" }}>
         {notice.noTitle.length > 4
           ? notice.noTitle.slice(0, 20) + "..."

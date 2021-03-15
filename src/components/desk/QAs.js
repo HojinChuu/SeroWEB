@@ -70,7 +70,6 @@ const QAs = ({ history }) => {
                 <QAitem
                   qaItem={qaItem}
                   key={index}
-                  index={index}
                   history={history}
                   userInfo={userInfo}
                 />

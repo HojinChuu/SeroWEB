@@ -51,7 +51,6 @@ const Notices = ({ history }) => {
                 <NoticeItem
                   notice={notice}
                   key={notice.noId}
-                  index={index}
                   history={history}
                 />
               ))

@@ -11,6 +11,7 @@ import {
   USER_LOGOUT,
   USER_TOKEN_CHECK_REQUEST,
   USER_TOKEN_CHECK_SUCCESS,
+  USER_TOKEN_CHECK_FAIL,
   USER_PHONE_SMS_REQUEST,
   USER_PHONE_SMS_SUCCESS,
   USER_PHONE_SMS_FAIL,
@@ -89,6 +90,10 @@ export const userLoginReducer = (state = {}, action) => {
       return {
         loading: false,
         userInfo: action.payload,
+      };
+    case USER_TOKEN_CHECK_FAIL:
+      return {
+        loading: false,
       };
     case USER_LOGOUT:
       return {};

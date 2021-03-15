@@ -13,6 +13,7 @@ import {
   USER_LOGOUT,
   USER_TOKEN_CHECK_SUCCESS,
   USER_TOKEN_CHECK_REQUEST,
+  USER_TOKEN_CHECK_FAIL,
   USER_PHONE_SMS_REQUEST,
   USER_PHONE_SMS_SUCCESS,
   USER_PHONE_SMS_FAIL,
@@ -201,5 +202,7 @@ export const getUserInfo = () => async (dispatch) => {
       type: USER_TOKEN_CHECK_SUCCESS,
       payload: userInfo.data.data,
     });
-  } catch (error) {}
+  } catch (error) {
+    dispatch({ type: USER_TOKEN_CHECK_FAIL });
+  }
 };

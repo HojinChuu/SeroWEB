@@ -18,7 +18,7 @@ const HomeScreen = () => {
 
   return (
     <div>
-      <div>
+      {/* <div>
         <button
           onClick={() =>
             type === "ios"
@@ -31,7 +31,7 @@ const HomeScreen = () => {
         >
           <Image src="/image/app_download.png" width="100" />
         </button>
-      </div>
+      </div> */}
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {width > 600 ? (
           <video style={{ height: "100%", width: "100%" }} autoPlay loop muted>
@@ -97,14 +97,14 @@ const colStyle = {
   fontSize: "30px",
 };
 
-const buttonStyle = {
-  position: "absolute",
-  bottom: -0,
-  right: 0,
-  border: "none",
-  outline: "none",
-  boxShadow: "none",
-  zIndex: 1000,
-};
+// const buttonStyle = {
+//   position: "absolute",
+//   bottom: -0,
+//   right: 0,
+//   border: "none",
+//   outline: "none",
+//   boxShadow: "none",
+//   zIndex: 1000,
+// };
 
 export default HomeScreen;
