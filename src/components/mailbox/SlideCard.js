@@ -14,23 +14,79 @@ const SlideCard = ({ children }) => {
       navigation
       centeredSlides
       grabCursor
-      breakpoints={{
-        1450: {
-          slidesPerView: 4,
-        },
-        1070: {
-          slidesPerView: 3,
-        },
-        768: {
-          slidesPerView: 2,
-        },
-        640: {
-          slidesPerView: 2,
-        },
-        320: {
-          slidesPerView: 1,
-        },
-      }}
+      breakpoints={
+        children.props.children.length > 3
+          ? {
+              1450: {
+                slidesPerView: 4,
+              },
+              1070: {
+                slidesPerView: 3,
+              },
+              768: {
+                slidesPerView: 2,
+              },
+              640: {
+                slidesPerView: 2,
+              },
+              320: {
+                slidesPerView: 1,
+              },
+            }
+          : children.props.children.length === 3
+          ? {
+              1450: {
+                slidesPerView: 3.5,
+              },
+              1070: {
+                slidesPerView: 3,
+              },
+              768: {
+                slidesPerView: 2,
+              },
+              640: {
+                slidesPerView: 2,
+              },
+              320: {
+                slidesPerView: 1,
+              },
+            }
+          : children.props.children.length === 2
+          ? {
+              1450: {
+                slidesPerView: 2.5,
+              },
+              1070: {
+                slidesPerView: 3,
+              },
+              768: {
+                slidesPerView: 2,
+              },
+              640: {
+                slidesPerView: 2,
+              },
+              320: {
+                slidesPerView: 1,
+              },
+            }
+          : {
+              1450: {
+                slidesPerView: 1.5,
+              },
+              1070: {
+                slidesPerView: 3,
+              },
+              768: {
+                slidesPerView: 2,
+              },
+              640: {
+                slidesPerView: 2,
+              },
+              320: {
+                slidesPerView: 1,
+              },
+            }
+      }
     >
       {children}
     </Swiper>

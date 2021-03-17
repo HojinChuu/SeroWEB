@@ -204,5 +204,6 @@ export const getUserInfo = () => async (dispatch) => {
     });
   } catch (error) {
     dispatch({ type: USER_TOKEN_CHECK_FAIL });
+    localStorage.removeItem("userToken");
   }
 };
