@@ -1,8 +1,11 @@
 import React from "react";
 import { Card, Row } from "react-bootstrap";
 import { IMAGE_URL } from "../../config";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 const SentPostItem = ({ post, postRefHandler, onHide, userInfo }) => {
+  const { width } = useWindowDimensions();
+
   const onClickHandler = () => {
     postRefHandler(post.poId);
     onHide();
@@ -10,7 +13,7 @@ const SentPostItem = ({ post, postRefHandler, onHide, userInfo }) => {
 
   return (
     <Card
-      className="col col-4"
+      className={width > 990 ? "col col-4" : "col col-10"}
       style={cardStyle}
       id="modalPostCard"
       onClick={onClickHandler}

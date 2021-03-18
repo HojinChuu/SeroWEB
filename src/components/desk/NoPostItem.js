@@ -1,10 +1,13 @@
 import React from "react";
 import { Card } from "react-bootstrap";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 const NoPostItem = () => {
+  const { width } = useWindowDimensions();
+
   return (
     <Card
-      className="col col-4"
+      className={width > 990 ? "col col-4" : "col col-10"}
       style={{ border: "none", backgroundColor: "transparent" }}
     >
       <div

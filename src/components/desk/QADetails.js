@@ -53,8 +53,10 @@ const QADetails = ({ history, match }) => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    dispatch(createQAComment(userInfo.usId, match.params.id, comment));
-    setComment("");
+    if (comment !== "") {
+      dispatch(createQAComment(userInfo.usId, match.params.id, comment));
+      setComment("");
+    }
   };
 
   const pageChangeHandler = (page) => {
@@ -151,6 +153,7 @@ const QADetails = ({ history, match }) => {
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 style={{ resize: "none" }}
+                required
               />
             </div>
             <input
@@ -158,6 +161,7 @@ const QADetails = ({ history, match }) => {
               value="댓글입력"
               className="btn btn-dark p-4"
               style={{ fontSize: "12px" }}
+              disabled={!comment}
             />
           </div>
         </form>
