@@ -683,6 +683,9 @@ body
   height: 32px;
   width: 30px;
 }
+#root > main > div > div > form > div > input:disabled {
+  background-color: #000000;
+}
 
 /* qa ref post */
 body

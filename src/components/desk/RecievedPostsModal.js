@@ -52,7 +52,6 @@ const RecievedPostsModal = ({ show, onHide, postRefHandler }) => {
       centered
       backdrop="static"
       keyboard={false}
-      scrollable
     >
       {loading ? (
         <Loader />
@@ -139,7 +138,7 @@ const RecievedPostsModal = ({ show, onHide, postRefHandler }) => {
 };
 
 const modalStyle = {
-  background: "linear-gradient(to bottom, #ffc165 17%, #ffffff 0%)",
+  background: "linear-gradient(to bottom, #ffc165 110px, #ffffff 0%)",
 };
 
 const textStyle = {
