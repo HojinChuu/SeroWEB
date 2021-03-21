@@ -102,12 +102,9 @@ footer {
 footer .title {
   color: #cecece;
   font-size: 15px;
-  margin-left: 0px;
-  font-size: 15px;
 }
 
 footer .title span {
-  margin-right: 14px;
   margin-left: 20px;
 }
 
@@ -116,13 +113,10 @@ footer .subTitle {
   font-size: 15px;
 }
 
-footer .subTitle span:not(:nth-child(4)) {
-  border-right: 1px solid #cecece;
-  padding-right: 40px;
-}
-
-footer .subTitle span {
-  margin-left: 15px;
+footer .subTitle span:not(:nth-child(1)) {
+  border-left: 1px solid #cecece;
+  margin-left: 23px;
+  padding-left: 25px;
 }
 
 /* spinner */
