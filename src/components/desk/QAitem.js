@@ -11,7 +11,12 @@ const QAitem = ({ qaItem, history, userInfo }) => {
   }, [history, userInfo]);
 
   const handleClick = () => {
-    if (qaItem.quShow === 0 || qaItem.quUsId === usId) {
+    if (userInfo && userInfo.usGrant === 1) {
+      history.push({
+        pathname: `/desk/qa/detail/${qaItem.quId}`,
+        state: { qaItem, userInfo },
+      });
+    } else if (qaItem.quShow === 0 || qaItem.quUsId === usId) {
       history.push({
         pathname: `/desk/qa/detail/${qaItem.quId}`,
         state: { qaItem, userInfo },
@@ -24,13 +29,19 @@ const QAitem = ({ qaItem, history, userInfo }) => {
       <td>{qaItem.quId}</td>
       <td>{qaItem.Category.caContent}</td>
       <td>
-        {qaItem.quShow === 1 && qaItem.quUsId !== usId && (
-          <Image
-            src="/image/locked.png"
-            width="15"
-            height="15"
-            className="mr-2 mb-1"
-          />
+        {qaItem.quShow === 1 && qaItem.quUsId !== usId ? (
+          userInfo && userInfo.usGrant === 1 ? (
+            <></>
+          ) : (
+            <Image
+              src="/image/locked.png"
+              width="15"
+              height="15"
+              className="mr-2 mb-1"
+            />
+          )
+        ) : (
+          <></>
         )}
         {qaItem.quTitle}
       </td>
