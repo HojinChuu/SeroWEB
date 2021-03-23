@@ -18,20 +18,6 @@ const HomeScreen = () => {
 
   return (
     <div>
-      {/* <div>
-        <button
-          onClick={() =>
-            type === "ios"
-              ? (window.location =
-                  "https://apps.apple.com/kr/app/trello/id1278508951?mt=12")
-              : "http://play.google.com/store/apps/details?id=com.google.android.apps.maps"
-          }
-          className="btn rounded"
-          style={{ ...buttonStyle, display: width > 414 ? "none" : "" }}
-        >
-          <Image src="/image/app_download.png" width="100" />
-        </button>
-      </div> */}
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {width > 600 ? (
           <video style={{ height: "100%", width: "100%" }} autoPlay loop muted>
@@ -66,20 +52,61 @@ const HomeScreen = () => {
           />
         </Col>
       </div>
-      <div
-        style={{
-          backgroundColor: "#dedbdb",
-          display: "flex",
-          flexWrap: "wrap",
-        }}
-      >
-        {width > 600 && (
-          <Image
-            src="/image/homeImage3.png"
-            style={{ height: "100%", width: "50%", margin: "0 auto" }}
-          />
-        )}
-      </div>
+      {width > 600 && (
+        <div>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              height: "100%",
+            }}
+          >
+            <Image
+              src="/image/homeImage3.png"
+              style={{
+                width: "50%",
+                margin: "0 auto",
+              }}
+            />
+          </div>
+          <div
+            style={{
+              position: "absolute",
+              bottom: "4%",
+              textAlign: "center",
+              width: "100%",
+              height: "80px",
+            }}
+          >
+            <Image
+              src="/image/appleStore.png"
+              style={{
+                width: "8%",
+                objectFit: "contain",
+                cursor: "pointer",
+              }}
+              className="ml-2"
+              onClick={() =>
+                (window.location =
+                  "https://apps.apple.com/kr/app/trello/id1278508951?mt=12")
+              }
+            />
+            <Image
+              src="/image/googlePlay.png"
+              style={{
+                width: "9%",
+                objectFit: "contain",
+                cursor: "pointer",
+              }}
+              className="ml-2"
+              onClick={() =>
+                (window.location =
+                  "http://play.google.com/store/apps/details?id=com.google.android.apps.maps")
+              }
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -96,15 +123,5 @@ const colStyle = {
   textAlign: "center",
   fontSize: "30px",
 };
-
-// const buttonStyle = {
-//   position: "absolute",
-//   bottom: -0,
-//   right: 0,
-//   border: "none",
-//   outline: "none",
-//   boxShadow: "none",
-//   zIndex: 1000,
-// };
 
 export default HomeScreen;
