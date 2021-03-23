@@ -17,9 +17,17 @@ const Footer = () => {
                   <div className="row justify-content-between title">
                     <div>Copyright &copy; 2021 Seropost.All right reserved</div>
                     <div>
-                      <span>개인정보 처리방침</span>
-                      <span>이용약관</span>
-                      <span>고객센터</span>
+                      <span>
+                        <a href="https://seropost.com/privacy.html">
+                          개인정보 처리방침
+                        </a>
+                      </span>
+                      <span>
+                        <a href="https://seropost.com/privacy.html">이용약관</a>
+                      </span>
+                      <span>
+                        <a href="https://seropost.com/desk/qa">고객센터</a>
+                      </span>
                     </div>
                   </div>
                   <div className="row mt-4 subTitle justify-content-center">
@@ -40,13 +48,15 @@ const Footer = () => {
                   </div>
                   <div>
                     <span style={{ fontSize: "14px", marginLeft: "17px" }}>
-                      개인정보 처리방침
+                      <a href="https://seropost.com/privacy.html">
+                        개인정보 처리방침
+                      </a>
                     </span>
                     <span style={{ fontSize: "14px", marginLeft: "7px" }}>
-                      이용약관
+                      <a href="https://seropost.com/privacy.html">이용약관</a>
                     </span>
                     <span style={{ fontSize: "14px", marginLeft: "7px" }}>
-                      고객센터
+                      <a href="https://seropost.com/desk/qa">고객센터</a>
                     </span>
                   </div>
                 </div>

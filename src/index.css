@@ -104,6 +104,11 @@ footer .title {
   font-size: 15px;
 }
 
+footer .title a {
+  color: #cecece;
+  font-size: 15px;
+}
+
 footer .title span {
   margin-left: 20px;
 }
