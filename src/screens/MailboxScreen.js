@@ -127,8 +127,8 @@ const MailboxScreen = ({ history }) => {
             ) : receivedPosts.length === 0 ? (
               <Image
                 src="/image/empty_post.png"
-                width="40%"
-                style={{ margin: "200px" }}
+                width={viewToggle ? "23.4%" : "40%"}
+                style={{ marginTop: "200px" }}
               />
             ) : viewToggle ? (
               <SlideCard>
@@ -151,8 +151,8 @@ const MailboxScreen = ({ history }) => {
           ) : sentPosts.length === 0 ? (
             <Image
               src="/image/empty_post.png"
-              width="40%"
-              style={{ margin: "200px" }}
+              width={viewToggle ? "33.4%" : "40%"}
+              style={{ marginTop: "200px" }}
             />
           ) : viewToggle ? (
             <SlideCard>

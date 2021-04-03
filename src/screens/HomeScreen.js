@@ -1,6 +1,6 @@
 import React from "react";
 import { Image, Col } from "react-bootstrap";
-import useWindowDimensions from "../hooks/useWindowDimensions";
+import useWindowDimensions from "../../src/hooks/useWindowDimensions";
 
 const HomeScreen = () => {
   const { width } = useWindowDimensions();
@@ -19,16 +19,24 @@ const HomeScreen = () => {
   return (
     <div>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {width > 600 ? (
-          <video style={{ height: "100%", width: "100%" }} autoPlay loop muted>
-            <source src="/image/homeVideo.mp4" type="video/mp4"></source>
-          </video>
-        ) : (
-          <Image
-            src="/image/homeVIdeo_sm.png"
-            style={{ height: "100vh", width: "100%" }}
-          />
-        )}
+        <video
+          id="mainVideo"
+          style={{ height: "100%", width: "100%" }}
+          autoPlay
+          loop
+          muted
+        >
+          <source src="image/homeVideo.mp4" type="video/mp4"></source>
+        </video>
+        <video
+          id="mainSmVideo"
+          style={{ height: "100%", width: "100%" }}
+          autoPlay
+          loop
+          muted
+        >
+          <source src="image/homeVideo_sm.mp4" type="video/mp4"></source>
+        </video>
       </div>
       <div style={rowStyle}>
         <Col style={colStyle}>
@@ -62,9 +70,9 @@ const HomeScreen = () => {
             }}
           >
             <Image
-              src="/image/homeImage3.png"
+              src="/image/mainpage3.png"
               style={{
-                width: "50%",
+                width: "100%",
                 margin: "0 auto",
               }}
             />
@@ -72,7 +80,8 @@ const HomeScreen = () => {
           <div
             style={{
               position: "absolute",
-              bottom: "4%",
+              bottom: "10%",
+              left: "12%",
               textAlign: "center",
               width: "100%",
               height: "80px",
@@ -101,7 +110,7 @@ const HomeScreen = () => {
               className="ml-2"
               onClick={() =>
                 (window.location =
-                  "http://play.google.com/store/apps/details?id=com.google.android.apps.maps")
+                  "https://play.google.com/store/apps/details?id=com.app.seropost")
               }
             />
           </div>

@@ -15,7 +15,7 @@ const FAQItem = ({ faq, index }) => {
         <Card.Body className="mt-2">
           <div className="ml-1" style={{ height: "200px" }}>
             <span style={spanStyle}>A.</span>
-            {faq.faContent}
+            <span style={{ whiteSpace: "pre-line" }}>{faq.faContent}</span>
           </div>
         </Card.Body>
       </Accordion.Collapse>

@@ -733,6 +733,19 @@ input::-webkit-inner-spin-button {
   -webkit-box-shadow: none;
 }
 
+/* home */
+@media (min-width: 600px) {
+  #mainSmVideo {
+    display: none;
+  }
+}
+
+@media not all and (min-width: 600px) {
+  #mainVideo {
+    display: none;
+  }
+}
+
 /* font */
 @font-face {
   font-family: "Noto Serif KR";
