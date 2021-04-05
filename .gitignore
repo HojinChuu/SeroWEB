@@ -13,8 +13,8 @@
 
 
 # config
-src/config.js
-public/image
+# src/config.js
+# public/image
 
 # misc
 .DS_Store
