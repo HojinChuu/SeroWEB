@@ -5,15 +5,7 @@ const SocialScreen = () => {
   return (
     <Container>
       <div style={containerStyle}>
-        <Card
-          style={{
-            width: "40rem",
-            fontWeight: "500",
-            fontSize: "28px",
-            marginTop: "20px",
-          }}
-          id="socialCard"
-        >
+        <Card style={titleStyle} id="socialCard">
           <p>4월 이웃이야기, Covid-19 Blue</p>
         </Card>
       </div>
@@ -95,6 +87,13 @@ const SocialScreen = () => {
       </div>
     </Container>
   );
+};
+
+const titleStyle = {
+  width: "40rem",
+  fontWeight: "500",
+  fontSize: "28px",
+  marginTop: "20px",
 };
 
 const containerStyle = {
