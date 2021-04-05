@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Card, Container } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
 
 const SocialScreen = () => {
   return (
@@ -7,7 +7,7 @@ const SocialScreen = () => {
       <div style={containerStyle}>
         <Card
           style={{
-            width: "36rem",
+            width: "40rem",
             fontWeight: "500",
             fontSize: "28px",
             marginTop: "20px",
@@ -18,7 +18,7 @@ const SocialScreen = () => {
         </Card>
       </div>
       <div style={containerStyle}>
-        <Card style={{ width: "36rem" }} id="socialCard">
+        <Card style={{ width: "40rem" }} id="socialCard">
           <Card.Header className="socialHeader">
             취업준비생, 나는 쓸모 없는 존재인 것 같아요.
           </Card.Header>
@@ -38,7 +38,7 @@ const SocialScreen = () => {
         </Card>
       </div>
       <div style={containerStyle}>
-        <Card style={{ width: "36rem" }} id="socialCard">
+        <Card style={{ width: "40rem" }} id="socialCard">
           <Card.Header className="socialHeader">
             의료진, 월화수목금금금.
           </Card.Header>
@@ -58,7 +58,7 @@ const SocialScreen = () => {
         </Card>
       </div>
       <div style={containerStyle}>
-        <Card style={{ width: "36rem" }} id="socialCard">
+        <Card style={{ width: "40rem" }} id="socialCard">
           <Card.Header className="socialHeader">
             소상공인, 망했습니다.
           </Card.Header>
@@ -76,7 +76,7 @@ const SocialScreen = () => {
         </Card>
       </div>
       <div style={containerStyle} className="pb-5">
-        <Card style={{ width: "36rem" }} id="socialCard">
+        <Card style={{ width: "40rem" }} id="socialCard">
           <Card.Header className="socialHeader">
             함께해요, 엄지 챌린지.
           </Card.Header>

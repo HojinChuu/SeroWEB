@@ -733,6 +733,37 @@ input::-webkit-inner-spin-button {
   -webkit-box-shadow: none;
 }
 
+/* about impact */
+#aboutCard {
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  padding-left: 0;
+  line-height: 1.72;
+  letter-spacing: -0.45px;
+  text-align: left;
+  color: #505050;
+  font-family: "Noto Serif KR";
+  background-color: transparent;
+  border: none;
+}
+
+#aboutCard .aboutHeader {
+  font-family: fantasy;
+  font-size: 40px;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+}
+
+#aboutCard .aboutBody {
+  font-size: 14px;
+}
+
+#aboutCard .aboutBody p {
+  text-align: center;
+}
+
 /* social impact */
 #socialCard {
   font-weight: normal;
