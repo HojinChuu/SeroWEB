@@ -4,17 +4,8 @@ import { Card, Container } from "react-bootstrap";
 const AboutScreen = () => {
   return (
     <Container>
-      <Card
-        style={{
-          fontWeight: "500",
-          fontSize: "28px",
-          marginTop: "20px",
-          textAlign: "center",
-          marginBottom: "50px",
-        }}
-        id="aboutCard"
-      >
-        <p>편지 보내기 설명서</p>
+      <Card style={titleStyle} id="aboutCard">
+        <p>편지 보내기 설명서 수정!!</p>
       </Card>
       <div className="row" style={{ marginBottom: "5%" }}>
         <div className="col col-xs-12 col-sm-12 col-md-4 col-lg-4 col-12">
@@ -51,19 +42,10 @@ const AboutScreen = () => {
           </Card>
         </div>
       </div>
-      <Card
-        style={{
-          fontWeight: "500",
-          fontSize: "28px",
-          marginTop: "20px",
-          textAlign: "center",
-          marginBottom: "50px",
-        }}
-        id="aboutCard"
-      >
+
+      <Card style={titleStyle} id="aboutCard">
         <p>편지 받기 설명서</p>
       </Card>
-
       <div className="row" style={{ marginBottom: "5%" }}>
         <div className="col col-xs-12 col-sm-12 col-md-4 col-lg-4 col-12">
           <Card style={{ width: "100%" }} id="aboutCard" className="pr-4 pl-4">
@@ -104,6 +86,14 @@ const AboutScreen = () => {
       </div>
     </Container>
   );
+};
+
+const titleStyle = {
+  fontWeight: "500",
+  fontSize: "28px",
+  marginTop: "20px",
+  textAlign: "center",
+  marginBottom: "50px",
 };
 
 export default AboutScreen;
