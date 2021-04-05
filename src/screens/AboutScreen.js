@@ -5,7 +5,7 @@ const AboutScreen = () => {
   return (
     <Container>
       <Card style={titleStyle} id="aboutCard">
-        <p>편지 보내기 설명서 수정!!</p>
+        <p>편지 보내기 설명서</p>
       </Card>
       <div className="row" style={{ marginBottom: "5%" }}>
         <div className="col col-xs-12 col-sm-12 col-md-4 col-lg-4 col-12">
