@@ -16,6 +16,8 @@
 src/config.js
 # public/image
 
+.eslintcache
+
 # misc
 .DS_Store
 .env.local
