@@ -733,6 +733,38 @@ input::-webkit-inner-spin-button {
   -webkit-box-shadow: none;
 }
 
+/* social impact */
+#socialCard {
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  padding-left: 0;
+  line-height: 1.72;
+  letter-spacing: -0.45px;
+  text-align: left;
+  color: #505050;
+  font-family: "Noto Serif KR";
+  background-color: transparent;
+  border: none;
+}
+
+#socialCard .socialHeader {
+  padding-left: 0;
+  font-size: 18px;
+  background-color: transparent;
+}
+
+#socialCard .socialBody {
+  padding-left: 0;
+  font-size: 13px;
+}
+
+#socialCard .socialBody .card-title {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.41;
+}
+
 /* home */
 @media (min-width: 600px) {
   #mainSmVideo {
