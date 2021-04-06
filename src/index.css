@@ -855,4 +855,5 @@ input::-webkit-inner-spin-button {
 /* design branch css test */
 .test {
   background-color: #007bdf;
+  font-size: 200px;
 }
