@@ -852,3 +852,7 @@ input::-webkit-inner-spin-button {
       format("otf");
 }
 
+.test {
+  font: optional;
+}
+
