@@ -851,3 +851,8 @@ input::-webkit-inner-spin-button {
     url(https://cdn.rawgit.com/kattergil/NotoSerifKR-Katter/7392ea08/fonts/NotoSerifCJKkr-Bold-subset.otf)
       format("otf");
 }
+
+/* design branch css test */
+.test {
+  background-color: #007bdf;
+}
