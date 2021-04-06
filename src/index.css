@@ -856,3 +856,6 @@ input::-webkit-inner-spin-button {
   font: optional;
 }
 
+.test {
+  font: optional;
+}
