@@ -856,4 +856,5 @@ input::-webkit-inner-spin-button {
 .test {
   background-color: #007bdf;
   font-size: 200px;
+  border: 1px solid "#dddddd";
 }
