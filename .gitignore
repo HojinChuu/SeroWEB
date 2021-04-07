@@ -14,7 +14,7 @@
 
 # config
 src/config.js
-# public/image
+public/image
 
 .eslintcache
 
