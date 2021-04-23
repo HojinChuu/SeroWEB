@@ -749,7 +749,8 @@ input::-webkit-inner-spin-button {
 }
 
 #aboutCard .aboutHeader {
-  font-family: fantasy;
+  font-family: "Noto Sans KR";
+  font-weight: 400;
   font-size: 40px;
   padding: 0;
   background-color: transparent;
@@ -758,6 +759,7 @@ input::-webkit-inner-spin-button {
 
 #aboutCard .aboutBody {
   font-size: 15px;
+  font-family: "Noto sans KR";
   padding-left: 0;
   padding-right: 0;
 }
@@ -852,3 +854,8 @@ input::-webkit-inner-spin-button {
       format("otf");
 }
 
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+.notosanskr * {
+  font-family: "Noto Sans KR", sans-serif;
+}
