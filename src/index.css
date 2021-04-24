@@ -769,35 +769,51 @@ input::-webkit-inner-spin-button {
 }
 
 /* social impact */
-#socialCard {
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  padding-left: 0;
-  line-height: 1.72;
-  letter-spacing: -0.45px;
-  text-align: left;
-  color: #505050;
-  font-family: "Noto Serif KR";
+
+#socialCardImage {
   background-color: transparent;
   border: none;
 }
 
-#socialCard .socialHeader {
-  padding-left: 0;
-  font-size: 18px;
+#socialCardText .card {
   background-color: transparent;
+  border: none;
 }
 
-#socialCard .socialBody {
+#socialCardText .card .card-img {
+  width: 70%;
+}
+
+#socialCardText .card .card-body {
   padding-left: 0;
-  font-size: 13px;
 }
 
-#socialCard .socialBody .card-title {
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.41;
+#socialCardText .card .card-body .card-text {
+  font-size: 15px;
+  line-height: 1.8;
+  font-family: "Noto Sans KR";
+}
+
+#socialCardText .card .card-body p {
+  font-size: 15px;
+  margin-top: 30px;
+  font-family: "Noto Sans KR";
+}
+
+#socialLastCard {
+  padding-left: 0;
+}
+
+#socialLastCard .card-text {
+  font-size: 15px;
+  line-height: 1.8;
+  font-family: "Noto Sans KR";
+}
+
+#socialLastCard p {
+  font-size: 15px;
+  margin-top: 30px;
+  font-family: "Noto Sans KR";
 }
 
 /* home */
