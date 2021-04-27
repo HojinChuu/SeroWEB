@@ -145,10 +145,7 @@ const RegisterScreen = ({ history }) => {
       {loading ? (
         <Spinner />
       ) : (
-        <div
-          className="card p-4 mt-4 rounded mb-5 registerForm"
-          style={{ backgroundColor: "transparent" }}
-        >
+        <div className="card p-4 mt-4 rounded mb-5 registerForm">
           <h1 className="text-center">SIGN UP</h1>
           {validation && (
             <Message variant="danger">
