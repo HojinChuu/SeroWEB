@@ -699,10 +699,19 @@ body
 }
 
 /* login & register */
+.registerForm {
+  background-color: transparent;
+  border-style: dashed;
+}
 .registerForm .form-control {
   background-color: transparent;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.loginForm {
+  background-color: transparent;
+  border-style: dashed;
 }
 .loginForm .form-control {
   background-color: transparent;

@@ -1,7 +1,10 @@
 import React from "react";
 import { Card, Container } from "react-bootstrap";
+import useWindowDimensions from "../hooks/useWindowDimensions";
 
 const AboutScreen = () => {
+  const { width } = useWindowDimensions();
+
   return (
     <Container>
       <Card style={titleStyle} id="aboutCard">
@@ -9,9 +12,13 @@ const AboutScreen = () => {
       </Card>
       <div className="row" style={{ marginBottom: "5%" }}>
         <div className="col col-xs-12 col-sm-12 col-md-4 col-lg-4 col-12">
-          <Card style={{ width: "100%" }} id="aboutCard">
+          <Card id="aboutCard">
             <Card.Header className="aboutHeader pl-4 pr-4">01</Card.Header>
-            <Card.Img src="/image/aboutImage1.png" />
+            <Card.Img
+              src="/image/aboutImage1.png"
+              style={width > 767 ? { width: "100%" } : { width: "60%" }}
+              className="m-auto"
+            />
             <Card.Body className="aboutBody">
               <Card.Text>
                 세로엽서 앱을 통해 엽서를 작성한다. <br />
@@ -21,9 +28,13 @@ const AboutScreen = () => {
           </Card>
         </div>
         <div className="col col-xs-12 col-sm-12 col-md-4 col-lg-4 col-12">
-          <Card style={{ width: "100%" }} id="aboutCard">
+          <Card id="aboutCard">
             <Card.Header className="aboutHeader pl-4 pr-4">02</Card.Header>
-            <Card.Img src="/image/aboutImage2.png" />
+            <Card.Img
+              src="/image/aboutImage2.png"
+              style={width > 767 ? { width: "100%" } : { width: "60%" }}
+              className="m-auto"
+            />
             <Card.Body className="aboutBody">
               <Card.Text>
                 받는 이의 전화번호 또는 주소를 입력 후 결제한다. <br />
@@ -35,7 +46,11 @@ const AboutScreen = () => {
         <div className="col col-xs-12 col-sm-12 col-md-4 col-lg-4 col-12">
           <Card style={{ width: "100%" }} id="aboutCard">
             <Card.Header className="aboutHeader pl-4 pr-4">03</Card.Header>
-            <Card.Img src="/image/aboutImage3.png" />
+            <Card.Img
+              src="/image/aboutImage3.png"
+              style={width > 767 ? { width: "100%" } : { width: "60%" }}
+              className="m-auto"
+            />
             <Card.Body className="aboutBody">
               <Card.Text>받는 이에게 연락이 오길 기다린다.</Card.Text>
             </Card.Body>
@@ -44,13 +59,19 @@ const AboutScreen = () => {
       </div>
 
       <Card style={titleStyle} id="aboutCard">
-        <p>편지 받기 설명서</p>
+        <p style={width > 767 ? { marginTop: "50px" } : { marginTop: "80px" }}>
+          편지 받기 설명서
+        </p>
       </Card>
       <div className="row" style={{ marginBottom: "5%" }}>
         <div className="col col-xs-12 col-sm-12 col-md-4 col-lg-4 col-12">
           <Card style={{ width: "100%" }} id="aboutCard" className="pr-4 pl-4">
             <Card.Header className="aboutHeader">01</Card.Header>
-            <Card.Img src="/image/aboutImage4.png" />
+            <Card.Img
+              src="/image/aboutImage4.png"
+              style={width > 767 ? { width: "100%" } : { width: "60%" }}
+              className="m-auto"
+            />
             <Card.Body className="aboutBody">
               <Card.Text>
                 세로엽서, 소셜 임팩트 카드를 천천히 읽는다. <br />
@@ -62,7 +83,11 @@ const AboutScreen = () => {
         <div className="col col-xs-12 col-sm-12 col-md-4 col-lg-4 col-12">
           <Card style={{ width: "100%" }} id="aboutCard" className="pr-4 pl-4">
             <Card.Header className="aboutHeader">02</Card.Header>
-            <Card.Img src="/image/aboutImage5.png" />
+            <Card.Img
+              src="/image/aboutImage5.png"
+              style={width > 767 ? { width: "100%" } : { width: "60%" }}
+              className="m-auto"
+            />
             <Card.Body className="aboutBody">
               <Card.Text>
                 엽서 왼쪽 하단의 QR코드를 스캔하여 <br />
@@ -71,10 +96,14 @@ const AboutScreen = () => {
             </Card.Body>
           </Card>
         </div>
-        <div className="col col-xs-12 col-sm-12 col-md-4 col-lg-4 col-12">
+        <div className="col col-xs-12 col-sm-12 col-md-4 col-lg-4 col-12 pb-5">
           <Card style={{ width: "100%" }} id="aboutCard" className="pr-4 pl-4">
             <Card.Header className="aboutHeader">03</Card.Header>
-            <Card.Img src="/image/aboutImage6.png" />
+            <Card.Img
+              src="/image/aboutImage6.png"
+              style={width > 767 ? { width: "100%" } : { width: "60%" }}
+              className="m-auto"
+            />
             <Card.Body className="aboutBody">
               <Card.Text>
                 동봉된 세로 쿠폰을 발신자에게 전해준다. <br />

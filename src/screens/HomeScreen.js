@@ -25,7 +25,6 @@ const HomeScreen = () => {
           autoPlay
           loop
           muted
-          preload
         >
           <source src="image/homeVideo.mp4" type="video/mp4"></source>
         </video>
@@ -35,7 +34,6 @@ const HomeScreen = () => {
           autoPlay
           loop
           muted
-          preload
         >
           <source src="image/homeVideo_sm.mp4" type="video/mp4"></source>
         </video>

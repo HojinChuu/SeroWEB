@@ -54,10 +54,7 @@ const LoginScreen = ({ history }) => {
       ) : (
         <FormContainer>
           {location.pathname === "/login" ? (
-            <div
-              className="card p-4 mt-4 rounded mb-4 loginForm"
-              style={{ backgroundColor: "transparent" }}
-            >
+            <div className="card p-4 mt-4 rounded mb-4 loginForm">
               <h1 className="text-center">LOGIN</h1>
               {message && <Message variant="danger">{message}</Message>}
               <form onSubmit={submitHandler}>
