@@ -28,7 +28,7 @@ const HomeScreen = () => {
         >
           <source src="image/homeVideo.mp4" type="video/mp4"></source>
         </video>
-        <video
+        {/* <video
           id="mainSmVideo"
           style={{ height: "100%", width: "100%" }}
           autoPlay
@@ -36,7 +36,12 @@ const HomeScreen = () => {
           muted
         >
           <source src="image/homeVideo_sm.mp4" type="video/mp4"></source>
-        </video>
+        </video> */}
+        <Image
+          id="mainSmVideo"
+          src="image/homeVideo_sm.gif"
+          style={{ height: "100%", width: "100%" }}
+        />
       </div>
       <div style={rowStyle}>
         <Col style={colStyle}>

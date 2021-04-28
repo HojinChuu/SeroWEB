@@ -17,6 +17,7 @@ src/config.js
 # public/image
 public/image/homeVideo.mp4
 public/image/homeVideo_sm.mp4
+public/image/homeVideo_sm.gif
 
 .eslintcache
 
