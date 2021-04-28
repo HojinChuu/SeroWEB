@@ -30,7 +30,7 @@ const SocialScreen = () => {
           style={width < 767 ? { marginTop: "30px", paddingLeft: 0 } : {}}
         >
           <Card className="align-self-center" style={{ paddingLeft: "15%" }}>
-            <Card.Img src="/image/socialSubTitle1.png" />
+            <Card.Img src="/image/socialSubtitle1.png" />
             <Card.Body>
               <Card.Text style={width < 767 ? { fontSize: "13px" } : {}}>
                 졸업 후 4번의 채용 시즌, 더 이상 버티기 힘들어요. <br></br>
@@ -58,7 +58,7 @@ const SocialScreen = () => {
                 className="align-self-center"
                 style={{ paddingRight: "15%" }}
               >
-                <Card.Img src="/image/socialSubTitle2.png" />
+                <Card.Img src="/image/socialSubtitle2.png" />
                 <Card.Body>
                   <Card.Text>
                     전신 보호복에 이중 장갑, 덧신, N95 마스크, 얼굴 보호막{" "}
@@ -98,7 +98,7 @@ const SocialScreen = () => {
                 className="align-self-center"
                 style={{ paddingLeft: "15%" }}
               >
-                <Card.Img src="/image/socialSubTitle2.png" />
+                <Card.Img src="/image/socialSubtitle2.png" />
                 <Card.Body>
                   <Card.Text style={{ fontSize: "13px" }}>
                     전신 보호복에 이중 장갑, 덧신, N95 마스크, 얼굴 보호막{" "}
@@ -133,7 +133,7 @@ const SocialScreen = () => {
           style={width < 767 ? { marginTop: "30px", paddingLeft: 0 } : {}}
         >
           <Card className="align-self-center" style={{ paddingLeft: "15%" }}>
-            <Card.Img src="/image/socialSubTitle3.png" />
+            <Card.Img src="/image/socialSubtitle3.png" />
             <Card.Body>
               <Card.Text style={width < 767 ? { fontSize: "13px" } : {}}>
                 코로나로 손님이 없어도 너무 없어서 대출을 받았어요. <br></br>
@@ -181,7 +181,7 @@ const SocialScreen = () => {
                 ? { width: "50%", marginTop: "30px", marginLeft: "50px" }
                 : { width: "65%", marginTop: "30px", marginLeft: "22px" }
             }
-            src="/image/socialSubTitle4.png"
+            src="/image/socialSubtitle4.png"
           />
           <Card.Body
             id="socialLastCard"
