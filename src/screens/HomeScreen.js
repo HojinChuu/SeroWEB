@@ -25,7 +25,6 @@ const HomeScreen = () => {
           autoPlay
           loop
           muted
-          playinline
         >
           <source src="image/homeVideo.mp4" type="video/mp4"></source>
         </video>
