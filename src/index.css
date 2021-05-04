@@ -4,7 +4,8 @@ html {
   height: 100%;
 }
 body {
-  background-image: url("background.jpg");
+  /* background-image: url("background.jpg"); */
+  background-color: #EBEBEB;
 }
 main {
   min-height: 82vh;
