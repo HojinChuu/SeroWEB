@@ -1,4 +1,5 @@
 import React from "react";
+import { Fragment } from "react";
 import { Image, Col } from "react-bootstrap";
 import useWindowDimensions from "../../src/hooks/useWindowDimensions";
 
@@ -8,41 +9,46 @@ const HomeScreen = () => {
   let type = navigator.userAgent.toLowerCase();
   if (type.indexOf("android") > -1) {
     type = "adroid";
-  } else if (
-    type.indexOf("iphone") > -1 ||
-    type.indexOf("ipad") > -1 ||
-    type.indexOf("ipod") > -1
-  ) {
+  } else if (type.indexOf("iphone") > -1 || type.indexOf("ipod") > -1) {
     type = "ios";
+  } else {
+    type = "web";
   }
 
   return (
     <div>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
-        <video
-          id="mainVideo"
-          style={{ height: "100%", width: "100%" }}
-          autoPlay
-          loop
-          muted
-        >
-          <source src="image/homeVideo.mp4" type="video/mp4"></source>
-        </video>
-        {/* <video
-          id="mainSmVideo"
-          style={{ height: "100%", width: "100%" }}
-          autoPlay
-          loop
-          muted
-          playinline
-        >
-          <source src="image/homeVideo_sm.mp4" type="video/mp4"></source>
-        </video> */}
-        <Image
-          id="mainSmVideo"
-          src="image/homeVideo_sm.gif"
-          style={{ height: "100%", width: "100%" }}
-        />
+        {type && type === "web" ? (
+          <Fragment>
+            <video
+              id="mainVideo"
+              style={{ height: "100%", width: "100%" }}
+              autoPlay
+              loop
+              muted
+            >
+              <source src="image/homeVideo.mp4" type="video/mp4"></source>
+            </video>
+            <video
+              id="mainSmVideo"
+              style={{ height: "100%", width: "100%" }}
+              autoPlay
+              loop
+              muted
+            >
+              <source
+                src="image/homeVideo_mobile.mp4"
+                type="video/mp4"
+              ></source>
+            </video>
+          </Fragment>
+        ) : (
+          <Image
+            id="mainSmVideo"
+            src="image/homeVideo_sm.gif"
+            style={{ height: "100%", width: "100%" }}
+          />
+        )}
       </div>
       <div style={rowStyle}>
         <Col style={colStyle}>
@@ -68,28 +74,20 @@ const HomeScreen = () => {
       </div>
       {width > 600 && (
         <div>
-          <div
+          <Image
+            src="/image/mainpage3.png"
             style={{
-              display: "flex",
-              flexWrap: "wrap",
-              height: "100%",
+              width: "100%",
+              margin: "0 auto",
             }}
-          >
-            <Image
-              src="/image/mainpage3.png"
-              style={{
-                width: "100%",
-                margin: "0 auto",
-              }}
-            />
-          </div>
+          />
           <div
             style={{
               position: "absolute",
               bottom: "10%",
-              left: "12%",
+              left: "20%",
               textAlign: "center",
-              width: "100%",
+              width: "80%",
               height: "80px",
             }}
           >
