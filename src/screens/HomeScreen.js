@@ -23,7 +23,9 @@ const HomeScreen = () => {
             <video
               id="mainVideo"
               style={{ height: "100%", width: "100%" }}
+              poster="image/homePoster.png"
               autoPlay
+              preload="auto"
               loop
               muted
             >
@@ -32,7 +34,9 @@ const HomeScreen = () => {
             <video
               id="mainSmVideo"
               style={{ height: "100%", width: "100%" }}
+              poster="image/homePoster_sm.png"
               autoPlay
+              preload="auto"
               loop
               muted
             >
@@ -43,11 +47,23 @@ const HomeScreen = () => {
             </video>
           </Fragment>
         ) : (
-          <Image
+          <video
             id="mainSmVideo"
-            src="image/homeVideo_sm.gif"
             style={{ height: "100%", width: "100%" }}
-          />
+            poster="image/homePoster_sm.png"
+            autoPlay
+            preload="auto"
+            playsInline
+            loop
+            muted
+          >
+            <source src="image/homeVideo_mobile.mp4" type="video/mp4"></source>
+          </video>
+          // <Image
+          //   id="mainSmVideo"
+          //   src="image/homeVideo_sm.gif"
+          //   style={{ height: "100%", width: "100%" }}
+          // />
         )}
       </div>
       <div style={rowStyle}>
