@@ -17,6 +17,7 @@ import {
   getReceivePosts,
   getSendPosts,
 } from "../actions/mailPostActions";
+import useWindowDimensions from "../../src/hooks/useWindowDimensions";
 import { paginate } from "../utils/paginate";
 
 import Spinner from "../components/helpers/Spinner";
@@ -30,6 +31,8 @@ import SlideWrittenCardItem from "../components/mailbox/SlideWrittenCardItem";
 import SlideSentCardItem from "../components/mailbox/SlideSentCardItem";
 
 const MailboxScreen = ({ history }) => {
+  const { width } = useWindowDimensions();
+
   const [postToggle, setPostToggle] = useState(1);
   const [viewToggle, setViewToggle] = useState(false);
 
@@ -162,7 +165,10 @@ const MailboxScreen = ({ history }) => {
               <Image
                 src="/image/empty_post.png"
                 width={viewToggle ? "23.4%" : "40%"}
-                style={{ marginTop: "200px" }}
+                height={width > 575 ? "300px" : "120px"}
+                style={
+                  width > 575 ? { marginTop: "200px" } : { marginTop: "120px" }
+                }
               />
             ) : viewToggle ? (
               <SlideCard>
@@ -187,7 +193,10 @@ const MailboxScreen = ({ history }) => {
               <Image
                 src="/image/empty_post.png"
                 width={viewToggle ? "33.4%" : "40%"}
-                style={{ marginTop: "200px" }}
+                height={width > 575 ? "300px" : "120px"}
+                style={
+                  width > 575 ? { marginTop: "200px" } : { marginTop: "120px" }
+                }
               />
             ) : viewToggle ? (
               <SlideCard>
@@ -216,7 +225,10 @@ const MailboxScreen = ({ history }) => {
             <Image
               src="/image/empty_post.png"
               width={viewToggle ? "33.4%" : "40%"}
-              style={{ marginTop: "200px" }}
+              height={width > 575 ? "300px" : "120px"}
+              style={
+                width > 575 ? { marginTop: "200px" } : { marginTop: "120px" }
+              }
             />
           ) : viewToggle ? (
             <SlideCard>

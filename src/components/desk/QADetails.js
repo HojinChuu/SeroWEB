@@ -43,7 +43,7 @@ const QADetails = ({ history, match }) => {
     if (refPost) {
       setRefPostData(refPost);
     }
-  }, [deskQas.refPost]);
+  }, [refPost]);
 
   useEffect(() => {
     if (match.params.id) {
