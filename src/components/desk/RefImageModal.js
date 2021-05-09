@@ -6,7 +6,7 @@ import { IMAGE_URL } from "../../config";
 const RefImageModal = ({ show, onHide, refPost }) => {
   const [audio, setAudio] = useState(null);
   const [playing, setPlaying] = useState(true);
-  console.log(refPost);
+
   useEffect(() => {
     if (refPost.Post.poRecord !== "null") {
       setAudio(new Audio(IMAGE_URL + "/" + refPost.poRecord));
@@ -73,7 +73,9 @@ const RefImageModal = ({ show, onHide, refPost }) => {
               <button className="btn btn-block pr-4 pl-4 ml-2 mt-2">
                 <Row className="justify-content-between align-items-center">
                   <Row className="align-items-center">
-                    <span>ㅇㅁ:</span>
+                    <span>
+                      {refPost.usName === refPost.seName ? "보낸이" : "받는이"}:
+                    </span>
                     <span className="ml-1">{refPost.seName}</span>
                   </Row>
                   <span>{refPost.createdAt.slice(0, 10)}</span>

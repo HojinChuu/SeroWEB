@@ -37,6 +37,13 @@ const QADetails = ({ history, match }) => {
     refPost,
     postLoading,
   } = deskQas;
+  const [refPostData, setRefPostData] = useState();
+
+  useEffect(() => {
+    if (refPost) {
+      setRefPostData(refPost);
+    }
+  }, [deskQas.refPost]);
 
   useEffect(() => {
     if (match.params.id) {
@@ -87,15 +94,13 @@ const QADetails = ({ history, match }) => {
                 size="sm"
               />
             ) : (
-              <span>
-                <button
-                  className="btn btn-sm btn-outline-dark mr-2"
-                  style={{ lineHeight: "11px" }}
-                  onClick={() => setShow(true)}
-                >
-                  <span style={{ fontSize: "12px" }}>첨부엽서</span>
-                </button>
-              </span>
+              <button
+                className="btn btn-sm btn-outline-dark mr-2"
+                style={{ lineHeight: "11px" }}
+                onClick={() => setShow(true)}
+              >
+                <span style={{ fontSize: "12px" }}>첨부엽서</span>
+              </button>
             )
           ) : (
             <></>
@@ -200,8 +205,8 @@ const QADetails = ({ history, match }) => {
           )}
         </div>
       </div>
-      {refPost && (
-        <RefImageModal show={show} onHide={handleClose} refPost={refPost} />
+      {refPostData && (
+        <RefImageModal show={show} onHide={handleClose} refPost={refPostData} />
       )}
     </Fragment>
   );
