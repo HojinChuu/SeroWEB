@@ -15,7 +15,7 @@ const NoPostItem = () => {
         style={postStyle}
       >
         <span style={{ color: "#bcbcbc", fontSize: "12px" }}>
-          받은 엽서가 없습니다.
+          엽서가 없습니다.
         </span>
       </div>
     </Card>

@@ -69,11 +69,11 @@ const SlideSentCardItem = ({ slideSentPost, userInfo }) => {
         </Flippy>
         <div id="flipCardTitle">
           <button className="btn btn-block pr-4 pl-4 ml-2 mt-2">
-            <Row className="justify-content-between align-items-center">
-              <Row className="align-items-center">
+            <Row className="justify-content-center align-items-center">
+              {/* <Row className="align-items-center">
                 <span>보낸이:</span>
                 <span className="ml-2">{userInfo.usName}</span>
-              </Row>
+              </Row> */}
               <span>{slideSentPost.createdAt.slice(0, 10)}</span>
             </Row>
           </button>

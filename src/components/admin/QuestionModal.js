@@ -1,28 +1,47 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal, Button, Image } from "react-bootstrap";
-import { answerToQuestion, getQAComments } from "../../actions/adminActions";
+import {
+  answerToQuestion,
+  getQAComments,
+  getQAPost,
+} from "../../actions/adminActions";
 import { IMAGE_URL } from "../../config";
 
 import AdminAnswer from "./AdminAnswer";
 import Spinner from "../helpers/Spinner";
-import { Fragment } from "react";
+import RefImageModal from "../desk/RefImageModal";
 
 const QuestionAnswer = ({ show, onHide }) => {
+  const [showPost, setShowPost] = useState(false);
   const [answerText, setAnswerText] = useState("");
+
+  const handleClose = () => setShowPost(false);
 
   const dispatch = useDispatch();
   const adminQuestions = useSelector((state) => state.adminQuestions);
   const userLogin = useSelector((state) => state.userLogin);
 
   const { userInfo } = userLogin;
-  const { question, answers, answerLoading } = adminQuestions;
+  const {
+    question,
+    answers,
+    answerLoading,
+    postLoading,
+    refPost,
+  } = adminQuestions;
 
   useEffect(() => {
     if (userInfo && Object.keys(question).length !== 0) {
       dispatch(getQAComments(userInfo.usId, question.quId));
     }
   }, [dispatch, userInfo, question]);
+
+  useEffect(() => {
+    if (question.Send !== null) {
+      dispatch(getQAPost(question.Send, question.quSeId));
+    }
+  }, [dispatch, question]);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -96,10 +115,28 @@ const QuestionAnswer = ({ show, onHide }) => {
             className="form-control m-auto"
             onChange={(e) => setAnswerText(e.target.value)}
             rows="5"
-            placeholder="답글하기"
+            placeholder="답변하기"
           ></textarea>
         </div>
         <Modal.Footer>
+          {question.Send !== null ? (
+            postLoading ? (
+              <div className="spinner-border mr-auto ml-4" role="status">
+                <span className="sr-only">Loading</span>
+              </div>
+            ) : (
+              <Button
+                variant="secondary"
+                className="rounded mr-auto ml-2"
+                size="sm"
+                onClick={() => setShowPost(true)}
+              >
+                첨부된 엽서
+              </Button>
+            )
+          ) : (
+            <></>
+          )}
           <Button variant="secondary" className="rounded" onClick={onHide}>
             취소
           </Button>
@@ -114,6 +151,9 @@ const QuestionAnswer = ({ show, onHide }) => {
           </Button>
         </Modal.Footer>
       </form>
+      {refPost && (
+        <RefImageModal show={showPost} onHide={handleClose} refPost={refPost} />
+      )}
     </Modal>
   );
 };

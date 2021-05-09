@@ -8,7 +8,7 @@ const RefImageModal = ({ show, onHide, refPost }) => {
   const [playing, setPlaying] = useState(true);
 
   useEffect(() => {
-    if (refPost.poRecord !== "null") {
+    if (refPost.Post.poRecord !== "null") {
       setAudio(new Audio(IMAGE_URL + "/" + refPost.poRecord));
     }
   }, [refPost]);
@@ -38,7 +38,7 @@ const RefImageModal = ({ show, onHide, refPost }) => {
             >
               <FrontSide className="d-flex align-items-center">
                 <Image
-                  src={IMAGE_URL + "/" + refPost.poPhoto}
+                  src={IMAGE_URL + "/" + refPost.Post.poPhoto}
                   width="100%"
                   height="100%"
                 />
@@ -49,21 +49,21 @@ const RefImageModal = ({ show, onHide, refPost }) => {
                   onClick={soundHandler}
                   className="btn"
                   style={{ position: "absolute", bottom: 10, right: 15 }}
-                  disabled={refPost.poRecord === "null"}
+                  disabled={refPost.Post.poRecord === "null"}
                 >
                   <Image
                     src={
-                      refPost.poRecord === "null"
+                      refPost.Post.poRecord === "null"
                         ? "/image/sound_none.png"
                         : playing
                         ? "/image/sound_on.png"
                         : "/image/sound_off.png"
                     }
-                    width={refPost.poRecord === "null" ? "20px" : "30px"}
+                    width={refPost.Post.poRecord === "null" ? "20px" : "30px"}
                   />
                 </button>
                 <Image
-                  src={IMAGE_URL + "/" + refPost.poContentPhoto}
+                  src={IMAGE_URL + "/" + refPost.Post.poContentPhoto}
                   width="100%"
                   height="100%"
                 />
@@ -73,8 +73,8 @@ const RefImageModal = ({ show, onHide, refPost }) => {
               <button className="btn btn-block pr-4 pl-4 ml-2 mt-2">
                 <Row className="justify-content-between align-items-center">
                   <Row className="align-items-center">
-                    <span>보낸이:</span>
-                    <span className="ml-1">{refPost.User.usName}</span>
+                    <span>받는이:</span>
+                    <span className="ml-1">{refPost.seName}</span>
                   </Row>
                   <span>{refPost.createdAt.slice(0, 10)}</span>
                 </Row>

@@ -130,13 +130,13 @@ export const getQAComments = (quId) => async (dispatch) => {
   }
 };
 
-export const getQAPost = (poId) => async (dispatch) => {
+export const getQAPost = (poId, quSeId) => async (dispatch) => {
   try {
     dispatch({ type: DESK_QA_FETCH_POST_REQUEST });
 
     const { data } = await axios.post(
       `${DOMAIN}/web_get_detail`,
-      { poId },
+      { poId, quSeId },
       { headers: { "Content-Type": "application/json" } }
     );
 

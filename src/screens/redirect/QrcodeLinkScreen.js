@@ -146,7 +146,7 @@ const QrcodeLinkScreen = ({ location, history }) => {
             onClick={addPostHandler}
             className="btn btn-dark btn-lg rounded btn-xl"
           >
-            <span style={{ fontSize: "14px" }}>내 엽서에 추가하기</span>
+            <span style={{ fontSize: "14px" }}>받은 엽서에 추가하기</span>
           </button>
         </Row>
       </div>

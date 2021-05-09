@@ -101,15 +101,15 @@ const MailboxScreen = ({ history }) => {
           </DropdownButton>
           <div>
             <button
-              className="btn btn-light p-2 pl-4 pr-4 mr-2"
+              className="btn btn-light p-2 pl-3 pr-3 mr-2"
               onClick={() => setToggle(!toggle)}
               disabled={toggle}
               style={toggle ? postBtnActive : postBtn}
             >
-              <span style={{ fontSize: "13px" }}>보낸 엽서</span>
+              <span style={{ fontSize: "13px" }}>제작한 엽서</span>
             </button>
             <button
-              className="btn btn-light p-2 pl-4 pr-4"
+              className="btn btn-light p-2 pl-3 pr-3"
               onClick={() => setToggle(!toggle)}
               disabled={!toggle}
               style={!toggle ? postBtnActive : postBtn}

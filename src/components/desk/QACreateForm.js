@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { DropdownButton, Dropdown } from "react-bootstrap";
+import { DropdownButton, Dropdown, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { createQa } from "../../actions/deskActions";
 
@@ -233,10 +233,19 @@ const QACreateForm = ({ history }) => {
             </div>
             {postRef !== 0 && (
               <div className="row mt-3">
-                <div className="col col-lg-1 col-md-2 col-sm-3 col-3">
+                <div className="col col-lg-1 col-md-2 col-sm-3 col-3 mt-1">
                   첨부엽서
                 </div>
-                <div className="col">{postRef}번 엽서</div>
+                <div className="col">
+                  <Button
+                    variant="light"
+                    size="sm rounded"
+                    style={{ border: "none" }}
+                    onClick={() => setPostRef(0)}
+                  >
+                    첨부완료<i className="fa fa-times fa-sm ml-2"></i>
+                  </Button>
+                </div>
               </div>
             )}
             <div

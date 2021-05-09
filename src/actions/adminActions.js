@@ -14,6 +14,8 @@ import {
   ADMIN_QUESTION_FETCH_SUCCESS,
   ADMIN_QUESTION_FETCH_FAIL,
   ADMIN_QUESTION_DATE_SAVE,
+  ADMIN_QA_FETCH_POST_REQUEST,
+  ADMIN_QA_FETCH_POST_SUCCESS,
   ADMIN_ANSWER_FETCH_REQUEST,
   ADMIN_ANSWER_FETCH_SUCCESS,
   ADMIN_ANSWER_FETCH_FAIL,
@@ -135,6 +137,24 @@ export const getQAComments = (usId, quId) => async (dispatch) => {
   } catch (error) {
     dispatch({ type: ADMIN_ANSWER_FETCH_FAIL });
   }
+};
+
+export const getQAPost = (send, quSeId) => async (dispatch) => {
+  try {
+    dispatch({ type: ADMIN_QA_FETCH_POST_REQUEST });
+
+    const poId = send.sePoId;
+    const { data } = await axios.post(
+      `${DOMAIN}/web_get_detail`,
+      { poId, quSeId },
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+    dispatch({
+      type: ADMIN_QA_FETCH_POST_SUCCESS,
+      payload: data.data,
+    });
+  } catch (error) {}
 };
 
 export const answerToQuestion = (usId, quId, anContent) => async (dispatch) => {

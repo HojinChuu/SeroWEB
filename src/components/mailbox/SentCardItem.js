@@ -67,11 +67,11 @@ const SentCardItem = ({ sentPost, userInfo }) => {
       </Flippy>
       <div id="flipCardTitle">
         <button className="btn btn-block pr-4 pl-4 ml-2 mt-2">
-          <Row className="justify-content-between align-items-center">
-            <Row className="align-items-center">
+          <Row className="justify-content-center align-items-center">
+            {/* <Row className="align-items-center">
               <span>보낸이:</span>
               <span className="ml-1">{userInfo.usName}</span>
-            </Row>
+            </Row> */}
             <span>{sentPost.createdAt.slice(2, 10).replaceAll("-", ".")}</span>
           </Row>
         </button>

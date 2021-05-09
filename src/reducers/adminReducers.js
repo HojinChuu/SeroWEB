@@ -27,6 +27,8 @@ import {
   ADMIN_NOTICE_REMOVE_REQUEST,
   ADMIN_NOTICE_REMOVE_SUCCESS,
   ADMIN_NOTICE_REMOVE_FAIL,
+  ADMIN_QA_FETCH_POST_REQUEST,
+  ADMIN_QA_FETCH_POST_SUCCESS,
 } from "../constants/adminConstants";
 
 export const adminTasksReducer = (state = {}, action) => {
@@ -142,6 +144,17 @@ export const adminQuestionsReducer = (state = { question: {} }, action) => {
       return {
         ...state,
         error: action.payload,
+      };
+    case ADMIN_QA_FETCH_POST_REQUEST:
+      return {
+        ...state,
+        postLoading: true,
+      };
+    case ADMIN_QA_FETCH_POST_SUCCESS:
+      return {
+        ...state,
+        postLoading: false,
+        refPost: action.payload,
       };
     default:
       return state;

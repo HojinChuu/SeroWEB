@@ -43,13 +43,13 @@ const QADetails = ({ history, match }) => {
       dispatch(getQAComments(parseInt(match.params.id)));
     }
     if (qaItem.Send !== null) {
-      dispatch(getQAPost(qaItem.Send.sePoId));
+      dispatch(getQAPost(qaItem.Send.sePoId, qaItem.quSeId));
     }
     if (success) {
       dispatch({ type: DESK_QA_FETCH_COMMENT_SUCCESS });
     }
     // eslint-disable-next-line
-  }, [history, dispatch, success, qaItem.Send]);
+  }, [history, dispatch, success, qaItem.Send, qaItem]);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
