@@ -19,6 +19,7 @@ import {
   addressInputReducer,
 } from "./reducers/linkReducers";
 import {
+  writtenPostsReducer,
   sendPostsReducer,
   receivePostsReducer,
 } from "./reducers/mailPostReducers";
@@ -40,6 +41,7 @@ const reducer = combineReducers({
   qrcodePostData: qrcodePostDataReducer,
   qrcodeSavePost: qrcodeSavePostReducer,
   addressInput: addressInputReducer,
+  writtenPosts: writtenPostsReducer,
   sendPosts: sendPostsReducer,
   receivePosts: receivePostsReducer,
   deskNotices: deskNoticesReducer,

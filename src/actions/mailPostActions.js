@@ -1,6 +1,9 @@
 import axios from "axios";
 import { DOMAIN } from "../config";
 import {
+  WRITTEN_POST_FETCH_REQUEST,
+  WRITTEN_POST_FETCH_SUCCESS,
+  WRITTEN_POST_FETCH_FAIL,
   SEND_POST_FETCH_REQUEST,
   SEND_POST_FETCH_SUCCESS,
   SEND_POST_FETCH_FAIL,
@@ -11,9 +14,9 @@ import {
   RECEIVE_QA_POST_FETCH_SUCCESS,
 } from "../constants/mailPostConstants";
 
-export const getSendPosts = (usId) => async (dispatch) => {
+export const getWrittenPosts = (usId) => async (dispatch) => {
   try {
-    dispatch({ type: SEND_POST_FETCH_REQUEST });
+    dispatch({ type: WRITTEN_POST_FETCH_REQUEST });
 
     const { data } = await axios.post(
       `${DOMAIN}/web_get_post`,
@@ -22,11 +25,11 @@ export const getSendPosts = (usId) => async (dispatch) => {
     );
 
     dispatch({
-      type: SEND_POST_FETCH_SUCCESS,
+      type: WRITTEN_POST_FETCH_SUCCESS,
       payload: data.data,
     });
   } catch (error) {
-    dispatch({ type: SEND_POST_FETCH_FAIL });
+    dispatch({ type: WRITTEN_POST_FETCH_FAIL });
   }
 };
 
@@ -46,6 +49,24 @@ export const getReceivePosts = (usId) => async (dispatch) => {
     });
   } catch (error) {
     dispatch({ type: RECEIVE_POST_FETCH_FAIL });
+  }
+};
+
+export const getSendPosts = (usId) => async (dispatch) => {
+  try {
+    dispatch({ type: SEND_POST_FETCH_REQUEST });
+    const { data } = await axios.post(
+      `${DOMAIN}/web_get_send`,
+      { usId },
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+    dispatch({
+      type: SEND_POST_FETCH_SUCCESS,
+      payload: data.data,
+    });
+  } catch (error) {
+    dispatch({ type: SEND_POST_FETCH_FAIL });
   }
 };
 

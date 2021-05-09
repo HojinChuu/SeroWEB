@@ -9,36 +9,44 @@ import {
 } from "react-bootstrap";
 import {
   RECEIVE_POST_FETCH_SUCCESS,
+  WRITTEN_POST_FETCH_SUCCESS,
   SEND_POST_FETCH_SUCCESS,
 } from "../constants/mailPostConstants";
-import { getSendPosts, getReceivePosts } from "../actions/mailPostActions";
+import {
+  getWrittenPosts,
+  getReceivePosts,
+  getSendPosts,
+} from "../actions/mailPostActions";
 import { paginate } from "../utils/paginate";
 
 import Spinner from "../components/helpers/Spinner";
 import ReceivedCardItem from "../components/mailbox/ReceivedCardItem";
+import WrittenCardItem from "../components/mailbox/WrittenCardItem";
 import SentCardItem from "../components/mailbox/SentCardItem";
 import Pagination from "../components/helpers/Pagination";
 import SlideCard from "../components/mailbox/SlideCard";
 import SlideReceivedCardItem from "../components/mailbox/SlideReceivedCardItem";
+import SlideWrittenCardItem from "../components/mailbox/SlideWrittenCardItem";
 import SlideSentCardItem from "../components/mailbox/SlideSentCardItem";
 
 const MailboxScreen = ({ history }) => {
-  const [toggle, setToggle] = useState(false);
+  const [postToggle, setPostToggle] = useState(1);
   const [viewToggle, setViewToggle] = useState(false);
 
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
-  const sendPosts = useSelector((state) => state.sendPosts);
+  const writtenPosts = useSelector((state) => state.writtenPosts);
   const receivePosts = useSelector((state) => state.receivePosts);
+  const sendPosts = useSelector((state) => state.sendPosts);
 
   const { userInfo } = userLogin;
   const {
-    loading: sentPostLoading,
-    sentPosts,
-    postCount: sentPostCount,
-    pageSize: sentPageSize,
-    currentPage: sentCurrentPage,
-  } = sendPosts;
+    loading: writtenPostLoading,
+    writePosts,
+    postCount: writtenPostCount,
+    pageSize: writtenPageSize,
+    currentPage: writtenCurrentPage,
+  } = writtenPosts;
   const {
     loading: receivedPostLoading,
     receivedPosts,
@@ -46,6 +54,13 @@ const MailboxScreen = ({ history }) => {
     pageSize: receivedPageSize,
     currentPage: receivedCurrentPage,
   } = receivePosts;
+  const {
+    loading: sentPostLoading,
+    sentPosts,
+    postCount: sentPostCount,
+    pageSize: sentPageSize,
+    currentPage: sentCurrentPage,
+  } = sendPosts;
 
   useEffect(() => {
     if (!userInfo && !localStorage.getItem("userToken")) {
@@ -55,11 +70,21 @@ const MailboxScreen = ({ history }) => {
 
   useEffect(() => {
     if (userInfo) {
-      toggle
-        ? dispatch(getSendPosts(userInfo.usId))
-        : dispatch(getReceivePosts(userInfo.usId));
+      postToggle === 0
+        ? dispatch(getWrittenPosts(userInfo.usId))
+        : postToggle === 1
+        ? dispatch(getReceivePosts(userInfo.usId))
+        : dispatch(getSendPosts(userInfo.usId));
     }
-  }, [dispatch, userInfo, toggle]);
+  }, [dispatch, userInfo, postToggle]);
+
+  const writtenPageChangeHandler = (page) => {
+    dispatch({
+      type: WRITTEN_POST_FETCH_SUCCESS,
+      payload: sentPosts,
+      currentPage: page,
+    });
+  };
 
   const sentPageChangeHandler = (page) => {
     dispatch({
@@ -77,12 +102,17 @@ const MailboxScreen = ({ history }) => {
     });
   };
 
-  const pagedSentPosts = paginate(sentPosts, sentCurrentPage, sentPageSize);
+  const pagedWrittenPosts = paginate(
+    writePosts,
+    writtenCurrentPage,
+    writtenPageSize
+  );
   const pagedReceivedPosts = paginate(
     receivedPosts,
     receivedCurrentPage,
     receivedPageSize
   );
+  const pagedSentPosts = paginate(sentPosts, sentCurrentPage, sentPageSize);
 
   return (
     <Fragment>
@@ -100,28 +130,32 @@ const MailboxScreen = ({ history }) => {
             </Dropdown.Item>
           </DropdownButton>
           <div>
-            <button
-              className="btn btn-light p-2 pl-3 pr-3 mr-2"
-              onClick={() => setToggle(!toggle)}
-              disabled={toggle}
-              style={toggle ? postBtnActive : postBtn}
+            <DropdownButton
+              id="postToggle"
+              title={
+                postToggle === 0
+                  ? "제작한 엽서"
+                  : postToggle === 1
+                  ? "받은 엽서"
+                  : "보낸 엽서"
+              }
             >
-              <span style={{ fontSize: "13px" }}>제작한 엽서</span>
-            </button>
-            <button
-              className="btn btn-light p-2 pl-3 pr-3"
-              onClick={() => setToggle(!toggle)}
-              disabled={!toggle}
-              style={!toggle ? postBtnActive : postBtn}
-            >
-              <span style={{ fontSize: "13px" }}>받은 엽서</span>
-            </button>
+              <Dropdown.Item onClick={() => setPostToggle(0)}>
+                제작한 엽서
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => setPostToggle(1)}>
+                받은 엽서
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => setPostToggle(2)}>
+                보낸 엽서
+              </Dropdown.Item>
+            </DropdownButton>
           </div>
         </div>
       </Container>
       <div className={viewToggle ? "" : "container"}>
         <Row className="justify-content-center cardContainer">
-          {!toggle ? (
+          {postToggle === 1 ? (
             receivedPostLoading || !receivedPosts ? (
               <Spinner />
             ) : receivedPosts.length === 0 ? (
@@ -144,6 +178,36 @@ const MailboxScreen = ({ history }) => {
             ) : (
               pagedReceivedPosts.map((receivedPost, index) => (
                 <ReceivedCardItem receivedPost={receivedPost} key={index} />
+              ))
+            )
+          ) : postToggle === 0 ? (
+            writtenPostLoading || !writePosts || !userInfo ? (
+              <Spinner />
+            ) : writePosts.length === 0 ? (
+              <Image
+                src="/image/empty_post.png"
+                width={viewToggle ? "33.4%" : "40%"}
+                style={{ marginTop: "200px" }}
+              />
+            ) : viewToggle ? (
+              <SlideCard>
+                <div className="swiper-wrapper">
+                  {writePosts.map((item, index) => (
+                    <SlideWrittenCardItem
+                      slideWrittenPost={item}
+                      userInfo={userInfo}
+                      key={index}
+                    />
+                  ))}
+                </div>
+              </SlideCard>
+            ) : (
+              pagedWrittenPosts.map((writtenPost, index) => (
+                <WrittenCardItem
+                  writtenPost={writtenPost}
+                  userInfo={userInfo}
+                  key={index}
+                />
               ))
             )
           ) : sentPostLoading || !sentPosts || !userInfo ? (
@@ -178,38 +242,32 @@ const MailboxScreen = ({ history }) => {
         </Row>
 
         <div className="mt-5 mb-5">
-          {toggle && !viewToggle ? (
+          {postToggle === 0 && !viewToggle ? (
             <Pagination
-              itemsCount={sentPostCount}
-              pageSize={sentPageSize}
-              currentPage={sentCurrentPage}
-              onPageChange={sentPageChangeHandler}
+              itemsCount={writtenPostCount}
+              pageSize={writtenPageSize}
+              currentPage={writtenCurrentPage}
+              onPageChange={writtenPageChangeHandler}
             />
-          ) : (
+          ) : postToggle === 1 && !viewToggle ? (
             <Pagination
               itemsCount={receivedPostCount}
               pageSize={receivedPageSize}
               currentPage={receivedCurrentPage}
               onPageChange={receivedPageChangeHandler}
             />
+          ) : (
+            <Pagination
+              itemsCount={sentPostCount}
+              pageSize={sentPageSize}
+              currentPage={sentCurrentPage}
+              onPageChange={sentPageChangeHandler}
+            />
           )}
         </div>
       </div>
     </Fragment>
   );
-};
-
-const postBtn = {
-  backgroundColor: "#e0dfde",
-  border: "none",
-  borderRadius: "10px",
-};
-
-const postBtnActive = {
-  backgroundColor: "#4e6f64",
-  color: "white",
-  borderRadius: "10px",
-  opacity: 1,
 };
 
 export default MailboxScreen;

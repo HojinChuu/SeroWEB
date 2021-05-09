@@ -4,15 +4,15 @@ import Flippy, { FrontSide, BackSide } from "react-flippy";
 import { SwiperSlide } from "swiper/react";
 import { IMAGE_URL } from "../../config";
 
-const SlideSentCardItem = ({ slideSentPost }) => {
+const SlideWrittenCardItem = ({ slideWrittenPost }) => {
   const [audio, setAudio] = useState(null);
   const [playing, setPlaying] = useState(true);
 
   useEffect(() => {
-    if (slideSentPost.Post.poRecord !== "null") {
-      setAudio(new Audio(IMAGE_URL + "/" + slideSentPost.Post.poRecord));
+    if (slideWrittenPost.poRecord !== "null") {
+      setAudio(new Audio(IMAGE_URL + "/" + slideWrittenPost.poRecord));
     }
-  }, [slideSentPost]);
+  }, [slideWrittenPost]);
 
   const soundHandler = (e) => {
     e.stopPropagation();
@@ -36,7 +36,7 @@ const SlideSentCardItem = ({ slideSentPost }) => {
         >
           <FrontSide className="d-flex align-items-center">
             <Image
-              src={IMAGE_URL + "/" + slideSentPost.Post.poPhoto}
+              src={IMAGE_URL + "/" + slideWrittenPost.poPhoto}
               width="100%"
               height="100%"
             />
@@ -47,21 +47,21 @@ const SlideSentCardItem = ({ slideSentPost }) => {
               onClick={soundHandler}
               className="btn"
               style={{ position: "absolute", bottom: 10, right: 15 }}
-              disabled={slideSentPost.Post.poRecord === "null"}
+              disabled={slideWrittenPost.poRecord === "null"}
             >
               <Image
                 src={
-                  slideSentPost.Post.poRecord === "null"
+                  slideWrittenPost.poRecord === "null"
                     ? "/image/sound_none.png"
                     : playing
                     ? "/image/sound_on.png"
                     : "/image/sound_off.png"
                 }
-                width={slideSentPost.Post.poRecord === "null" ? "20px" : "30px"}
+                width={slideWrittenPost.poRecord === "null" ? "20px" : "30px"}
               />
             </button>
             <Image
-              src={IMAGE_URL + "/" + slideSentPost.Post.poContentPhoto}
+              src={IMAGE_URL + "/" + slideWrittenPost.poContentPhoto}
               width="100%"
               height="100%"
             />
@@ -69,12 +69,8 @@ const SlideSentCardItem = ({ slideSentPost }) => {
         </Flippy>
         <div id="flipCardTitle">
           <button className="btn btn-block pr-4 pl-4 ml-2 mt-2">
-            <Row className="justify-content-between align-items-center">
-              <Row className="align-items-center">
-                <span>받는이:</span>
-                <span className="ml-2">{slideSentPost.seName}</span>
-              </Row>
-              <span>{slideSentPost.createdAt.slice(0, 10)}</span>
+            <Row className="justify-content-center align-items-center">
+              <span>{slideWrittenPost.createdAt.slice(0, 10)}</span>
             </Row>
           </button>
         </div>
@@ -83,4 +79,4 @@ const SlideSentCardItem = ({ slideSentPost }) => {
   );
 };
 
-export default SlideSentCardItem;
+export default SlideWrittenCardItem;

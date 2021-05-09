@@ -358,6 +358,23 @@ body > div.fade.modal.show > div > div {
 #root > main > div.container > div > div.show.dropdown > div > a {
   padding-left: 12px;
 }
+#postToggle {
+  font-family: "Noto Serif KR";
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding-bottom: 8px;
+  padding-top: 8px;
+  color: #404040;
+  font-size: 14px;
+  background-color: transparent;
+}
+#root > main > div:nth-child(2) > div > div:nth-child(2) > div > div {
+  font-family: "Noto Serif KR";
+  min-width: 80px;
+}
+#root > main > div:nth-child(2) > div > div:nth-child(2) > div > div > a {
+  padding-left: 12px;
+}
 
 #root
   > main
