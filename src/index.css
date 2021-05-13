@@ -793,6 +793,7 @@ input::-webkit-inner-spin-button {
 
 #aboutCard .aboutBody p {
   text-align: center;
+  font-family: "Noto sans KR";
 }
 
 /* social impact */

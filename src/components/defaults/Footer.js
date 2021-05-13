@@ -23,7 +23,7 @@ const Footer = () => {
                         </a>
                       </span>
                       <span>
-                        <a href="https://seropost.com/privacy.html">이용약관</a>
+                        <a href="https://seropost.com/tos.html">이용약관</a>
                       </span>
                       <span>
                         <a href="https://seropost.com/desk/qa">고객센터</a>
@@ -32,8 +32,7 @@ const Footer = () => {
                   </div>
                   <div className="row mt-4 subTitle justify-content-center">
                     <span>개인정보책임관리자: 안준용</span>
-                    <span>사업자등록번호: 538-44-00663
-</span>
+                    <span>사업자등록번호: 538-44-00663</span>
                     <span>통신판매업신고번호: 제2021-대구북구-0443호</span>
                     <span>
                       주소: 대구광역시 북구 대학로 53 해피하우스 201호
@@ -54,7 +53,7 @@ const Footer = () => {
                       </a>
                     </span>
                     <span style={{ fontSize: "14px", marginLeft: "7px" }}>
-                      <a href="https://seropost.com/privacy.html">이용약관</a>
+                      <a href="https://seropost.com/tos.html">이용약관</a>
                     </span>
                     <span style={{ fontSize: "14px", marginLeft: "7px" }}>
                       <a href="https://seropost.com/desk/qa">고객센터</a>
@@ -63,8 +62,7 @@ const Footer = () => {
                 </div>
                 <div className="p-3 subTitle" style={{ fontSize: "14px" }}>
                   <div>개인정보책임관리자: 안준용</div>
-                  <div>사업자등록번호: 538-44-00663
-</div>
+                  <div>사업자등록번호: 538-44-00663</div>
                   <div>통신판매업신고번호: 제2021-대구북구-0443호</div>
                   <div>주소: 대구광역시 북구 대학로 53 해피하우스 201호</div>
                 </div>
