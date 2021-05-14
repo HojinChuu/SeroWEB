@@ -268,13 +268,15 @@ const MailboxScreen = ({ history }) => {
               currentPage={receivedCurrentPage}
               onPageChange={receivedPageChangeHandler}
             />
-          ) : (
+          ) : postToggle === 2 && !viewToggle ? (
             <Pagination
               itemsCount={sentPostCount}
               pageSize={sentPageSize}
               currentPage={sentCurrentPage}
               onPageChange={sentPageChangeHandler}
             />
+          ) : (
+            ""
           )}
         </div>
       </div>

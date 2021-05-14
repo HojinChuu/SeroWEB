@@ -3,7 +3,7 @@ import { Modal, Image, Row, Col } from "react-bootstrap";
 import Flippy, { FrontSide, BackSide } from "react-flippy";
 import { IMAGE_URL } from "../../config";
 
-const RefImageModal = ({ show, onHide, refPost }) => {
+const RefImageModal = ({ show, onHide, refPost, categoryId }) => {
   const [audio, setAudio] = useState(null);
   const [playing, setPlaying] = useState(true);
 
@@ -74,9 +74,19 @@ const RefImageModal = ({ show, onHide, refPost }) => {
                 <Row className="justify-content-between align-items-center">
                   <Row className="align-items-center">
                     <span>
-                      {refPost.usName === refPost.seName ? "보낸이" : "받는이"}:
+                      {categoryId === 3
+                        ? "보낸이:"
+                        : categoryId === 2
+                        ? "받는이:"
+                        : ""}
                     </span>
-                    <span className="ml-1">{refPost.seName}</span>
+                    <span className="ml-1">
+                      {categoryId === 3
+                        ? refPost.Post.User.usName
+                        : categoryId === 2
+                        ? refPost.seName
+                        : ""}
+                    </span>
                   </Row>
                   <span>{refPost.createdAt.slice(0, 10)}</span>
                 </Row>

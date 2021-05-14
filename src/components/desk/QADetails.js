@@ -206,7 +206,12 @@ const QADetails = ({ history, match }) => {
         </div>
       </div>
       {refPostData && (
-        <RefImageModal show={show} onHide={handleClose} refPost={refPostData} />
+        <RefImageModal
+          show={show}
+          onHide={handleClose}
+          refPost={refPostData}
+          categoryId={qaItem.Category.caId}
+        />
       )}
     </Fragment>
   );
