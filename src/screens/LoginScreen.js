@@ -43,7 +43,6 @@ const LoginScreen = ({ history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(error);
     if (!phone || !password) {
       setMessage("빈칸을 모두 입력해 주세요.");
     } else {
