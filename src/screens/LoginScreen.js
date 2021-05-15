@@ -35,12 +35,17 @@ const LoginScreen = ({ history }) => {
     }
   }, [history, userToken, success, message]);
 
+  useEffect(() => {
+    if (error) {
+      setMessage("아이디 또는 비밀번호 오류입니다.");
+    }
+  }, [error]);
+
   const submitHandler = (e) => {
     e.preventDefault();
+    console.log(error);
     if (!phone || !password) {
       setMessage("빈칸을 모두 입력해 주세요.");
-    } else if (error) {
-      setMessage("아이디 또는 비밀번호 오류입니다.");
     } else {
       dispatch(login(0, phone, password));
       dispatch(getUserInfo());
