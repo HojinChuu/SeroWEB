@@ -8,6 +8,7 @@ import { paginate } from "../../utils/paginate";
 import TaskItem from "./TaskItem";
 import Loader from "../helpers/Loader";
 import TaskStateModal from "../admin/TaskStateModal";
+import TaskImageModal from "../admin/TaskImageModal";
 import Pagination from "../helpers/Pagination";
 
 const Tasks = () => {
@@ -17,6 +18,8 @@ const Tasks = () => {
   const [target, setTarget] = useState(0);
   const [searchText, setSearchText] = useState("");
   const [show, setShow] = useState(false);
+  const [imageShow, setImageShow] = useState(false);
+  const [taskItem, setTaskItem] = useState();
   const [disable, setDisable] = useState(true);
 
   const handleClose = () => setShow(false);
@@ -25,16 +28,16 @@ const Tasks = () => {
     setShow(true);
   };
 
+  const handleImageClose = () => setImageShow(false);
+  const handleImageShow = (taskItem) => {
+    setImageShow(true);
+    setTaskItem(taskItem);
+  };
+
   const dispatch = useDispatch();
   const adminTasks = useSelector((state) => state.adminTasks);
-  const {
-    loading,
-    tasks,
-    success,
-    tasksCount,
-    pageSize,
-    currentPage,
-  } = adminTasks;
+  const { loading, tasks, success, tasksCount, pageSize, currentPage } =
+    adminTasks;
 
   useEffect(() => {
     dispatch(getTasks({}));
@@ -139,7 +142,7 @@ const Tasks = () => {
         </form>
       </div>
       <div className="table-responsive">
-        <table className="table table-striped table-lg">
+        <table className="table table-striped table-lg table-hover">
           <thead>
             <tr className="text-center">
               <th>선택</th>
@@ -167,6 +170,7 @@ const Tasks = () => {
                       key={task.seId}
                       getTaskValue={getTaskValue}
                       removeTaskValue={removeTaskValue}
+                      handleImageShowHandler={handleImageShow}
                     />
                   ))}
               </>
@@ -187,6 +191,13 @@ const Tasks = () => {
         onHide={handleClose}
         seletedTask={seletedTask}
       />
+      {taskItem && (
+        <TaskImageModal
+          show={imageShow}
+          onHide={handleImageClose}
+          taskItem={taskItem}
+        />
+      )}
     </Fragment>
   );
 };

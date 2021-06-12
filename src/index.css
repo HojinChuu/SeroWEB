@@ -22,6 +22,9 @@ h2 {
   padding: 0.5rem 0;
 }
 
+.carousel-item {
+  transition-duration: 1s;
+}
 /* header */
 nav.navbar {
   z-index: 100;
@@ -270,6 +273,13 @@ body > div.fade.modal.show > div > div {
   line-height: 1px;
   height: 32px;
   width: 30px;
+}
+#taskColumn:hover {
+  cursor: pointer;
+}
+#taskImageCard .col img:hover {
+  background-color: #a5a5a520;
+  cursor: pointer;
 }
 
 /* qrcode  */

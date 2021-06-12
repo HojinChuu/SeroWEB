@@ -1,7 +1,12 @@
 import React from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
-const TaskItem = ({ task, getTaskValue, removeTaskValue }) => {
+const TaskItem = ({
+  task,
+  getTaskValue,
+  removeTaskValue,
+  handleImageShowHandler,
+}) => {
   let shippingStatus = "";
 
   switch (task.seStatus) {
@@ -18,6 +23,10 @@ const TaskItem = ({ task, getTaskValue, removeTaskValue }) => {
       shippingStatus = "수신대기";
   }
 
+  const onClickHandler = () => {
+    handleImageShowHandler(task);
+  };
+
   const renderTooltip = (
     <Tooltip id="button-tooltip">
       <div className="p-2">
@@ -27,7 +36,7 @@ const TaskItem = ({ task, getTaskValue, removeTaskValue }) => {
   );
 
   return (
-    <tr className="text-center">
+    <tr className="text-center" id="taskColumn" onClick={onClickHandler}>
       <td>
         <input
           className="mt-1"

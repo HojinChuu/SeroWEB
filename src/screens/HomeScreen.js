@@ -1,10 +1,14 @@
-import React from "react";
-import { Fragment } from "react";
-import { Image, Col } from "react-bootstrap";
+import React, { useState, Fragment } from "react";
+import { Image, Col, Carousel } from "react-bootstrap";
 import useWindowDimensions from "../../src/hooks/useWindowDimensions";
 
 const HomeScreen = () => {
   const { width } = useWindowDimensions();
+  const [index, setIndex] = useState(0);
+
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
 
   let type = navigator.userAgent.toLowerCase();
   if (type.indexOf("android") > -1) {
@@ -20,17 +24,46 @@ const HomeScreen = () => {
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {type && type === "web" ? (
           <Fragment>
-            <video
-              id="mainVideo"
-              style={{ height: "100%", width: "100%" }}
-              poster="image/homePoster.png"
-              autoPlay
-              preload="auto"
-              loop
-              muted
-            >
-              <source src="image/homeVideo.mp4" type="video/mp4"></source>
-            </video>
+            <Carousel activeIndex={index} onSelect={handleSelect} fade>
+              <Carousel.Item interval={9000}>
+                <video
+                  id="mainVideo"
+                  style={{ height: "100%", width: "100%" }}
+                  poster="image/homePoster.png"
+                  autoPlay
+                  preload="auto"
+                  loop
+                  muted
+                >
+                  <source src="image/homeVideo.mp4" type="video/mp4"></source>
+                </video>
+                <Carousel.Caption>
+                  <h4>SEROPOST</h4>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item interval={3000}>
+                <img
+                  className="d-block w-100"
+                  src="/image/mainpage2.png"
+                  alt="Second slide"
+                />
+
+                <Carousel.Caption>
+                  <h4>SEROPOST</h4>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item interval={3000}>
+                <img
+                  className="d-block w-100"
+                  src="/image/mainpage3.png"
+                  alt="Third slide"
+                />
+
+                <Carousel.Caption>
+                  <h4>SEROPOST</h4>
+                </Carousel.Caption>
+              </Carousel.Item>
+            </Carousel>
             <video
               id="mainSmVideo"
               style={{ height: "100%", width: "100%" }}
@@ -59,11 +92,6 @@ const HomeScreen = () => {
           >
             <source src="image/homeVideo_mobile.mp4" type="video/mp4"></source>
           </video>
-          // <Image
-          //   id="mainSmVideo"
-          //   src="image/homeVideo_sm.gif"
-          //   style={{ height: "100%", width: "100%" }}
-          // />
         )}
       </div>
       <div style={rowStyle}>
@@ -152,15 +180,5 @@ const colStyle = {
   textAlign: "center",
   fontSize: "30px",
 };
-
-// const buttonStyle = {
-//   position: "absolute",
-//   bottom: -0,
-//   right: 0,
-//   border: "none",
-//   outline: "none",
-//   boxShadow: "none",
-//   zIndex: 1000,
-// };
 
 export default HomeScreen;
