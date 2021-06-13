@@ -277,7 +277,12 @@ body > div.fade.modal.show > div > div {
 #taskColumn:hover {
   cursor: pointer;
 }
+#taskImageCard .col img {
+  box-shadow: 4px 4px 10px #ccc;
+  border-radius: 3px;
+}
 #taskImageCard .col img:hover {
+  box-shadow: 6px 6px 20px #ccc;
   background-color: #a5a5a520;
   cursor: pointer;
 }

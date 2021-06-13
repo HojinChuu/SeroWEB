@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import axios from "axios";
 import { Modal, Image, Row, Col, Button } from "react-bootstrap";
 import { IMAGE_URL } from "../../config";
 
@@ -7,14 +8,17 @@ const TaskImageModal = ({ show, onHide, taskItem }) => {
   const backImage = useRef("");
 
   const imageClickHandler = async (imageSrc, direction) => {
-    const response = await fetch(imageSrc);
-    if (response.status === 200) {
-      const blob = await response.blob();
-      const imageTag = document.createElement("a");
-      imageTag.href = URL.createObjectURL(blob);
-      imageTag.download = `No${taskItem.seId}_${taskItem.seName}_${direction}`;
-      imageTag.click();
-    }
+    const response = await axios.get(imageSrc, {
+      responseType: "blob",
+    });
+    console.log(response);
+    // if (response.status === 200) {
+    //   const blob = await response.data;
+    //   const imageTag = document.createElement("a");
+    //   imageTag.href = URL.createObjectURL(blob);
+    //   imageTag.download = `No${taskItem.seId}_${taskItem.seName}_${direction}`;
+    //   imageTag.click();
+    // }
   };
 
   const frontImageHandler = () => {
@@ -60,7 +64,7 @@ const TaskImageModal = ({ show, onHide, taskItem }) => {
       </Modal.Body>
       <Button
         size="lg"
-        className="mt-2"
+        className="mt-4"
         variant="secondary"
         style={{ fontSize: "13px" }}
         onClick={onClickHandler}
