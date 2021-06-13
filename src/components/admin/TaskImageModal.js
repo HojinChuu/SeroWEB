@@ -1,34 +1,33 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { Modal, Image, Row, Col, Button } from "react-bootstrap";
 import { IMAGE_URL } from "../../config";
 
 const TaskImageModal = ({ show, onHide, taskItem }) => {
   const frontImage = useRef("");
   const backImage = useRef("");
-  useEffect(() => {
-    if (taskItem) {
-      console.log(taskItem);
-    }
-  }, [taskItem]);
 
-  const imageClickHandler = (imageSrc) => {
-    const imageTag = document.createElement("a");
-    imageTag.href = imageSrc;
-    imageTag.download = imageSrc.substring(imageSrc.lastIndexOf("/") + 1);
-    imageTag.click();
+  const imageClickHandler = async (imageSrc, direction) => {
+    const response = await fetch(imageSrc);
+    if (response.status === 200) {
+      const blob = await response.blob();
+      const imageTag = document.createElement("a");
+      imageTag.href = URL.createObjectURL(blob);
+      imageTag.download = `No${taskItem.seId}_${taskItem.seName}_${direction}`;
+      imageTag.click();
+    }
   };
 
   const frontImageHandler = () => {
-    imageClickHandler(frontImage.current.src);
+    imageClickHandler(frontImage.current.src, "front");
   };
 
   const backImageHandler = () => {
-    imageClickHandler(backImage.current.src);
+    imageClickHandler(backImage.current.src, "back");
   };
 
   const onClickHandler = () => {
-    imageClickHandler(frontImage.current.src);
-    imageClickHandler(backImage.current.src);
+    imageClickHandler(frontImage.current.src, "front");
+    imageClickHandler(backImage.current.src, "back");
   };
 
   return (
@@ -42,7 +41,7 @@ const TaskImageModal = ({ show, onHide, taskItem }) => {
           <Col>
             <Image
               ref={frontImage}
-              src="/image/aboutImage4.png"
+              src={IMAGE_URL + "/" + taskItem.Post.poPhoto}
               width="100%"
               height="100%"
               onClick={frontImageHandler}
@@ -51,7 +50,7 @@ const TaskImageModal = ({ show, onHide, taskItem }) => {
           <Col>
             <Image
               ref={backImage}
-              src="/image/aboutImage5.png"
+              src={IMAGE_URL + "/" + taskItem.Post.poContentPhoto}
               width="100%"
               height="100%"
               onClick={backImageHandler}

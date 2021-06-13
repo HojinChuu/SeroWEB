@@ -24,7 +24,13 @@ const HomeScreen = () => {
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {type && type === "web" ? (
           <Fragment>
-            <Carousel activeIndex={index} onSelect={handleSelect} fade>
+            <Carousel
+              activeIndex={index}
+              onSelect={handleSelect}
+              fade
+              keyboard
+              pause={false}
+            >
               <Carousel.Item interval={9000}>
                 <video
                   id="mainVideo"
