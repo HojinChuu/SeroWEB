@@ -551,6 +551,9 @@ body > div.fade.modal.show > div > div {
   line-height: 1px;
   height: 32px;
   width: 30px;
+  outline: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
 }
 
 /* FAQ */
@@ -713,10 +716,14 @@ body
   border: 1px solid #191919;
   color: #191919;
   margin-right: 3px;
+  margin-right: 3px;
   margin-left: 3px;
   line-height: 1px;
   height: 32px;
   width: 30px;
+  outline: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
 }
 #root > main > div > div > form > div > input:disabled {
   background-color: #000000;
