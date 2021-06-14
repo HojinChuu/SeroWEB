@@ -50,7 +50,7 @@ const HomeScreen = () => {
               <Carousel.Item interval={3000}>
                 <img
                   className="d-block w-100"
-                  src="/image/mainpage2.png"
+                  src="/image/seroRefImage1.png"
                   alt="Second slide"
                 />
 
@@ -61,7 +61,29 @@ const HomeScreen = () => {
               <Carousel.Item interval={3000}>
                 <img
                   className="d-block w-100"
-                  src="/image/mainpage3.png"
+                  src="/image/seroRefImage2.png"
+                  alt="Third slide"
+                />
+
+                <Carousel.Caption>
+                  <h4>SEROPOST</h4>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item interval={3000}>
+                <img
+                  className="d-block w-100"
+                  src="/image/seroRefImage3.png"
+                  alt="Third slide"
+                />
+
+                <Carousel.Caption>
+                  <h4>SEROPOST</h4>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item interval={3000}>
+                <img
+                  className="d-block w-100"
+                  src="/image/seroRefImage4.png"
                   alt="Third slide"
                 />
 
