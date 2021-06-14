@@ -144,7 +144,7 @@ const HomeScreen = () => {
           />
         </Col>
       </div>
-      {width > 600 && (
+      {width > 600 ? (
         <div>
           <Image
             src="/image/mainpage3.png"
@@ -180,6 +180,47 @@ const HomeScreen = () => {
               src="/image/googlePlay.png"
               style={{
                 width: "9%",
+                objectFit: "contain",
+                cursor: "pointer",
+              }}
+              className="ml-2"
+              onClick={() =>
+                (window.location =
+                  "https://play.google.com/store/apps/details?id=com.app.seropost")
+              }
+            />
+          </div>
+        </div>
+      ) : (
+        <div>
+          <Image src="/image/mainpage3_sm.png" height="100%" width="100%" />
+          <div
+            style={{
+              position: "absolute",
+              bottom: "3.5%",
+              left: "10%",
+              textAlign: "center",
+              width: "80%",
+              height: "80px",
+            }}
+          >
+            <Image
+              src="/image/appleStore.png"
+              style={{
+                width: "35%",
+                objectFit: "contain",
+                cursor: "pointer",
+              }}
+              className="ml-2"
+              onClick={() =>
+                (window.location =
+                  "https://apps.apple.com/kr/app/trello/id1278508951?mt=12")
+              }
+            />
+            <Image
+              src="/image/googlePlay.png"
+              style={{
+                width: "37%",
                 objectFit: "contain",
                 cursor: "pointer",
               }}

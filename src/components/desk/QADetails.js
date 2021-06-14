@@ -185,7 +185,10 @@ const QADetails = ({ history, match }) => {
           comments &&
           comments.length !== 0 && (
             <div
-              style={{ background: "#f9f8f7", border: "1px solid #b1b1b1" }}
+              style={{
+                background: "rgb(250, 250, 250)",
+                border: "1px solid #b1b1b1",
+              }}
               className="pl-3 pr-3 pt-4 rounded"
             >
               {pagedComments.map((item, index) => (
