@@ -11,14 +11,13 @@ const TaskImageModal = ({ show, onHide, taskItem }) => {
     const response = await axios.get(imageSrc, {
       responseType: "blob",
     });
-    console.log(response);
-    // if (response.status === 200) {
-    //   const blob = await response.data;
-    //   const imageTag = document.createElement("a");
-    //   imageTag.href = URL.createObjectURL(blob);
-    //   imageTag.download = `No${taskItem.seId}_${taskItem.seName}_${direction}`;
-    //   imageTag.click();
-    // }
+    if (response.status === 200) {
+      const blob = await response.data;
+      const imageTag = document.createElement("a");
+      imageTag.href = URL.createObjectURL(blob);
+      imageTag.download = `No${taskItem.seId}_${taskItem.seName}_${direction}`;
+      imageTag.click();
+    }
   };
 
   const frontImageHandler = () => {
