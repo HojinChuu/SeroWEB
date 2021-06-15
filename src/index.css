@@ -131,6 +131,12 @@ footer .subTitle span:not(:nth-child(1)) {
   padding-left: 25px;
 }
 
+/* btn */
+.btn.btn-dark {
+  background-color: grey !important;
+  border: none !important;
+}
+
 /* spinner */
 svg {
   width: 200px;

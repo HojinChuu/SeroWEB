@@ -25,6 +25,7 @@ const HomeScreen = () => {
         {type && type === "web" ? (
           <Fragment>
             <Carousel
+              id="mainVideo"
               activeIndex={index}
               onSelect={handleSelect}
               fade
@@ -33,7 +34,6 @@ const HomeScreen = () => {
             >
               <Carousel.Item interval={9000}>
                 <video
-                  id="mainVideo"
                   style={{ height: "100%", width: "100%" }}
                   poster="image/homePoster.png"
                   autoPlay
@@ -73,7 +73,7 @@ const HomeScreen = () => {
                 <img
                   className="d-block w-100"
                   src="/image/seroRefImage3.png"
-                  alt="Third slide"
+                  alt="Fourth slide"
                 />
 
                 <Carousel.Caption>
@@ -84,7 +84,7 @@ const HomeScreen = () => {
                 <img
                   className="d-block w-100"
                   src="/image/seroRefImage4.png"
-                  alt="Third slide"
+                  alt="Fifth slide"
                 />
 
                 <Carousel.Caption>
@@ -92,23 +92,92 @@ const HomeScreen = () => {
                 </Carousel.Caption>
               </Carousel.Item>
             </Carousel>
-            <video
+            <Carousel
               id="mainSmVideo"
-              style={{ height: "100%", width: "100%" }}
-              poster="image/homePoster_sm.png"
-              autoPlay
-              preload="auto"
-              loop
-              muted
+              activeIndex={index}
+              onSelect={handleSelect}
+              fade
+              keyboard
+              pause={false}
             >
-              <source
-                src="image/homeVideo_mobile.mp4"
-                type="video/mp4"
-              ></source>
-            </video>
+              <Carousel.Item interval={9000}>
+                <video
+                  style={{ height: "100%", width: "100%" }}
+                  poster="image/homePoster_sm.png"
+                  autoPlay
+                  preload="auto"
+                  playsInline
+                  loop
+                  muted
+                >
+                  <source
+                    src="image/homeVideo_mobile.mp4"
+                    type="video/mp4"
+                  ></source>
+                </video>
+                <Carousel.Caption>
+                  <h6>SEROPOST</h6>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item interval={3000}>
+                <img
+                  className="d-block w-100"
+                  src="/image/seroRefImage_sm1.png"
+                  alt="Second slide"
+                />
+                <Carousel.Caption>
+                  <h6>SEROPOST</h6>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item interval={3000}>
+                <img
+                  className="d-block w-100"
+                  src="/image/seroRefImage_sm2.png"
+                  alt="Third slide"
+                />
+
+                <Carousel.Caption>
+                  <h6>SEROPOST</h6>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item interval={3000}>
+                <img
+                  className="d-block w-100"
+                  src="/image/seroRefImage_sm3.png"
+                  alt="Fourth slide"
+                />
+
+                <Carousel.Caption>
+                  <h6>SEROPOST</h6>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item interval={3000}>
+                <img
+                  className="d-block w-100"
+                  src="/image/seroRefImage_sm4.png"
+                  alt="Fifth slide"
+                />
+
+                <Carousel.Caption>
+                  <h6>SEROPOST</h6>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item interval={3000}>
+                <img
+                  className="d-block w-100"
+                  src="/image/seroRefImage_sm5.png"
+                  alt="Sixth slide"
+                />
+
+                <Carousel.Caption>
+                  <h6>SEROPOST</h6>
+                </Carousel.Caption>
+              </Carousel.Item>
+            </Carousel>
           </Fragment>
         ) : (
           <Carousel
+            id="mainSmVideo"
             activeIndex={index}
             onSelect={handleSelect}
             fade
@@ -117,7 +186,6 @@ const HomeScreen = () => {
           >
             <Carousel.Item interval={9000}>
               <video
-                id="mainSmVideo"
                 style={{ height: "100%", width: "100%" }}
                 poster="image/homePoster_sm.png"
                 autoPlay
@@ -148,7 +216,7 @@ const HomeScreen = () => {
             <Carousel.Item interval={3000}>
               <img
                 className="d-block w-100"
-                src="/image/seroRefImage_sm2.jpg"
+                src="/image/seroRefImage_sm2.png"
                 alt="Third slide"
               />
 
@@ -159,8 +227,8 @@ const HomeScreen = () => {
             <Carousel.Item interval={3000}>
               <img
                 className="d-block w-100"
-                src="/image/seroRefImage_sm3.jpg"
-                alt="Third slide"
+                src="/image/seroRefImage_sm3.png"
+                alt="Forth slide"
               />
 
               <Carousel.Caption>
@@ -170,8 +238,8 @@ const HomeScreen = () => {
             <Carousel.Item interval={3000}>
               <img
                 className="d-block w-100"
-                src="/image/seroRefImage_sm4.jpg"
-                alt="Third slide"
+                src="/image/seroRefImage_sm4.png"
+                alt="Fifth slide"
               />
 
               <Carousel.Caption>
@@ -181,8 +249,8 @@ const HomeScreen = () => {
             <Carousel.Item interval={3000}>
               <img
                 className="d-block w-100"
-                src="/image/seroRefImage_sm5.jpg"
-                alt="Third slide"
+                src="/image/seroRefImage_sm5.png"
+                alt="Sixth slide"
               />
 
               <Carousel.Caption>
@@ -226,17 +294,17 @@ const HomeScreen = () => {
           <div
             style={{
               position: "absolute",
-              bottom: "10%",
-              left: "20%",
+              bottom: "10.5%",
+              left: "36%",
               textAlign: "center",
-              width: "80%",
+              width: "50%",
               height: "80px",
             }}
           >
             <Image
               src="/image/appleStore.png"
               style={{
-                width: "8%",
+                width: "15%",
                 objectFit: "contain",
                 cursor: "pointer",
               }}
@@ -249,7 +317,7 @@ const HomeScreen = () => {
             <Image
               src="/image/googlePlay.png"
               style={{
-                width: "9%",
+                width: "17%",
                 objectFit: "contain",
                 cursor: "pointer",
               }}
@@ -268,7 +336,7 @@ const HomeScreen = () => {
             style={{
               position: "absolute",
               bottom: "3.5%",
-              left: "10%",
+              left: "9%",
               textAlign: "center",
               width: "80%",
               height: "80px",
