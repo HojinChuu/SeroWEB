@@ -23,7 +23,7 @@ const TaskImageModal = ({ show, onHide, taskItem }) => {
       const blob = await response.data;
       const imageTag = document.createElement("a");
       imageTag.href = URL.createObjectURL(blob);
-      imageTag.download = `No${taskItem.seId}_${taskItem.seName}_${direction}`;
+      imageTag.download = `No${taskItem.seId}_${taskItem.seName}_${direction}.png`;
       imageTag.click();
     }
     onHide();
