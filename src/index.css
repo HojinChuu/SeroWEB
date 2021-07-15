@@ -116,10 +116,6 @@ footer .title a {
   font-size: 15px;
 }
 
-footer .title span {
-  margin-left: 20px;
-}
-
 footer .subTitle {
   color: #cecece;
   font-size: 15px;
@@ -127,8 +123,8 @@ footer .subTitle {
 
 footer .subTitle span:not(:nth-child(1)) {
   border-left: 1px solid #cecece;
-  margin-left: 23px;
-  padding-left: 25px;
+  margin-left: 35px;
+  padding-left: 36px;
 }
 
 /* btn */

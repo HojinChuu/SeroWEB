@@ -22,6 +22,17 @@ const QrcodeLinkScreen = ({ location, history }) => {
   const { loading, qrcode, error } = qrcodePostData;
   const { success: postSaveSuccess, error: postSaveError } = qrcodeSavePost;
 
+  let type = navigator.userAgent.toLowerCase();
+  if (type.indexOf("android") > -1) {
+    type = "adroid";
+  } else if (type.indexOf("iphone") > -1 || type.indexOf("ipod") > -1) {
+    type = "ios";
+  } else if (navigator.userAgent.toLowerCase().search("mac") !== -1) {
+    type = "mac";
+  } else {
+    type = "window";
+  }
+
   useEffect(() => {
     if (userInfo && localStorage.getItem("userToken")) {
       dispatch(getQrcodeData(qrData, userInfo.usPhoneNumber));
@@ -34,9 +45,9 @@ const QrcodeLinkScreen = ({ location, history }) => {
   }, [userInfo, qrData, history, dispatch]);
 
   useEffect(() => {
-    if (postSaveSuccess) {
-      history.push("/mailbox");
-    }
+    // if (postSaveSuccess) {
+    //   history.push("/mailbox");
+    // }
     if (error) {
       showAlert
         .error("", "잘못된 경로의 엽서입니다.", false, "확인")
@@ -44,7 +55,30 @@ const QrcodeLinkScreen = ({ location, history }) => {
           if (isConfirmed) history.push("/");
         });
     }
-  }, [history, postSaveSuccess, error]);
+  }, [history, error]);
+
+  useEffect(() => {
+    if (postSaveSuccess) {
+      showAlert
+        .success(
+          "",
+          "엽서를 추가했습니다 !",
+          true,
+          "WEB에서 확인",
+          "APP에서 확인",
+          false
+        )
+        .then(({ isConfirmed }) => {
+          isConfirmed
+            ? history.push("/mailbox")
+            : type === "ios" || type === "mac"
+            ? (window.location.href =
+                "https://apps.apple.com/kr/app/trello/id1278508951?mt=12")
+            : (window.location.href =
+                "https://play.google.com/store/apps/details?id=com.app.seropost");
+        });
+    }
+  }, [postSaveSuccess, history, type]);
 
   useEffect(() => {
     if (qrcode) {
