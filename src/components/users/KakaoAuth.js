@@ -9,7 +9,7 @@ const KakaoAuth = ({ history }) => {
 
   const onSuccess = ({ profile }) => {
     const authInfo = {
-      id: profile.googleId,
+      id: profile.id,
       name: profile.properties.nickname,
       image: profile.kakao_account.profile.profile_image_url
         ? DEFAULT_PROFILE
