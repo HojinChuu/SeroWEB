@@ -23,8 +23,12 @@ const LoginScreen = ({ history }) => {
   const { loading, userToken, success, error } = userLogin;
 
   useEffect(() => {
-    if (userToken) {
+    if (userToken && !localStorage.getItem("addressCode")) {
       history.push("/");
+    }
+    if (userToken && localStorage.getItem("addressCode")) {
+      history.push(`/address?seid=${localStorage.getItem("addressCode")}`);
+      localStorage.removeItem("addressCode");
     }
     if (success && localStorage.getItem("qrCode")) {
       history.push(`/qrcode?code=${localStorage.getItem("qrCode")}`);

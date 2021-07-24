@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { Image } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { register, sendSms, checkSms } from "../actions/userActions";
-import { bindAddress } from "../utils/bindAddress";
+// import { bindAddress } from "../utils/bindAddress";
 import { DEFAULT_PROFILE } from "../config";
 
 import FormContainer from "../components/helpers/FormContainer";
-import AddressSearchModal from "../components/users/AddressSearchModal";
+// import AddressSearchModal from "../components/users/AddressSearchModal";
 import RegisterAgreeModal from "../components/users/RegisterAgreeModal";
 import Message from "../components/helpers/Message";
 import Spinner from "../components/helpers/Spinner";
@@ -17,14 +17,14 @@ const RegisterScreen = ({ history }) => {
   const [code, setCode] = useState("");
   const [name, setName] = useState("");
   const [photo, setPhoto] = useState({ preview: "", file: "" });
-  const [address, setAddress] = useState("");
-  const [addressDetail, setAddressDetail] = useState("");
-  const [postCode, setPostCode] = useState("");
+  // const [address, setAddress] = useState("");
+  // const [addressDetail, setAddressDetail] = useState("");
+  // const [postCode, setPostCode] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState({ success: "", fail: "" });
   const [smsVisible, setSmsVisible] = useState(false);
-  const [postSearch, setPostSearch] = useState(false);
+  // const [postSearch, setPostSearch] = useState(false);
   const [show, setShow] = useState(false);
 
   const dispatch = useDispatch();
@@ -110,12 +110,12 @@ const RegisterScreen = ({ history }) => {
     }
   };
 
-  const addressCompleteHandler = (data) => {
-    const { fullAddress, zoneCodes } = bindAddress(data);
-    setAddress(fullAddress);
-    setPostCode(zoneCodes);
-    setPostSearch(false);
-  };
+  // const addressCompleteHandler = (data) => {
+  //   const { fullAddress, zoneCodes } = bindAddress(data);
+  //   setAddress(fullAddress);
+  //   setPostCode(zoneCodes);
+  //   setPostSearch(false);
+  // };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -132,9 +132,9 @@ const RegisterScreen = ({ history }) => {
       }
       formData.append("usPhoneNumber", phone);
       formData.append("usName", name);
-      formData.append("usAddress", address);
-      formData.append("usAddressDetail", addressDetail);
-      formData.append("usAddressNumber", postCode);
+      // formData.append("usAddress", address);
+      // formData.append("usAddressDetail", addressDetail);
+      // formData.append("usAddressNumber", postCode);
       formData.append("usPhoto", photo.file);
       dispatch(register(formData));
     }
@@ -253,7 +253,7 @@ const RegisterScreen = ({ history }) => {
                 </div>
               </label>
             </div>
-            <div className="form-group" id="address">
+            {/* <div className="form-group" id="address">
               <div className="row justify-content-between">
                 <div className="col">
                   <label>Address</label>
@@ -261,7 +261,7 @@ const RegisterScreen = ({ history }) => {
                     type="button"
                     className="btn btn-sm"
                     style={{ color: "grey" }}
-                    onClick={() => setPostSearch(true)}
+                    // onClick={() => setPostSearch(true)}
                   >
                     <i className="fas fa-search-location fa-lg"></i>
                   </button>
@@ -303,15 +303,15 @@ const RegisterScreen = ({ history }) => {
                   />
                 </div>
               </div>
-            </div>
+            </div> */}
 
-            {postSearch && (
+            {/* {postSearch && (
               <AddressSearchModal
-                visible={postSearch}
+                // visible={postSearch}
                 onComplete={addressCompleteHandler}
-                cancelBtn={() => setPostSearch(false)}
+                // cancelBtn={() => setPostSearch(false)}
               />
-            )}
+            )} */}
             {!authInfo && (
               <Fragment>
                 <div className="form-group" id="password">

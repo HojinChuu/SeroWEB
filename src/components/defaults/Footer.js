@@ -33,10 +33,11 @@ const Footer = () => {
                     </div>
                   </div>
                   <div className="row mt-4 subTitle justify-content-center">
-                    <span>개인정보책임관리자: 안준용</span>
+                    <span>개인정보책임관리자: 윤애자</span>
                     <span>사업자등록번호: 277-19-01178</span>
                     <span>
-                      주소: 대구광역시 북구 대학로 53 해피하우스 201호
+                      사업장소재지: 경상남도 창원시 성산구 대정로 142, 108동
+                      1104호
                     </span>
                   </div>
                 </div>
@@ -62,9 +63,12 @@ const Footer = () => {
                   </div>
                 </div>
                 <div className="p-3 subTitle" style={{ fontSize: "14px" }}>
-                  <div>개인정보책임관리자: 안준용</div>
+                  <div>개인정보책임관리자: 윤애자</div>
                   <div>사업자등록번호: 277-19-01178</div>
-                  <div>주소: 대구광역시 북구 대학로 53 해피하우스 201호</div>
+                  <div>
+                    사업장소재지: 경상남도 창원시 성산구 대정로 142, 108동
+                    1104호
+                  </div>
                 </div>
               </div>
             )}

@@ -49,34 +49,43 @@ export const saveQrcodePost = (usId, poId) => async (dispatch) => {
   }
 };
 
-export const postAddress = (
-  seCode,
-  phone,
-  name,
-  address,
-  addressDeatil,
-  postCode
-) => async (dispatch) => {
-  try {
-    dispatch({ type: ADDRESS_INPUT_REQUEST });
+export const postAddress =
+  (seCode, phone, name, address, addressDeatil, postCode) =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: ADDRESS_INPUT_REQUEST });
 
+      await axios.post(
+        `${DOMAIN}/web_set_address`,
+        {
+          seCode,
+          usPhoneNumber: phone,
+          usName: name,
+          usAddress: address,
+          usAddressDetail: addressDeatil,
+          usAddressNumber: postCode,
+        },
+        { headers: { "Content-Type": "application/json" } }
+      );
+
+      dispatch({
+        type: ADDRESS_INPUT_SUCCESS,
+      });
+    } catch (error) {
+      dispatch({ type: ADDRESS_INPUT_FAIL });
+    }
+  };
+
+export const updateAddress =
+  (usId, address, addressDeatil, postCode) => async (dispatch) => {
     await axios.post(
-      `${DOMAIN}/web_set_address`,
+      `${DOMAIN}/web_upt_address`,
       {
-        seCode,
-        usPhoneNumber: phone,
-        usName: name,
+        usId,
         usAddress: address,
         usAddressDetail: addressDeatil,
         usAddressNumber: postCode,
       },
       { headers: { "Content-Type": "application/json" } }
     );
-
-    dispatch({
-      type: ADDRESS_INPUT_SUCCESS,
-    });
-  } catch (error) {
-    dispatch({ type: ADDRESS_INPUT_FAIL });
-  }
-};
+  };

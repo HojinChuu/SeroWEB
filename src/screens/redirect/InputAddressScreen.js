@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postAddress } from "../../actions/linkActions";
+import { postAddress, updateAddress } from "../../actions/linkActions";
 import { bindAddress } from "../../utils/bindAddress";
 import showAlert from "../../utils/alert";
+import { getUserInfo } from "../../actions/userActions";
 
 import FormContainer from "../../components/helpers/FormContainer";
 import AddressSearchModal from "../../components/users/AddressSearchModal";
@@ -18,11 +19,14 @@ const InputAddressScreen = ({ location, history }) => {
   const [postSearch, setPostSearch] = useState(false);
   const [message, setMessage] = useState("");
   const [seCode] = useState(location.search.split("=")[1]);
+  const [updateToggle, setUpdateToggle] = useState(false);
 
   const dispatch = useDispatch();
   const addressInput = useSelector((state) => state.addressInput);
+  const userLogin = useSelector((state) => state.userLogin);
 
   const { success, loading, error } = addressInput;
+  const { userToken, userInfo } = userLogin;
 
   useEffect(() => {
     if (error) {
@@ -32,9 +36,16 @@ const InputAddressScreen = ({ location, history }) => {
           if (isConfirmed) history.push("/");
         });
     } else if (success) {
-      showAlert.success("Saved!", "", false, "OK").then(({ isConfirmed }) => {
-        if (isConfirmed) history.push("/");
-      });
+      showAlert
+        .success(
+          "처리되었습니다!",
+          "엽서가 도착하는데 5일정도 소요됩니다.",
+          false,
+          "OK"
+        )
+        .then(({ isConfirmed }) => {
+          if (isConfirmed) history.push("/");
+        });
     } else if (location.search.split("=")[0] !== "?seid") {
       history.push("/");
     }
@@ -47,16 +58,56 @@ const InputAddressScreen = ({ location, history }) => {
     setPostSearch(false);
   };
 
+  const inputAddressHandler = () => {
+    if (userInfo) {
+      setPhone(userInfo.usPhoneNumber);
+      setName(userInfo.usName);
+      setAddress(userInfo.usAddress);
+      setAddressDetail(userInfo.usAddressDetail);
+      setPostCode(userInfo.usAddressNumber);
+    } else {
+      localStorage.setItem("addressCode", location.search.split("=")[1]);
+      history.push({
+        pathname: `/login`,
+      });
+    }
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
     if (!name || !address || !addressDetail || !postCode) {
-      setMessage("전부 입력해 주세요");
+      setMessage("전부 입력해 주세요.");
+    }
+    if (addressDetail.length < 6) {
+      setMessage("상세주소는 6자 이상 입력하세요.");
     } else {
-      dispatch(
-        postAddress(seCode, phone, name, address, addressDetail, postCode)
-      );
+      if (updateToggle) {
+        dispatch(
+          updateAddress(userInfo.usId, address, addressDetail, postCode)
+        );
+        dispatch(
+          postAddress(
+            seCode,
+            userInfo.usPhoneNumber,
+            userInfo.usName,
+            address,
+            addressDetail,
+            postCode
+          )
+        );
+      } else {
+        dispatch(
+          postAddress(seCode, phone, name, address, addressDetail, postCode)
+        );
+      }
     }
   };
+
+  useEffect(() => {
+    if (userToken) {
+      dispatch(getUserInfo());
+    }
+  }, [dispatch, userToken]);
 
   return (
     <FormContainer>
@@ -73,8 +124,9 @@ const InputAddressScreen = ({ location, history }) => {
                 type="text"
                 placeholder="Enter Phone Number"
                 className="form-control"
-                value={phone}
+                value={userInfo ? userInfo.usPhoneNumber : phone}
                 onChange={(e) => setPhone(e.target.value)}
+                readOnly={userInfo}
               />
             </div>
             <div id="name" className="form-group">
@@ -83,8 +135,9 @@ const InputAddressScreen = ({ location, history }) => {
                 type="text"
                 placeholder="Enter Name"
                 className="form-control"
-                value={name}
+                value={userInfo ? userInfo.usName : name}
                 onChange={(e) => setName(e.target.value)}
+                readOnly={userInfo}
               />
             </div>
             <div className="form-group" id="address">
@@ -138,12 +191,36 @@ const InputAddressScreen = ({ location, history }) => {
                 </div>
               </div>
             </div>
+            {userInfo && (
+              <div className="row">
+                <div className="mr-2 ml-3">
+                  <input
+                    type="checkbox"
+                    id="addressUpdateCheck"
+                    onChange={(e) => setUpdateToggle(!updateToggle)}
+                  />
+                </div>
+                <div style={{ fontSize: "12px", lineHeight: "18px" }}>
+                  <label htmlFor="addressUpdateCheck">
+                    앞으로도 입력한 주소를 배송지로 사용하겠습니다.
+                  </label>
+                </div>
+              </div>
+            )}
             <button
               type="submit"
               className="btn btn-block mt-4 btn-dark"
               style={{ backgroundColor: "#515151" }}
             >
               확인
+            </button>
+            <button
+              type="button"
+              className="btn btn-block btn-light"
+              style={{ color: "grey" }}
+              onClick={inputAddressHandler}
+            >
+              내 정보 불러오기
             </button>
           </form>
         </div>
