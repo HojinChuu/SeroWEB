@@ -108,7 +108,7 @@ footer {
 
 footer .title {
   color: #cecece;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 footer .title a {
@@ -118,7 +118,7 @@ footer .title a {
 
 footer .subTitle {
   color: #cecece;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 footer .subTitle span:not(:nth-child(1)) {
