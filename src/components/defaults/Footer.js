@@ -14,10 +14,11 @@ const Footer = () => {
             {width >= 1080 ? (
               <div className="col col-12 pt-5 pb-5">
                 <div className="m-auto" style={{ width: "1047px" }}>
-                  <div className="row justify-content-around title">
-                    <div className="ml-3">
-                      Copyright &copy; 2021 Seropost.All right reserved
-                    </div>
+                  <div
+                    className="row m-auto justify-content-between title"
+                    style={{ width: "1000px" }}
+                  >
+                    <div>Copyright &copy; 2021 Seropost.All right reserved</div>
                     <div>
                       <span className="mr-3">
                         <a href="https://seropost.com/privacy.html">
@@ -27,14 +28,19 @@ const Footer = () => {
                       <span className="mr-3">
                         <a href="https://seropost.com/tos.html">이용약관</a>
                       </span>
-                      <span className="mr-3">
+                      <span>
                         <a href="https://seropost.com/desk/qa">고객센터</a>
                       </span>
                     </div>
                   </div>
-                  <div className="row mt-4 subTitle justify-content-center">
-                    <span>개인정보책임관리자: 윤애자</span>
+                  <div
+                    className="row mt-4 mr-auto ml-auto subTitle justify-content-between"
+                    style={{ width: "1000px" }}
+                  >
+                    <span>상호명: 세로엽서</span>
                     <span>사업자등록번호: 277-19-01178</span>
+                    <span>연락처: 010-8946-0931</span>
+                    <span>개인정보책임관리자: 윤애자</span>
                     <span>
                       사업장소재지: 경상남도 창원시 성산구 대정로 142, 108동
                       1104호
@@ -63,8 +69,10 @@ const Footer = () => {
                   </div>
                 </div>
                 <div className="p-3 subTitle" style={{ fontSize: "14px" }}>
-                  <div>개인정보책임관리자: 윤애자</div>
+                  <div>상호명: 세로엽서</div>
                   <div>사업자등록번호: 277-19-01178</div>
+                  <div>연락처: 010-8946-0931</div>
+                  <div>개인정보책임관리자: 윤애자</div>
                   <div>
                     사업장소재지: 경상남도 창원시 성산구 대정로 142, 108동
                     1104호
