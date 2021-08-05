@@ -6,6 +6,13 @@ const Footer = () => {
   const location = useLocation();
   const { width } = useWindowDimensions();
 
+  let type = navigator.userAgent.toLowerCase();
+  if (navigator.userAgent.toLowerCase().search("mac") !== -1) {
+    type = "mac";
+  } else {
+    type = "window";
+  }
+
   return (
     <Fragment>
       {location.pathname !== "/qrcode" && (
@@ -35,7 +42,11 @@ const Footer = () => {
                   </div>
                   <div
                     className="row mt-4 mr-auto ml-auto subTitle justify-content-between"
-                    style={{ width: "1000px" }}
+                    style={
+                      type === "mac"
+                        ? { width: "1000px", fontSize: "14px" }
+                        : { width: "1000px", fontSize: "13px" }
+                    }
                   >
                     <span>상호명: 세로엽서</span>
                     <span>사업자등록번호: 277-19-01178</span>
