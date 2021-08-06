@@ -21,7 +21,7 @@ const HomeScreen = () => {
 
   return (
     <div>
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
+      <div>
         {type && type === "web" ? (
           <Fragment>
             <Carousel
