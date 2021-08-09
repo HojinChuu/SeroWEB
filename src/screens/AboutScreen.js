@@ -38,7 +38,7 @@ const AboutScreen = () => {
             <Card.Body className="aboutBody">
               <Card.Text>
                 받는 이의 전화번호 또는 주소를 입력 후 결제한다. <br />
-                배송은 우체국 일반등기로 배송 금액은 1,000원 입니다.
+                배송은 우체국 일반등기로 배송 금액은 1,900원 입니다.
               </Card.Text>
             </Card.Body>
           </Card>

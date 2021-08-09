@@ -8,6 +8,11 @@ const SideBar = () => {
         <ul className="nav flex-column">
           <li className="nav-item">
             <Link className="nav-link" to="/admin">
+              <span className="space">대시보드</span>
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/admin/tasks">
               <span className="space">엽서업무</span>
             </Link>
           </li>
@@ -23,8 +28,8 @@ const SideBar = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/admin/analysis">
-              <span className="space">통계/분석</span>
+            <Link className="nav-link" to="/admin/logs">
+              <span className="space">결제기록</span>
             </Link>
           </li>
         </ul>

@@ -869,6 +869,11 @@ input::-webkit-inner-spin-button {
   font-family: "Noto Sans KR";
 }
 
+.ct-chart svg {
+  height: inherit !important;
+  width: 100% !important;
+}
+
 /* home */
 @media (min-width: 600px) {
   #mainSmVideo {

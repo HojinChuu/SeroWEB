@@ -5,7 +5,8 @@ import { Container } from "react-bootstrap";
 
 import SideBar from "../components/admin/SideBar";
 import Tasks from "../components/admin/Tasks";
-import Analysis from "../components/admin/Analysis";
+import Logs from "../components/admin/Logs";
+import Dashboard from "../components/admin/Dashboard";
 import Notices from "../components/admin/Notices";
 import Questions from "../components/admin/Questions";
 import NoticeCreateForm from "../components/admin/NoticeCreateForm";
@@ -18,7 +19,7 @@ const AdminHomeScreen = ({ match, location, history }) => {
 
   useEffect(() => {
     location.pathname.slice(7) === ""
-      ? setTitle("TASKS")
+      ? setTitle("DashBoard")
       : setTitle(location.pathname.slice(7).toUpperCase());
   }, [location]);
 
@@ -45,9 +46,10 @@ const AdminHomeScreen = ({ match, location, history }) => {
             exact
           />
           <Route path={match.path + "/questions"} component={Questions} exact />
-          <Route path={match.path + "/analysis"} component={Analysis} exact />
+          <Route path={match.path + "/logs"} component={Logs} exact />
+          <Route path={match.path + "/tasks"} component={Tasks} exact />
           <Route path={match.path + "/notices"} component={Notices} exact />
-          <Route path={match.path} component={Tasks} exact />
+          <Route path={match.path} component={Dashboard} exact />
         </div>
       </div>
     </Container>
