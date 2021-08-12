@@ -122,7 +122,7 @@ footer .subTitle {
 
 footer .subTitle span:not(:nth-child(1)) {
   border-left: 1px solid #cecece;
-  padding-left: 8px;
+  padding-left: 18px;
 }
 
 /* btn */
