@@ -114,10 +114,7 @@ const Tasks = () => {
               제작중
             </ToggleButton>
             <ToggleButton variant="light" value={2}>
-              배송중
-            </ToggleButton>
-            <ToggleButton variant="light" value={3}>
-              배송완료
+              집하완료
             </ToggleButton>
           </ToggleButtonGroup>
 

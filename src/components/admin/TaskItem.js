@@ -14,10 +14,7 @@ const TaskItem = ({
       shippingStatus = "제작중";
       break;
     case 2:
-      shippingStatus = "배송중";
-      break;
-    case 3:
-      shippingStatus = "배송완료";
+      shippingStatus = "집하완료";
       break;
     default:
       shippingStatus = "수신대기";

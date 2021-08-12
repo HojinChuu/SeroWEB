@@ -8,8 +8,7 @@ const TaskStateModal = ({ show, onHide, seletedTask }) => {
   const radios = [
     { name: "수신대기", value: "0", classValue: "fa-pause-circle" },
     { name: "제작중", value: "1", classValue: "fa-edit" },
-    { name: "배송중", value: "2", classValue: "fa-shipping-fast" },
-    { name: "배송완료", value: "3", classValue: "fa-check" },
+    { name: "집하완료", value: "2", classValue: "fa-shipping-fast" },
   ];
 
   const dispatch = useDispatch();
