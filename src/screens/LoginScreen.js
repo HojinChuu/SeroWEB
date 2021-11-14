@@ -63,14 +63,14 @@ const LoginScreen = ({ history }) => {
         <FormContainer>
           {location.pathname === "/login" ? (
             <div className="card p-4 mt-4 rounded mb-4 loginForm">
-              <h1 className="text-center">LOGIN</h1>
+              <h1 className="text-center">로그인</h1>
               {message && <Message variant="danger">{message}</Message>}
               <form onSubmit={submitHandler}>
                 <div className="form-group" id="phone">
                   <label>Phone Number</label>
                   <input
                     type="phone"
-                    placeholder="Enter Phone Number"
+                    placeholder="전화번호를 입력하세요"
                     className="form-control"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
@@ -82,7 +82,7 @@ const LoginScreen = ({ history }) => {
                   <input
                     type="password"
                     className="form-control"
-                    placeholder="Enter password"
+                    placeholder="비밀번호를 입력하세요"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     autoComplete="on"

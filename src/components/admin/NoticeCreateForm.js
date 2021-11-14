@@ -30,7 +30,7 @@ const NoticeCreateForm = ({ history }) => {
           <label>TITLE</label>
           <input
             type="phone"
-            placeholder="Enter the Title"
+            placeholder="제목을 입력하세요"
             className="form-control"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -41,7 +41,7 @@ const NoticeCreateForm = ({ history }) => {
           <label>CONTENT</label>
           <textarea
             className="form-control"
-            placeholder="Enter the Content"
+            placeholder="내용을 입력하세요"
             rows="15"
             style={{ resize: "none" }}
             value={content}

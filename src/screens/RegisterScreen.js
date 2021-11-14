@@ -94,10 +94,10 @@ const RegisterScreen = ({ history }) => {
   const smsCheckHandler = () => {
     if (parseInt(code) === smsCode) {
       dispatch(checkSms(phone, code));
-      setMessage({ success: "SMS success" });
+      setMessage({ success: "SMS 인증되었습니다" });
       setSmsVisible(false);
     } else {
-      setMessage({ fail: "SMS code do not match" });
+      setMessage({ fail: "SMS 코드가 다릅니다" });
     }
   };
 
@@ -120,7 +120,7 @@ const RegisterScreen = ({ history }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword && smsCheckSuccess) {
-      setMessage({ fail: "Passwords do not match" });
+      setMessage({ fail: "비밀번호를 확인해주세요" });
     } else {
       const formData = new FormData();
       if (!authInfo) {
@@ -146,7 +146,7 @@ const RegisterScreen = ({ history }) => {
         <Spinner />
       ) : (
         <div className="card p-4 mt-4 rounded mb-5 registerForm">
-          <h1 className="text-center">SIGN UP</h1>
+          <h1 className="text-center">회원가입</h1>
           {validation && (
             <Message variant="danger">
               {validation.map((validate, index) => (
@@ -169,7 +169,7 @@ const RegisterScreen = ({ history }) => {
                 <div className="col">
                   <input
                     type="number"
-                    placeholder="Enter Phone Number"
+                    placeholder="전화번호를 입력하세요"
                     className="form-control"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
@@ -185,7 +185,7 @@ const RegisterScreen = ({ history }) => {
                     onClick={smsSendHandler}
                     style={{ backgroundColor: "#515151" }}
                   >
-                    Send SMS
+                    SMS 보내기
                   </button>
                 </div>
               </div>
@@ -196,7 +196,7 @@ const RegisterScreen = ({ history }) => {
                 <div className="col">
                   <input
                     type="text"
-                    placeholder="Number"
+                    placeholder="전송된 코드를 입력하세요"
                     className="form-control"
                     value={code}
                     onChange={(e) => setCode(e.target.value)}
@@ -211,7 +211,7 @@ const RegisterScreen = ({ history }) => {
                     onClick={smsCheckHandler}
                     style={{ backgroundColor: "#515151" }}
                   >
-                    Ok
+                    OK
                   </button>
                 </div>
               </div>
@@ -221,7 +221,7 @@ const RegisterScreen = ({ history }) => {
               <label>Name</label>
               <input
                 type="text"
-                placeholder="Enter Name"
+                placeholder="이름을 입력하세요"
                 className="form-control"
                 value={name}
                 // readOnly={authInfo}
@@ -318,7 +318,7 @@ const RegisterScreen = ({ history }) => {
                   <label>Password</label>
                   <input
                     type="password"
-                    placeholder="Enter password"
+                    placeholder="비밀번호를 입력하세요"
                     className="form-control"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -330,7 +330,7 @@ const RegisterScreen = ({ history }) => {
                   <label>Confirm Password</label>
                   <input
                     type="password"
-                    placeholder="Enter Confirm Password"
+                    placeholder="비밀번호를 한번 더 입력하세요"
                     className="form-control"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
@@ -359,13 +359,13 @@ const RegisterScreen = ({ history }) => {
               className="btn btn-block mt-4 btn-dark"
               style={{ backgroundColor: "#515151" }}
             >
-              Register
+              가입하기
             </button>
           </form>
 
           <div className="row py-3">
             <div className="col">
-              Have an Account? <Link to="/login">Login</Link>
+              계정을 이미 가지고 있으신가요? <Link to="/login">로그인하기</Link>
             </div>
           </div>
         </div>

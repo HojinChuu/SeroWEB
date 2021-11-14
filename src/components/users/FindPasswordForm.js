@@ -44,17 +44,17 @@ const FindPasswordForm = ({ history }) => {
   const smsCheckHandler = () => {
     if (parseInt(code) === smsCode) {
       dispatch(checkSms(phone, code));
-      setMessage({ success: "SMS success" });
+      setMessage({ success: "SMS 인증되었습니다" });
       setSmsVisible(false);
     } else {
-      setMessage({ fail: "SMS code do not match" });
+      setMessage({ fail: "SMS 코드가 다릅니다" });
     }
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword && smsCheckSuccess) {
-      setMessage({ fail: "Passwords do not match" });
+      setMessage({ fail: "비밀번호를 확인해주세요" });
     } else {
       dispatch(updatePassword(phone, password));
     }
@@ -83,7 +83,7 @@ const FindPasswordForm = ({ history }) => {
                 <div className="col">
                   <input
                     type="number"
-                    placeholder="Enter Phone Number"
+                    placeholder="전화번호를 입력하세요"
                     className="form-control"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
@@ -110,7 +110,7 @@ const FindPasswordForm = ({ history }) => {
                 <div className="col">
                   <input
                     type="text"
-                    placeholder="Number"
+                    placeholder="전송된 코드를 입력하세요"
                     className="form-control"
                     value={code}
                     onChange={(e) => setCode(e.target.value)}
@@ -125,7 +125,7 @@ const FindPasswordForm = ({ history }) => {
                     onClick={smsCheckHandler}
                     style={{ backgroundColor: "#515151" }}
                   >
-                    Ok
+                    OK
                   </button>
                 </div>
               </div>
@@ -136,7 +136,7 @@ const FindPasswordForm = ({ history }) => {
                   <label>Password</label>
                   <input
                     type="password"
-                    placeholder="Enter password"
+                    placeholder="비밀번호를 입력하세요"
                     className="form-control"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}

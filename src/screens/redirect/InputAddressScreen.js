@@ -122,7 +122,7 @@ const InputAddressScreen = ({ location, history }) => {
               <label>Phone Number</label>
               <input
                 type="text"
-                placeholder="Enter Phone Number"
+                placeholder="전화번호를 입력하세요"
                 className="form-control"
                 value={userInfo ? userInfo.usPhoneNumber : phone}
                 onChange={(e) => setPhone(e.target.value)}
@@ -133,7 +133,7 @@ const InputAddressScreen = ({ location, history }) => {
               <label>Name</label>
               <input
                 type="text"
-                placeholder="Enter Name"
+                placeholder="이름을 입력하세요"
                 className="form-control"
                 value={userInfo ? userInfo.usName : name}
                 onChange={(e) => setName(e.target.value)}
@@ -156,7 +156,7 @@ const InputAddressScreen = ({ location, history }) => {
               </div>
               <input
                 type="text"
-                placeholder="Enter Address"
+                placeholder="주소"
                 className="form-control"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
@@ -171,7 +171,7 @@ const InputAddressScreen = ({ location, history }) => {
                   <label>Address Detail</label>
                   <input
                     type="text"
-                    placeholder="Enter Address Detail"
+                    placeholder="상세주소를 입력하세요"
                     className="form-control"
                     value={addressDetail}
                     onChange={(e) => setAddressDetail(e.target.value)}
@@ -181,7 +181,7 @@ const InputAddressScreen = ({ location, history }) => {
                   <label>Post Code</label>
                   <input
                     type="text"
-                    placeholder="Enter Post Code"
+                    placeholder="우편번호"
                     className="form-control"
                     value={postCode}
                     onChange={(e) => setPostCode(e.target.value)}

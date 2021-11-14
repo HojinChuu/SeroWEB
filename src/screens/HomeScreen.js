@@ -310,8 +310,7 @@ const HomeScreen = () => {
               }}
               className="ml-2"
               onClick={() =>
-                (window.location =
-                  "https://apps.apple.com/kr/app/trello/id1278508951?mt=12")
+                window.open("https://apps.apple.com/kr/app/trello/id1278508951?mt=12", "blank")
               }
             />
             <Image
@@ -323,8 +322,7 @@ const HomeScreen = () => {
               }}
               className="ml-2"
               onClick={() =>
-                (window.location =
-                  "https://play.google.com/store/apps/details?id=com.app.seropost")
+                window.open("https://play.google.com/store/apps/details?id=com.app.seropost", "blank")
               }
             />
           </div>
@@ -351,8 +349,7 @@ const HomeScreen = () => {
               }}
               className="ml-2"
               onClick={() =>
-                (window.location =
-                  "https://apps.apple.com/kr/app/trello/id1278508951?mt=12")
+                window.open("https://apps.apple.com/kr/app/trello/id1278508951?mt=12", "blank")
               }
             />
             <Image
@@ -364,8 +361,7 @@ const HomeScreen = () => {
               }}
               className="ml-2"
               onClick={() =>
-                (window.location =
-                  "https://play.google.com/store/apps/details?id=com.app.seropost")
+                window.open("https://play.google.com/store/apps/details?id=com.app.seropost", "blank")
               }
             />
           </div>

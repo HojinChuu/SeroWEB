@@ -36,7 +36,9 @@ const Footer = () => {
                         <a href="https://seropost.com/tos.html">이용약관</a>
                       </span>
                       <span>
-                        <a href="https://seropost.com/desk/qa">고객센터</a>
+                        <a type="_blank" href="mailto:official@seropost.com">
+                          고객센터
+                        </a>
                       </span>
                     </div>
                   </div>
@@ -75,7 +77,9 @@ const Footer = () => {
                       <a href="https://seropost.com/tos.html">이용약관</a>
                     </span>
                     <span style={{ fontSize: "14px", marginLeft: "7px" }}>
-                      <a href="https://seropost.com/desk/qa">고객센터</a>
+                      <a type="_blank" href="mailto:official@seropost.com">
+                        고객센터
+                      </a>
                     </span>
                   </div>
                 </div>
